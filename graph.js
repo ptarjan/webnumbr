@@ -1,27 +1,56 @@
 var api = "ajax/graph.php?id=" + $.query.get("id");
 $.getJSON(api, function (json) {
     $("#data").ready(function () {
-        var dataNode = $("#data")[0];
-        if (dataNode) {
+        if ($("#data").size() > 0) {
             $("#data").hide();
 
-            json.graph['json API'] = api + "&callback=cbfunc";
-            json.graph.embed = '<input value="&lt;iframe src=&quot;http://paul.slowgeek.com/webGrapher/embedGraph.php?id=' + $.query.get("id") + '&amp;type=js&quot; frameborder=&quot;0&quot; style=&quot;width: 450px; height: 300px; display: block;&quot; ></iframe>" size="100" onclick="javascript:this.focus(); javascreipt:this.select()" />';
+            json.graph['json API'] = api;
+            json.graph.embed = "";
             for (var key in json.graph) {
-                var tr = document.createElement("tr");
-                var td = document.createElement("th");
-                td.innerHTML = '<b>' + key + '</b>';
-                tr.appendChild(td);
-                td = document.createElement("td");
+                var tr = $(document.createElement("tr"));
+                var th = $(document.createElement("th"));
+                th.text(key).wrapInner("<b></b>");
+                tr.append(th);
+                var td = $(document.createElement("td"));
+                td.text(json.graph[key]);
                 switch (key) {
                     case "url" : 
                     case "json API" :
-                        td.innerHTML = '<a href="' + (json.graph[key]) + '">' + json.graph[key] + '</a>'; break;
-                    case "xpath" : td.innerHTML = '<a href="selectNode.php?' + $.param({url: json.graph.url, xpath: json.graph.xpath}) + '">' + json.graph[key] + '</a>'; break;
-                    default : td.innerHTML = json.graph[key];
+                        // Create an "a" around the element with the same content as the element
+                        td.wrapInner($(document.createElement("a")).attr("href", td.text()))
+                        break;
+                    case "embed" :
+                        var iframe = $(document.createElement("iframe"))
+                            .attr("frameborder", "0")
+                            .attr("src", "http://paulisageek.com/webGrapher/embedGraph.php?id=" + $.query.get("id") + "&type=js")
+                            .css("width", "450px")
+                            .css("height", "300px")
+                            .css("display", "block")
+                        ;
+                        var input = $(document.createElement("input"))
+                            .attr("onclick", "javascript:this.focus(); javascript:this.select()")
+                            .attr("value", $(document.createElement("div")).append(iframe).html())
+                            .attr("size", 90)
+                        ;
+                        td.append(input);
+                        var a = $(document.createElement("a"))
+                            .attr("href",  "#")
+                            .attr("onclick", 'javascript:window.open(\'embedGraph.php?id=' + $.query.get("id") + '&type=js\', \'Embed Preview\', \'width=450,height=300\'); return false;')
+                            .text("Preview")
+                        ;
+                        td.append(" ");
+                        td.append(a);
+                        break;
+                    case "xpath" :
+                        td.wrapInner($(document.createElement("a")).attr("href", 'selectNode.php?' + $.param({url: json.graph.url, xpath: json.graph.xpath})))
+                        break;
+                    case "createdTime" :
+                    case "modifiedTime" :
+                        td.text(new Date(json.graph[key] * 1000).toString());
+                        break;
                 }
-                tr.appendChild(td);
-                dataNode.appendChild(tr);
+                tr.append(td);
+                $("#data").append(tr);
             }
         }
     });
@@ -29,7 +58,7 @@ $.getJSON(api, function (json) {
     $("#title").ready(function () {
         $("#title").text(json.graph.name);
     });
-    document.title = $("head title").append(" - " + json.graph.name).text();
+    document.title = $("head title").text($("head title").text() + " - " + $("#title").text()).text();
 
     var data = [];
     var offset = new Date().getTimezoneOffset();
@@ -61,7 +90,7 @@ $.getJSON(api, function (json) {
     });
 
     $("#graphinfo").click(function() {
-        $("#data").show("normal");
+        $("#data").toggle("normal");
         return false;
     });
 
