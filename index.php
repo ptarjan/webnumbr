@@ -16,7 +16,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <body>
     <div id='main'>
 
-      <h1>Start a Graph</h1>
+      <h1 id='start'>Start a Graph</h1>
 
       <form action='selectNode.php'>
         <div class='content'>
@@ -70,6 +70,11 @@ foreach ($data as $row) {
 ?>
         </ul>
       </div>  
+        
+      <h1>What is This Site?</h1>
+
+      <p>This site graphs things on the internet. If there is a web page that you want to know how it changes over time, just put the URL in the <a href='#start'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty data.</p>
+      <p>Once you like it, you can embed it in your site, or use the API to do something fancy with it, or just keep coming back to oooo and aaaahhh at how pretty my design is.</p>
 
       <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
     
