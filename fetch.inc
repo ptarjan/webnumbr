@@ -4,8 +4,14 @@ class FetchException extends Exception {}
 
 function fetch($url, $xpath = NULL) {
     $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_USERAGENT, "webGrapher 1.0 http://paulisageek.com/webGrapher/");
+    $options = array(
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_FOLLOWLOCATION => true,
+        CURLOPT_TIMEOUT => 30,
+        CURLOPT_MAXREDIRS => 10,
+        CURLOPT_USERAGENT => "webGrapher 1.0 http://paulisageek.com/webGrapher/",
+    );
+    curl_setopt_array($ch, $options);
     $data = curl_exec($ch);
 
     $config = array(
