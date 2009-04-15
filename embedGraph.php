@@ -37,7 +37,7 @@ div#main {
 }
 
 div#plot {
-    width : 95%;
+    width : 90%;
     min-height : 95%;
 }
 h5 {
