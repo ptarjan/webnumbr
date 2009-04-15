@@ -60,7 +60,6 @@ foreach ($data as $row) {
       <div class='content'>
         <ul>
 <?php
-$stmt = $PDO->prepare('SELECT COUNT(*) AS count, SUBSTRING(url, 8, LOCATE("/", url, LOCATE("/", url, LOCATE("/", url)+1)+1)-8) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT 10');
 $stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, @END - @START-1) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT 10');
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
