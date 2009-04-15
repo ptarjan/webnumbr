@@ -86,12 +86,12 @@ $(document).ready(function() {
     var confirmed = false;
     $("form").submit(function(ev) {
         if ($.trim($(":input[name='name']").attr("value")) == "") {
-            $(":input[name='name']").wrap("<span style='border:10px solid red'></span>");
+            $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
             return false;
         }
         var data = parseInt($("#data").text());
         if (isNaN(data)) {
-            $("#data").wrapInner("<span style='color:red'></span>");
+            $("#data").wrapInner("<span class='error' style='color:red'></span>");
             return false;
         }
         $("#dialog").dialog("open");
