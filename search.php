@@ -6,7 +6,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>Web Grapher - Search Results for <?php print htmlentities($_REQUEST['query']) ?></title>
+    <title>Web Grapher - Search Results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
 
@@ -21,7 +21,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
       <div class='content'>
         <form action=''>
-            <input name='query' value='<?php print htmlentities($_REQUEST['query']) ?>' style='width:90%' />
+            <input name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:90%' />
             <input type='submit' value='Search' />
         </form>
         <div id='searchResults'>
@@ -33,17 +33,19 @@ $stmt = $PDO->prepare("SELECT name, id, url FROM graphs WHERE name LIKE CONCAT('
 $stmt->execute(array("query" => $_REQUEST['query']));
 
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+$ids = array();
 foreach ($data as $row) {
     $url = substr($row['url'], 0, 30);
     if (strlen($row['url']) > 30) $url .= "...";
+    $ids[] = $row['id'];
 
-    print "            <li><a href='graph.php?id=" . htmlentities($row['id']) . "'>" . htmlentities($row['name']) . "</a> (" . htmlentities($url) . ")</li>\n";
+    print "            <li><a href='graph.php?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</a> (" . htmlspecialchars($url) . ")</li>\n";
 }
 ?>
           </ul>
         </div>
 
-        Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>
+        Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>. See these <a href="graph.php?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>
       </div>
     </div>
   </body>
