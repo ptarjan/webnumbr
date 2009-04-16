@@ -6,7 +6,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>Web Grapher - Graph anything on the web</title>
+    <title>WebGrapher - Graph anything on the web</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     
@@ -49,7 +49,7 @@ foreach ($data as $row) {
     $name = substr($row['name'], 0, 50);
     if (strlen($row['name']) > 50) $name .= "...";
 
-    print "            <li><a href='graph.php?id=" . htmlentities($row['id']) . "'>" . htmlentities($name) . "</a> (<span title='" . htmlentities($row['url']) . "'>" . htmlentities($url) . "</span>)</li>\n";
+    print "            <li><a href='graph.php?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($name) . "</a> (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($url) . "</span>)</li>\n";
 }
 ?>
         </ul>
@@ -60,11 +60,11 @@ foreach ($data as $row) {
       <div class='content'>
         <ul>
 <?php
-$stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, @END - @START-1) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT 10');
+$stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, IF(@END = 0, LENGTH(url)+1, @END) - @START-1) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT 10');
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
-    print "          <li><a href='search.php?query=" . htmlentities($row['domain']) . "'>" . htmlentities($row['domain']) . "</a> (" . htmlentities($row['count']) . ")</li>\n";
+    print "          <li><a href='search.php?query=" . htmlspecialchars($row['domain']) . "'>" . htmlspecialchars($row['domain']) . "</a> (" . htmlspecialchars($row['count']) . ")</li>\n";
 }
 ?>
         </ul>
