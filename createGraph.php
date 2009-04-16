@@ -130,8 +130,8 @@ $(document).ready(function() {
 <input type="hidden" name="go" value="go" />
 <table>
 <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
-<tr><td>URL: </td><td><input name="url" value="<?php print htmlentities($url) ?>" size="100" /></td></tr>
-<tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlentities($xpath); ?>" size="100" /></td></tr>
+<tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
+<tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
 <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
 <tr><td>Graph Frequency: </td><td><select name='frequency'>
 <option value="1">1 hour</option>
