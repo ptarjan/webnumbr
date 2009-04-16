@@ -16,7 +16,7 @@ if ($_REQUEST['xpath'] != NULL) die($data);
 $rep = '
 
 <!-- Added Code -->
-<base href="' . htmlentities($_REQUEST['url']) . '" />
+<base href="' . htmlspecialchars($_REQUEST['url']) . '" />
 <script>top=window</script>
 <script>
 nsDoneURL = "http://paul.slowgeek.com/webGrapher/createGraph.php";
