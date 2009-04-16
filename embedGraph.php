@@ -48,7 +48,7 @@ h5 {
   </head>
   <body>
     <div id="main">
-        <h5 id='title'>Web Grapher</h5>
+        <h5 id='title'></h5>
         <div id="plot" class='center'>/\___|\___/\</div>
     </div>
     <script>
