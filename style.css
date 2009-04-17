@@ -1,3 +1,10 @@
-body {
-    background : url(images/webGrapher-logo-200.png) no-repeat;
+#biglogo {
+    height : 200px;
 }
+#logo {
+    height : 100px;
+}
+#smalllogo {
+    height : 32px;
+}
+

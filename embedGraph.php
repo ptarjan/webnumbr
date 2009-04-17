@@ -11,7 +11,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="icon" href="graph.ico" type="image/x-icon" />
+    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon" />
 
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
     <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
@@ -28,7 +28,7 @@ body {
     height : 100%;
 }
 
-div#main {
+div#content {
     margin : auto;
     min-height : 95%;
     width : auto;
@@ -48,13 +48,13 @@ h5 {
     </style>
   </head>
   <body>
-    <div id="main">
+    <div id="content">
         <h5 id='title'></h5>
         <div id="plot" class='center'>/\___|\___/\</div>
     </div>
     <script>
 $(document).ready(function() {
-    $("#plot").height(($("#main").innerHeight() - $("#title").outerHeight(true) - 17));
+    $("#plot").height(($("#content").innerHeight() - $("#title").outerHeight(true) - 17));
 });
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }

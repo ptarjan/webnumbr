@@ -11,23 +11,28 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="shortcut icon" href="graph.ico" type="image/x-icon">
-    <link rel="icon" href="graph.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/webGrapher-favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon">
 
   </head>
   <body>
-    <div id='main'>
+    <div id='container'>
+      <div id='header'>
+        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
+      </div>
 
-      <h1>Search Results</h1>
+      <div id='content'>
 
-      <div class='content'>
+        <h1>Search Results</h1>
+
         <form action=''>
-            <input name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:90%' />
-            <input type='submit' value='Search' />
+          <div>
+              <input name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:90%' />
+              <input type='submit' value='Search' />
+          </div>
         </form>
         <div id='searchResults'>
           <ul class='searchresults'>
-
 <?php
 require("db.inc");
 $stmt = $PDO->prepare("SELECT name, id, url FROM graphs WHERE name LIKE CONCAT('%', :query, '%') OR url LIKE CONCAT('%', :query, '%')");

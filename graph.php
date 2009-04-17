@@ -11,7 +11,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="icon" href="graph.ico" type="image/x-icon" />
+    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon" />
 
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
     <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
@@ -33,32 +33,37 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     </style>
   </head>
   <body>
-    <div id='main'>
-
-      <h1 id='title'></h1>
-
-      <div class='content'>
-
-        <div id="plot" style="width:95%;height:600px;" class='center'></div>
-
-        <form id='dateRange' action="">
-          <div class="center">
-            <input type="hidden" name="id" />
-            Last
-            <input name="days" value="" size="3" />
-            days. From
-            <input name="from" value="" size="10" />
-            to
-            <input name="to" value="" size="10" />
-            <input type="submit" value="Redraw" />
-          </div>
-        </form>
-
+    <div id='container'>
+      <div id='header'>
+        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
       </div>
 
-      <h1><a id='graphinfo' href='#'>See Graph Info</a></h1>
+      <div id='content'>
 
-      <div class='content' id="data"></div>
+          <h1 id='title'></h1>
+
+          <div>
+
+            <div id="plot" style="width:95%;height:600px;" class='center'></div>
+
+            <form id='dateRange' action="">
+              <div class="center">
+                <input type="hidden" name="id" />
+                Last
+                <input name="days" value="" size="3" />
+                days. From
+                <input name="from" value="" size="10" />
+                to
+                <input name="to" value="" size="10" />
+                <input type="submit" value="Redraw" />
+              </div>
+            </form>
+
+          </div>
+
+          <h1><a id='graphinfo' href='#'>See Graph Info</a></h1>
+
+          <div id="data"></div>
 
     </div>
   </body>

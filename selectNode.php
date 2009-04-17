@@ -19,9 +19,9 @@ $rep = '
 <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
 <script>top=window</script>
 <script>
-nsDoneURL = "http://paul.slowgeek.com/webGrapher/createGraph.php";
+nsDoneURL = "http://paulisageek.com/webGrapher/createGraph.php";
 </script>
-<script src="http://paul.slowgeek.com/nodeSelector/ns.js" ></script>
+<script src="http://paulisageek.com/nodeSelector/ns.js" ></script>
 <!-- End Added Code -->
 
 ';

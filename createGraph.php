@@ -63,8 +63,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="shortcut icon" href="graph.ico" type="image/x-icon">
-    <link rel="icon" href="graph.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="images/webGrapher-favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon">
 
     <link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
@@ -121,35 +121,36 @@ $(document).ready(function() {
 
   </head>
   <body>
-    <div id='main'>
+    <div id='container'>
+      <div id='header'>
+        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
+      </div>
 
-    <h1>Last Step</h1>
-
-    <form>
       <div id='content'>
 
-<input type="hidden" name="go" value="go" />
-<table>
-<tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
-<tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
-<tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
-<tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
-<tr><td>Graph Frequency: </td><td><select name='frequency'>
-<option value="1">1 hour</option>
-<option value="6">6 hours</option>
-<option value="12">12 hours</option>
-<option value="24">24 hours</option>
-</select></td></tr>
-<tr><td></td><td><input type="submit" value="Create Graph" /></td></tr>
-</table>
+        <h1>Last Step</h1>
+
+        <form>
+          <input type="hidden" name="go" value="go" />
+          <table>
+            <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
+            <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
+            <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
+            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
+            <tr><td>Graph Frequency: </td><td><select name='frequency'>
+            <option value="1">1 hour</option>
+            <option value="6">6 hours</option>
+            <option value="12">12 hours</option>
+            <option value="24">24 hours</option>
+            </select></td></tr>
+            <tr><td></td><td><input type="submit" value="Create Graph" /></td></tr>
+          </table>
+        </form>
       </div>
-</form>
+    </div>
 
-<div id='dialog'>
-Everything look good? These values can't be changed once you click yes.
-<br/>
-</div>
-
-</div>
-</body>
+    <div id='dialog'>
+    Everything look good? These values can't be changed once you click yes.
+    <br/>
+  </body>
 </html>
