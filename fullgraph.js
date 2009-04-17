@@ -58,13 +58,16 @@ paulisageek.wg.graphCallback = function(json) {
                             .css("height", "300px")
                             .css("display", "block");
                         var input = $(document.createElement("input"))
-                            .attr("onclick", "javascript:this.focus(); javascript:this.select()")
+                            .click(function() {this.focus(); this.select(); })
                             .attr("value", $(document.createElement("div")).append(iframe).html())
                             .attr("size", 90);
                         td.append(input);
                         var a = $(document.createElement("a"))
                             .attr("href",  "#")
-                            .attr("onclick", 'javascript:window.open(\'embedGraph.php?type=js&' + query + '\', \'Embed Preview\', \'width=450,height=300\'); return false;')
+                            .click(function() {
+                                window.open('embedGraph.php?type=js&' + query, 'Embed Preview', 'width=450,height=300'); 
+                                return false;
+                            })
                             .text("Preview");
                         td.append(" ");
                         td.append(a);
