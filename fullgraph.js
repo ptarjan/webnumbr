@@ -90,12 +90,6 @@ paulisageek.wg.graphCallback = function(json) {
     $(':input').ready(function() {
         for (var key in json.request) {
             var val = json.request[key];
-            switch (key) {
-                case "from" :
-                case "to" :
-                    val = new Date(json.request[key] * 1000).toLocaleDateString();
-                    break;
-            }
             $(':input[name="' + key + '"]').val(val);
         }
     });
