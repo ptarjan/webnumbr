@@ -1,7 +1,7 @@
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
-paulisageek.wg.graphCallback = function(json) {
+paulisageek.wg.postGraphCallback = function(json) {
     $("#graphinfo").click(function() {
         $("#data").toggle("normal");
         return false;
@@ -35,7 +35,7 @@ paulisageek.wg.graphCallback = function(json) {
             query = $.param(query);
 
             var tbody = $(document.createElement("tbody"));
-            meta.API = "ajax/v1/graph.php?" + query;
+            meta.API = "ajax/v1/graph?" + query;
             meta.embed = "";
             for (var key in meta) {
                 var tr = $(document.createElement("tr"));
@@ -53,7 +53,7 @@ paulisageek.wg.graphCallback = function(json) {
                     case "embed" :
                         var iframe = $(document.createElement("iframe"))
                             .attr("frameborder", "0")
-                            .attr("src", "http://paulisageek.com/webGraphr/embedGraph.php?type=js&" + query)
+                            .attr("src", "http://paulisageek.com/webGraphr/embedGraph?type=js&" + query)
                             .css("width", "450px")
                             .css("height", "300px")
                             .css("display", "block");
@@ -65,7 +65,7 @@ paulisageek.wg.graphCallback = function(json) {
                         var a = $(document.createElement("a"))
                             .attr("href",  "#")
                             .click(function() {
-                                window.open('embedGraph.php?type=js&' + query, 'Embed Preview', 'width=450,height=300'); 
+                                window.open('embedGraph?type=js&' + query, 'Embed Preview', 'width=450,height=300'); 
                                 return false;
                             })
                             .text("Preview");
@@ -73,7 +73,7 @@ paulisageek.wg.graphCallback = function(json) {
                         td.append(a);
                         break;
                     case "xpath" :
-                        td.wrapInner($(document.createElement("a")).attr("href", 'selectNode.php?' + $.param({url: meta.url, xpath: meta.xpath})));
+                        td.wrapInner($(document.createElement("a")).attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath})));
                         break;
                     case "createdTime" :
                     case "modifiedTime" :

@@ -27,7 +27,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           Start a Graph
         </h1>
 
-        <form action='selectNode.php'>
+        <form action='selectNode'>
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
             <input id="url" name='url' value="http://" />
@@ -44,7 +44,7 @@ $(window).resize(resizeURL);
 
         <h1>Search All Graphs</h1>
 
-        <form action="search.php">
+        <form action="search">
           <div id="searchForm">
             <input id="query" name='query' />
             <input id="submitQuery" type="submit" value='Search' />
@@ -73,7 +73,7 @@ foreach ($data as $row) {
     $name = substr($row['name'], 0, 50);
     if (strlen($row['name']) > 50) $name .= "...";
 
-    print "            <li><a href='graph.php?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($name) . "</a> (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($url) . "</span>)</li>\n";
+    print "            <li><a href='graph?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($name) . "</a> (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($url) . "</span>)</li>\n";
 }
 ?>
           </ul>
@@ -88,7 +88,7 @@ $stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @EN
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
-    print "          <li><a href='search.php?query=" . htmlspecialchars($row['domain']) . "'>" . htmlspecialchars($row['domain']) . "</a> (" . htmlspecialchars($row['count']) . ")</li>\n";
+    print "          <li><a href='search?query=" . htmlspecialchars($row['domain']) . "'>" . htmlspecialchars($row['domain']) . "</a> (" . htmlspecialchars($row['count']) . ")</li>\n";
 }
 ?>
           </ul>

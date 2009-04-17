@@ -4,8 +4,11 @@ if (! $.query.get("id")) {
     });
 } else {
 
-$.getJSON("ajax/v1/graph.php" + $.query, function (json) {
+$.getJSON("ajax/v1/graph" + $.query, function (json) {
     $(document).ready(function () {
+        if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.finishedAjaxCallback == "function") { 
+            paulisageek.wg.finishedAjaxCallback(json);
+        }
         var data = [];
 
         for (var graphIndex in json.graphs) {
@@ -61,7 +64,7 @@ $.getJSON("ajax/v1/graph.php" + $.query, function (json) {
                     ];
                 }
             }
-            var a = $("<a/>").attr("href", "http://paulisageek.com/webGraphr/graph.php?id=" + graph.meta.id).text(graph.meta.name);
+            var a = $("<a/>").attr("href", "http://paulisageek.com/webGraphr/graph?id=" + graph.meta.id).text(graph.meta.name);
             data.push({
                 "label" : $("<div/>").append(a).html(), // htmlspecialchars
                 "data" : series

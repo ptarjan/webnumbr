@@ -45,7 +45,7 @@ foreach ($data as $row) {
     if (strlen($row['url']) > 30) $url .= "...";
     $ids[] = $row['id'];
 
-    print "            <li><a href='graph.php?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</a> (" . htmlspecialchars($url) . ")</li>\n";
+    print "            <li><a href='graph?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</a> (" . htmlspecialchars($url) . ")</li>\n";
 }
 ?>
           </ul>
@@ -56,7 +56,7 @@ foreach ($data as $row) {
         </div>
         
         <div>
-          See these <a href="graph.php?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>.
+          See these <a href="graph?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>.
         </div>
       </div>
     </div>

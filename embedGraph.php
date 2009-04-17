@@ -62,7 +62,7 @@ paulisageek.wg.postGraphCallback = function(json) {
     $("#title").ready(function() {
         var keys = $.query.keys;
         delete keys.type;
-        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGraphr/graph.php?' + $.param(keys) + '"></a>"');
+        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
 }
     </script>

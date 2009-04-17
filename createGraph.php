@@ -23,7 +23,7 @@ if (isset($_REQUEST['go'])) {
 
         if (count($result) == 0) die ("ummm.. couldn't insert into database");
 
-        header("Location: graph.php?id=" . $result[0]['id']);
+        header("Location: graph?id=" . $result[0]['id']);
     }
     die();
 }
@@ -77,7 +77,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 $(document).ready(function() {
     function reload() {
         $("#data").html("<img src='http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif' />");
-        $.get("selectNode.php?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value")}), function (data) {
+        $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value")}), function (data) {
             $("#data").html(data);
         });
     }
