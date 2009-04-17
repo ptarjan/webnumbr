@@ -53,7 +53,7 @@ if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
 paulisageek.wg.preGraphCallback = function(json) {
-    $("#plot").height(($("#content").innerHeight() - 40));
+    $("#plot").height(($("#content").innerHeight() - $("#title").height() - 20));
     $("#plot").width(($("#content").width() - 40));
 }
 paulisageek.wg.postGraphCallback = function(json) {
