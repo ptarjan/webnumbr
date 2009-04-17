@@ -1,6 +1,10 @@
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
+paulisageek.wg.preGraphCallback = function(json) {
+    $("#plot").height($(window).height() - $("#header").height() - $("#content h1").height() - 30);
+}
+
 paulisageek.wg.postGraphCallback = function(json) {
     $("#graphinfo").click(function() {
         $("#data").toggle("normal");
@@ -88,6 +92,7 @@ paulisageek.wg.postGraphCallback = function(json) {
             $("#data").append($(document.createElement("table")).append(tbody).css("margin-top", margin));
         }
     }
+
     $(':input').ready(function() {
         for (var key in json.request) {
             if ($.query.get(key) && $.query.get(key) != "" && $.query.get(key) !== true) {
