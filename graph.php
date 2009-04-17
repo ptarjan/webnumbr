@@ -17,7 +17,19 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
     <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
 
+<!-- Calendar -->
+    <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/redmond/jquery-ui.css" />
+    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
+    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js"></script>
+
+    <script type="text/javascript" src='fullgraph.js'></script>
     <script type="text/javascript" src='graph.js'></script>
+
+    <style type="text/css">
+.ui-datepicker-trigger {
+    margin-left : 2px;
+}
+    </style>
   </head>
   <body>
     <div id='main'>
@@ -28,12 +40,25 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
         <div id="plot" style="width:95%;height:600px;" class='center'></div>
 
+        <form id='dateRange' action="">
+          <div class="center">
+            <input type="hidden" name="id" />
+            Last
+            <input name="days" value="" size="3" />
+            days. From
+            <input name="from" value="" size="10" />
+            to
+            <input name="to" value="" size="10" />
+            <input type="submit" value="Redraw" />
+          </div>
+        </form>
+
       </div>
 
-       <h1><a id='graphinfo' href='#'>See Graph Info</a></h1>
+      <h1><a id='graphinfo' href='#'>See Graph Info</a></h1>
 
-      <div class='content' id="data">
-      </div>
+      <div class='content' id="data"></div>
+
     </div>
   </body>
 </html>

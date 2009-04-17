@@ -55,9 +55,14 @@ h5 {
 $(document).ready(function() {
     $("#plot").height(($("#main").innerHeight() - $("#title").outerHeight(true) - 17));
 });
-callback = function(json) { 
+if (typeof paulisageek == "undefined") { paulisageek = {}; }
+if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
+
+paulisageek.wg.graphCallback = function(json) {
     $("#title").ready(function() {
-        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGrapher/graph.php?id=' + $.query.get("id") + '"></a>"');
+        var keys = $.query.keys;
+        delete keys.type;
+        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGrapher/graph.php?' + $.param(keys) + '"></a>"');
     });
 }
     </script>

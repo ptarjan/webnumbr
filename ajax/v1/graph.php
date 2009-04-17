@@ -1,23 +1,43 @@
 <?php
-require ("../db.inc");
+require ("../../db.inc");
 header("Content-type: application/json");
 
 // Don't let them be whitespace
 foreach ($_REQUEST as $var => $_) 
     if (strlen(trim($_REQUEST[$var])) == 0) unset($_REQUEST[$var]);
 
-if (!isset($_REQUEST['days']) && (!isset($_REQUEST['from']) || !isset($_REQUEST['to']))) {
+function isGood($str) {
+    return isset($_REQUEST[$str]) && is_numeric($_REQUEST[$str]) && ((int) $_REQUEST[$str]) >= 0;
+}
+
+if ($date = strtotime($_REQUEST['from'])) {
+    $_REQUEST['from'] = $date ;
+}
+if ($date = strtotime($_REQUEST['to'])) {
+    $_REQUEST['to'] = $date ;
+}
+
+if (!isGood('days') && (!isGood('from') || !isGood('to'))) {
     $_REQUEST['days'] = -1;    
 }
-if (!isset($_REQUEST['to'])) $_REQUEST['to'] = time(); 
-if (!isset($_REQUEST['from'])) {
-    if ($_REQUEST['days'] < 0) {
-        $_REQUEST['from'] = 0;
-    } else {
-        $_REQUEST['from'] = time() - $_REQUEST['days'] * 24 * 60 * 60;
+
+if (!isGood('to')) 
+    $_REQUEST['to'] = time(); 
+
+if (isGood('days')) {
+    $_REQUEST['from'] = $_REQUEST['to'] - $_REQUEST['days'] * 24 * 60 * 60;
+} else {
+    if (!isGood('from')) {
+        if ($_REQUEST['days'] < 0) {
+            $_REQUEST['from'] = 0;
+        } else {
+            $_REQUEST['from'] = time() - $_REQUEST['days'] * 24 * 60 * 60;
+        }
     }
 }
+
 $_REQUEST['days'] = ((int) $_REQUEST['to'] - (int) $_REQUEST['from']) / 60 / 60 / 24;
+
 if (!isset($_REQUEST['format'])) 
     $_REQUEST['format'] = "json";
 
@@ -33,9 +53,12 @@ if (! is_array($_REQUEST['id'])) {
         $_REQUEST['id'] = array($_REQUEST['id']);
 }
 
+$_REQUEST['id'] = implode(",", $_REQUEST['id']);
 $output = array(
     "request" => $_REQUEST,
 );
+$_REQUEST['id'] = explode(",", $_REQUEST['id']);
+
 $graphs = array();
 
 foreach ($_REQUEST['id'] as $id) {

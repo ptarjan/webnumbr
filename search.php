@@ -45,7 +45,13 @@ foreach ($data as $row) {
           </ul>
         </div>
 
-        Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>. See these <a href="graph.php?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>
+        <div>
+          Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>. 
+        </div>
+        
+        <div>
+          See these <a href="graph.php?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>.
+        </div>
       </div>
     </div>
   </body>
