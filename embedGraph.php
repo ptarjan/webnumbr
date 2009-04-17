@@ -11,7 +11,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
     <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
@@ -63,7 +63,7 @@ paulisageek.wg.graphCallback = function(json) {
     $("#title").ready(function() {
         var keys = $.query.keys;
         delete keys.type;
-        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGrapher/graph.php?' + $.param(keys) + '"></a>"');
+        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGraphr/graph.php?' + $.param(keys) + '"></a>"');
     });
 }
     </script>

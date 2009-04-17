@@ -6,18 +6,18 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>WebGrapher - Graph anything on the web</title>
+    <title>webGraphr - Graph anything on the web</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
     
-    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='logo' src="images/webGrapher-banner-100.png" /></a>
+        <a href='.'><img id='logo' src="images/webGraphr-banner-100.png" /></a>
       </div>
 
       <div id='content'>
@@ -86,7 +86,7 @@ foreach ($data as $row) {
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
       
         <div class='center'>
-          <a href='mailto:webGrapher@paulisageek.com'>webGrapher@paulisageek.com</a>
+          <a href='mailto:webGraphr@paulisageek.com'>webGraphr@paulisageek.com</a>
         </div>
 
       </div>

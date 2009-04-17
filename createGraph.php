@@ -11,7 +11,7 @@ if (isset($_REQUEST['go'])) {
     $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, createdTime) VALUES (:name, :url, :xpath, :frequency, NOW())");
     $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency']));
     if (!$r) {
-        die("Something is wrong with the database right now. Please retry again later, and send me an email webGrapher@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
+        die("Something is wrong with the database right now. Please retry again later, and send me an email webGraphr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
     } else {
         $stmt = $PDO->prepare("SELECT id FROM graphs WHERE name = :name AND url = :url AND xpath = :xpath AND frequency = :frequency ORDER BY createdTime ASC");
         $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency']));
@@ -63,8 +63,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="shortcut icon" href="images/webGrapher-favicon.png" type="image/x-icon">
-    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/webGraphr-favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon">
 
     <link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
@@ -123,7 +123,7 @@ $(document).ready(function() {
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
       </div>
 
       <div id='content'>

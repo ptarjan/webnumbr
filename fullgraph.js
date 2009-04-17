@@ -55,7 +55,7 @@ paulisageek.wg.graphCallback = function(json) {
                     case "embed" :
                         var iframe = $(document.createElement("iframe"))
                             .attr("frameborder", "0")
-                            .attr("src", "http://paulisageek.com/webGrapher/embedGraph.php?type=js&" + query)
+                            .attr("src", "http://paulisageek.com/webGraphr/embedGraph.php?type=js&" + query)
                             .css("width", "450px")
                             .css("height", "300px")
                             .css("display", "block");

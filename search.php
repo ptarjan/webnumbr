@@ -11,14 +11,14 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="shortcut icon" href="images/webGrapher-favicon.png" type="image/x-icon">
-    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="images/webGraphr-favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon">
 
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
       </div>
 
       <div id='content'>

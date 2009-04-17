@@ -11,7 +11,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="icon" href="images/webGrapher-favicon.png" type="image/x-icon" />
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
     <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
     <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
@@ -35,7 +35,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGrapher-banner-100.png" /></a>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
       </div>
 
       <div id='content'>
