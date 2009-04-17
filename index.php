@@ -27,18 +27,19 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         </h1>
 
         <form action='selectNode.php'>
-          <div> 
-            URL: <input name='url' value="http://" style='width: 70%' />
-            <input type='submit' value='Pick the Number on the Page' />
+          <div id="startForm"> 
+            <label id="urlLabel" for="url">URL:</label>
+            <input id="url" name='url' value="http://" />
+            <input id="submitURL" type='submit' value='Pick the Number on the Page' />
           </div>
         </form>
 
         <h1>Search All Graphs</h1>
 
         <form action="search.php">
-          <div>
-            <input name='query' style='width : 90%' />
-            <input type="submit" value='Search' />
+          <div id="searchForm">
+            <input id="query" name='query' />
+            <input id="submitQuery" type="submit" value='Search' />
           </div>
         </form>
 
