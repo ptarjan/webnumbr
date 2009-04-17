@@ -9,6 +9,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <title>Web Grapher - Search Results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
+    <link rel="stylesheet" href="style.css" type='text/css' />  
 
     <link rel="shortcut icon" href="graph.ico" type="image/x-icon">
     <link rel="icon" href="graph.ico" type="image/x-icon">
