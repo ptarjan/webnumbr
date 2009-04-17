@@ -12,6 +12,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="style.css" type='text/css' />  
     
     <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
+    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
 
   </head>
   <body>
@@ -33,6 +34,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
             <input id="submitURL" type='submit' value='Pick the Number on the Page' />
           </div>
         </form>
+        <script>
+var resizeURL = function() {
+    $("#url").width($("#startForm").width() - $("#urlLabel").width() - $("#submitURL").width() - 30);
+};
+$("#startForm").ready(resizeURL);
+$(window).resize(resizeURL);
+        </script>
 
         <h1>Search All Graphs</h1>
 
@@ -42,6 +50,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
             <input id="submitQuery" type="submit" value='Search' />
           </div>
         </form>
+        <script>
+var resizeSearch = function() {
+    $("#query").width($("#searchForm").width() - $("#submitQuery").width() - 30);
+};
+$("#startForm").ready(resizeSearch);
+$(window).resize(resizeSearch);
+        </script>
 
         <h1>Last 10 Graphs</h1>
 
