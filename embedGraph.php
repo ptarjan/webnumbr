@@ -30,17 +30,13 @@ body {
 
 div#content {
     margin : auto;
-    min-height : 95%;
     width : auto;
     vertical-align : middle;
     -moz-border-radius : 0px;
     -webkit-border-radius : 0px;
+    height : 100%;
 }
 
-div#plot {
-    width : 90%;
-    min-height : 95%;
-}
 h5 {
     margin : 0px;
     text-decoration : underline;
@@ -48,18 +44,21 @@ h5 {
     </style>
   </head>
   <body>
+    <h5 id='title'></h5>
     <div id="content">
-        <h5 id='title'></h5>
         <div id="plot" class='center'>/\___|\___/\</div>
     </div>
     <script>
-$(document).ready(function() {
-    $("#plot").height(($("#content").innerHeight() - $("#title").outerHeight(true) - 17));
-});
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
-paulisageek.wg.graphCallback = function(json) {
+paulisageek.wg.preGraphCallback = function(json) {
+    console.log($("#content").innerHeight());
+    console.log($("#title").outerHeight(true));
+    $("#plot").height(($("#content").innerHeight() - 40));
+    $("#plot").width(($("#content").width() - 40));
+}
+paulisageek.wg.postGraphCallback = function(json) {
     $("#title").ready(function() {
         var keys = $.query.keys;
         delete keys.type;

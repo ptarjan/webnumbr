@@ -69,6 +69,9 @@ $.getJSON("ajax/v1/graph.php" + $.query, function (json) {
         }
         document.title = $("head title").text($("head title").text() + " - " + $("#title").text()).text();
 
+        if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.preGraphCallback == "function") { 
+            paulisageek.wg.preGraphCallback(json);
+        }
         var config = {
             xaxis: { mode : "time" },
             legend : { 
@@ -81,8 +84,8 @@ $.getJSON("ajax/v1/graph.php" + $.query, function (json) {
             $.plot($('#plot'), data, config);
         });
 
-        if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.graphCallback == "function") { 
-            paulisageek.wg.graphCallback(json);
+        if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.postGraphCallback == "function") { 
+            paulisageek.wg.postGraphCallback(json);
         }
     });
 });
