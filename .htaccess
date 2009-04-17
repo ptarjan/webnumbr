@@ -1,0 +1,4 @@
+RewriteEngine on
+
+RewriteCond %{DOCUMENT_ROOT}%{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php [PT]
