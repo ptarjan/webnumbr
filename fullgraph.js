@@ -87,7 +87,7 @@ paulisageek.wg.graphCallback = function(json) {
     }
     $(':input').ready(function() {
         for (var key in json.request) {
-            if ($.query.get(key) && $.query.get(key) != "" && $.query.get(key) != true) {
+            if ($.query.get(key) && $.query.get(key) != "" && $.query.get(key) !== true) {
                 var val = json.request[key];
                 switch (key) {
                     case "from" :
