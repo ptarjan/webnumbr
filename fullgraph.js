@@ -11,11 +11,9 @@ paulisageek.wg.graphCallback = function(json) {
         showOn: 'button', 
         buttonImage: 'images/calendar.gif', 
         buttonImageOnly: true,
+        onClose : function() { $("form#dateRange").submit() }
     };
     $(":input[name='to']").datepicker(config);
-    config.onClose = function(date) {
-        $(":input[name='days']").val("");
-    }
     $(":input[name='from']").datepicker(config);
     $(":input[name='from']").change(function() {
         $(":input[name='days']").val("");
@@ -89,8 +87,15 @@ paulisageek.wg.graphCallback = function(json) {
     }
     $(':input').ready(function() {
         for (var key in json.request) {
-            var val = json.request[key];
-            $(':input[name="' + key + '"]').val(val);
+            if ($.query.get(key) && $.query.get(key) != "" && $.query.get(key) != true) {
+                var val = json.request[key];
+                switch (key) {
+                    case "from" :
+                    case "to" :
+                        val = new Date(val * 1000).toLocaleDateString();
+                }
+                $(':input[name="' + key + '"]').val(val);
+            }
         }
     });
 }
