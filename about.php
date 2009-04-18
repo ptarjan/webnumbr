@@ -7,7 +7,7 @@ $header = array('    <link rel="icon" href="images/webGraphr-favicon.png" type="
 <tr><td>
 <p><a href='http://paulisageek.com/webGraphr'>webGraphr</a> lets anyone build a graph for any site on the internet. It started because I wanted to know how much flight prices were for my trip to <a href="http://en.wikipedia.org/wiki/St._Martin">Saint Martin</a>. Did you know they vary by about $100!</p>
 <div class='center'>
-<iframe style="width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=3" frameborder="0"></iframe>
+<iframe style="width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=3&amp;to=April+16" frameborder="0"></iframe>
 </div>
 
 </td><td>
