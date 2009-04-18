@@ -73,7 +73,6 @@ paulisageek.wg.postGraphCallback = function(json) {
                         .attr("src", "http://paulisageek.com/webGraphr/embedGraph?type=js&" + query)
                         .css("width", "450px")
                         .css("height", "300px")
-                        .css("display", "block");
                     var input = $(document.createElement("input"))
                         .click(function() {this.focus(); this.select(); })
                         .attr("value", $(document.createElement("div")).append(iframe).html())
