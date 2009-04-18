@@ -74,6 +74,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             });
         }
         document.title = $("head title").text($("head title").text() + " - " + $("#title").text()).text();
+        $("#title").attr("title", $("#title").text());
 
         if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.preGraphCallback == "function") { 
             paulisageek.wg.preGraphCallback(json);
@@ -90,7 +91,6 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             $.plot($('#plot'), data, config);
         });
 
-        $("#title").attr("title", $("#title").text());
         if ($("#title").text().length > 80) {
             $("#title").text($("#title").text().substring(0,77) + "...");
         }

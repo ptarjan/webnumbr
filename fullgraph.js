@@ -2,7 +2,7 @@ if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
 paulisageek.wg.preGraphCallback = function(json) {
-    $("#plot").height($(window).height() - $("#header").height() - $("#content h1").height() - 30);
+    $("#plot").height($(window).height() - $("#header").height() - $("#content h1").height() - 28);
 }
 
 paulisageek.wg.postGraphCallback = function(json) {
@@ -86,8 +86,7 @@ paulisageek.wg.postGraphCallback = function(json) {
                             return false;
                         })
                         .text("Preview");
-                    tr.append(td);
-                    var td = $(document.createElement("td"));
+                    td.append(" ");
                     td.append(a);
                     break;
                 case "xpath" :

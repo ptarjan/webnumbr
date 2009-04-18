@@ -56,7 +56,6 @@ paulisageek.wg.preGraphCallback = function(json) {
     $("#title").ready(function() {
         var keys = $.query.keys;
         delete keys.type;
-        $("#title").attr("title", $("#title").text());
         if ($("#title").text().length > 50) {
             $("#title").text($("#title").text().substring(0,47) + "...");
         }
