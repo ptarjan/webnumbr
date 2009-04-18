@@ -40,7 +40,7 @@ $parsed = parse_url($referer);
 $query = $parsed['query'];
 $url = "";
 foreach (explode("&", $query) as $arg) {
-    $boom =  explode("=", $arg);
+    $boom =  explode("=", $arg, 2);
     if (count($boom) !== 2) continue;
     list($k, $v) = $boom;
     if ($k == "url") 
