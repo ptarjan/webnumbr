@@ -117,7 +117,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 .css("overflow", "hidden")
                 .css("float", "left")
                 .css("padding-left", 10)
-                .css("padding-top", 0)
+                .css("margin-top", "-0.2em")
                 
 /*
             )
