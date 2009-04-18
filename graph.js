@@ -83,7 +83,8 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             xaxis: { mode : "time" },
             legend : { 
                 position : "nw",
-                show : data.length > 1
+                show : data.length > 1,
+                backgroundOpacity : 0.5
             },
             lines : { show : true }
         };

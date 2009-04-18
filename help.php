@@ -1,3 +1,7 @@
+<?php 
+$title = "webGraphr - help"; 
+$header = array('    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />');
+?>
 <?php require "/var/www/paul.slowgeek.com/header.php" ?>
 <table>
 <tr><td>
