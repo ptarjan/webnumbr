@@ -23,6 +23,7 @@ html {
     margin : 0px;
     height : 100%;
     overflow : hidden;
+    background : transparent;
 }
 body {
     height : 100%;
@@ -35,7 +36,8 @@ div#content {
     -moz-border-radius : 0px;
     -webkit-border-radius : 0px;
     height : 100%;
-    width : 100%;
+    border : 0px;
+    background-color : transparent;
 }
 
 h5 {

@@ -16,7 +16,7 @@
 </td></tr>
 <tr><td>
 
-<p>You can even combine a few graphs together. Here are 3 interesting numbers from a torrent on <a href='http://thepiratebay.org'>the pirate bay</a>. You can see the seeders lag behind the leechers since when a leecher finishes it becomes a seeder. Also, the torrent is steadily declining.</p>
+<p>You can even combine a few graphs together. Here are 3 interesting numbers from a torrent on <a href='http://thepiratebay.org'>the pirate bay</a>. You can see the seeders lag behind the leechers since when a leecher finishes it becomes a seeder, neat. And the undulation is not inline with North America usage habits, and more close to Europe's day. Also, the seeds for the torrent are steadily declining, but the leechers are staying high. Data is fun!</p>
 <div class="center">
 <iframe style="width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=10%2C21%2C22" frameborder="0"></iframe>
 </div>
