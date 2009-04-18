@@ -53,9 +53,9 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
                 Last
                 <input name="days" value="" size="3" />
                 days. From
-                <input name="from" value="" size="10" />
+                <input name="from" value="" size="30" />
                 to
-                <input name="to" value="" size="10" />
+                <input name="to" value="" size="30" />
                 <input type="submit" value="Redraw" />
               </div>
             </form>
