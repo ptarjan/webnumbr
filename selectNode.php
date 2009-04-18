@@ -13,6 +13,8 @@ try {
 
 if ($_REQUEST['xpath'] != NULL) die($data);
 
+$data = $data->saveXML();
+
 $rep = '
 
 <!-- Added Code -->
