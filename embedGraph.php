@@ -62,12 +62,13 @@ paulisageek.wg.preGraphCallback = function(json) {
         if ($("#title").text().length > 50) {
             $("#title").text($("#title").text().substring(0,47) + "...");
         }
-        $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
+        $("#title").wrap('<a target="webGrapher" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
     $("#plot").height(($("#content").innerHeight() - $("#title").height() - 20));
     $("#plot").width(($("#content").width() - 20));
 }
 paulisageek.wg.postGraphCallback = function(json) {
+    $(".legend a").attr("target", "webGrapher");
     var legend = $(".legend");
     var html = legend.html();
     legend.data("oldLegend", html);
