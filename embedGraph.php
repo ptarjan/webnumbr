@@ -49,7 +49,7 @@ h5 {
   <body>
     <h5 id='title'></h5>
     <div id="content">
-        <div id="plot" class='center'>/\___|\___/\</div>
+        <div id="plot" class='center'>_______/\___|\___/\</div>
     </div>
     <script>
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
