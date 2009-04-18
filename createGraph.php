@@ -49,7 +49,6 @@ foreach (explode("&", $query) as $arg) {
 $xpath = $_REQUEST['xpath'];
 
 ?>
-
 <?php
 print '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
@@ -110,10 +109,10 @@ $(document).ready(function() {
                 confirmed = true;
                 $("form").submit() 
             },
-            "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); },
+            "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); }
         },
         title : "Last step before graphyness",
-        hide : "slide",
+        "hide" : "slide"
     });
 });
 
