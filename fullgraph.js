@@ -83,7 +83,7 @@ paulisageek.wg.postGraphCallback = function(json) {
                     var embedA = $(document.createElement("a"))
                         .attr("href",  "#")
                         .click(function() {
-                            window.open('embedGraph?type=js&' + query, 'Embed Preview', 'width=450,height=300'); 
+                            window.open('embedGraph?type=js&' + query, 'webGraphrPreview', 'width=450px, height=300px'); 
                             return false;
                         })
                         .text("Preview");
