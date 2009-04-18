@@ -98,6 +98,28 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
         if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.postGraphCallback == "function") { 
             paulisageek.wg.postGraphCallback(json);
         }
+
+        // $("#title").prepend($("<img/>").attr("src", "images/webGraphr-favicon.png").wrap($("<a/>").attr("href", "http://paulisageek.com/webGraphr")));
+        
+        $("#title")
+        .prepend(" ")
+        .prepend(
+/*
+            $("<a/>")
+            .attr("href", "http://paulisageek.com/webGraphr")
+            .append(
+*/
+                $("<img/>")
+                .attr("src", "images/webGraphr-logo-32.png")
+                .height($("#title").height())
+                .css("overflow", "hidden")
+                .css("float", "left")
+                .css("padding-left", 10)
+/*
+            )
+*/
+        );
+
     });
 });
 
