@@ -2,6 +2,10 @@
 
 class FetchException extends Exception {}
 
+function noLineErrorHandler( $errno, $errstr, $errfile, $errline, $errcontext ) {
+    throw new FetchException($errstr);
+}
+
 function fetch($url, $xpath = NULL) {
     if (is_string($url)) {
         $ch = curl_init($url);
@@ -50,7 +54,11 @@ function fetch($url, $xpath = NULL) {
     }
 
     $domxpath = new DomXPath($dom);
+
+    set_error_handler("noLineErrorHandler");
     $nl = $domxpath->query($xpath);
+    restore_error_handler();
+
     if ($nl->length == 0) {
         throw new FetchException("No nodes selected");
     } else if ($nl->length > 1) {
