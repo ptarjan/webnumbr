@@ -72,9 +72,21 @@ paulisageek.wg.postGraphCallback = function(json) {
     var html = legend.html();
     legend.data("oldLegend", html);
     var div = $(".legend div:first");
-    legend.html($("<a/>").attr("href", "#").append("Show Legend").css({"top":div.css("top"),"left":div.css("left"),"position":div.css("position"),"color":"black"}).click(function() {
-        legend.html(legend.data("oldLegend"));
-}));
+    legend.html($("<a/>")
+        .attr("href", "#")
+        .append("Show Legend")
+        .css({
+            "top":div.css("top"),
+            "left":div.css("left"),
+            "position":div.css("position"),
+            "margin-left":div.css("margin-left"),
+            "margin-top":div.css("margin-top"),
+            "color":"black"
+        })
+        .click(function() {
+            legend.html(legend.data("oldLegend"));
+        })
+    );
 }
     </script>
   </body>
