@@ -65,6 +65,9 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 }
             }
             var a = $("<a/>").attr("href", "http://paulisageek.com/webGraphr/graph?id=" + graph.meta.id).text(graph.meta.name);
+            a.attr("title", a.text());
+            if (a.text().length > 30) 
+                a.text(a.text().substring(0, 27) + "...");
             data.push({
                 "label" : $("<div/>").append(a).html(), // htmlspecialchars
                 "data" : series
@@ -86,6 +89,11 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
         $("#plot").ready(function() {
             $.plot($('#plot'), data, config);
         });
+
+        $("#title").attr("title", $("#title").text());
+        if ($("#title").text().length > 80) {
+            $("#title").text($("#title").text().substring(0,77) + "...");
+        }
 
         if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.postGraphCallback == "function") { 
             paulisageek.wg.postGraphCallback(json);

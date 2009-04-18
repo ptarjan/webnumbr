@@ -53,15 +53,26 @@ if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
 paulisageek.wg.preGraphCallback = function(json) {
-    $("#plot").height(($("#content").innerHeight() - $("#title").height() - 20));
-    $("#plot").width(($("#content").width() - 40));
-}
-paulisageek.wg.postGraphCallback = function(json) {
     $("#title").ready(function() {
         var keys = $.query.keys;
         delete keys.type;
+        $("#title").attr("title", $("#title").text());
+        if ($("#title").text().length > 50) {
+            $("#title").text($("#title").text().substring(0,47) + "...");
+        }
         $("#title").wrap('<a target="_new" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
+    $("#plot").height(($("#content").innerHeight() - $("#title").height() - 20));
+    $("#plot").width(($("#content").width() - 20));
+}
+paulisageek.wg.postGraphCallback = function(json) {
+    var legend = $(".legend");
+    var html = legend.html();
+    legend.data("oldLegend", html);
+    var div = $(".legend div:first");
+    legend.html($("<a/>").attr("href", "#").append("Show Legend").css({"top":div.css("top"),"left":div.css("left"),"position":div.css("position"),"color":"black"}).click(function() {
+        legend.html(legend.data("oldLegend"));
+}));
 }
     </script>
   </body>
