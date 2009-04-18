@@ -27,6 +27,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             }
 
             if (series.length === 0 && json.graphs.length == 1) {
+                /*
                 function getLetterGraph(s) {
                     var letters = {
                         "N" : [[0, 0], [0, 1], [1, 0], [1, 1], [1, 0]],
@@ -38,8 +39,9 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                     }
                     return $.map(s, function(a) { return letters[a]});
                 }
+                */
                    
-                if (graph.meta.goodFetches == 0 && graph.meta.badFetches == 0) {
+                if (graph.meta.goodFetches === 0 && graph.meta.badFetches === 0) {
                     series = [
                         [0, 1], [1, 0], [2, 1], [3, 0], [4, 1], [3, 0], // W
                         [6, 0], [7, 1], [7.5, 0.5], [6.5, 0.5], [7.5, 0.5], [8, 0], // A
@@ -66,8 +68,9 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             }
             var a = $("<a/>").attr("href", "http://paulisageek.com/webGraphr/graph?id=" + graph.meta.id).text(graph.meta.name);
             a.attr("title", a.text());
-            if (a.text().length > 30) 
+            if (a.text().length > 30) {
                 a.text(a.text().substring(0, 27) + "...");
+            }
             data.push({
                 "label" : $("<div/>").append(a).html(), // htmlspecialchars
                 "data" : series

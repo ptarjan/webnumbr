@@ -3,7 +3,7 @@ if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
 paulisageek.wg.preGraphCallback = function(json) {
     $("#plot").height($(window).height() - $("#header").height() - $("#content h1").height() - 28);
-}
+};
 
 paulisageek.wg.postGraphCallback = function(json) {
     $("#graphinfo").click(function() {
@@ -15,7 +15,7 @@ paulisageek.wg.postGraphCallback = function(json) {
         showOn: 'button', 
         buttonImage: 'images/calendar.gif', 
         buttonImageOnly: true,
-        onClose : function() { $("form#dateRange").submit() },
+        onClose : function() { $("form#dateRange").submit(); }
     };
     $(":input[name='to']").datepicker(config);
     $(":input[name='from']").datepicker(config);
@@ -27,9 +27,10 @@ paulisageek.wg.postGraphCallback = function(json) {
     });
 
     var keys = $.query.get();
-    for (var key in keys) {
-        if (keys[key] === true)
-            delete keys[key];
+    for (var keyName in keys) {
+        if (keys[keyName] === true) {
+            delete keys[keyName];
+        }
     }
     var query = $.param(keys);
 
@@ -60,10 +61,11 @@ paulisageek.wg.postGraphCallback = function(json) {
                 case "API" :
                     var a = $(document.createElement("a")).attr("href", td.text());
                     var s = [];
-                    for (var key in $.query.get()) {
-                        if ($.query.get(key) !== true)
-                            s.push(key + "=" + $.query.get(key));
-                    };
+                    for (var name in $.query.get()) {
+                        if ($.query.get(name) !== true) {
+                            s.push(name + "=" + $.query.get(name));
+                        }
+                    }
                     td.text("ajax/v1/graph?" + s.join("&"));
                     td.wrapInner(a);
                     break;
@@ -72,13 +74,13 @@ paulisageek.wg.postGraphCallback = function(json) {
                         .attr("frameborder", "0")
                         .attr("src", "http://paulisageek.com/webGraphr/embedGraph?type=js&" + query)
                         .css("width", "450px")
-                        .css("height", "300px")
+                        .css("height", "300px");
                     var input = $(document.createElement("input"))
                         .click(function() {this.focus(); this.select(); })
                         .attr("value", $(document.createElement("div")).append(iframe).html())
                         .attr("size", 90);
                     td.append(input);
-                    var a = $(document.createElement("a"))
+                    var embedA = $(document.createElement("a"))
                         .attr("href",  "#")
                         .click(function() {
                             window.open('embedGraph?type=js&' + query, 'Embed Preview', 'width=450,height=300'); 
@@ -86,7 +88,7 @@ paulisageek.wg.postGraphCallback = function(json) {
                         })
                         .text("Preview");
                     td.append(" ");
-                    td.append(a);
+                    td.append(embedA);
                     break;
                 case "xpath" :
                     td.wrapInner($(document.createElement("a")).attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath})));
@@ -105,7 +107,7 @@ paulisageek.wg.postGraphCallback = function(json) {
 
     $(':input').ready(function() {
         for (var key in json.request) {
-            if ($.query.get(key) && $.query.get(key) != "" && $.query.get(key) !== true) {
+            if ($.query.get(key) && $.query.get(key) !== "" && $.query.get(key) !== true) {
                 var val = json.request[key];
                 switch (key) {
                     case "from" :
@@ -116,4 +118,4 @@ paulisageek.wg.postGraphCallback = function(json) {
             }
         }
     });
-}
+};
