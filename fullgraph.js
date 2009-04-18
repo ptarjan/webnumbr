@@ -26,7 +26,13 @@ paulisageek.wg.postGraphCallback = function(json) {
         $(":input[name='from']").val("");
     });
 
-    var query = $.param($.query.get());
+    var keys = $.query.get();
+    for (var key in keys) {
+        if (keys[key] === true)
+            delete keys[key];
+    }
+    var query = $.param(keys);
+
     json.graphs.push({ "meta" : {
         "API" : "ajax/v1/graph?" + query,
         "embed" : ""
@@ -55,7 +61,8 @@ paulisageek.wg.postGraphCallback = function(json) {
                     var a = $(document.createElement("a")).attr("href", td.text());
                     var s = [];
                     for (var key in $.query.get()) {
-                        s.push(key + "=" + $.query.get(key));
+                        if ($.query.get(key) !== true)
+                            s.push(key + "=" + $.query.get(key));
                     };
                     td.text("ajax/v1/graph?" + s.join("&"));
                     td.wrapInner(a);
