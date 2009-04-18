@@ -35,6 +35,7 @@ div#content {
     -moz-border-radius : 0px;
     -webkit-border-radius : 0px;
     height : 100%;
+    width : 100%;
 }
 
 h5 {

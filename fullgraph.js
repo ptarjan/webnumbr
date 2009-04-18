@@ -15,7 +15,7 @@ paulisageek.wg.postGraphCallback = function(json) {
         showOn: 'button', 
         buttonImage: 'images/calendar.gif', 
         buttonImageOnly: true,
-        onClose : function() { $("form#dateRange").submit() }
+        onClose : function() { $("form#dateRange").submit() },
     };
     $(":input[name='to']").datepicker(config);
     $(":input[name='from']").datepicker(config);
