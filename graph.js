@@ -3,7 +3,6 @@ if (! $.query.get("id")) {
         $("#title").text("id is a required parameter");
     });
 } else {
-
 $.getJSON("ajax/v1/graph" + $.query, function (json) {
     $(document).ready(function () {
         if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.finishedAjaxCallback == "function") { 
@@ -76,9 +75,8 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 "data" : series
             });
         }
-        document.title = $("head title").text($("head title").text() + " - " + $("#title").text()).text();
+        document.title = $("head title").html() + " - " + $("#title").text();
         $("#title").attr("title", $("#title").text());
-
         if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.preGraphCallback == "function") { 
             paulisageek.wg.preGraphCallback(json);
         }
@@ -119,6 +117,8 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 .css("overflow", "hidden")
                 .css("float", "left")
                 .css("padding-left", 10)
+                .css("padding-top", 0)
+                
 /*
             )
 */
