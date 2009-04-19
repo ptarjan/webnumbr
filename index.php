@@ -83,6 +83,8 @@ foreach ($data as $row) {
         <h1>News</h1>
         <ul><li>
         <span class='date'>April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
+        </li><li>
+        <span class='date'>April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
         </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>

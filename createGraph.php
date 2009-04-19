@@ -61,6 +61,7 @@ if (isset($_REQUEST['go'])) {
         print "</pre>";
         die("Not inserting in dev mode");
     }
+
     $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
     $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency'], "openid" => $openid));
     if (!$r) {
