@@ -45,8 +45,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
         <h1>Last 10 Graphs</h1>
 
-        <div>
-          <ul>
+        <ul>
 <?php
 $stmt = $PDO->prepare("SELECT name, id, url FROM graphs ORDER BY createdTime DESC LIMIT 10");
 $stmt->execute();
@@ -58,37 +57,33 @@ foreach ($data as $row) {
     $name = substr($row['name'], 0, 50);
     if (strlen($row['name']) > 50) $name .= "...";
 
-    print "            <li><a href='graph?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($name) . "</a> (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($url) . "</span>)</li>\n";
+    print "          <li><a href='graph?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($name) . "</a> (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($url) . "</span>)</li>\n";
 }
 ?>
-          </ul>
-        </div>
+        </ul>
 
         <h1>Most Popular 10 Hosts</h1>
 
-        <div>
-          <ul>
+        <ul>
 <?php
 $stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, IF(@END = 0, LENGTH(url)+1, @END) - @START-1) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT 10');
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
-    print "          <li><a href='search?query=" . htmlspecialchars($row['domain']) . "'>" . htmlspecialchars($row['domain']) . "</a> (" . htmlspecialchars($row['count']) . ")</li>\n";
+    print "            <li><a href='search?query=" . htmlspecialchars($row['domain']) . "'>" . htmlspecialchars($row['domain']) . "</a> (" . htmlspecialchars($row['count']) . ")</li>\n";
 }
 ?>
-          </ul>
-        </div>  
+        </ul>
           
         <h1><a href='about' style='color:white'>What is This Site?</a></h1>
 
         <p>This site builds graphs from the web. If you want to know how data on a webpage changes over time, just put the URL in the <a href='#start'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
         <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks.</p>
-    
-        <h1>News</h1>
-    
-        <h2>April 18, 2009</h2>
 
-        <p>Launched. The web gets graphier!</p>
+        <h1>News</h1>
+        <ul><li>
+        <span class='date'>April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
+        </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
       
