@@ -14,8 +14,9 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
            var graph = json.graphs[graphIndex];
 
             $("#title").ready(function () {
-                if ($("#title").text().length > 0) { $("#title").append(" + "); }
-                $("#title").text($("#title").text() + graph.meta.name);
+                var title = $.trim($("#title").text());
+                if (title.length > 0) { title += " + "; }
+                $("#title").text(title + graph.meta.name);
             });
 
             var series = [];
@@ -117,7 +118,6 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 .css("overflow", "hidden")
                 .css("float", "left")
                 .css("padding-left", 10)
-                .css("margin-top", "-0.2em")
                 
 /*
             )
