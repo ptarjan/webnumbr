@@ -30,7 +30,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
       </div>
 
-      <div id='content'>
+      <div class="content">
 
           <h1 id='title'></h1>
 
