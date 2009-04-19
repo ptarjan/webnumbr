@@ -36,7 +36,7 @@ paulisageek.wg.postGraphCallback = function(json) {
 
     json.graphs.push({ "meta" : {
         "API" : "ajax/v1/graph?" + query,
-        "embed" : ""
+        "embed" : "",
     }});
     var tbody = $(document.createElement("tbody"));
     $("#data").append($(document.createElement("table")).append(tbody)).hide();
@@ -45,6 +45,8 @@ paulisageek.wg.postGraphCallback = function(json) {
         var graph = json.graphs[graphIndex];
 
         var meta = graph.meta;
+        if (graph.meta.id)
+            meta.extend = '<a href="createGraph.php?parent=' + graph.meta.id + '">Extend</a> - Creates a new graph with the same history of this one. Good for fixing typos or broken xpath.';
 
         for (var key in meta) {
             var tr = $(document.createElement("tr"));
@@ -55,12 +57,9 @@ paulisageek.wg.postGraphCallback = function(json) {
             td.text(meta[key]);
             switch (key) {
                 case "openid" : 
+                case "url" : 
                     if (meta[key] === "")
                         continue;
-                    // Create an "a" around the element with the same content as the element
-                    td.wrapInner($(document.createElement("a")).attr("href", td.text()));
-                    break;
-                case "url" : 
                     // Create an "a" around the element with the same content as the element
                     td.wrapInner($(document.createElement("a")).attr("href", td.text()));
                     break;
@@ -102,6 +101,9 @@ paulisageek.wg.postGraphCallback = function(json) {
                 case "createdTime" :
                 case "modifiedTime" :
                     td.text(new Date(meta[key] * 1000).toString());
+                    break;
+                case "extend" :
+                    td.html(td.text());
                     break;
             }
             tr.append(td);

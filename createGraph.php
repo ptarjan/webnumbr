@@ -8,7 +8,6 @@ if (isset($_REQUEST['go'])) {
     }
 
     required("name", "url", "xpath", "frequency");
-    require ("db.inc");
 
     chdir("openid");
     require ("common.php");
@@ -20,6 +19,7 @@ if (isset($_REQUEST['go'])) {
         "url" => $_REQUEST["url"],
         "xpath" => $_REQUEST["xpath"],
         "frequency" => $_REQUEST["frequency"],
+        "parent" => $_REQUEST["parent"],
         "go" => $_REQUEST["go"],
     ));
     $_REQUEST["_root"] = $dirbase;
@@ -62,24 +62,55 @@ if (isset($_REQUEST['go'])) {
         die("Not inserting in dev mode");
     }
 
-    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
-    $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency'], "openid" => $openid));
+    if (! isset($_REQUEST["parent"])) $_REQUEST["parent"] = NULL;
+    
+    require ("db.inc");
+    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, parent, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, :parent, NOW())");
+    $r = $stmt->execute(array(
+        "name" => $_REQUEST['name'], 
+        "url" => $_REQUEST['url'], 
+        "xpath" => $_REQUEST['xpath'], 
+        "frequency" => $_REQUEST['frequency'], 
+        "openid" => $openid, 
+        "parent" => $_REQUEST["parent"]
+    ));
     if (!$r) {
         die("Something is wrong with the database right now. Please retry again later, and send me an email webGraphr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
     } else {
         $stmt = $PDO->prepare("SELECT id FROM graphs WHERE name = :name AND url = :url AND xpath = :xpath AND frequency = :frequency AND openid = :openid ORDER BY createdTime ASC");
-        $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency'], "openid" => $openid));
+        $r = $stmt->execute(array(
+            "name" => $_REQUEST['name'], 
+            "url" => $_REQUEST['url'], 
+            "xpath" => $_REQUEST['xpath'], 
+            "frequency" => $_REQUEST['frequency'], 
+            "openid" => $openid
+        ));
         if (! $r) { 
             die ("ummm.. can't select from the database<br/>" . print_r($stmt->errorInfo(), TRUE));
         };
 
         $result = $stmt->fetchAll();    
 
-        if (count($result) == 0) die ("ummm.. couldn't insert into database");
+        if (count($result) == 0) die ("ummm.. the insert didn't work. Maybe an ID error? Go try again.");
 
         header("Location: graph?id=" . $result[0]['id']);
     }
     die();
+}
+
+if (isset($_REQUEST['parent'])) {
+    require_once ("db.inc");
+    $stmt = $PDO->prepare("SELECT * FROM graphs WHERE id = :id");
+    $stmt->execute(array("id" => $_REQUEST["parent"]));
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) === 1) {
+        foreach ($result as $row) {
+            foreach ($row as $key => $value) {
+                if ($key !== "parent")
+                    $_REQUEST[$key] = $value;
+            }
+        }
+    }
 }
 
 // print $_REQUEST['referer'] . "<br>" . $_SERVER['HTTP_REFERER'];
@@ -138,8 +169,11 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <form>
           <input name="go" value="go" type="hidden" />
           <table>
+<?php if (isset($_REQUEST["parent"])) { ?>
+            <tr><td>Extends:</td><td><input name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
+<?php } ?>
             <tr><td>OpenID (to edit later)</td><td>
-                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="http://" name="openid_identifier" id="openid_identifier"/>
+                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid_identifier" id="openid_identifier"/>
             </td></tr>
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
