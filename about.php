@@ -41,6 +41,7 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 try {
 var pageTracker = _gat._getTracker("UA-149816-4");
 pageTracker._trackPageview();
-} catch(err) {}</script>
+} catch(err) {}
+</script>
 
 <?php require "/var/www/paul.slowgeek.com/footer.php" ?>

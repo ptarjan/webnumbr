@@ -13,18 +13,9 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
     <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
-    <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
-    <!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
-    <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
-
-<!-- Calendar -->
+    <!-- Calendar -->
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/redmond/jquery-ui.css" />
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.datepicker.js"></script>
-
-    <script type="text/javascript" src='fullgraph.js'></script>
-    <script type="text/javascript" src='graph.js'></script>
+    <!-- END Calendar -->
 
     <style type="text/css">
 .ui-datepicker-trigger {
@@ -68,6 +59,17 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
     </div>
 
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
+<script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
+<!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
+<script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.datepicker.js"></script>
+
+<script type="text/javascript" src='fullgraph.js'></script>
+<script type="text/javascript" src='graph.js'></script>
+
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
@@ -76,7 +78,8 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 try {
 var pageTracker = _gat._getTracker("UA-149816-4");
 pageTracker._trackPageview();
-} catch(err) {}</script>
+} catch(err) {}
+</script>
 
   </body>
 </html>

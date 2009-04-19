@@ -66,13 +66,46 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon">
 
     <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />
-    <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.draggable.js"></script>
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.resizable.js"></script>
-    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.dialog.js"></script>
-<script>
+  </head>
+  <body>
+    <div id='container'>
+      <div id='header'>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
+      </div>
 
+      <div id='content'>
+
+        <h1>Last Step</h1>
+
+        <form>
+          <input type="hidden" name="go" value="go" />
+          <table>
+            <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
+            <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
+            <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
+            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
+            <tr><td>Graph Frequency: </td><td><select name='frequency'>
+            <option value="1">1 hour</option>
+            <option value="6">6 hours</option>
+            <option value="12">12 hours</option>
+            <option value="24">24 hours</option>
+            </select></td></tr>
+            <tr><td></td><td><input type="submit" value="Create Graph" /></td></tr>
+          </table>
+        </form>
+      </div>
+    </div>
+
+    <div id='dialog' style='display:none'>
+    Everything look good? These values can't be changed once you click yes.
+    <br/>
+
+<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.draggable.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.resizable.js"></script>
+<script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.dialog.js"></script>
+<script>
 $(document).ready(function() {
     function reload() {
         $("#data").html("<img src='http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif' />");
@@ -115,42 +148,7 @@ $(document).ready(function() {
         "hide" : "slide"
     });
 });
-
 </script>
-
-  </head>
-  <body>
-    <div id='container'>
-      <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
-      </div>
-
-      <div id='content'>
-
-        <h1>Last Step</h1>
-
-        <form>
-          <input type="hidden" name="go" value="go" />
-          <table>
-            <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
-            <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
-            <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
-            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
-            <tr><td>Graph Frequency: </td><td><select name='frequency'>
-            <option value="1">1 hour</option>
-            <option value="6">6 hours</option>
-            <option value="12">12 hours</option>
-            <option value="24">24 hours</option>
-            </select></td></tr>
-            <tr><td></td><td><input type="submit" value="Create Graph" /></td></tr>
-          </table>
-        </form>
-      </div>
-    </div>
-
-    <div id='dialog'>
-    Everything look good? These values can't be changed once you click yes.
-    <br/>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -160,7 +158,8 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 try {
 var pageTracker = _gat._getTracker("UA-149816-4");
 pageTracker._trackPageview();
-} catch(err) {}</script>
+} catch(err) {}
+</script>
 
   </body>
 </html>

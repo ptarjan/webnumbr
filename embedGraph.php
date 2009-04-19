@@ -13,11 +13,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
     <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
-    <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
-    <script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
-    <!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
-    <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
-    <script type="text/javascript" src='graph.js'></script>
     <style type="text/css">
 html {
     margin : 0px;
@@ -51,7 +46,13 @@ h5 {
     <div id="content">
         <div id="plot" class='center'>_______/\___|\___/\</div>
     </div>
-    <script>
+
+<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+<script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
+<!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
+<script type="text/javascript" src="js/flot/jquery.flot.js"></script>
+<script type="text/javascript" src='graph.js'></script>
+<script>
 if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
@@ -89,7 +90,7 @@ paulisageek.wg.postGraphCallback = function(json) {
         })
     );
 }
-    </script>
+</script>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
@@ -99,7 +100,8 @@ document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.
 try {
 var pageTracker = _gat._getTracker("UA-149816-4");
 pageTracker._trackPageview();
-} catch(err) {}</script>
+} catch(err) {}
+</script>
 
   </body>
 </html>
