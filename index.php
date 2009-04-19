@@ -83,6 +83,12 @@ foreach ($data as $row) {
 
         <p>This site builds graphs from the web. If you want to know how data on a webpage changes over time, just put the URL in the <a href='#start'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
         <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks.</p>
+    
+        <h1>News</h1>
+    
+        <h2>April 18, 2009</h2>
+
+        <p>Launched. The web gets graphier!</p>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
       
