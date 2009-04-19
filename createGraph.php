@@ -24,7 +24,7 @@ if (isset($_REQUEST['go'])) {
         $count += 1;
     }
     if ($count >= 5) {
-        die("You can have up to 5 levels of parent depth and you just went over that. This is either a recursive parent relationship, or you're doing something I didn't predict. Please send me an email explaining it and we'll see what we can do.");
+        die("You can have up to 5 levels of parent depth and you just went over that. Something is probably wrong or you're doing something I didn't predict. Please send me an email explaining it and we'll see what we can do.");
     }
 
     // 
@@ -59,9 +59,8 @@ if (isset($_REQUEST['go'])) {
     } else if ($response->status == Auth_OpenID_FAILURE) {
         // Authentication failed; display the error message.
         if (strpos($response->message, "<No mode set>") === FALSE)  {
-            print ("OpenID authentication failed: " . $response->message);
             error_log ("OpenID authentication failed: " . $response->message);
-            die();
+            die ("OpenID authentication failed: " . $response->message);
         }
     } else if ($response->status == Auth_OpenID_SUCCESS) {
         // This means the authentication succeeded; extract the

@@ -46,7 +46,7 @@ paulisageek.wg.postGraphCallback = function(json) {
 
         var meta = graph.meta;
         if (graph.meta.id)
-            meta.extend = '<a href="createGraph.php?parent=' + graph.meta.id + '">Extend</a> - Creates a new graph with the same history of this one. Good for fixing typos or broken xpath.';
+            meta.extend = '<a href="createGraph?parent=' + graph.meta.id + '">Extend</a> - Creates a new graph with the same history of this one. Good for fixing typos or broken xpath.';
 
         for (var key in meta) {
             var tr = $(document.createElement("tr"));
