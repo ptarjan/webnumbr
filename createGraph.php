@@ -71,7 +71,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.draggable.js"></script>
     <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.resizable.js"></script>
     <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.dialog.js"></script>
-    <script>
+<script>
 
 $(document).ready(function() {
     function reload() {
