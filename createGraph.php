@@ -187,7 +187,6 @@ $(document).ready(function() {
             $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
             return false;
         }
-        reload();
         var data = parseInt($("#data").text());
         if (isNaN(data)) {
             $("#data").wrapInner("<span class='error' style='color:red'></span>");
