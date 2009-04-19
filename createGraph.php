@@ -11,21 +11,6 @@ if (isset($_REQUEST['go'])) {
 
     // Check recusion
     require ("db.inc");
-    $id =  $_REQUEST["parent"];
-    $count = 0;
-    $stmt = $PDO->prepare("SELECT parent FROM graphs WHERE id = :id");
-    while ($count < 5) {
-        $stmt->execute(array("id" => $id));
-        $result = $stmt->fetchAll();
-        if (count($result) != 1) break;
-        $parent = $result[0]['parent'];
-        if ($parent === NULL) break;
-        $id = $parent;
-        $count += 1;
-    }
-    if ($count >= 5) {
-        die("You can have up to 5 levels of parent depth and you just went over that. Something is probably wrong or you're doing something I didn't predict. Please send me an email explaining it and we'll see what we can do.");
-    }
 
     // 
     // OpenID
@@ -84,16 +69,13 @@ if (isset($_REQUEST['go'])) {
         die("Not inserting in dev mode");
     }
 
-    if (! isset($_REQUEST["parent"])) $_REQUEST["parent"] = NULL;
-    
-    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, parent, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, :parent, NOW())");
+    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
     $r = $stmt->execute(array(
         "name" => $_REQUEST['name'], 
         "url" => $_REQUEST['url'], 
         "xpath" => $_REQUEST['xpath'], 
         "frequency" => $_REQUEST['frequency'], 
         "openid" => $openid, 
-        "parent" => $_REQUEST["parent"]
     ));
     if (!$r) {
         die("Something is wrong with the database right now. Please retry again later, and send me an email webGraphr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
@@ -114,7 +96,17 @@ if (isset($_REQUEST['go'])) {
 
         if (count($result) == 0) die ("ummm.. the insert didn't work. Maybe an ID error? Go try again.");
 
-        header("Location: graph?id=" . $result[0]['id']);
+        $id = $result[0]['id'];
+
+        if (isset($_REQUEST['parent'])) {
+            $stmt = $PDO->prepare("INSERT INTO graph_data (data, timestamp, graph_id) SELECT data, timestamp, :id as graph_id FROM graph_data WHERE graph_id = :parent");
+            $stmt->execute(array(
+                "parent" => $_REQUEST["parent"],
+                "id" => $id,
+            ));
+        }
+
+        header("Location: graph?id=" . $id);
     }
     die();
 }
@@ -214,7 +206,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
     <div id='dialog' style='display:none'>
         <p>Everything look good?</p>
-        <p>If you don't register with OpenID you can't change these.</p>
+        <p>You can't edit anything after you click yes.</p>
     </div>
 
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
