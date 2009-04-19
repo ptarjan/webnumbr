@@ -20,8 +20,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
 <!-- Calendar -->
     <link rel="stylesheet" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.7.0/themes/redmond/jquery-ui.css" />
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.datepicker.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.datepicker.js"></script>
 
     <script type="text/javascript" src='fullgraph.js'></script>
     <script type="text/javascript" src='graph.js'></script>

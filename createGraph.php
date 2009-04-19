@@ -65,12 +65,12 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="shortcut icon" href="images/webGraphr-favicon.png" type="image/x-icon">
     <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon">
 
-    <link type="text/css" href="http://jqueryui.com/latest/themes/base/ui.all.css" rel="stylesheet" />
+    <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />
     <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.core.js"></script>
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.draggable.js"></script>
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.resizable.js"></script>
-    <script type="text/javascript" src="http://jqueryui.com/latest/ui/ui.dialog.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.draggable.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.resizable.js"></script>
+    <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.dialog.js"></script>
     <script>
 
 $(document).ready(function() {
