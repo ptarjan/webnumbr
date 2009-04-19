@@ -85,6 +85,8 @@ foreach ($data as $row) {
         <span class='date'>April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
         </li><li>
         <span class='date'>April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
+        </li><li>
+        <span class='date'>April 19, 2009</span> :  <span>Now you can extend graphs if the xpath breaks or you mis-typed something.</span>
         </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
