@@ -9,6 +9,27 @@ if (isset($_REQUEST['go'])) {
 
     required("name", "url", "xpath", "frequency");
 
+    // Check recusion
+    require ("db.inc");
+    $id =  $_REQUEST["parent"];
+    $count = 0;
+    $stmt = $PDO->prepare("SELECT parent FROM graphs WHERE id = :id");
+    while ($count < 5) {
+        $stmt->execute(array("id" => $id));
+        $result = $stmt->fetchAll();
+        if (count($result) != 1) break;
+        $parent = $result[0]['parent'];
+        if ($parent === NULL) break;
+        $id = $parent;
+        $count += 1;
+    }
+    if ($count >= 5) {
+        die("You can have up to 5 levels of parent depth and you just went over that. This is either a recursive parent relationship, or you're doing something I didn't predict. Please send me an email explaining it and we'll see what we can do.");
+    }
+
+    // 
+    // OpenID
+    //
     chdir("openid");
     require ("common.php");
     $dirbase = sprintf("http://%s%s/", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
@@ -24,7 +45,6 @@ if (isset($_REQUEST['go'])) {
     ));
     $_REQUEST["_root"] = $dirbase;
 
-    // OpenID
     $consumer = getConsumer();
 
     // Complete the authentication process using the server's
@@ -54,6 +74,9 @@ if (isset($_REQUEST['go'])) {
         require ("try_auth.php");
         die();
     };
+    //
+    // End OpendID
+    //
 
     if (strpos($_SERVER["REQUEST_URI"], "/dev/") === 0) {
         print "<pre>";
@@ -64,7 +87,6 @@ if (isset($_REQUEST['go'])) {
 
     if (! isset($_REQUEST["parent"])) $_REQUEST["parent"] = NULL;
     
-    require ("db.inc");
     $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, parent, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, :parent, NOW())");
     $r = $stmt->execute(array(
         "name" => $_REQUEST['name'], 
