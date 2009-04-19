@@ -15,6 +15,7 @@ function fetch($url, $xpath = NULL) {
             CURLOPT_TIMEOUT => 30,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_USERAGENT => "webGraphr 1.0 http://paulisageek.com/webGraphr/",
+            CURLOPT_ENCODING => "gzip",
         );
         curl_setopt_array($ch, $options);
         $data = curl_exec($ch);
@@ -23,6 +24,7 @@ function fetch($url, $xpath = NULL) {
                         'output-xml' => TRUE,
                         'wrap' => 0,
                        );
+
         $data = tidy_repair_string ($data, $config);
 
         $data = preg_replace("/xmlns='[^']*'/", "", $data);
