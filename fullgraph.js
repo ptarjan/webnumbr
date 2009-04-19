@@ -54,6 +54,12 @@ paulisageek.wg.postGraphCallback = function(json) {
             var td = $(document.createElement("td"));
             td.text(meta[key]);
             switch (key) {
+                case "openid" : 
+                    if (meta[key] === "")
+                        continue;
+                    // Create an "a" around the element with the same content as the element
+                    td.wrapInner($(document.createElement("a")).attr("href", td.text()));
+                    break;
                 case "url" : 
                     // Create an "a" around the element with the same content as the element
                     td.wrapInner($(document.createElement("a")).attr("href", td.text()));

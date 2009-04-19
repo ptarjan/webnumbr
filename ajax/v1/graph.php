@@ -88,7 +88,7 @@ ORDER BY unix_timestamp
         $data[] = array($row['unix_timestamp'], $row['data']);
     }
 
-    $stmt = $PDO->prepare("SELECT id, name, url, xpath, frequency, goodFetches, badFetches, UNIX_TIMESTAMP(createdTime) AS createdTime, UNIX_TIMESTAMP(modifiedTime) AS 'modifiedTime' FROM graphs WHERE id = :id");
+    $stmt = $PDO->prepare("SELECT id, openid, name, url, xpath, frequency, goodFetches, badFetches, UNIX_TIMESTAMP(createdTime) AS createdTime, UNIX_TIMESTAMP(modifiedTime) AS 'modifiedTime' FROM graphs WHERE id = :id");
     if (!$stmt) dieError($PDO);
     $ret = $stmt->execute(array("id" => $id));
     if (!$ret) dieError($stmt);
