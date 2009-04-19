@@ -47,7 +47,7 @@ function fetch($url, $xpath = NULL) {
         if (!$ret) {
             throw new FetchException("Can't load xml");
         }
-        if ($xpath == NULL) return $dom;
+        if ($xpath === NULL) return $dom;
 
     } else if ($url instanceof DomDocument) {
         $dom = $url;

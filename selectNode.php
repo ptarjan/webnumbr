@@ -11,7 +11,12 @@ try {
     die();
 }
 
-if ($_REQUEST['xpath'] != NULL) die($data);
+if (is_string($data)) {
+    if ($data) 
+        die($data);
+    else 
+        die ("Something is wrong with the fetch. Check URL and XPATH");
+}
 
 $data = $data->saveXML();
 
