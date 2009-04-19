@@ -159,7 +159,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <div id='dialog' style='display:none'>
         <p>Everything look good?</p>
         <p>If you don't register with OpenID you can't change these.</p>
-    <br/>
+    </div>
 
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
 <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
@@ -179,7 +179,12 @@ $(document).ready(function() {
 
     var confirmed = false;
     $("form").submit(function(ev) {
-        if ($.trim($(":input[name='name']").attr("value")) == "") {
+        $(".error").each(function() {
+            this.replace(this.contents());
+        });
+        console.log($.trim($(":input[name='name']").val())); 
+
+        if ($.trim($(":input[name='name']").val() == "")) {
             $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
             return false;
         }
