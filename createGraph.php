@@ -138,12 +138,12 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           <input name="go" value="go" type="hidden" />
           <table>
             <tr><td>OpenID (to edit later)</td><td>
-                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="50" value="http://" name="openid_identifier" id="openid_identifier"/>
+                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="http://" name="openid_identifier" id="openid_identifier"/>
             </td></tr>
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
             <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" size="100" /></td></tr>
-            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
+            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /></tr>
             <tr><td>Graph Frequency: </td><td><select name='frequency'>
             <option value="1">1 hour</option>
             <option value="6">6 hours</option>
@@ -180,11 +180,10 @@ $(document).ready(function() {
     var confirmed = false;
     $("form").submit(function(ev) {
         $(".error").each(function() {
-            this.replace(this.contents());
+            $(this).replaceWith($(this).contents());
         });
-        console.log($.trim($(":input[name='name']").val())); 
 
-        if ($.trim($(":input[name='name']").val() == "")) {
+        if ($.trim($(":input[name='name']").val()) == "") {
             $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
             return false;
         }

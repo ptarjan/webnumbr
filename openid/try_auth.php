@@ -7,8 +7,6 @@ function getOpenIDURL() {
     // value.
     if (empty($_GET['openid_identifier'])) {
         $error = "Expected an OpenID URL.";
-        include 'index.php';
-        exit(0);
     }
 
     return $_GET['openid_identifier'];
@@ -23,7 +21,7 @@ function run() {
 
     // No auth request means we can't begin OpenID.
     if (!$auth_request) {
-        displayError("Authentication error; not a valid OpenID.");
+        die("Authentication error; not a valid OpenID.");
     }
 
     $sreg_request = Auth_OpenID_SRegRequest::build(

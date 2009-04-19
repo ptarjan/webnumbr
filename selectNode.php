@@ -19,7 +19,6 @@ $rep = '
 
 <!-- Added Code -->
 <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
-<script>top=window</script>
 <script>
 __nsDoneURL = "http://paulisageek.com/webGraphr/createGraph";
 </script>
