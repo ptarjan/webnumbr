@@ -6,15 +6,68 @@ if (isset($_REQUEST['go'])) {
         if (!isset($_REQUEST[$p])) die ("Required parameter $p");
         if (trim(isset($_REQUEST[$p])) == "") die ("Empty parameter $p");
     }
+
     required("name", "url", "xpath", "frequency");
     require ("db.inc");
-    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, createdTime) VALUES (:name, :url, :xpath, :frequency, NOW())");
-    $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency']));
+
+    chdir("openid");
+    require ("common.php");
+    $dirbase = sprintf("http://%s%s/", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
+    $base = $dirbase . "createGraph?";
+
+    $_REQUEST["_done"] = $base . http_build_query(array(
+        "name" => $_REQUEST["name"],
+        "url" => $_REQUEST["url"],
+        "xpath" => $_REQUEST["xpath"],
+        "frequency" => $_REQUEST["frequency"],
+        "go" => $_REQUEST["go"],
+    ));
+    $_REQUEST["_root"] = $dirbase;
+
+    // OpenID
+    $consumer = getConsumer();
+
+    // Complete the authentication process using the server's
+    // response.
+    $response = $consumer->complete($_REQUEST['_done']);
+
+    $openid = "";
+    // Check the response status.
+    if ($response->status == Auth_OpenID_CANCEL) {
+        // This means the authentication was cancelled.
+        print ('Verification cancelled.');
+    } else if ($response->status == Auth_OpenID_FAILURE) {
+        // Authentication failed; display the error message.
+        if (strpos($response->message, "<No mode set>") === FALSE)  {
+            print ("OpenID authentication failed: " . $response->message);
+            error_log ("OpenID authentication failed: " . $response->message);
+            die();
+        }
+    } else if ($response->status == Auth_OpenID_SUCCESS) {
+        // This means the authentication succeeded; extract the
+        // identity URL and Simple Registration data (if it was
+        // returned).
+        $openid = $response->getDisplayIdentifier();
+    }
+
+    if (isset($_REQUEST['openid_identifier']) && $_REQUEST['openid_identifier'] !== "http://" && $_REQUEST['openid_identifier'] !== "") {
+        require ("try_auth.php");
+        die();
+    };
+
+    if (strpos($_SERVER["REQUEST_URI"], "/dev/") === 0) {
+        print "<pre>";
+        print_r($_REQUEST);
+        print "</pre>";
+        die("Not inserting in dev mode");
+    }
+    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
+    $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency'], "openid" => $openid));
     if (!$r) {
         die("Something is wrong with the database right now. Please retry again later, and send me an email webGraphr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
     } else {
-        $stmt = $PDO->prepare("SELECT id FROM graphs WHERE name = :name AND url = :url AND xpath = :xpath AND frequency = :frequency ORDER BY createdTime ASC");
-        $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency']));
+        $stmt = $PDO->prepare("SELECT id FROM graphs WHERE name = :name AND url = :url AND xpath = :xpath AND frequency = :frequency AND openid = :openid ORDER BY createdTime ASC");
+        $r = $stmt->execute(array("name" => $_REQUEST['name'], "url" => $_REQUEST['url'], "xpath" => $_REQUEST['xpath'], "frequency" => $_REQUEST['frequency'], "openid" => $openid));
         if (! $r) { 
             die ("ummm.. can't select from the database<br/>" . print_r($stmt->errorInfo(), TRUE));
         };
@@ -29,24 +82,28 @@ if (isset($_REQUEST['go'])) {
 }
 
 // print $_REQUEST['referer'] . "<br>" . $_SERVER['HTTP_REFERER'];
-if (isset($_REQUEST['referer']))
-    $referer = $_REQUEST['referer'];
-else if (isset($_SERVER['HTTP_REFERER']))
-    $referer = $_SERVER['HTTP_REFERER'];
-else
-    $referer = "";
+if (isset($_REQUEST['url']))
+    $url = $_REQUEST['url'];
+else {
+    if (isset($_REQUEST['referer']))
+        $referer = $_REQUEST['referer'];
+    else if (isset($_SERVER['HTTP_REFERER']))
+        $referer = $_SERVER['HTTP_REFERER'];
+    else
+        $referer = "";
 
-$parsed = parse_url($referer);
-$query = $parsed['query'];
-$url = "";
-foreach (explode("&", $query) as $arg) {
-    $boom =  explode("=", $arg, 2);
-    if (count($boom) !== 2) continue;
-    list($k, $v) = $boom;
-    if ($k == "url") 
-        $url = urldecode($v);
+    $parsed = parse_url($referer);
+    $query = $parsed['query'];
+
+    $url = "";
+    foreach (explode("&", $query) as $arg) {
+        $boom =  explode("=", $arg, 2);
+        if (count($boom) !== 2) continue;
+        list($k, $v) = $boom;
+        if ($k == "url") 
+            $url = urldecode($v);
+    }
 }
-$xpath = $_REQUEST['xpath'];
 
 ?>
 <?php
@@ -78,11 +135,14 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <h1>Last Step</h1>
 
         <form>
-          <input type="hidden" name="go" value="go" />
+          <input name="go" value="go" type="hidden" />
           <table>
-            <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100"/></td></tr>
+            <tr><td>OpenID (to edit later)</td><td>
+                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="50" value="http://" name="openid_identifier" id="openid_identifier"/>
+            </td></tr>
+            <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
-            <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($xpath); ?>" size="100" /></td></tr>
+            <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" size="100" /></td></tr>
             <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data'></b> <input type="button" id='reload' value="Reload" /></tr>
             <tr><td>Graph Frequency: </td><td><select name='frequency'>
             <option value="1">1 hour</option>
@@ -97,7 +157,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     </div>
 
     <div id='dialog' style='display:none'>
-    Everything look good? These values can't be changed once you click yes.
+        <p>Everything look good?</p>
+        <p>If you don't register with OpenID you can't change these.</p>
     <br/>
 
 <script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
@@ -154,7 +215,7 @@ $(document).ready(function() {
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
 // document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
 </script>
-<script src='http://google-analytics.com/ga.js' type='text/javascript'></script>
+<!-- <script src='http://google-analytics.com/ga.js' type='text/javascript'></script> -->
 <script type="text/javascript">
 try {
 var pageTracker = _gat._getTracker("UA-149816-4");
