@@ -46,7 +46,7 @@ paulisageek.wg.postGraphCallback = function(json) {
 
         var meta = graph.meta;
         if (graph.meta.id)
-            meta.extend = '<a href="createGraph?parent=' + meta.id + '">Extend</a> - Creates a new graph with the same history of this one. Good for fixing typos or broken xpath.';
+            meta.extend = '<a href="createGraph?parent=' + meta.id + '">Extend</a> - Creates a new graph with the same history as this one. Good for fixing typos or broken xpath.';
         if (meta.badFetches >= 100 && (meta.goodFetches / (meta.goodFetches + meta.badFetches)) <= 0.25)
             meta.fetchingErrors = '<span class="error">This graph is not fetching because there are too many errors. <a href="createGraph?parent=' + meta.id + '">Extend</a> it and fix it or email me if think it should be fetching.</span>';
 
