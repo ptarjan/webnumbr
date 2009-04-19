@@ -24,7 +24,7 @@ body {
     height : 100%;
 }
 
-div#content {
+div.content {
     margin : auto;
     width : auto;
     vertical-align : middle;
@@ -43,7 +43,7 @@ h5 {
   </head>
   <body>
     <h5 id='title'></h5>
-    <div id="content">
+    <div class="content">
         <div id="plot" class='center'>_______/\___|\___/\</div>
     </div>
 
@@ -65,8 +65,8 @@ paulisageek.wg.preGraphCallback = function(json) {
         }
         $("#title").wrap('<a target="webGrapher" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
-    $("#plot").height(($("#content").innerHeight() - $("#title").height() - 20));
-    $("#plot").width(($("#content").width() - 20));
+    $("#plot").height(($(".content").innerHeight() - $("#title").height() - 20));
+    $("#plot").width(($(".content").width() - 20));
 }
 paulisageek.wg.postGraphCallback = function(json) {
     $(".legend a").attr("target", "webGrapher");
