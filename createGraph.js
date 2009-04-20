@@ -15,7 +15,7 @@ $(document).ready(function() {
         });
 
         if ($.trim($(":input[name='name']").val()) == "") {
-            $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
+            $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>").focus();
             return false;
         }
         var data = parseInt($("#data").text());
