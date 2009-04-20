@@ -114,6 +114,8 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
 */
                 $("<img/>")
                 .attr("src", "images/webGraphr-logo-32.png")
+                .attr("title", "webGraphr")
+                .attr("alt", "webGraphr icon")
                 .height($("#title").height())
                 .css("overflow", "hidden")
                 .css("float", "left")

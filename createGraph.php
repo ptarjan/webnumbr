@@ -164,23 +164,22 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
-    <link rel="shortcut icon" href="images/webGraphr-favicon.png" type="image/x-icon">
-    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon">
+    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
     <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
 
       <div class="content">
 
         <h1>Last Step</h1>
 
-        <form>
-          <input name="go" value="go" type="hidden" />
+        <form action="">
+        <p> <input name="go" value="go" type="hidden" /> </p>
           <table>
 <?php if (isset($_REQUEST["parent"])) { ?>
             <tr><td>Extends:</td><td><input name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
@@ -191,7 +190,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
             <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" size="100" /></td></tr>
-            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /></tr>
+            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /></td></tr>
             <tr><td>Graph Frequency: </td><td><select name='frequency'>
             <option value="1">1 hour</option>
             <option value="6">6 hours</option>
@@ -209,59 +208,12 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <p>You can't edit anything after you click yes.</p>
     </div>
 
-<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
+<script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>
 <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.core.js"></script>
 <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.draggable.js"></script>
 <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.resizable.js"></script>
 <script type="text/javascript" src="http://jquery-ui.googlecode.com/svn/tags/1.7.1/ui/ui.dialog.js"></script>
-<script>
-$(document).ready(function() {
-    function reload() {
-        $("#data").html("<img src='http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif' />");
-        $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value")}), function (data) {
-            $("#data").html(data);
-        });
-    }
-    $("#data").ready(reload);
-    $("#reload").click(reload);
-
-    var confirmed = false;
-    $("form").submit(function(ev) {
-        $(".error").each(function() {
-            $(this).replaceWith($(this).contents());
-        });
-
-        if ($.trim($(":input[name='name']").val()) == "") {
-            $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>");
-            return false;
-        }
-        var data = parseInt($("#data").text());
-        if (isNaN(data)) {
-            $("#data").wrapInner("<span class='error' style='color:red'></span>");
-            return false;
-        }
-        $("#dialog").dialog("open");
-        if (!confirmed) {
-            return false;
-        } else {
-            return true;
-        }
-    });
-    $("#dialog").dialog({
-        modal : true,
-        autoOpen : false,
-        buttons : {
-            "Yes!" : function() { 
-                confirmed = true;
-                $("form").submit() 
-            },
-            "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); }
-        },
-        title : "Last step before graphyness",
-        "hide" : "slide"
-    });
-});
-</script>
+<script type="text/javascript" src="createGraph.js"></script>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

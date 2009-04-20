@@ -1,7 +1,7 @@
 <?php
-require ("db.inc");
 print '<?xml version="1.0" encoding="UTF-8"?>';
 ?>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
@@ -17,7 +17,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='logo' src="images/webGraphr-banner-100.png" /></a>
+        <a href='.'><img id='logo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
 
       <div class="content">
@@ -47,6 +47,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
         <ul>
 <?php
+require ("db.inc");
 $stmt = $PDO->prepare("SELECT name, id, url FROM graphs ORDER BY createdTime DESC LIMIT 10");
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -100,7 +101,7 @@ foreach ($data as $row) {
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
 
-<script>
+<script type='text/javascript'>
 var resizeURL = function() {
     $("#url").width($("#startForm").width() - $("#urlLabel").width() - $("#submitURL").width() - 30);
 };

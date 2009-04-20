@@ -27,7 +27,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" /></a>
+        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
 
       <div class="content">
@@ -57,6 +57,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
           <div id="data"></div>
 
+      </div>
     </div>
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
