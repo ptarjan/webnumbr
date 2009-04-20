@@ -83,11 +83,13 @@ foreach ($data as $row) {
 
         <h1>News</h1>
         <ul><li>
-        <span class='date'>April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
+        <span class="date">April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
         </li><li>
-        <span class='date'>April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
+        <span class="date">April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
         </li><li>
-        <span class='date'>April 19, 2009</span> :  <span>Now you can extend graphs if the xpath breaks or you mis-typed something.</span>
+        <span class="date">April 19, 2009</span> :  <span>Now you can <a href="createGraph?parent=4">extend</a> graphs if the xpath breaks or you mis-typed something.</span>
+        </li><li>
+        <span class="date">April 19, 2009</span> :  <span>I wish I was your <a href="graph?id=4&derivative=1">derivative</a> so I could lie <a href="graph?id=4&derivative=2">tangent</a> to your <a href="graph?id=4&derivative=3">curves</a>.</span>
         </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>

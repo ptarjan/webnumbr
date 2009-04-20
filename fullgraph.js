@@ -37,6 +37,7 @@ paulisageek.wg.postGraphCallback = function(json) {
     json.graphs.push({ "meta" : {
         "API" : "ajax/v1/graph?" + query,
         "embed" : "",
+        "derivative" : 'Show ' + ($.query.get("derivative") ? '<a href="' + $.query.remove("derivative").toString() + "&derivative=" + ($.query.get("derivative") + 1) + '">next derivative</a>' : '<a href="?' + query + '&derivative=1">derivative</a>') + ' graph (how the <b>change</b> changes over time)'
     }});
     var tbody = $(document.createElement("tbody"));
     $("#data").append($(document.createElement("table")).append(tbody)).hide();
@@ -106,6 +107,7 @@ paulisageek.wg.postGraphCallback = function(json) {
                     td.text(new Date(meta[key] * 1000).toString());
                     break;
                 case "extend" :
+                case "derivative" :
                 case "fetchingErrors" :
                     td.html(td.text());
                     break;

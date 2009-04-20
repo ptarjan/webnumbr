@@ -184,7 +184,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 <?php if (isset($_REQUEST["parent"])) { ?>
             <tr><td>Extends:</td><td><input name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
 <?php } ?>
-            <tr><td>OpenID (to edit later)</td><td>
+            <tr><td><a href="http://openid.net">OpenID</a></td><td>
                 <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid_identifier" id="openid_identifier"/>
             </td></tr>
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
