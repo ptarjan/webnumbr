@@ -94,6 +94,8 @@ ORDER BY unix_timestamp
     if (!$ret) dieError($stmt);
     $graph = $stmt->fetchAll(PDO::FETCH_ASSOC);
     $graph = $graph[0];
+    if ($graph === NULL) 
+        continue;
 
     if (isset($_REQUEST['derivative']) && is_numeric($_REQUEST['derivative'])) {
         for ($d = 0; $d < (int) $_REQUEST['derivative']; $d ++) {
