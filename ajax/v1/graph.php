@@ -87,6 +87,28 @@ ORDER BY unix_timestamp
     foreach ($result as $row) {
         $data[] = array($row['unix_timestamp'], $row['data']);
     }
+    if (isset($_REQUEST['derivative'])) {
+        for ($d = 0; $d < (int) $_REQUEST['derivative']; $d ++) {
+            $newData = array();
+            $last = NULL;
+            foreach ($data as $row) {
+                $time = (int) $row[0];
+                $val = (int) $row[1];
+                $old = array($time, $val);
+                if ($last === NULL) {
+                    $last = $old;
+                    continue;
+                }
+                // Discrete derivative (by the hours)
+                $val = ($val - $last[1]) / ($time - $last[0]) * 60 * 60;
+                // Put the point directly in between the two values
+                $time -= ($time - $last[0]) / 2;
+                $last = $old;
+                $newData[] = (array($time, $val));
+            }
+            $data = $newData;
+        }
+    }
 
     $stmt = $PDO->prepare("SELECT id, openid, name, url, xpath, frequency, goodFetches, badFetches, UNIX_TIMESTAMP(createdTime) AS createdTime, UNIX_TIMESTAMP(modifiedTime) AS 'modifiedTime' FROM graphs WHERE id = :id");
     if (!$stmt) dieError($PDO);

@@ -26,29 +26,6 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 var val = graph.data[i][1];
                 series.push([time * 1000, val]);
             }
-            if ($.query.get("derivative")) {
-                for (var d=0; d < $.query.get("derivative"); d++) {
-                    var newSeries = [];
-                    var last = null;
-                    for (var i=0; i < series.length; i++) {
-                        var time = series[i][0]; 
-                        var val = series[i][1];
-                        var old = [time, val];
-                        // Derivative undefined at the start point
-                        if (last === null) {
-                            last = old;
-                            continue;
-                        }
-                        // Discrete derivative (by the hours)
-                        val = (val - last[1]) / (time - last[0]) * 60 * 60 * 1000;
-                        // Put the point directly in between the two values
-                        time -= (time - last[0]) / 2;
-                        last = old;
-                        newSeries.push([time, val]);
-                    }
-                    series = newSeries;
-                }
-            }
 
             if (series.length === 0 && json.graphs.length == 1) {
                 /*
