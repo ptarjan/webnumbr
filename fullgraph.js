@@ -26,6 +26,9 @@ paulisageek.wg.postGraphCallback = function(json) {
         $(":input[name='from']").val("");
     });
 
+    if ($.isArray($.query.get("id")))
+        $.query.SET("id", $.query.get("id").join(","));
+
     var keys = $.query.get();
     for (var keyName in keys) {
         if (keys[keyName] === true) {

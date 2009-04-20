@@ -31,6 +31,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
               <input type='submit' value='Search' />
           </div>
         </form>
+        <form action='graph'>
         <div id='searchResults'>
           <ul class='searchresults'>
 <?php
@@ -44,8 +45,15 @@ foreach ($data as $row) {
     $url = substr($row['url'], 0, 30);
     if (strlen($row['url']) > 30) $url .= "...";
     $ids[] = $row['id'];
+?>
+            <li>
+              <input name="id[]" value="<?php print htmlspecialchars($row["id"]) ?>" type="checkbox" checked="checked" />
+              <a href="graph?id=<?php print htmlspecialchars($row['id']) ?>">
+                <?php print htmlspecialchars($row['name']) ?>
 
-    print "            <li><a href='graph?id=" . htmlspecialchars($row['id']) . "'>" . htmlspecialchars($row['name']) . "</a> (" . htmlspecialchars($url) . ")</li>\n";
+              </a> (<?php print htmlspecialchars($url) ?>)
+            </li>
+<?php
 }
 ?>
           </ul>
@@ -56,8 +64,10 @@ foreach ($data as $row) {
         </div>
         
         <div>
-          See these <a href="graph?id=<?php print htmlspecialchars(urlencode(implode(",", $ids))) ?>">all on the same graph</a>.
+          <input type="submit" value="See these on the same graph" />
         </div>
+        </form>
+
       </div>
     </div>
 

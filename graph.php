@@ -61,7 +61,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     </div>
 
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
-<script type='text/javascript' src='http://plugins.jquery.com/files/jquery.query-2.1.2.js.txt'></script>
+<script type='text/javascript' src='js/jquery/jquery.query-2.2.0.js'></script>
 
 <!--[if IE]><script type="text/javascript" src="js/flot/excanvas.pack.js"></script><![endif]-->
 <script type="text/javascript" src="js/flot/jquery.flot.js"></script>
