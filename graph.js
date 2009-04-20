@@ -16,15 +16,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             $("#title").ready(function () {
                 var title = $.trim($("#title").text());
                 if (title.length > 0) { title += " + "; }
-                var suffix = "";
-                switch ($.query.get("derivative")) {
-                    case null : break;
-                    case 1 : suffix = " (1st derivative)"; break;
-                    case 2 : suffix = " (2nd derivative)"; break;
-                    case 3 : suffix = " (3rd derivative)"; break;
-                    default : suffix = " (" + $.query.get("derivative") + "th derivative)"; break;
-                };
-                $("#title").text(title + graph.meta.name + suffix);
+                $("#title").text(title + graph.meta.name);
             });
 
             var series = [];
@@ -75,7 +67,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                     ];
                 }
             }
-            var a = $("<a/>").attr("href", "http://paulisageek.com/webGraphr/graph?id=" + graph.meta.id).text(graph.meta.name);
+            var a = $("<a/>").attr("href", "graph?id=" + graph.meta.id + ($.query.get("derivative") ? "&derivative=" + $.query.get("derivative") : "")).text(graph.meta.name);
             a.attr("title", a.text());
             if (a.text().length > 30) {
                 a.text(a.text().substring(0, 27) + "...");

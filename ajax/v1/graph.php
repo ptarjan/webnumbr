@@ -92,13 +92,21 @@ ORDER BY unix_timestamp
     foreach ($result as $row) {
         $data[] = array($row['unix_timestamp'], $row['data']);
     }
-    if (isset($_REQUEST['derivative'])) {
+
+    $stmt = $PDO->prepare("SELECT id, openid, name, url, xpath, frequency, goodFetches, badFetches, UNIX_TIMESTAMP(createdTime) AS createdTime, UNIX_TIMESTAMP(modifiedTime) AS 'modifiedTime' FROM graphs WHERE id = :id");
+    if (!$stmt) dieError($PDO);
+    $ret = $stmt->execute(array("id" => $id));
+    if (!$ret) dieError($stmt);
+    $graph = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $graph = $graph[0];
+
+    if (isset($_REQUEST['derivative']) && is_numeric($_REQUEST['derivative'])) {
         for ($d = 0; $d < (int) $_REQUEST['derivative']; $d ++) {
             $newData = array();
             $last = NULL;
             foreach ($data as $row) {
-                $time = (int) $row[0];
-                $val = (int) $row[1];
+                $time = (float) $row[0];
+                $val = (float) $row[1];
                 $old = array($time, $val);
                 if ($last === NULL) {
                     $last = $old;
@@ -113,14 +121,14 @@ ORDER BY unix_timestamp
             }
             $data = $newData;
         }
+        switch ($_REQUEST["derivative"]) {
+            case "1" : $graph['name'] .= " (1st derivative)"; break;
+            case "2" : $graph['name'] .= " (2nd derivative)"; break;
+            case "3" : $graph['name'] .= " (3rd derivative)"; break;
+            default : $graph['name'] .= " ({$_REQUEST['derivative']}th derivative)"; break;
+        };
     }
 
-    $stmt = $PDO->prepare("SELECT id, openid, name, url, xpath, frequency, goodFetches, badFetches, UNIX_TIMESTAMP(createdTime) AS createdTime, UNIX_TIMESTAMP(modifiedTime) AS 'modifiedTime' FROM graphs WHERE id = :id");
-    if (!$stmt) dieError($PDO);
-    $ret = $stmt->execute(array("id" => $id));
-    if (!$ret) dieError($stmt);
-    $graph = $stmt->fetchAll(PDO::FETCH_ASSOC);
-    $graph = $graph[0];
 
     $graphs[] = array(
         "meta" => $graph,
