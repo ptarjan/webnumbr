@@ -16,7 +16,15 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             $("#title").ready(function () {
                 var title = $.trim($("#title").text());
                 if (title.length > 0) { title += " + "; }
-                $("#title").text(title + graph.meta.name);
+                var suffix = "";
+                switch ($.query.get("derivative")) {
+                    case null : break;
+                    case 1 : suffix = " (1st derivative)"; break;
+                    case 2 : suffix = " (2nd derivative)"; break;
+                    case 3 : suffix = " (3rd derivative)"; break;
+                    default : suffix = " (" + $.query.get("derivative") + "th derivative)"; break;
+                };
+                $("#title").text(title + graph.meta.name + suffix);
             });
 
             var series = [];
