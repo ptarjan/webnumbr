@@ -25,7 +25,7 @@ $rep = '
 <!-- Added Code -->
 <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
 <script>
-__nsDoneURL = "http://paulisageek.com/webGraphr/createGraph";
+__nsDoneURL = "http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/createGraph";
 </script>
 <script src="http://paulisageek.com/nodeSelector/ns.js" ></script>
 <!-- End Added Code -->
