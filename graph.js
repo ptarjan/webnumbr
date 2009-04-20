@@ -42,7 +42,7 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
                 }
                 */
                    
-                if (graph.meta.goodFetches === 0 && graph.meta.badFetches === 0) {
+                if (graph.meta.goodFetches == 0 && graph.meta.badFetches == 0) {
                     series = [
                         [0, 1], [1, 0], [2, 1], [3, 0], [4, 1], [3, 0], // W
                         [6, 0], [7, 1], [7.5, 0.5], [6.5, 0.5], [7.5, 0.5], [8, 0], // A
