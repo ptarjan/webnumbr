@@ -98,7 +98,8 @@ ORDER BY unix_timestamp
         continue;
 
     if (isset($_REQUEST['derivative']) && is_numeric($_REQUEST['derivative'])) {
-        for ($d = 0; $d < (int) $_REQUEST['derivative']; $d ++) {
+        $derivative = (int) $_REQUEST['derivative'];
+        for ($d = 0; $d < $derivative; $d ++) {
             $newData = array();
             $last = NULL;
             foreach ($data as $row) {
@@ -118,12 +119,14 @@ ORDER BY unix_timestamp
             }
             $data = $newData;
         }
-        switch ($_REQUEST["derivative"]) {
-            case "1" : $graph['name'] .= " (1st derivative)"; break;
-            case "2" : $graph['name'] .= " (2nd derivative)"; break;
-            case "3" : $graph['name'] .= " (3rd derivative)"; break;
-            default : $graph['name'] .= " ({$_REQUEST['derivative']}th derivative)"; break;
-        };
+        if ($derivative > 0) {
+            switch ($_REQUEST["derivative"]) {
+                case "1" : $graph['name'] .= " (1st derivative)"; break;
+                case "2" : $graph['name'] .= " (2nd derivative)"; break;
+                case "3" : $graph['name'] .= " (3rd derivative)"; break;
+                default : $graph['name'] .= " ({$_REQUEST['derivative']}th derivative)"; break;
+            };
+        }
     }
 
 
