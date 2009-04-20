@@ -10,8 +10,9 @@ paulisageek.wg.preGraphCallback = function(json) {
         }
         $("#title").wrap('<a target="webGrapher" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
-    $("#plot").height(($(".content").innerHeight() - $("#title").height() - 20));
-    $("#plot").width(($(".content").width() - 20));
+    $("#plot").height(($(".content").innerHeight() - $("#title").height() + 5));
+    $("#plot").width(($(".content").width() - 10));
+    $("#plot").css("margin", -10);
 }
 paulisageek.wg.postGraphCallback = function(json) {
     $(".legend a").attr("target", "webGrapher");
