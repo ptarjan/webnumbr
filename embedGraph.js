@@ -11,7 +11,7 @@ paulisageek.wg.preGraphCallback = function(json) {
         $("#title").wrap('<a target="webGrapher" href="http://paulisageek.com/webGraphr/graph?' + $.param(keys) + '"></a>"');
     });
     $("#plot").height(($(".content").innerHeight() - $("#title").height() + 5));
-    $("#plot").width(($(".content").width() - 10));
+    $("#plot").width(($(".content").width() - 15));
     $("#plot").css("margin", -10);
 }
 paulisageek.wg.postGraphCallback = function(json) {
