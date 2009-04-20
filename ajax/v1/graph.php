@@ -43,7 +43,12 @@ if (!isset($_REQUEST['format']))
 
 
 function dieError($pdo) {
-    die(json_encode(array("error" => array("msg" => "Prepare error", "errorInfo" => $pdo->errorInfo(), "errorCode" => $pdo->errorCode()))));
+    die(json_encode(array("error" => 
+    array(
+        "msg" => "Prepare error", 
+        "errorInfo" => $pdo->errorInfo(), 
+        "errorCode" => $pdo->errorCode()
+    ))));
 }
 
 if (! is_array($_REQUEST['id'])) {
