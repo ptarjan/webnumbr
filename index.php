@@ -34,8 +34,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           </div>
         </form>
 
-        <iframe style="float: left; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0"></iframe>
-        <iframe style="float: right; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=27" frameborder="0"></iframe>
+        <iframe style="float: left; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0" allowtransparency="true"></iframe>
+        <iframe style="float: right; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=27" frameborder="0" allowtransparency="true"></iframe>
 
         <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
         <p>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
