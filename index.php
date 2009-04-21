@@ -110,13 +110,13 @@ foreach ($data as $row) {
 
 <script type='text/javascript'>
 var resizeURL = function() {
-    $("#url").width($("#startForm").width() - $("#urlLabel").width() - $("#submitURL").width() - 30);
+    $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 15);
 };
 $("#startForm").ready(resizeURL);
 $(window).resize(resizeURL);
 
 var resizeSearch = function() {
-    $("#query").width($("#searchForm").width() - $("#submitQuery").width() - 30);
+    $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 15);
 };
 $("#startForm").ready(resizeSearch);
 $(window).resize(resizeSearch);
