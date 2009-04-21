@@ -36,7 +36,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
       <div class="content">
 
-          <h1 id='title'>&nbsp;</h1>
+          <h1 id='title'> </h1>
 
           <div>
 
