@@ -34,13 +34,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
 
-      <div class="content">
+      <div class="content" style="overflow: hidden">
 
           <h1 id='title'> </h1>
 
-          <div>
+          <div style="margin : 0px">
 
-            <div id="plot" style="width:95%" class='center'></div>
+            <div id="plot" style="margin: 0px"></div>
 
             <form id='dateRange' action="">
               <div class="center">

@@ -91,8 +91,19 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             },
             lines : { show : true }
         };
-        $("#plot").ready(function() {
+
+        var plotFunction = function(json) {
+            if (typeof paulisageek != "undefined" && typeof paulisageek.wg != "undefined" && typeof paulisageek.wg.plotSize == "function") { 
+                paulisageek.wg.plotSize(json);
+            }
             $.plot($('#plot'), data, config);
+        }
+
+        $(window).resize(function() { 
+            plotFunction();
+        });
+        $("#plot").ready(function() {
+            plotFunction();
         });
 
         if ($("#title").text().length > 80) {
