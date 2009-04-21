@@ -34,6 +34,16 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           </div>
         </form>
 
+        <iframe style="float: left; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0"></iframe>
+        <iframe style="float: right; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=27" frameborder="0"></iframe>
+
+        <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
+        <o>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
+        <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks.</p>
+        <p><a href="about">Read More..</a></p>
+
+        <p class="clear" />
+
         <h1>Search All Graphs</h1>
 
         <form action="search">
@@ -76,11 +86,6 @@ foreach ($data as $row) {
 ?>
         </ul>
           
-        <h1><a href='about' style='color:white'>What is This Site?</a></h1>
-
-        <p>This site builds graphs from the web. If you want to know how data on a webpage changes over time, just put the URL in the <a href='#start'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
-        <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks.</p>
-
         <h1>News</h1>
         <ul><li>
         <span class="date">April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
@@ -97,6 +102,7 @@ foreach ($data as $row) {
         <div class='center'>
           <a href='mailto:webGraphr@paulisageek.com'>webGraphr@paulisageek.com</a>
         </div>
+
 
       </div>
     </div>
