@@ -40,7 +40,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
           <div>
 
-            <div id="plot" style="width:95%;height:600px;" class='center'></div>
+            <div id="plot" style="width:95%" class='center'></div>
 
             <form id='dateRange' action="">
               <div class="center">

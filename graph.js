@@ -103,8 +103,6 @@ $.getJSON("ajax/v1/graph" + $.query, function (json) {
             paulisageek.wg.postGraphCallback(json);
         }
 
-        // $("#title").prepend($("<img/>").attr("src", "images/webGraphr-favicon.png").wrap($("<a/>").attr("href", "http://paulisageek.com/webGraphr")));
-        
         $("#title")
         .prepend(" ")
         .prepend(
