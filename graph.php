@@ -26,6 +26,10 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   </head>
   <body>
     <div id='container'>
+        <form action='selectNode' style="position : absolute; right : 2.5%; top : 7px; color : white">
+        <label for="url" title="Create a new graph from any URL">New Graph:</label> 
+        <input id="url" name='url' value='http://' size="30" />
+        </form>
       <div id='header'>
         <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
