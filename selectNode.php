@@ -39,7 +39,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 <script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
 <script type='text/javascript'>
 var resizeURL = function() {
-    $("#url").width($("#startForm").width() - $("#urlLabel").width() - $("#submitURL").width() - 30);
+    $("#url").width($("#startForm").outerWidth() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 15);
 };
 $("#startForm").ready(resizeURL);
 $(window).resize(resizeURL);
