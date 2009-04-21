@@ -84,6 +84,7 @@ paulisageek.wg.postGraphCallback = function(json) {
                 case "embed" :
                     var iframe = $(document.createElement("iframe"))
                         .attr("frameborder", "0")
+                        .attr("allowtransparency", "true")
                         .attr("src", "http://paulisageek.com/webGraphr/embedGraph?type=js&" + query)
                         .css("width", "450px")
                         .css("height", "300px");
