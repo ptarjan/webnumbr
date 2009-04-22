@@ -109,7 +109,12 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL) {
                 $dom = new DomDocument;
                 $dom->preserveWhiteSpace = FALSE;
                 $dom->formatOutput = TRUE;
-                $dom->loadXML($data);
+                libxml_use_internal_errors(true);
+                $ret = @$dom->loadXML($data);
+                libxml_use_internal_errors(false);
+                if (!$ret) {
+                    throw new FetchException("Can't load xml");
+                }
                 $type = "xml";
                 break;
             default :
@@ -120,7 +125,12 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL) {
             $dom = new DomDocument;
             $dom->preserveWhiteSpace = FALSE;
             $dom->formatOutput = TRUE;
-            $dom->loadXML($data);
+            libxml_use_internal_errors(true);
+            $ret = @$dom->loadXML($data);
+            libxml_use_internal_errors(false);
+            if (!$ret) {
+                throw new FetchException("Can't load xml");
+            }
             $type = "json";
             /*
             $data = $dom->saveXML();
