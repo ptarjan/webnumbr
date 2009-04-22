@@ -1,13 +1,21 @@
 $(document).ready(function() {
+    var messages = function() { 
+        $("#messages").empty();
+        if ($(":input[name='xpath']").val().indexOf("tbody") != -1) {
+            $("#messages").append("<span class='error'>tbody is often not in the document. Try removing it if you are seeing errors</span>");
+        }
+    }
+
     function reload() {
         $("#data").html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/>');
         $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value")}), function (data) {
             $("#data").html(data);
         });
+        messages();
     }
     $("#data").ready(reload);
     $("#reload").click(reload);
-
+   
     var confirmed = false;
     $("form").submit(function(ev) {
         $(".error").each(function() {

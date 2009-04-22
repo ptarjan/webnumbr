@@ -6,7 +6,79 @@ function noLineErrorHandler( $errno, $errstr, $errfile, $errline, $errcontext ) 
     throw new FetchException($errstr);
 }
 
-function fetch($url, $xpath = NULL) {
+class XMLHelper {
+    public static function is_vector( &$array ) {
+        if ( !is_array($array) || empty($array) ) {
+            return false;
+        }
+        $next = 0;
+        foreach ( $array as $k => $v ) {
+            if ( $k !== $next ) return false;
+            $next++;
+        }
+        return true;
+    }
+    public static function xml_encode_node ($string) {
+        $string = (string) $string;
+        if (strlen($string) === 0) return "_";
+        if (preg_match("/[0-9]/", $string[0])) 
+            $string = "_" . $string;
+        return preg_replace("/[^0-9a-zA-Z-.]/", "_", $string);
+    }
+
+    public static function xmlspecialchars($text) {
+        return str_replace('&#039;', '&apos;', htmlspecialchars($text, ENT_QUOTES));
+    }
+
+    public static function xml_encode($array, $i=0, $root = "_") {
+        if(!$i) {
+            $data = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<' . self::xml_encode_node($root) . ">";
+        } else {
+            $data = '';
+        }
+
+        if (!is_array($array))  {
+            $data .= self::xmlspecialchars($array);
+        } else {
+            $vector = false;
+            if (self::is_vector($array))
+                $vector = true;
+
+            foreach($array as $k=>$v) {
+                if (self::is_vector($v)) {
+                    $data .= self::xml_encode($v, $i, $k);
+                    continue;
+                }
+
+                if ($vector) $k = $root;
+
+                $data .= "\n";
+                $data .= str_repeat("\t", $i);
+                $data .= "<" . self::xml_encode_node($k) . ">";
+                if(is_object($v) || is_array($v)) {
+                    $data .= self::xml_encode($v, ($i+1), $k);
+                } else {
+                    $dom = @DomDocument::loadXML($v);
+                    if ($dom){
+                        $xml = $dom->saveXML();
+                        $xml = preg_replace("/<\?xml[^>]*>/", "", $xml);
+                        $data .= self::xml_encode($xml, ($i+1), $k);
+                    } else {
+                        $data .= self::xml_encode($v, ($i+1), $k);
+                    }
+                }
+                $data .= '</' . self::xml_encode_node($k) . ">";
+            }
+        }
+        if(!$i) {
+            $data .= '</' . self::xml_encode_node($root) . ">\n";
+        }
+
+        return $data;
+    }
+}
+
+function fetch($url, $xpath = NULL, &$type = "") {
     if (is_string($url)) {
         $ch = curl_init($url);
         $options = array(
@@ -20,34 +92,54 @@ function fetch($url, $xpath = NULL) {
         curl_setopt_array($ch, $options);
         $data = curl_exec($ch);
 
-        $config = array(
-                        'output-xml' => TRUE,
-                        'wrap' => 0,
-                       );
+        $json = json_decode($data, TRUE);
+        if ($json) {
+            $data = XMLHelper::xml_encode($json, 0, "json");
+            $dom = new DomDocument;
+            $dom->preserveWhiteSpace = FALSE;
+            $dom->formatOutput = TRUE;
+            $dom->loadXML($data);
+            $type = "json";
+            /*
+            $data = $dom->saveXML();
+            header("Content-type: application/xml");
+            die($data);
+            $data = htmlspecialchars($data);
+            $data = str_replace("\n", "</div><div>", $data);
+            $data = str_replace(" ", "&nbsp;", $data);
+            $data = "<html><body><div>" . $data . "</div></body></html>";
+            */
+        } else {
+            $config = array(
+                            'output-xhtml' => TRUE,
+                            'wrap' => 0,
+                           );
 
-        $data = tidy_repair_string ($data, $config);
+            $data = tidy_repair_string ($data, $config);
+            $data = preg_replace("/xmlns='[^']*'/", "", $data);
+            $data = preg_replace('/xmlns="[^"]*"/', "", $data);
 
-        $data = preg_replace("/xmlns='[^']*'/", "", $data);
-        $data = preg_replace('/xmlns="[^"]*"/', "", $data);
-
-        if (!function_exists("fetch_preg_lowercase")) {
-            function fetch_preg_lowercase($matches) {
-                return "<" . $matches[1] . strtolower($matches[2]);
+            if (!function_exists("fetch_preg_lowercase")) {
+                function fetch_preg_lowercase($matches) {
+                    return "<" . $matches[1] . strtolower($matches[2]);
+                }
             }
+
+            $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
+
+            $dom = new DomDocument;
+            $dom->recover = true;
+            libxml_use_internal_errors(true);
+            $ret = @$dom->loadXML($data);
+            libxml_use_internal_errors(false);
+            if (!$ret) {
+                throw new FetchException("Can't load xml");
+            }
+            $type = "html";
         }
-        $data = preg_replace_callback("/< *(\/ *)?(\w+)/", "fetch_preg_lowercase", $data);
 
-        $dom = new DomDocument;
-        $dom->recover = true;
-
-        libxml_use_internal_errors(true);
-        $ret = @$dom->loadXML($data);
-        libxml_use_internal_errors(false);
-
-        if (!$ret) {
-            throw new FetchException("Can't load xml");
-        }
-        if ($xpath === NULL) return $dom;
+        if ($xpath === NULL) 
+            return $dom;
 
     } else if ($url instanceof DomDocument) {
         $dom = $url;
@@ -76,6 +168,7 @@ function fetch($url, $xpath = NULL) {
     if (!is_numeric($num)) {
         throw new FetchException("Not a number: $num");
     }
+    $type = "num";
     return $num;
 }
 

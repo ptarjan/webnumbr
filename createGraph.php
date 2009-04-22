@@ -190,7 +190,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
             <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" size="100" /></td></tr>
-            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /></td></tr>
+            <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /> <span id="messages"></span></td></tr>
             <tr><td>Graph Frequency: </td><td><select name='frequency'>
             <option value="1">1 hour</option>
             <option value="6">6 hours</option>
