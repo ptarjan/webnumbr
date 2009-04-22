@@ -129,10 +129,20 @@ if (isset($_REQUEST['parent'])) {
     }
 }
 
+$url = "";
 // print $_REQUEST['referer'] . "<br>" . $_SERVER['HTTP_REFERER'];
 if (isset($_REQUEST['url']))
     $url = $_REQUEST['url'];
 else {
+    if (isset($_REQUEST['params'])) {
+        $params = json_decode($_REQUEST['params'], TRUE);
+        if (isset($params['url']))
+            $url = $params['url'];
+    }
+}
+
+// after all the direct aproaches use the referer
+if (empty($url)) {
     if (isset($_REQUEST['referer']))
         $referer = $_REQUEST['referer'];
     else if (isset($_SERVER['HTTP_REFERER']))

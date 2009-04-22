@@ -55,7 +55,7 @@ if (! isset($_REQUEST['xpath'])) $_REQUEST['xpath'] = NULL;
 require ("fetch.inc");
 
 try {
-    $data = fetch($_REQUEST['url'], $_REQUEST['xpath'], $type);
+    $data = fetch($_REQUEST['url'], $_REQUEST['xpath'], $type, $finalURL);
 } catch (FetchException $e) {
     print "Fetch Exception: " . $e->getMessage(); 
     die();
@@ -89,7 +89,10 @@ else if ($type === "html") {
 
     <!-- paulisageek.com/nodeSelector Added Code -->
     <script>
+    if (typeof paulisageek == "undefined") { paulisageek = {}; }
+    if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.doneURL = "' . $next . '";
+    paulisageek.ns.params = "' . preg_replace('/"/', '\"', (json_encode(array("url" => $finalURL)))) . '";
     </script>
     <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
     <!-- paulisageek.com/nodeSelector End Added Code -->
@@ -108,7 +111,7 @@ else if ($type === "html") {
 <h1>Converted to XML</h1>
 
 <?php if ($type == "xml") { ?>
-<div>NOTE: When selecting a node, the generated XPath will be <b class="error">ALL LOWER CASE</b>. You might have to fix the cAsE by hand if you aren't getting any nodes.</div>
+<div>NOTE: When selecting a node, the generated XPath will be <b class="error">ALL lower CaSe</b>. You might have to fix the cAsE by hand if you aren't getting any nodes.</div>
 <?php } ?>
 
 <div>
@@ -116,13 +119,13 @@ else if ($type === "html") {
 <?php 
 $xml = $data->saveXML();
 // Start nodes
-$xml = preg_replace(",<\s*([^>/][^>]*[^>/])\s*>,", "<$1$2>&lt;$1$2&gt;", $xml);
+$xml = preg_replace(",<\s*([^>?/][^>]*[^>/])\s*>,", "<json_$1>&lt;$1&gt;", $xml);
 // 1 char start tags
-$xml = preg_replace(",<\s*([^>/])\s*>,", "<$1>&lt;$1&gt;", $xml);
+$xml = preg_replace(",<\s*([^>/])\s*>,", "<json_$1>&lt;$1&gt;", $xml);
 // End nodes
-$xml = preg_replace(",<\s*(/[^/>]+)\s*>,", "&lt;$1&gt;<$1>", $xml);
+$xml = preg_replace(",<\s*/([^/>]+)\s*>,", "&lt;$1&gt;</json_$1>", $xml);
 // Short tags
-$xml = preg_replace(",<\s*([^>\s]+)(\s[^>]+)?\s*/>,", "<$1$2>&lt;$1$2 /&gt;</$1>", $xml);
+$xml = preg_replace(",<\s*([^>\s]+)(\s[^>]+)?\s*/>,", "<json_$1$2>&lt;$1$2 /&gt;</json_$1>", $xml);
 
 print $xml;
 ?>
@@ -134,9 +137,10 @@ print $xml;
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.clickCallback = function(xpath) {
-        return xpath.replace("//pre[@id='xml']", "");
+        return xpath.replace("//pre[@id='xml']", "").replace(/\/json_/g, "/");
     }
     paulisageek.ns.doneURL = "<?php print $next ?>";
+    paulisageek.ns.params = {"url" : "<?php print $finalURL ?>"};
     </script>
     <script src="http://paulisageek.com<?php print dirname(dirname($_SERVER['PHP_SELF'])) ?>/nodeSelector/ns.js" ></script>
     <!-- paulisageek.com/nodeSelector End Added Code -->
