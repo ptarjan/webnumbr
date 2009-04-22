@@ -78,7 +78,7 @@ class XMLHelper {
     }
 }
 
-function fetch($url, $xpath = NULL, &$type = "") {
+function fetch($url, $xpath = NULL, &$type = "", &$finalURL) {
     if (is_string($url)) {
         $ch = curl_init($url);
         $options = array(
@@ -91,7 +91,9 @@ function fetch($url, $xpath = NULL, &$type = "") {
         );
         curl_setopt_array($ch, $options);
         $data = curl_exec($ch);
-
+        
+        $finalURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
+    
         $ct = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
         $boom = explode(";", $ct);
         $ct = $boom[0];
