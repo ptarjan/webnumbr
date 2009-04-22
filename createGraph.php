@@ -9,7 +9,10 @@ if (isset($_REQUEST['go'])) {
 
     required("name", "url", "xpath", "frequency");
 
-    // Check recusion
+    if (strpos($_REQUEST["url"], "http") !== 0) {
+        die ("Only urls starting with http are supported");
+    }
+
     require ("db.inc");
 
     // 
