@@ -89,7 +89,7 @@ else if ($type === "html") {
 
     <!-- paulisageek.com/nodeSelector Added Code -->
     <script>
-    __nsDoneURL = "' . $next . '";
+    paulisageek.ns.doneURL = "' . $next . '";
     </script>
     <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
     <!-- paulisageek.com/nodeSelector End Added Code -->
@@ -106,6 +106,10 @@ else if ($type === "html") {
     require "/var/www/paul.slowgeek.com/header.php";
 ?>
 <h1>Converted to XML</h1>
+
+<?php if ($type == "xml") { ?>
+<div>NOTE: When selecting a node, the generated XPath will be <b class="error">ALL LOWER CASE</b>. You might have to fix the cAsE by hand if you aren't getting any nodes.</div>
+<?php } ?>
 
 <div>
 <pre id="xml">
