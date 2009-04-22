@@ -64,10 +64,7 @@ try {
 $next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/createGraph';
 
 if ($type === "num") {
-    if ($data) 
-        die($data);
-    else 
-        die ("Something is wrong with the fetch. Check URL and XPATH");
+    die($data);
 }
 else if ($type === "html") {
 
@@ -105,19 +102,24 @@ else if ($type === "html") {
     }
 
     print $data;
-} else if ($type === "json") {
+} else {
     require "/var/www/paul.slowgeek.com/header.php";
 ?>
-<h1>JSON</h1>
-
-<div>This data is in JSON format. Below is the JSON as XML, go ahead and select your desired node.</div>
+<h1>Converted to XML</h1>
 
 <div>
-<pre id="json2xml">
+<pre id="xml">
 <?php 
 $xml = $data->saveXML();
-$xml = preg_replace("/<\s*([0-9a-zA-Z-.]+)\s*>/", "<$1>&lt;$1&gt;", $xml);
-$xml = preg_replace("/<\s*(\/[0-9a-zA-Z-.]+)\s*>/", "&lt;$1&gt;<$1>", $xml);
+// Start nodes
+$xml = preg_replace(",<\s*([^>/][^>]*[^>/])\s*>,", "<$1$2>&lt;$1$2&gt;", $xml);
+// 1 char start tags
+$xml = preg_replace(",<\s*([^>/])\s*>,", "<$1>&lt;$1&gt;", $xml);
+// End nodes
+$xml = preg_replace(",<\s*(/[^/>]+)\s*>,", "&lt;$1&gt;<$1>", $xml);
+// Short tags
+$xml = preg_replace(",<\s*([^>\s]+)(\s[^>]+)?\s*/>,", "<$1$2>&lt;$1$2 /&gt;</$1>", $xml);
+
 print $xml;
 ?>
 </pre>
@@ -128,7 +130,7 @@ print $xml;
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.clickCallback = function(xpath) {
-        return xpath.replace("//pre[@id='json2xml']", "");
+        return xpath.replace("//pre[@id='xml']", "");
     }
     paulisageek.ns.doneURL = "<?php print $next ?>";
     </script>

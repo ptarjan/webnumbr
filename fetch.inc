@@ -92,6 +92,26 @@ function fetch($url, $xpath = NULL, &$type = "") {
         curl_setopt_array($ch, $options);
         $data = curl_exec($ch);
 
+        $ct = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
+        $boom = explode(";", $ct);
+        $ct = $boom[0];
+        switch ($ct) {
+            case "application/xml":
+            case "text/xml":
+            case "application/rss+xml":
+            case "application/atom+xml":
+            case "application/rdf+xml":
+            case "application/xhtml+xml":
+                $data = preg_replace("/xmlns='[^']*'/", "", $data);
+                $data = preg_replace('/xmlns="[^"]*"/', "", $data);
+                $dom = new DomDocument;
+                $dom->preserveWhiteSpace = FALSE;
+                $dom->formatOutput = TRUE;
+                $dom->loadXML($data);
+                $type = "xml";
+                break;
+            default :
+    
         $json = json_decode($data, TRUE);
         if ($json) {
             $data = XMLHelper::xml_encode($json, 0, "json");
@@ -138,6 +158,8 @@ function fetch($url, $xpath = NULL, &$type = "") {
             $type = "html";
         }
 
+        } // end switch
+
         if ($xpath === NULL) 
             return $dom;
 
@@ -148,6 +170,13 @@ function fetch($url, $xpath = NULL, &$type = "") {
     }
 
     $domxpath = new DomXPath($dom);
+
+    // Namespace finder
+    $sxe = simplexml_import_dom($dom);
+    $namespaces = $sxe->getNamespaces(true);
+    foreach ($namespaces as $prefix => $ns) {
+        $domxpath->registerNamespace($prefix, $ns);
+    }
 
     set_error_handler("noLineErrorHandler");
     $nl = $domxpath->evaluate($xpath);
