@@ -36,7 +36,15 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           <ul class='searchresults'>
 <?php
 require("db.inc");
-$stmt = $PDO->prepare("SELECT name, id, url FROM graphs WHERE name LIKE CONCAT('%', :query, '%') OR url LIKE CONCAT('%', :query, '%')");
+$stmt = $PDO->prepare("
+SELECT 
+    name, id, url, 
+    badFetches < 100 
+    OR 
+    (goodFetches / (goodFetches + badFetches)) > 0.25
+    AS fetching 
+
+FROM graphs WHERE name LIKE CONCAT('%', :query, '%') OR url LIKE CONCAT('%', :query, '%')");
 $stmt->execute(array("query" => $_REQUEST['query']));
 
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -47,11 +55,16 @@ foreach ($data as $row) {
     $ids[] = $row['id'];
 ?>
             <li>
-              <input name="id[]" value="<?php print htmlspecialchars($row["id"]) ?>" type="checkbox" checked="checked" />
+              <input name="id[]" value="<?php print htmlspecialchars($row["id"]) ?>" type="checkbox" 
+<?php if ($row['fetching']) { ?> checked="checked" <?php } ?>
+/>
               <a href="graph?id=<?php print htmlspecialchars($row['id']) ?>">
                 <?php print htmlspecialchars($row['name']) ?>
 
               </a> (<?php print htmlspecialchars($url) ?>)
+<?php if (!$row['fetching']) { ?>
+              <span class="error">Not fetching due to errors.</span>
+<?php } ?>
             </li>
 <?php
 }
