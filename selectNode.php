@@ -108,7 +108,7 @@ else if ($type === "html") {
 } else {
     require "/var/www/paul.slowgeek.com/header.php";
 ?>
-<h1>Converted to XML</h1>
+<h1>Data Document (converted to XML for XPath)</h1>
 
 <?php if ($type == "xml") { ?>
 <div>NOTE: When selecting a node, the generated XPath will be <b class="error">ALL lower CaSe</b>. You might have to fix the cAsE by hand if you aren't getting any nodes.</div>
@@ -119,13 +119,21 @@ else if ($type === "html") {
 <?php 
 $xml = $data->saveXML();
 // Start nodes
-$xml = preg_replace(",<\s*([^>?/][^>]*[^>/])\s*>,", "<json_$1>&lt;$1&gt;", $xml);
+$xml = preg_replace(",<\s*([^>!?/\s][^>\s]*)(\s[^>]+)*([^>/])\s*>,", "<xml_$1$2$3>&lt;$1$2$3&gt;", $xml);
 // 1 char start tags
-$xml = preg_replace(",<\s*([^>/])\s*>,", "<json_$1>&lt;$1&gt;", $xml);
+$xml = preg_replace(",<\s*([^>/])\s*>,", "<xml_$1>&lt;$1&gt;", $xml);
 // End nodes
-$xml = preg_replace(",<\s*/([^/>]+)\s*>,", "&lt;$1&gt;</json_$1>", $xml);
+$xml = preg_replace(",<\s*/([^/>]+)\s*>,", "&lt;$1&gt;</xml_$1>", $xml);
 // Short tags
-$xml = preg_replace(",<\s*([^>\s]+)(\s[^>]+)?\s*/>,", "<json_$1$2>&lt;$1$2 /&gt;</json_$1>", $xml);
+$xml = preg_replace(",<\s*([^>!?/\s]+)(\s[^>]+)*\s*/>,", "<xml_$1$2>&lt;$1$2 /&gt;</xml_$1>", $xml);
+
+function htmlspecialchars_callback($matches) {
+    return htmlspecialchars($matches[0]);
+}
+// Comments
+$xml = preg_replace_callback(",<!--.+?-->,", 'htmlspecialchars_callback', $xml);
+// Declaration
+$xml = preg_replace_callback(",<\?.+?\?>,", 'htmlspecialchars_callback', $xml);
 
 print $xml;
 ?>
@@ -137,7 +145,7 @@ print $xml;
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.clickCallback = function(xpath) {
-        return xpath.replace("//pre[@id='xml']", "").replace(/\/json_/g, "/");
+        return xpath.replace("//pre[@id='xml']", "").replace(/\/xml_/g, "/");
     }
     paulisageek.ns.doneURL = "<?php print $next ?>";
     paulisageek.ns.params = {"url" : "<?php print $finalURL ?>"};
