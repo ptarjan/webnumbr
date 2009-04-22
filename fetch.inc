@@ -150,15 +150,19 @@ function fetch($url, $xpath = NULL, &$type = "") {
     $domxpath = new DomXPath($dom);
 
     set_error_handler("noLineErrorHandler");
-    $nl = $domxpath->query($xpath);
+    $nl = $domxpath->evaluate($xpath);
     restore_error_handler();
 
-    if ($nl->length == 0) {
-        throw new FetchException("No nodes selected");
-    } else if ($nl->length > 1) {
-        // throw new FetchException(" entries for xpath", "warning");
+    if ($nl instanceof DOMNodeList) {
+        if ($nl->length == 0) {
+            throw new FetchException("No nodes selected");
+        } else if ($nl->length > 1) {
+            // throw new FetchException(" entries for xpath", "warning");
+        }
+        $num = $nl->item(0)->nodeValue;
+    } else {
+        $num = $nl;
     }
-    $num = $nl->item(0)->nodeValue;
 
     // Number matches
     preg_match("/([0-9,]+[.]?[0-9]*)/", $num, $matches);
