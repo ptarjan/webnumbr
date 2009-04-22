@@ -95,7 +95,9 @@ foreach ($data as $row) {
         </li><li>
         <span class="date">April 19, 2009</span> :  <span>I wish I was your <a href="graph?id=4&derivative=1">derivative</a> so I could lie <a href="graph?id=4&derivative=2">tangent</a> to your <a href="graph?id=4&derivative=3">curves</a>.</span>
         </li><li>
-        <span class="date">April 21, 2009</span> :  <span>You can now convert <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">json to xml</a>. Let me know if it is working for you, or if you have any better ideas for the xpath generation.</span>
+        <span class="date">April 21, 2009</span> :  <span>You can now convert <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">JSON to XML</a>. Let me know if it is working for you, or if you have any better ideas for the xpath generation.</span>
+        </li><li>
+        <span class="date">April 22, 2009</span> :  <span>Sweet! I figured out a <span style="text-decoration:line-through;">hackey</span> great way to select <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">JSON nodes</a>.</span>
         </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>

@@ -110,15 +110,30 @@ else if ($type === "html") {
 ?>
 <h1>JSON</h1>
 
-<div>This data is in JSON format, and sadly I haven't yet figured out a good way to let you select the node. I've converted it to XML, and you can run an XPath on it, but sadly you can't just point your cursor at it.</div>
-<div><a href="<?php print $next; ?>?url=<?php print htmlspecialchars(urlencode($_REQUEST["url"])) ?>">Continue and write yur own XPath.</a></div>
+<div>This data is in JSON format. Below is the JSON as XML, go ahead and select your desired node.</div>
 
 <div>
-<pre>
-<?php print htmlspecialchars($data->saveXML()); ?>
+<pre id="json2xml">
+<?php 
+$xml = $data->saveXML();
+$xml = preg_replace("/<\s*([0-9a-zA-Z-.]+)\s*>/", "<$1>&lt;$1&gt;", $xml);
+$xml = preg_replace("/<\s*(\/[0-9a-zA-Z-.]+)\s*>/", "&lt;$1&gt;<$1>", $xml);
+print $xml;
+?>
 </pre>
 </div>
 
+    <!-- paulisageek.com/nodeSelector Added Code -->
+    <script>
+    if (typeof paulisageek == "undefined") { paulisageek = {}; }
+    if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
+    paulisageek.ns.clickCallback = function(xpath) {
+        return xpath.replace("//pre[@id='json2xml']", "");
+    }
+    paulisageek.ns.doneURL = "<?php print $next ?>";
+    </script>
+    <script src="http://paulisageek.com<?php print dirname(dirname($_SERVER['PHP_SELF'])) ?>/nodeSelector/ns.js" ></script>
+    <!-- paulisageek.com/nodeSelector End Added Code -->
 <?php
     require "/var/www/paul.slowgeek.com/footer.php";
 }
