@@ -106,6 +106,11 @@ else if ($type === "html") {
 
     print $data;
 } else {
+    if (isset($_REQUEST['format']) && $_REQUEST['format'] == "xml")  {
+        header("Content-type: text/xml");
+        die($data->saveXML());
+    }
+
     require "/var/www/paul.slowgeek.com/header.php";
 ?>
 <h1>Data Document (converted to XML for XPath)</h1>
@@ -119,13 +124,13 @@ else if ($type === "html") {
 <?php 
 $xml = $data->saveXML();
 // Start nodes
-$xml = preg_replace(",<\s*([^>!?/\s][^>\s]*)(\s[^>]+)*([^>/])\s*>,", "<xml_$1$2$3>&lt;$1$2$3&gt;", $xml);
+$xml = preg_replace(",<\s*([^>!?/\s][^>\s]*)(\s[^>]+)?([^>/])\s*>,", "<xml_$1$2$3>&lt;$1$2$3&gt;", $xml);
 // 1 char start tags
 $xml = preg_replace(",<\s*([^>/])\s*>,", "<xml_$1>&lt;$1&gt;", $xml);
 // End nodes
 $xml = preg_replace(",<\s*/([^/>]+)\s*>,", "&lt;$1&gt;</xml_$1>", $xml);
 // Short tags
-$xml = preg_replace(",<\s*([^>!?/\s]+)(\s[^>]+)*\s*/>,", "<xml_$1$2>&lt;$1$2 /&gt;</xml_$1>", $xml);
+$xml = preg_replace(",<\s*([^>!?/\s]+)(\s[^>]+)?\s*/>,", "<xml_$1$2>&lt;$1$2 /&gt;</xml_$1>", $xml);
 
 function htmlspecialchars_callback($matches) {
     return htmlspecialchars($matches[0]);
