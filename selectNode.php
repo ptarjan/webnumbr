@@ -89,6 +89,8 @@ else if ($type === "html") {
 
     <!-- paulisageek.com/nodeSelector Added Code -->
     <script>
+    if (typeof paulisageek == "undefined") { paulisageek = {}; }
+    if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.doneURL = "' . $next . '";
     </script>
     <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
