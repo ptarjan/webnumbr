@@ -15,7 +15,16 @@ $(document).ready(function() {
     }
     $("#data").ready(reload);
     $("#reload").click(reload);
-   
+  
+    $(":input[name='xpath']").keydown(function(event) {
+        switch(event.keyCode) {
+            case 13 :
+                reload();
+                return false;
+                break;
+        }
+    });
+ 
     var confirmed = false;
     $("form").submit(function(ev) {
         $(".error").each(function() {
