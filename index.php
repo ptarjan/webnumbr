@@ -87,19 +87,19 @@ foreach ($data as $row) {
           
         <h1>News</h1>
         <ul><li>
-        <span class="date">April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
-        </li><li>
-        <span class="date">April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
-        </li><li>
-        <span class="date">April 19, 2009</span> :  <span>Now you can <a href="createGraph?parent=4">extend</a> graphs if the xpath breaks or you mis-typed something.</span>
-        </li><li>
-        <span class="date">April 19, 2009</span> :  <span>I wish I was your <a href="graph?id=4&derivative=1">derivative</a> so I could lie <a href="graph?id=4&derivative=2">tangent</a> to your <a href="graph?id=4&derivative=3">curves</a>.</span>
-        </li><li>
-        <span class="date">April 21, 2009</span> :  <span>You can now convert <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">JSON to XML</a>. Let me know if it is working for you, or if you have any better ideas for the xpath generation.</span>
+        <span class="date">April 22, 2009</span> :  <span><a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Dxml">XML</a> is also now supported. I strip the default namespace on docs, but other <a href="selectNode?url=http%3A%2F%2Fpaulisageek.blogspot.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss">namespaces should work</a>. <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2B*%2Bfrom%2Bflickr.photos.search%2Bwhere%2Bhas_geo%253D%2522true%2522%2Band%2Btext%253D%2522san%2Bfrancisco%2522">Attribute selecting</a> is a pain, but you can do it yourself in XPath (with /some/path/to/node/@id). One more "gotcha" is that the automatic xpath only can do lowercase nodes (since most browsers don't preserve case), you might have to fix up the case yourself.</span>
         </li><li>
         <span class="date">April 22, 2009</span> :  <span>Sweet! I figured out a <span style="text-decoration:line-through;">hackey</span> great way to select <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">JSON nodes</a>.</span>
         </li><li>
-        <span class="date">April 22, 2009</span> :  <span><a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Dxml">XML</a> is also now supported. I strip the default namespace on docs, but other <a href="selectNode?url=http%3A%2F%2Fpaulisageek.blogspot.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss">namespaces should work</a>. <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2B*%2Bfrom%2Bflickr.photos.search%2Bwhere%2Bhas_geo%253D%2522true%2522%2Band%2Btext%253D%2522san%2Bfrancisco%2522">Attribute selecting</a> is a pain, but you can do it yourself in XPath (with /some/path/to/node/@id). One more "gotcha" is that the automatic xpath only can do lowercase nodes (since most browsers don't preserve case), you might have to fix up the case yourself.</span>
+        <span class="date">April 21, 2009</span> :  <span>You can now convert <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520flickr.photos.search%2520where%2520has_geo%253D%2522true%2522%2520and%2520text%253D%2522paul%2520tarjan%2522%26format%3Djson%26callback%3D">JSON to XML</a>. Let me know if it is working for you, or if you have any better ideas for the xpath generation.</span>
+        </li><li>
+        <span class="date">April 19, 2009</span> :  <span>I wish I was your <a href="graph?id=4&derivative=1">derivative</a> so I could lie <a href="graph?id=4&derivative=2">tangent</a> to your <a href="graph?id=4&derivative=3">curves</a>.</span>
+        </li><li>
+        <span class="date">April 19, 2009</span> :  <span>Now you can <a href="createGraph?parent=4">extend</a> graphs if the xpath breaks or you mis-typed something.</span>
+        </li><li>
+        <span class="date">April 19, 2009</span> :  <span>Added <a href="http://openid.net">OpenID</a> when creating graphs. Hmmm, what could come next ...</span>
+        </li><li>
+        <span class="date">April 18, 2009</span> :  <span>Launched. The web gets graphier!</span>
         </li></ul>
 
         <h1>Suggestions? Bugs? Requests? Fan Mail?</h1>
