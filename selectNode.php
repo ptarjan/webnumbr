@@ -282,7 +282,7 @@ require "/var/www/paul.slowgeek.com/header.php";
 // Start nodes
 $xml = preg_replace(",<([^>!?/\s][^>/\s]*)((\s+([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"))+)?\s*>,", "<span name=\"$1\" $2>&lt;$1$2&gt;", $xml);
 // End nodes
-$xml = preg_replace(",</([^/>]+)\s*>,", "&lt;$1&gt;</span>", $xml);
+$xml = preg_replace(",<(/[^/>]+)\s*>,", "&lt;$1&gt;</span>", $xml);
 // Short tags
 $xml = preg_replace(",<([^>!?/\s]+)(\s[^>]+)?\s*/>,", "<span name=\"$1\" $2>&lt;$1$2 /&gt;</span>", $xml);
 
