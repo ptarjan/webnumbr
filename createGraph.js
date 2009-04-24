@@ -1,8 +1,12 @@
 $(document).ready(function() {
     var messages = function() { 
         $("#messages").empty();
-        if ($(":input[name='xpath']").val().indexOf("tbody") != -1) {
+        var xpath = $(":input[name='xpath']").val();
+        if (xpath.indexOf("tbody") != -1) {
             $("#messages").append("<span class='error'>tbody is often not in the document. Try removing it if you are seeing errors</span>");
+        }
+        if (xpath.toLowerCase() != xpath) {
+            $("#messages").append("<span class='error'>All nodes are lowercased. You shouldn't have any UPPERCASE letters in your xpath</span>");
         }
     }
 
