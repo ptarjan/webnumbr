@@ -279,6 +279,15 @@ require "/var/www/paul.slowgeek.com/header.php";
 <pre id="xml">
 <?php 
 
+function htmlspecialchars_callback($matches) {
+    return htmlspecialchars($matches[0]);
+}
+
+// CDATA
+$xml = preg_replace_callback(",<!\[CDATA\[(.|\n)*?\]\]>,", "htmlspecialchars_callback", $xml);
+// Remove the word "CDATA"
+$xml = preg_replace(",&lt;!\[CDATA\[((.|\n)*?)\]\]&gt;,", "$1", $xml);
+
 // Start nodes
 $xml = preg_replace(",<([^>!?/\s][^>/\s]*)((\s+([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"))+)?\s*>,", "<span name=\"$1\" $2>&lt;$1$2&gt;", $xml);
 // End nodes
@@ -292,16 +301,11 @@ function markupAttr($matches) {
 }
 // Encoded nodes
 $xml = preg_replace_callback(",&lt;.*?&gt;,", "markupAttr", $xml);
-function htmlspecialchars_callback($matches) {
-    return htmlspecialchars($matches[0]);
-}
 
 // Comments
 $xml = preg_replace_callback(",<!--.*?-->,", 'htmlspecialchars_callback', $xml);
 // Declaration
 $xml = preg_replace_callback(",<\?.*?\?>,", 'htmlspecialchars_callback', $xml);
-// CDATA
-$xml = preg_replace(",<!\[CDATA\[(.*?)\]\]>,", '$1', $xml);
 
 print $xml;
 ?>

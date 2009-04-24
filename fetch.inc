@@ -8,16 +8,6 @@ function noLineErrorHandler( $errno, $errstr, $errfile, $errline, $errcontext ) 
 require("XMLHelper.inc");
 
 function buildDom($data) {
-    $data = preg_replace("/xmlns='[^']*'/", "", $data);
-    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
-
-    if (!function_exists("fetch_preg_lowercase")) {
-        function fetch_preg_lowercase($matches) {
-            return "<" . $matches[1] . strtolower($matches[2]);
-        }
-    }
-
-    $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
 
     $dom = new DomDocument;
     $dom->recover = true;
@@ -76,6 +66,16 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                                     'wrap' => 0,
                                    );
 
+                    $data = preg_replace("/xmlns='[^']*'/", "", $data);
+                    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
+
+                    if (!function_exists("fetch_preg_lowercase")) {
+                        function fetch_preg_lowercase($matches) {
+                            return "<" . $matches[1] . strtolower($matches[2]);
+                        }
+                    }
+
+                    $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
                     $data = tidy_repair_string ($data, $config);
                     $dom = buildDom($data);
                     $type = "html";
