@@ -32,7 +32,7 @@ function buildDom($data) {
     return $dom;
 }
 
-function fetch($url, $xpath = NULL, &$type = "", &$finalURL) {
+function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
     if (is_string($url)) {
         $ch = curl_init($url);
         $options = array(
