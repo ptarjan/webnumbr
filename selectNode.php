@@ -106,23 +106,179 @@ else if ($type === "html") {
 
     print $data;
 } else {
-    if (isset($_REQUEST['format']) && $_REQUEST['format'] == "xml")  {
-        header("Content-type: text/xml");
-        die($data->saveXML());
+
+/** 
+    Old code that I can't really part with. This does DOM operations instead of the regular expressions, but 
+    sadly our xml library couldn't indent it properly
+function doNamespace($node, &$knownNamespaces) {
+    if ($node->namespaceURI) {
+        $boom = explode(":", $node->nodeName, 2);
+        $prefix = $boom[0]; // stupid PHP not putting this on the previous line *grumble*
+        if (!isset($knownNamespaces[$prefix])) {
+            $knownNamespaces[$prefix] = $node->namespaceURI;
+            return " xmlns:{$prefix}=\"{$node->namespaceURI}\"";
+        }
     }
+    return false;
+}
 
-    require "/var/www/paul.slowgeek.com/header.php";
+function saveXML($node, $level = 0, $namespaces = array()){
+    $r = "";
+    switch ($node->nodeType) {
+        case XML_ELEMENT_NODE :
+            $r .= "<" . $node->nodeName;
+            $r .= doNamespace($node, $namespaces);
+            if ($node->hasAttributes()) {
+                foreach ($node->attributes as $attrName => $attrNode) {
+                    $r .= doNamespace($attrNode, $namespaces);
+                    $r .= saveXML($attrNode);
+                }
+            }
+            $r .= ">";
+            if ($node->hasChildNodes()) {
+                foreach ($node->childNodes as $child) {
+                    $r .= saveXML($child, $level+1, $namespaces);
+                }
+            }
+            $r .= "</" . $node->nodeName . ">";
+            break;
+        case XML_ATTRIBUTE_NODE :
+            $r .= " {$node->nodeName}=\"" . htmlspecialchars($node->nodeValue) . "\"";
+            break;
+        case XML_TEXT_NODE :
+            $r .= htmlspecialchars($node->nodeValue);
+            break;
+        case XML_CDATA_SECTION_NODE :
+            $r .= "<![CDATA[{$node->nodeValue}]]>";
+            break;
+        case XML_COMMENT_NODE :
+            $r .= "<!--{$node->nodeValue}-->";
+            break;
+        case XML_DOCUMENT_NODE :
+            if ($node->hasChildNodes()) {
+                foreach ($node->childNodes as $child) {
+                    $r .= saveXML($child, $level+1, $namespaces);
+                }
+            }
+            break;
+        case XML_PI_NODE :
+            $r .= "<?{$node->nodeName} {$node->nodeValue} ?".">";
+            break;
+        case XML_DOCUMENT_TYPE_NODE :
+            $r .= $node->internalSubset;
+            break;
+        default :
+            $r .= "?Node type not implemented: {$node->nodeType}?";
+            break;
+    }
+    return $r;
+}
+
+function encodeXML($node, $doc = NULL, $level=0) {
+    switch ($node->nodeType) {
+        case XML_ELEMENT_NODE :
+            $xmlNode = $doc->createElement("xml_{$node->nodeName}");
+            $xmlNode->appendChild(
+                $doc->createTextNode("<{$node->nodeName}")
+            );
+            if ($node->hasAttributes()) {
+                foreach ($node->attributes as $attrName => $attrNode) {
+                    $xmlAttrNode = $xmlNode->ownerDocument->createElement("xmlat_" . str_replace(":", "__colon__", $attrNode->nodeName));
+                    $style = $doc->createAttribute("style");
+                    $style->appendChild(
+                        $doc->createTextNode("color:blue")
+                    );
+                    $xmlAttrNode->appendChild($style);
+                    $xmlAttrNode->appendChild(
+                        $doc->createTextNode(
+                            " {$attrNode->nodeName}=\"{$attrNode->nodeValue}\""
+                        )
+                    );
+                    $xmlNode->appendChild($xmlAttrNode);
+                }
+            }
+            $xmlNode->appendChild(
+                $doc->createTextNode(">")
+            );
+            if ($node->hasChildNodes()) {
+                $first = TRUE;
+                foreach ($node->childNodes as $child) {
+                    $childNode = encodeXML($child, $doc, $level+1);
+                    if ($childNode) {
+                        if ($first) {
+                            $first = FALSE;
+                        }
+                        $xmlNode->appendChild($childNode);
+                    }
+                }
+            }
+            $xmlNode->appendChild(
+                $doc->createTextNode("</{$node->nodeName}")
+            );
+            $xmlNode->appendChild(
+                $doc->createTextNode(">")
+            );
+            return $xmlNode;
+            break;
+        case XML_ATTRIBUTE_NODE :
+            break;
+        case XML_TEXT_NODE :
+            return $doc->importNode($node, TRUE);
+            break;
+        case XML_CDATA_SECTION_NODE :
+            return $doc->createTextNode(
+                $node->nodeValue
+            );
+            return $doc->importNode($node, TRUE);
+            break;
+        case XML_COMMENT_NODE :
+            return $doc->importNode($node, TRUE);
+            break;
+        case XML_DOCUMENT_NODE :
+            $newDom = new DomDocument();
+            $newDom->formatOutput = TRUE;
+            $newDom->preserveWhitespace = FALSE;
+            if ($node->hasChildNodes()) {
+                foreach ($node->childNodes as $child) {
+                    $newChild = encodeXML($child, $newDom);
+                    if ($newChild) {
+                        $newDom->appendChild(
+                            $newChild
+                        );
+                    }
+                }
+            }
+            return $newDom;
+            break;
+        case XML_PI_NODE :
+            break;
+        case XML_DOCUMENT_TYPE_NODE :
+            break;
+        default :
+            print "!?Node type not implemented: {$node->nodeType}?!";
+            break;
+    }
+    return $r;
+}
+
+$data = encodeXML($data);
+**/
+
+$xml = $data->saveXML($data);
+
+if (isset($_REQUEST['format']) && $_REQUEST['format'] == "xml")  {
+    header("Content-type: text/xml");
+    die($xml);
+}
+
+require "/var/www/paul.slowgeek.com/header.php";
 ?>
-<h1>Data Document (converted to XML for XPath)</h1>
-
-<?php if ($type == "xml") { ?>
-<div>NOTE: When selecting a node, the generated XPath will be <b class="error">ALL lower CaSe</b>. You might have to fix the cAsE by hand if you aren't getting any nodes.</div>
-<?php } ?>
+<h1>Data Document</h1>
 
 <div>
 <pre id="xml">
 <?php 
-$xml = $data->saveXML();
+
 // Start nodes
 $xml = preg_replace(",<([^>!?/\s][^>\s]*)(\s[^>]+)?([^>/])\s*>,", "<xml_$1$2$3>&lt;$1$2$3&gt;", $xml);
 // 1 char start tags
@@ -132,13 +288,22 @@ $xml = preg_replace(",</([^/>]+)\s*>,", "&lt;$1&gt;</xml_$1>", $xml);
 // Short tags
 $xml = preg_replace(",<([^>!?/\s]+)(\s[^>]+)?\s*/>,", "<xml_$1$2>&lt;$1$2 /&gt;</xml_$1>", $xml);
 
+// Attributes
+function markupAttr($matches) {
+    return preg_replace(",([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"),", "<xmlattr_$1>$1=$2</xmlattr_$1>", $matches[0]);
+}
+// Encoded nodes
+$xml = preg_replace_callback(",&lt;.*?&gt;,", "markupAttr", $xml);
 function htmlspecialchars_callback($matches) {
     return htmlspecialchars($matches[0]);
 }
+
 // Comments
-$xml = preg_replace_callback(",<!--.+?-->,", 'htmlspecialchars_callback', $xml);
+$xml = preg_replace_callback(",<!--.*?-->,", 'htmlspecialchars_callback', $xml);
 // Declaration
-$xml = preg_replace_callback(",<\?.+?\?>,", 'htmlspecialchars_callback', $xml);
+$xml = preg_replace_callback(",<\?.*?\?>,", 'htmlspecialchars_callback', $xml);
+// CDATA
+$xml = preg_replace(",<!\[CDATA\[(.*?)\]\]>,", '$1', $xml);
 
 print $xml;
 ?>
@@ -150,7 +315,7 @@ print $xml;
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.clickCallback = function(xpath) {
-        return xpath.replace("//pre[@id='xml']", "").replace(/\/xml_/g, "/");
+        return xpath.replace("//pre[@id='xml']", "").replace(/\/xml_/g, "/").replace(/\/xmlattr_/g, "/@").replace(/__colon__/g, ":");
     }
     paulisageek.ns.doneURL = "<?php print $next ?>";
     paulisageek.ns.params = {"url" : "<?php print $finalURL ?>"};
