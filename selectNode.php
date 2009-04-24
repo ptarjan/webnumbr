@@ -280,17 +280,15 @@ require "/var/www/paul.slowgeek.com/header.php";
 <?php 
 
 // Start nodes
-$xml = preg_replace(",<([^>!?/\s][^>\s]*)(\s[^>]+)?([^>/])\s*>,", "<xml_$1$2$3>&lt;$1$2$3&gt;", $xml);
-// 1 char start tags
-$xml = preg_replace(",<([^>/])\s*>,", "<xml_$1>&lt;$1&gt;", $xml);
+$xml = preg_replace(",<([^>!?/\s][^>/\s]*)((\s+([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"))+)?\s*>,", "<span name=\"$1\" $2>&lt;$1$2&gt;", $xml);
 // End nodes
-$xml = preg_replace(",</([^/>]+)\s*>,", "&lt;$1&gt;</xml_$1>", $xml);
+$xml = preg_replace(",</([^/>]+)\s*>,", "&lt;$1&gt;</span>", $xml);
 // Short tags
-$xml = preg_replace(",<([^>!?/\s]+)(\s[^>]+)?\s*/>,", "<xml_$1$2>&lt;$1$2 /&gt;</xml_$1>", $xml);
+$xml = preg_replace(",<([^>!?/\s]+)(\s[^>]+)?\s*/>,", "<span name=\"$1\" $2>&lt;$1$2 /&gt;</span>", $xml);
 
 // Attributes
 function markupAttr($matches) {
-    return preg_replace(",([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"),", "<xmlattr_$1>$1=$2</xmlattr_$1>", $matches[0]);
+    return preg_replace(",([^\s=]+)\s*=\s*(\'[^<\']*\'|\"[^<\"]*\"),", "<span name=\"@$1\">$1=$2</span>", $matches[0]);
 }
 // Encoded nodes
 $xml = preg_replace_callback(",&lt;.*?&gt;,", "markupAttr", $xml);
@@ -310,19 +308,43 @@ print $xml;
 </pre>
 </div>
 
+      </div>
+    </div>
+  </body>
+
     <!-- paulisageek.com/nodeSelector Added Code -->
     <script>
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
-    paulisageek.ns.clickCallback = function(xpath) {
-        return xpath.replace("//pre[@id='xml']", "").replace(/\/xml_/g, "/").replace(/\/xmlattr_/g, "/@").replace(/__colon__/g, ":");
-    }
     paulisageek.ns.doneURL = "<?php print $next ?>";
     paulisageek.ns.params = {"url" : "<?php print $finalURL ?>"};
+    paulisageek.ns.getXpath = function(e, oldXpath) {
+        var xpath = "";
+        while (e.nodeName.toLowerCase() != "pre") {
+            var node = e.attributes["name"].nodeValue;
+            var parent = e.parentNode;
+            var children = $(parent).children("[name=" + node + "]");
+            if (children.size() > 1) {
+                var good = false;
+                children.each(function(i) {
+                    if (this == e) {
+                        node = node + "[" + (i+1) + "]";
+                        good = true;
+                        return false;
+                    }
+                });
+                if (! good) {
+                    return false;
+                }
+            }
+            xpath = "/" + node + xpath;
+            e = parent;
+        }
+        return xpath;
+    };
     </script>
     <script src="http://paulisageek.com<?php print dirname(dirname($_SERVER['PHP_SELF'])) ?>/nodeSelector/ns.js" ></script>
     <!-- paulisageek.com/nodeSelector End Added Code -->
-<?php
-    require "/var/www/paul.slowgeek.com/footer.php";
-}
-?>
+
+</html>
+<?php } ?>
