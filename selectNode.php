@@ -65,8 +65,18 @@ $next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/
 
 if ($type === "num") {
     die($data);
+} else {
+    if (isset($_REQUEST['format']) && $_REQUEST['format'] == "xml")  {
+        header("Content-Type: text/xml");
+        header("X-Content-Type-Options: nosniff");
+        // stupid browser sniffing the content type
+        $xml = $data->saveXML();
+        $xml = str_replace('xmlns="http://www.w3.org/1999/xhtml"', "", $xml);
+        die($xml);
+    }
 }
-else if ($type === "html") {
+
+if ($type === "html") {
 
     $data = $data->saveXML();
     // Eliminate shorttags
@@ -265,11 +275,6 @@ $data = encodeXML($data);
 **/
 
 $xml = $data->saveXML($data);
-
-if (isset($_REQUEST['format']) && $_REQUEST['format'] == "xml")  {
-    header("Content-type: text/xml");
-    die($xml);
-}
 
 require "/var/www/paul.slowgeek.com/header.php";
 ?>

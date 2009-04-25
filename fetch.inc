@@ -66,9 +66,6 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                                     'wrap' => 0,
                                    );
 
-                    $data = preg_replace("/xmlns='[^']*'/", "", $data);
-                    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
-
                     if (!function_exists("fetch_preg_lowercase")) {
                         function fetch_preg_lowercase($matches) {
                             return "<" . $matches[1] . strtolower($matches[2]);
@@ -77,6 +74,9 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
 
                     $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
                     $data = tidy_repair_string ($data, $config);
+
+                    $data = preg_replace("/xmlns='[^']*'/", "", $data);
+                    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
                     $dom = buildDom($data);
                     $type = "html";
                 }
