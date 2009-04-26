@@ -107,6 +107,9 @@ paulisageek.wg.postGraphCallback = function(json) {
                 case "xpath" :
                     td.wrapInner($(document.createElement("a")).attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath})));
                     break;
+                case "frequency" :
+                    td.text("Every " + td.text() + " hour" + (td.text() != "1" ? "s" : ""));
+                    break;
                 case "createdTime" :
                 case "modifiedTime" :
                     td.text(new Date(meta[key] * 1000).toString());

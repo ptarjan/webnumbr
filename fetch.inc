@@ -9,6 +9,8 @@ require("XMLHelper.inc");
 
 function buildDom($data) {
 
+    $data = preg_replace("/xmlns='[^']*'/", "", $data);
+    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
     $dom = new DomDocument;
     $dom->recover = true;
     $dom->preserveWhitespace = FALSE;
@@ -48,8 +50,6 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
             case "application/atom+xml":
             case "application/rdf+xml":
             case "application/xhtml+xml":
-                $data = preg_replace("/xmlns='[^']*'/", "", $data);
-                $data = preg_replace('/xmlns="[^"]*"/', "", $data);
                 $dom = buildDom($data);
                 $type = "xml";
                 break;
@@ -62,7 +62,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     $type = "json";
                 } else {
                     $config = array(
-                                    'output-xhtml' => TRUE,
+                                    'output-xml' => TRUE,
                                     'wrap' => 0,
                                    );
 
@@ -75,8 +75,6 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
                     $data = tidy_repair_string ($data, $config);
 
-                    $data = preg_replace("/xmlns='[^']*'/", "", $data);
-                    $data = preg_replace('/xmlns="[^"]*"/', "", $data);
                     $dom = buildDom($data);
                     $type = "html";
                 }
