@@ -40,7 +40,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
         <p>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
         <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks. <a href="about">Read More..</a></p>
-
+        <p><a href="random">See a Random Graph</a> to give you an idea of what this is all about.</p>
         <p class="clear" />
 
         <h1>Search All Graphs</h1>
@@ -87,6 +87,8 @@ foreach ($data as $row) {
           
         <h1>News</h1>
         <ul><li>
+        <span class="date">April 26, 2009</span> :  <span>You can now spend ALL DAY looking at <a href="random">random graphs</a></span>
+        </li><li>
         <span class="date">April 24, 2009</span> :  <span><a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Dxml">Attributes</a> are now selectable with your mouse. And you can get the xml output directly by putting <a href="http://paul.slowgeek.com/dev/webGraphr/selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Djson&format=xml">&amp;format=xml</a> in the query string.</span>
         </li><li>
         <span class="date">April 22, 2009</span> :  <span><a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Dxml">XML</a> is also now supported. I strip the default namespace on docs, but other <a href="selectNode?url=http%3A%2F%2Fpaulisageek.blogspot.com%2Ffeeds%2Fposts%2Fdefault%3Falt%3Drss">namespaces should work</a>. <a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2B*%2Bfrom%2Bflickr.photos.search%2Bwhere%2Bhas_geo%253D%2522true%2522%2Band%2Btext%253D%2522san%2Bfrancisco%2522">Attribute selecting</a> is a pain, but you can do it yourself in XPath (with /some/path/to/node/@id). One more "gotcha" is that the automatic xpath only can do lowercase nodes (since most browsers don't preserve case), you might have to fix up the case yourself.</span>
