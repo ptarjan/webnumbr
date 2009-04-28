@@ -9,7 +9,7 @@ $(document).ready(function() {
 
     function reload() {
         $("#data").html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/>');
-        $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value")}), function (data) {
+        $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
             $("#data").html(data);
         });
         messages();
