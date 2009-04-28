@@ -115,7 +115,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
     }
 
     // Number matches
-    preg_match("/([0-9,]+[.]?[0-9]*)/", $num, $matches);
+    preg_match("/(-?\s*[0-9,]+[.]?[0-9]*)/", $num, $matches);
     if (isset($matches[1])) $num = $matches[1];
     $num = str_replace(",", "", $num);
 
