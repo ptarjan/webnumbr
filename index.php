@@ -87,6 +87,8 @@ foreach ($data as $row) {
           
         <h1>News</h1>
         <ul><li>
+        <span class="date">April 27, 2009</span> :  <span>Since my friend <a href="http://dawning.ca">Jamie</a> made a <a href="graph?id=50">graph</a> that I had NO IDEA what it was doing, I wrote a <a href="selectNode?url=http%3A%2F%2Fpaul.slowgeek.com%2FwebGraphr%2F&xpath=%2F%2Fdiv%5B%40id%3D%27container%27%5D%2Fdiv%5B2%5D%2Ful%5B2%5D%2Fli%5B1%5D&action=show">little visualizer</a> to see what graphs do. Just go to the graph info, and click on the xpath.</span>
+        </li><li>
         <span class="date">April 26, 2009</span> :  <span>You can now spend ALL DAY looking at <a href="random">random graphs</a></span>
         </li><li>
         <span class="date">April 24, 2009</span> :  <span><a href="selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Dxml">Attributes</a> are now selectable with your mouse. And you can get the xml output directly by putting <a href="http://paul.slowgeek.com/dev/webGraphr/selectNode?url=http%3A%2F%2Fquery.yahooapis.com%2Fv1%2Fpublic%2Fyql%3Fq%3Dselect%2520*%2520from%2520geo.places%2520where%2520text%253D%2522san%2520jose%2522%26format%3Djson&format=xml">&amp;format=xml</a> in the query string.</span>
@@ -122,8 +124,10 @@ foreach ($data as $row) {
 var resizeURL = function() {
     $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 15);
 };
-$("#startForm").ready(resizeURL);
-$(window).resize(resizeURL);
+$("#startForm").ready(function() {
+    $(window).resize(resizeURL);
+    resizeURL();
+});
 
 var resizeSearch = function() {
     $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 15);

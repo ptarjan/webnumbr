@@ -105,7 +105,16 @@ paulisageek.wg.postGraphCallback = function(json) {
                     td.append(embedA);
                     break;
                 case "xpath" :
-                    td.wrapInner($(document.createElement("a")).attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath})));
+                    td.wrapInner(
+                        $(document.createElement("a"))
+                        .attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath, action: 'show'}))
+                    );
+                    td.append(" ");
+                    td.append(
+                        $(document.createElement("a"))
+                        .attr("href", 'selectNode?' + $.param({url: meta.url, xpath: meta.xpath, action: 'run'}))
+                        .text("(current data)")
+                    );
                     break;
                 case "frequency" :
                     td.text("Every " + td.text() + " hour" + (td.text() != "1" ? "s" : ""));

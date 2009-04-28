@@ -51,6 +51,15 @@ $(window).resize(resizeURL);
     die();
 }
 if (! isset($_REQUEST['xpath'])) $_REQUEST['xpath'] = NULL;
+if (! isset($_REQUEST['action'])) 
+    if ($_REQUEST['xpath'] == NULL)
+        $_REQUEST['action'] = 'pick';
+    else 
+        $_REQUEST['action'] = 'show';
+if ($_REQUEST['action'] == 'show') {
+    $showxpath = $_REQUEST['xpath'];
+    $_REQUEST['xpath'] = NULL;
+}
 
 require ("fetch.inc");
 
@@ -78,6 +87,40 @@ if ($type === "num") {
 
 if ($type === "html") {
 
+    if ($_REQUEST['action'] == "show") {
+        $dx = new DomXpath ($data);
+        $nl = $dx->query($showxpath);
+        if ($nl->length == 0) {
+            $div = $data->createElement("div");
+            $div->setAttribute("style", "margin: 30px");
+            $div->appendChild($data->createTextNode(
+                "No nodes found from the Xpath. It is probably a string match. Search in the document for this :"
+            ));
+            $blink = $data->createElement("blink");
+            $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
+            $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; margin: 10px; padding: 10px");
+            $blink->appendChild(
+                $data->createTextNode(
+                    $dx->evaluate($showxpath)
+                )
+            );
+            $div->appendchild($blink);
+                
+            $data->documentElement->insertBefore($div, $data->documentElement->firstChild);
+        } else {
+            $node = $nl->item(0);
+            $blink = $data->createElement("blink");
+            $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
+            $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; z-index: 999");
+            while ($node->childNodes->length > 0) {
+                $child = $node->firstChild;
+                $node->removeChild($child);
+                $blink->appendChild($child);
+            }
+            $node->appendChild($blink);
+        }
+    }
+
     $data = $data->saveXML();
     // Eliminate shorttags
     $data = preg_replace('/<\s*([a-z]+)\s([^>]*)\/>/', "<$1 $2></$1>", $data);
@@ -95,23 +138,54 @@ if ($type === "html") {
         $data = preg_replace('/(.*<\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . "<head>" . $rep . "</head>" . "$2", $data, -1, $count);
     }
 
-    $rep = '
+    if ($_REQUEST['action'] == "pick") {
+        $rep = '
 
-    <!-- paulisageek.com/nodeSelector Added Code -->
-    <script>
-    if (typeof paulisageek == "undefined") { paulisageek = {}; }
-    if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
-    paulisageek.ns.doneURL = "' . $next . '";
-    paulisageek.ns.params = "' . preg_replace('/"/', '\"', (json_encode(array("url" => $finalURL)))) . '";
-    </script>
-    <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
-    <!-- paulisageek.com/nodeSelector End Added Code -->
+        <!-- paulisageek.com/nodeSelector Added Code -->
+        <script>
+        if (typeof paulisageek == "undefined") { paulisageek = {}; }
+        if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
+        paulisageek.ns.doneURL = "' . $next . '";
+        paulisageek.ns.params = "' . preg_replace('/"/', '\"', (json_encode(array("url" => $finalURL)))) . '";
+        </script>
+        <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
+        <!-- paulisageek.com/nodeSelector End Added Code -->
 
-    ';
+        ';
 
+    } else if ($_REQUEST['action'] == "show") {
+        $rep = '
+        
+        <!-- paulisageek.com/webGraphr START Added Code -->
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script>
+$(document).ready(function($) {
+    var node = $("#paulisaageek_webGraphr_blink");
+    node.ready(function($) {
+        node
+        .clone()
+        .attr("id", node.attr("id") + "_clone")
+        .css({
+            "position" : "absolute",
+            "top" : 0,
+            "left" : 0
+        })
+        .appendTo(document.body)
+        .animate(node.offset(), 2000, "linear", function() { 
+            $("#" + node.attr("id") + "_clone").remove() 
+        });
+    });
+});
+        </script>    
+        <!-- paulisageek.com/webGraphr END Added Code -->
+    
+        ';
+    } else { 
+        $rep = "";
+    }
     $data = preg_replace('/(.*<\/\s*[bB][oO][dD][yY]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
     if ($count == 0) {
-        $data = preg_replace('/(.*<\/\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . "<head>" . $rep . "</head>" . "$2", $data, -1, $count);
+        $data = preg_replace('/(.*<\/\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
     }
 
     print $data;
