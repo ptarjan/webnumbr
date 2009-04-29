@@ -56,9 +56,19 @@ if (! isset($_REQUEST['action']))
         $_REQUEST['action'] = 'pick';
     else 
         $_REQUEST['action'] = 'show';
-if ($_REQUEST['action'] == 'show') {
+switch ($_REQUEST['action']) {
+case 'show' :
     $showxpath = $_REQUEST['xpath'];
     $_REQUEST['xpath'] = NULL;
+    break;
+case 'pick' :
+    $_REQUEST['xpath'] = NULL;
+    break;
+case 'run' :
+default :
+    if (!$_REQUEST['xpath'])
+        die("Can't run without an xpath");
+    break;
 }
 
 require ("fetch.inc");
@@ -130,9 +140,9 @@ if ($type === "html") {
 
     $rep = '
 
-    <!-- paulisageek.com/nodeSelector Added Code -->
+    <!-- paulisageek.com/webGraphr Added Code -->
     <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
-    <!-- paulisageek.com/nodeSelector End Added Code -->
+    <!-- paulisageek.com/webGraphr End Added Code -->
 
     ';
 
@@ -144,7 +154,7 @@ if ($type === "html") {
     if ($_REQUEST['action'] == "pick") {
         $rep = '
 
-        <!-- paulisageek.com/nodeSelector Added Code -->
+        <!-- paulisageek.com/webGraphr Added Code -->
         <script>
         if (typeof paulisageek == "undefined") { paulisageek = {}; }
         if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
@@ -152,7 +162,7 @@ if ($type === "html") {
         paulisageek.ns.params = "' . preg_replace('/"/', '\"', (json_encode(array("url" => $finalURL)))) . '";
         </script>
         <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
-        <!-- paulisageek.com/nodeSelector End Added Code -->
+        <!-- paulisageek.com/webGraphr End Added Code -->
 
         ';
 
@@ -398,7 +408,7 @@ print $xml;
     </div>
   </body>
 
-    <!-- paulisageek.com/nodeSelector Added Code -->
+    <!-- paulisageek.com/webGraphr Added Code -->
     <script>
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
@@ -430,7 +440,7 @@ print $xml;
     };
     </script>
     <script src="http://paulisageek.com<?php print dirname(dirname($_SERVER['PHP_SELF'])) ?>/nodeSelector/ns.js" ></script>
-    <!-- paulisageek.com/nodeSelector End Added Code -->
+    <!-- paulisageek.com/webGraphr End Added Code -->
 
 </html>
 <?php } ?>
