@@ -62,7 +62,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     $type = "json";
                 } else {
                     $config = array(
-                                    'output-xml' => TRUE,
+                                    'output-xhtml' => TRUE,
                                     'wrap' => 0,
                                    );
 
