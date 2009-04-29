@@ -99,9 +99,12 @@ if ($type === "html") {
             $blink = $data->createElement("blink");
             $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; margin: 10px; padding: 10px");
+            $node = $dx->evaluate($showxpath);
+            if (!is_string($node) && !is_int($node))
+                $node = "Xpath doesn't match anything in the document";
             $blink->appendChild(
                 $data->createTextNode(
-                    $dx->evaluate($showxpath)
+                    $node
                 )
             );
             $div->appendchild($blink);
