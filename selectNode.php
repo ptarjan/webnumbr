@@ -99,7 +99,7 @@ if ($type === "html") {
 
     if ($_REQUEST['action'] == "show") {
         $dx = new DomXpath ($data);
-        $nl = $dx->query($showxpath);
+        $nl = @$dx->query($showxpath);
         if ($nl->length == 0) {
             $div = $data->createElement("div");
             $div->setAttribute("style", "margin: 30px");
@@ -109,9 +109,9 @@ if ($type === "html") {
             $blink = $data->createElement("blink");
             $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; margin: 10px; padding: 10px");
-            $node = $dx->evaluate($showxpath);
+            $node = @$dx->evaluate($showxpath);
             if (!is_string($node) && !is_int($node))
-                $node = "Xpath doesn't match anything in the document";
+                $node = $showxpath . " doesn't match anything in the document";
             $blink->appendChild(
                 $data->createTextNode(
                     $node
