@@ -26,13 +26,22 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   </head>
   <body>
     <div id='container'>
-        <form action='selectNode' style="position : absolute; right : 2.5%; top : 7px; color : white">
-        <label for="url" title="Create a new graph from any URL">New Graph:</label> 
-        <input id="url" name='url' value='http://' size="30" />
+      <div id="menu" style="float : right; margin : 0px; padding: 5px; color : white; background-color : #0066CC; -moz-border-radius-bottomleft:10px; -moz-border-radius-bottomright:10px">
+        <form action='search' style="display : inline">
+        <label for="query" title="Search within the name or url of any graph">Search:</label> 
+        <input id="query" name='query' value='' size="20" />
         </form>
-      <div id='header'>
+
+        <form action='selectNode' style="display : inline">
+        <label for="url" title="Create a new graph from any URL">New Graph:</label> 
+        <input id="url" name='url' value='http://' size="20" />
+        </form>
+      </div>
+
+      <div id='header' style="float : left">
         <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
       </div>
+      <div class="clear" ></div>
 
       <div class="content" style="overflow: hidden">
 
