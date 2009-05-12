@@ -2,7 +2,11 @@ if (typeof paulisageek == "undefined") { paulisageek = {}; }
 if (typeof paulisageek.wg == "undefined") { paulisageek.wg = {}; }
 
 paulisageek.wg.plotSize = function(json) {
-    $("#plot").height($(window).height() - $("#header").height() - $(".content h1").height() - 23);
+    var h = $("#dateRange").height();
+    h += $("#graphinfo").height();
+    h += 55;
+    h = 0;
+    $("#plot").height($(window).height() - $("#header").height() - $(".content h1").height() - 23 - h);
     $("#plot").parent().width($("#container").innerWidth() - 30);
 };
 

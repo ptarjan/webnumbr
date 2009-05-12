@@ -122,7 +122,7 @@ foreach ($data as $row) {
 
 <script type='text/javascript'>
 var resizeURL = function() {
-    $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 15);
+    $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 20);
 };
 $("#startForm").ready(function() {
     $(window).resize(resizeURL);
@@ -130,7 +130,7 @@ $("#startForm").ready(function() {
 });
 
 var resizeSearch = function() {
-    $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 15);
+    $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 20);
 };
 $("#startForm").ready(resizeSearch);
 $(window).resize(resizeSearch);

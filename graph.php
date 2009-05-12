@@ -36,6 +36,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <label for="url" title="Create a new graph from any URL">New Graph:</label> 
         <input id="url" name='url' value='http://' size="20" />
         </form>
+    
+        <a href="random" style="color:white">Random</a>
       </div>
 
       <div id='header' style="float : left">
