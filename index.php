@@ -87,6 +87,8 @@ foreach ($data as $row) {
           
         <h1>News</h1>
         <ul><li>
+        <span class="date">May 14, 2009</span> :  <span>I'm back from <a href="http://paulisageek.blogspot.com/2009/05/st-maartenmartin.html">vacation</a> (hense the lack of news). As alluded to before, you can now <a href="http://paulisageek.com/dev/webGraphr/createGraph?mode=edit&id=27">edit</a> a graph that has your openid as the owner.
+        </li><li>
         <span class="date">April 27, 2009</span> :  <span>Since my friend <a href="http://dawning.ca">Jamie</a> made a <a href="graph?id=50">graph</a> that I had NO IDEA what it was doing, I wrote a <a href="selectNode?url=http%3A%2F%2Fpaulisageek.com%2FwebGraphr%2F&xpath=%2F%2Fdiv%5B%40id%3D%27container%27%5D%2Fdiv%5B2%5D%2Ful%5B2%5D%2Fli%5B1%5D&action=show">little visualizer</a> to see what graphs do. Just go to the graph info, and click on the xpath.</span>
         </li><li>
         <span class="date">April 26, 2009</span> :  <span>You can now spend ALL DAY looking at <a href="random">random graphs</a></span>
