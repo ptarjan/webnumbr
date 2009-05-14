@@ -66,5 +66,5 @@ if (!$ret) dieError($stmt);
 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count($result) != 1) dieError("Didn't get 1 row returned");
 if (! isset($result[0]['data'])) dieError("'data' not present");
-dieEncode($result[0]['data']);
+dieEncode((float) $result[0]['data']);
 
