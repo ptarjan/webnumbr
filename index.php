@@ -30,6 +30,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks. <a href="about">Read More..</a></p>
         <p class="clear" />
         <p class="center">See a <a href="random">random graph</a> to give you an idea of what this is all about.</p>
+        <p>TesT</p>
 
         <h1 id='start'>
           Start a Graph
