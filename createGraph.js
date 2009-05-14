@@ -25,9 +25,8 @@ $(document).ready(function() {
                 break;
         }
     });
- 
-    var confirmed = false;
-    $("form").submit(function(ev) {
+
+    var validate = function(ev) { 
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
@@ -42,19 +41,16 @@ $(document).ready(function() {
             return false;
         }
         $("#dialog").dialog("open");
-        if (!confirmed) {
-            return false;
-        } else {
-            return true;
-        }
-    });
+        return false;
+    }
+    $("form").submit(validate);
     $("#dialog").dialog({
         modal : true,
         autoOpen : false,
         buttons : {
             "Yes!" : function() { 
-                confirmed = true;
-                $("form").submit() 
+                $("form").unbind("submit", validate);
+                $("form").submit();
             },
             "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); }
         },

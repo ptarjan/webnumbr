@@ -1,5 +1,6 @@
 <?php
-if (isset($_REQUEST['go'])) {
+if (!isset($_REQUEST['mode'])) $_REQUEST['mode'] = "create";
+if (isset($_REQUEST['submit'])) {
     function required($p) {
         if (is_array($p)) 
             foreach ($p as $v) required($v);
@@ -29,7 +30,9 @@ if (isset($_REQUEST['go'])) {
         "xpath" => $_REQUEST["xpath"],
         "frequency" => $_REQUEST["frequency"],
         "parent" => $_REQUEST["parent"],
-        "go" => $_REQUEST["go"],
+        "mode" => $_REQUEST["mode"],
+        "id" => $_REQUEST["id"],
+        "submit" => $_REQUEST["submit"],
     ));
     $_REQUEST["_root"] = $dirbase;
 
@@ -49,6 +52,21 @@ if (isset($_REQUEST['go'])) {
         if (strpos($response->message, "<No mode set>") === FALSE)  {
             error_log ("OpenID authentication failed: " . $response->message);
             die ("OpenID authentication failed: " . $response->message);
+        } else {
+            // This part redirects them to their openid provider
+            if ($_REQUEST["mode"] == "edit") {
+                $stmt = $PDO->prepare("SELECT openid FROM graphs WHERE id=:id");
+                $stmt->execute(array("id" => $_REQUEST['id']));
+                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
+                $openid = $result[0]['openid'];
+            }
+            if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
+                $openid = $_REQUEST['openid'];
+            };
+            require("try_auth.php");
+            doOpenID($openid);
+            die();
         }
     } else if ($response->status == Auth_OpenID_SUCCESS) {
         // This means the authentication succeeded; extract the
@@ -57,10 +75,7 @@ if (isset($_REQUEST['go'])) {
         $openid = $response->getDisplayIdentifier();
     }
 
-    if (isset($_REQUEST['openid_identifier']) && $_REQUEST['openid_identifier'] !== "http://" && $_REQUEST['openid_identifier'] !== "") {
-        require ("try_auth.php");
-        die();
-    };
+    chdir("..");
     //
     // End OpendID
     //
@@ -113,6 +128,17 @@ if (isset($_REQUEST['go'])) {
     }
     die();
 }
+
+if ($_REQUEST['mode'] == "edit") {
+    require_once ("db.inc");
+    $stmt = $PDO->prepare("SELECT * FROM graphs WHERE id=:id");
+    $stmt->execute(array("id" => $_REQUEST['id']));
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) != 1) die ("bad ID");
+    foreach ($result[0] as $name => $value) 
+        $_REQUEST[$name] = $value;
+}
+
 
 if (isset($_REQUEST['parent'])) {
     require_once ("db.inc");
@@ -192,25 +218,31 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <h1>Last Step</h1>
 
         <form action="">
-        <p> <input name="go" value="go" type="hidden" /> </p>
+        <p> 
+          <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
+<?php if (isset($_REQUEST["id"])) { ?>
+          <input name="id" value="<?php print htmlspecialchars($_REQUEST['id']) ?>" type="hidden" /> 
+<?php } ?>
+          <input name="submit" value="1" type="hidden" /> 
+        </p>
           <table>
 <?php if (isset($_REQUEST["parent"])) { ?>
             <tr><td>Extends:</td><td><input name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
 <?php } ?>
             <tr><td><a href="http://openid.net">OpenID</a></td><td>
-                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid_identifier" id="openid_identifier"/>
+                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%;" size="75" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
             </td></tr>
             <tr><td>Name (<b>required</b>):</td><td><input name="name" size="100" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td></tr>
             <tr><td>URL: </td><td><input name="url" value="<?php print htmlspecialchars($url) ?>" size="100" /></td></tr>
             <tr><td>Xpath: </td><td><input name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" size="100" /></td></tr>
             <tr><td>Example of the data (<b>must be a number</b>): </td><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /> <span id="messages"></span></td></tr>
             <tr><td>Graph Frequency: </td><td><select name='frequency'>
-            <option value="1">1 hour</option>
-            <option value="6">6 hours</option>
-            <option value="12">12 hours</option>
-            <option value="24">24 hours</option>
+            <option value="1"<?php if ($_REQUEST['frequency'] == 1) print ' selected="selected"'; ?>>1 hour</option>
+            <option value="6"<?php if ($_REQUEST['frequency'] == 6) print ' selected="selected"'; ?>>6 hours</option>
+            <option value="12"<?php if ($_REQUEST['frequency'] == 12) print ' selected="selected"'; ?>>12 hours</option>
+            <option value="24"<?php if ($_REQUEST['frequency'] == 24) print ' selected="selected"'; ?>>24 hours</option>
             </select></td></tr>
-            <tr><td></td><td><input type="submit" value="Create Graph" /></td></tr>
+            <tr><td></td><td><input type="submit" value="<?php print ($_REQUEST["mode"] == "edit" ? "Edit" : "Create" ) . " Graph"?>" /></td></tr>
           </table>
         </form>
       </div>
@@ -218,7 +250,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
     <div id='dialog' style='display:none'>
         <p>Everything look good?</p>
-        <p>You can't edit anything after you click yes.</p>
+        <p>You can only edit things if you put in a valid openid.</p>
     </div>
 
 <script type="text/javascript" src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.min.js'></script>

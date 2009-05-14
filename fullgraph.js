@@ -69,9 +69,18 @@ paulisageek.wg.postGraphCallback = function(json) {
             td.text(meta[key]);
             switch (key) {
                 case "openid" : 
+                    if (meta[key] === "") continue;
+                    // Create an "a" around the element with the same content as the element
+                    td.wrapInner($(document.createElement("a")).attr("href", td.text()));
+                    td.append(" ");
+                    td.append(
+                        $("<a/>")
+                        .attr("href", "createGraph?mode=edit&" + $.param({id : meta.id}))
+                        .text("(edit this graph)")
+                    );
+                    break;
                 case "url" : 
-                    if (meta[key] === "")
-                        continue;
+                    if (meta[key] === "") continue;
                     // Create an "a" around the element with the same content as the element
                     td.wrapInner($(document.createElement("a")).attr("href", td.text()));
                     break;

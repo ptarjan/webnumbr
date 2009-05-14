@@ -50,6 +50,10 @@ $(window).resize(resizeURL);
 <?php
     die();
 }
+if (strpos($_REQUEST["url"], "http") !== 0) {
+    $_REQUEST['url'] = "http://" . $_REQUEST['url'];
+}
+
 if (! isset($_REQUEST['xpath'])) $_REQUEST['xpath'] = NULL;
 if (! isset($_REQUEST['action'])) 
     if ($_REQUEST['xpath'] == NULL)

@@ -35,7 +35,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 if (count ($data) == 1) {
     $id = my_rand(1, $data['maxid']);
 } else {
-    print "Some error happending finding a random graph. Please contact me and I'll have it working in a jiffy";
+    print "Some error is happending finding a random graph. Please contact me and I'll have it working in a jiffy";
 }
 }
 

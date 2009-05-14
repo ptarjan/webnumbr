@@ -2,20 +2,8 @@
 
 require_once "common.php";
 
-function getOpenIDURL() {
-    // Render a default page if we got a submission without an openid
-    // value.
-    if (empty($_GET['openid_identifier'])) {
-        $error = "Expected an OpenID URL.";
-    }
-
-    return $_GET['openid_identifier'];
-}
-
-function run() {
-    $openid = getOpenIDURL();
+function doOpenID($openid) {
     $consumer = getConsumer();
-
     // Begin the OpenID authentication process.
     $auth_request = $consumer->begin($openid);
 
@@ -26,9 +14,10 @@ function run() {
 
     $sreg_request = Auth_OpenID_SRegRequest::build(
                                      // Required
-                                     array('nickname'),
+                                     array(''),
                                      // Optional
-                                     array('fullname', 'email'));
+                                     array('')
+    );
 
     if ($sreg_request) {
         $auth_request->addExtension($sreg_request);
@@ -45,34 +34,28 @@ function run() {
     // Store the token for this authentication so we can verify the
     // response.
 
-    // For OpenID 1, send a redirect.  For OpenID 2, use a Javascript
-    // form to send a POST request to the server.
-    if ($auth_request->shouldSendRedirect()) {
-        $redirect_url = $auth_request->redirectURL($_REQUEST['_root'], $_REQUEST['_done']);
+    // send header and html form
+    $redirect_url = $auth_request->redirectURL($_REQUEST['_root'], $_REQUEST['_done']);
 
-        // If the redirect URL can't be built, display an error
-        // message.
-        if (Auth_OpenID::isFailure($redirect_url)) {
-            displayError("Could not redirect to server: " . $redirect_url->message);
-        } else {
-            // Send redirect.
-            header("Location: ".$redirect_url);
-        }
+    // If the redirect URL can't be built, display an error
+    // message.
+    if (Auth_OpenID::isFailure($redirect_url)) {
+        displayError("Could not redirect to server: " . $redirect_url->message);
     } else {
-        // Generate form markup and render it.
-        $form_id = 'openid_message';
-        $form_html = $auth_request->htmlMarkup($_REQUEST['_root'], $_REQUEST['_done'], false, array('id' => $form_id));
+        // Send redirect.
+        header("Location: ".$redirect_url);
+    }
+    // Generate form markup and render it.
+    $form_id = 'openid_message';
+    $form_html = $auth_request->htmlMarkup($_REQUEST['_root'], $_REQUEST['_done'], false, array('id' => $form_id));
 
-        // Display an error if the form markup couldn't be generated;
-        // otherwise, render the HTML.
-        if (Auth_OpenID::isFailure($form_html)) {
-            displayError("Could not redirect to server: " . $form_html->message);
-        } else {
-            print $form_html;
-        }
+    // Display an error if the form markup couldn't be generated;
+    // otherwise, render the HTML.
+    if (Auth_OpenID::isFailure($form_html)) {
+        displayError("Could not redirect to server: " . $form_html->message);
+    } else {
+        print $form_html;
     }
 }
-
-run();
 
 ?>
