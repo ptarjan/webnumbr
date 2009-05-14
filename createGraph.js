@@ -44,6 +44,7 @@ $(document).ready(function() {
         return false;
     }
     $("form").submit(validate);
+
     $("#dialog").dialog({
         modal : true,
         autoOpen : false,
@@ -51,6 +52,8 @@ $(document).ready(function() {
             "Yes!" : function() { 
                 $("form").unbind("submit", validate);
                 $("form").submit();
+                $("#dialog").text("Submitting ... ");
+                $("#dialog").dialog('option', 'buttons', {});
             },
             "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); }
         },
