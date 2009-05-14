@@ -22,6 +22,15 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
       <div class="content">
 
+        <iframe style="float: left; padding: 10px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0" allowtransparency="true"></iframe>
+        <iframe style="float: right; padding: 10px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=16" frameborder="0" allowtransparency="true"></iframe>
+
+        <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
+        <p>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
+        <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks. <a href="about">Read More..</a></p>
+        <p class="clear" />
+        <p>See a <a href="random">random graph</a> to give you an idea of what this is all about.</p>
+
         <h1 id='start'>
           Start a Graph
         </h1>
@@ -33,15 +42,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
             <input id="submitURL" type='submit' value='Pick the Number on the Page' />
           </div>
         </form>
-
-        <iframe style="float: left; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0" allowtransparency="true"></iframe>
-        <iframe style="float: right; padding: 0px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=16" frameborder="0" allowtransparency="true"></iframe>
-
-        <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
-        <p>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
-        <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks. <a href="about">Read More..</a></p>
-        <p><a href="random">See a Random Graph</a> to give you an idea of what this is all about.</p>
-        <p class="clear" />
 
         <h1>Search All Graphs</h1>
 
