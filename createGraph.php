@@ -1,6 +1,6 @@
 <?php
 if (!isset($_REQUEST['mode'])) $_REQUEST['mode'] = "create";
-if (isset($_REQUEST['submit'])) {
+if (isset($_REQUEST['go'])) {
     function required($p) {
         if (is_array($p)) 
             foreach ($p as $v) required($v);
@@ -32,7 +32,7 @@ if (isset($_REQUEST['submit'])) {
         "parent" => $_REQUEST["parent"],
         "mode" => $_REQUEST["mode"],
         "id" => $_REQUEST["id"],
-        "submit" => $_REQUEST["submit"],
+        "go" => $_REQUEST["go"],
     ));
     $_REQUEST["_root"] = $dirbase;
 
@@ -87,16 +87,30 @@ if (isset($_REQUEST['submit'])) {
         die("Not inserting in dev mode");
     }
 
-    $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
-    $r = $stmt->execute(array(
-        "name" => $_REQUEST['name'], 
-        "url" => $_REQUEST['url'], 
-        "xpath" => $_REQUEST['xpath'], 
-        "frequency" => $_REQUEST['frequency'], 
-        "openid" => $openid, 
-    ));
-    if (!$r) {
+    if ($_REQUEST["mode"] == "edit") {
+        $stmt = $PDO->prepare("UPDATE graphs SET name=:name, url=:url, xpath=:xpath, frequency=:frequency WHERE id=:id");
+        $r = $stmt->execute(array(
+            "name" => $_REQUEST['name'], 
+            "url" => $_REQUEST['url'], 
+            "xpath" => $_REQUEST['xpath'], 
+            "frequency" => $_REQUEST['frequency'], 
+            "id" => $_REQUEST['id'], 
+        ));
+    } else {
+        $stmt = $PDO->prepare("INSERT INTO graphs (name, url, xpath, frequency, openid, createdTime) VALUES (:name, :url, :xpath, :frequency, :openid, NOW())");
+        $r = $stmt->execute(array(
+            "name" => $_REQUEST['name'], 
+            "url" => $_REQUEST['url'], 
+            "xpath" => $_REQUEST['xpath'], 
+            "frequency" => $_REQUEST['frequency'], 
+            "openid" => $openid, 
+        ));
+    }
+    if (!$r) 
         die("Something is wrong with the database right now. Please retry again later, and send me an email webGraphr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
+
+    if ($_REQUEST["mode"] == "edit") {
+        $id = $_REQUEST["id"];
     } else {
         $stmt = $PDO->prepare("SELECT id FROM graphs WHERE name = :name AND url = :url AND xpath = :xpath AND frequency = :frequency AND openid = :openid ORDER BY createdTime ASC");
         $r = $stmt->execute(array(
@@ -123,9 +137,9 @@ if (isset($_REQUEST['submit'])) {
                 "id" => $id,
             ));
         }
-
-        header("Location: graph?id=" . $id);
     }
+
+    header("Location: graph?id=" . $id);
     die();
 }
 
@@ -223,7 +237,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 <?php if (isset($_REQUEST["id"])) { ?>
           <input name="id" value="<?php print htmlspecialchars($_REQUEST['id']) ?>" type="hidden" /> 
 <?php } ?>
-          <input name="submit" value="1" type="hidden" /> 
+          <input name="go" value="1" type="hidden" /> 
         </p>
           <table>
 <?php if (isset($_REQUEST["parent"])) { ?>
