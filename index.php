@@ -25,7 +25,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
         <iframe style="float: left; padding: 10px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=4" frameborder="0" allowtransparency="true"></iframe>
         <iframe style="float: right; padding: 10px 20px; width: 450px; height: 300px;" src="http://paulisageek.com/webGraphr/embedGraph?type=js&amp;id=16" frameborder="0" allowtransparency="true"></iframe>
 
-        <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and quite unique).</p>
+        <p>This site builds graphs from the web -&gt; Web Graphs -&gt; webGrapher -&gt; webGraphr (web 2.0 names are awesome, and <a href="http://search.yahoo.com/search?q=webGraphr">quite</a> <a href="http://www.google.com/search?q=webGraphr">unique</a>).</p>
         <p>If you want to know how data on a webpage changes over time, just put the URL in the <a href='selectNode'>text box</a>, click on the number that you want graphed, name your graph, and then sit back and enjoy the pretty, mesmerizing data.</p>
         <p>Once you like it, you can embed it in your site, or use the API to do something fancy, or just keep coming back to oooo and aaaahhh at how pretty your graph looks. <a href="about">Read More..</a></p>
         <p class="clear" />
