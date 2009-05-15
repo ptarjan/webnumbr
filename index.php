@@ -72,7 +72,7 @@ foreach ($data as $row) {
 ?>
         </ul>
 
-        <h1>Most Popular 10 Hosts</h1>
+        <h1>Most Popular 10 <a href="allhosts">Hosts</a></h1>
 
         <ul>
 <?php
