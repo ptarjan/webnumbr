@@ -8,7 +8,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <head>
     <title>webNumbr - search results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
-    <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
   </head>
@@ -48,7 +47,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
 ?>
             <li>
-              <a href="n/<?php print htmlspecialchars($row['name']) ?>">
+              <a href="n/<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
                 <?php print htmlspecialchars($row['name']) ?>
 
               </a>

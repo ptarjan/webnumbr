@@ -192,7 +192,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <head>
     <title>webNumbr - Create Numbr</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
-    <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
     <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />

@@ -8,7 +8,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <head>
     <title>webNumbr: Can I get your Numbr?</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
-    <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
     
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
@@ -61,11 +60,23 @@ $count = (int) $data[0]['count'];
 
         <ul>
 <?php
-$stmt = $PDO->prepare("SELECT name, short(title, 50) as title, description, url, short(url, 30) as shorturl FROM numbrs ORDER BY createdTime DESC LIMIT 10");
+$stmt = $PDO->prepare("SELECT name, short(title, 50) as shorttitle, title, description, url, short(url, 30) as shorturl, is_fetching FROM numbrs ORDER BY createdTime DESC LIMIT 10");
 $stmt->execute();
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
-    print '          <li><a href="n/' . htmlspecialchars($row['name']) . '" title="' . htmlspecialchars($row['description']) . '">' . htmlspecialchars($row['name']) . "</a> : " . htmlspecialchars($row['title']) . " (<span title='" . htmlspecialchars($row['url']) . "'>" . htmlspecialchars($row['shorturl']) . "</span>)</li>\n";
+?>
+            <li>
+              <a href="n/<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
+                <?php print htmlspecialchars($row['name']) ?>
+
+              </a>
+                : <a title="<?php print htmlspecialchars($row['title']) ?>"><?php print htmlspecialchars($row['shorttitle']) ?> </a>
+              <a title="<?php print htmlspecialchars($row['url']) ?>">(<?php print htmlspecialchars($row['shorturl']) ?>)</a>
+<?php if (!$row['is_fetching']) { ?>
+              <span class="error">Not fetching due to errors.</span>
+<?php } ?>
+            </li>
+<?php
 }
 ?>
         </ul>
