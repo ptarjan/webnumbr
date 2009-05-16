@@ -2,3 +2,9 @@ RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
+
+RewriteRule ^n/(.*)$ numbr.php?name=$1
+
+# make sure "/" isn't served
+RewriteRule ^$ %{REQUEST_URI}index [R,L]
+

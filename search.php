@@ -6,19 +6,16 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webGraphr - Search Results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
+    <title>webNumbr - search results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
-
-    <link rel="shortcut icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
-    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
 
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
+        <a href='.'><img id='smalllogo' src="images/webNumbr-banner-32.png" alt="logo" /></a>
       </div>
 
       <div class="content">
@@ -31,38 +28,33 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
               <input type='submit' value='Search' />
           </div>
         </form>
-        <form action='graph'>
         <div id='searchResults'>
           <ul class='searchresults'>
 <?php
 require("db.inc");
 $stmt = $PDO->prepare("
 SELECT 
-    name, id, url, 
-    badFetches < 100 
-    OR 
-    (goodFetches / (goodFetches + badFetches)) > 0.25
-    AS fetching 
+    name, short(title, 50) as shorttitle, title, description, url, short(url, 30) as shorturl, is_fetching
 
-FROM graphs WHERE name LIKE CONCAT('%', :query, '%') OR url LIKE CONCAT('%', :query, '%')");
+FROM numbrs WHERE 
+
+name LIKE CONCAT('%', :query, '%') OR 
+url LIKE CONCAT('%', :query, '%') OR 
+title LIKE CONCAT('%', :query, '%') OR 
+description LIKE CONCAT('%', :query, '%')
+");
 $stmt->execute(array("query" => $_REQUEST['query']));
-
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$ids = array();
 foreach ($data as $row) {
-    $url = substr($row['url'], 0, 30);
-    if (strlen($row['url']) > 30) $url .= "...";
-    $ids[] = $row['id'];
 ?>
             <li>
-              <input name="id[]" value="<?php print htmlspecialchars($row["id"]) ?>" type="checkbox" 
-<?php if ($row['fetching']) { ?> checked="checked" <?php } ?>
-/>
-              <a href="graph?id=<?php print htmlspecialchars($row['id']) ?>">
+              <a href="n/<?php print htmlspecialchars($row['name']) ?>">
                 <?php print htmlspecialchars($row['name']) ?>
 
-              </a> (<?php print htmlspecialchars($url) ?>)
-<?php if (!$row['fetching']) { ?>
+              </a>
+                : <a title="<?php print htmlspecialchars($row['title']) ?>"><?php print htmlspecialchars($row['shorttitle']) ?> </a>
+              <a title="<?php print htmlspecialchars($row['url']) ?>">(<?php print htmlspecialchars($row['shorturl']) ?>)</a>
+<?php if (!$row['is_fetching']) { ?>
               <span class="error">Not fetching due to errors.</span>
 <?php } ?>
             </li>
@@ -76,11 +68,6 @@ foreach ($data as $row) {
           Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>. 
         </div>
         
-        <div>
-          <input type="submit" value="See these on the same graph" />
-        </div>
-        </form>
-
       </div>
     </div>
 

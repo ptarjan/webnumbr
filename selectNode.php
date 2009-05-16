@@ -7,18 +7,16 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webGraphr - Graph anything on the web</title>
+    <title>webNumbr: Can I get your Numbr?</title>
     <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="/style.css" type='text/css' />  
     <link rel="stylesheet" href="style.css" type='text/css' />  
     
-    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />
-
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='logo' src="images/webGraphr-banner-100.png" alt="logo" /></a>
+        <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
       </div>
 
       <div class="content">
@@ -31,7 +29,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
             <input id="url" name='url' value="http://" />
-            <input id="submitURL" type='submit' value='Pick the Number on the Page' />
+            <input id="submitURL" type='submit' value='Pick the Numbr on the Page' />
           </div>
         </form>
       </div>
@@ -84,7 +82,7 @@ try {
     die();
 }
 
-$next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/createGraph';
+$next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/createNumbr';
 
 if ($type === "num") {
     die($data);
@@ -111,7 +109,7 @@ if ($type === "html") {
                 "No nodes found from the Xpath. It is probably a string match. Search in the document for this :"
             ));
             $blink = $data->createElement("blink");
-            $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
+            $blink->setAttribute("id", "paulisaageek_webNumbr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; margin: 10px; padding: 10px");
             $node = @$dx->evaluate($showxpath);
             if (!is_string($node) && !is_int($node))
@@ -127,7 +125,7 @@ if ($type === "html") {
         } else {
             $node = $nl->item(0);
             $blink = $data->createElement("blink");
-            $blink->setAttribute("id", "paulisaageek_webGraphr_blink");
+            $blink->setAttribute("id", "paulisaageek_webNumbr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; z-index: 999");
             while ($node->childNodes->length > 0) {
                 $child = $node->firstChild;
@@ -144,9 +142,9 @@ if ($type === "html") {
 
     $rep = '
 
-    <!-- paulisageek.com/webGraphr Added Code -->
+    <!-- webnumbr.com Added Code -->
     <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
-    <!-- paulisageek.com/webGraphr End Added Code -->
+    <!-- webnumbr.com End Added Code -->
 
     ';
 
@@ -158,7 +156,7 @@ if ($type === "html") {
     if ($_REQUEST['action'] == "pick") {
         $rep = '
 
-        <!-- paulisageek.com/webGraphr Added Code -->
+        <!-- webnumbr.com Added Code -->
         <script>
         if (typeof paulisageek == "undefined") { paulisageek = {}; }
         if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
@@ -166,18 +164,18 @@ if ($type === "html") {
         paulisageek.ns.params = "' . preg_replace('/"/', '\"', (json_encode(array("url" => $finalURL)))) . '";
         </script>
         <script src="http://paulisageek.com' . dirname(dirname($_SERVER['PHP_SELF'])) . '/nodeSelector/ns.js" ></script>
-        <!-- paulisageek.com/webGraphr End Added Code -->
+        <!-- webnumbr.com End Added Code -->
 
         ';
 
     } else if ($_REQUEST['action'] == "show") {
         $rep = '
         
-        <!-- paulisageek.com/webGraphr START Added Code -->
+        <!-- webnumbr.com START Added Code -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script>
 $(document).ready(function($) {
-    var node = $("#paulisaageek_webGraphr_blink");
+    var node = $("#paulisaageek_webNumbr_blink");
     node.ready(function($) {
         node
         .clone()
@@ -194,7 +192,7 @@ $(document).ready(function($) {
     });
 });
         </script>    
-        <!-- paulisageek.com/webGraphr END Added Code -->
+        <!-- webnumbr.com END Added Code -->
     
         ';
     } else { 
@@ -412,7 +410,7 @@ print $xml;
     </div>
   </body>
 
-    <!-- paulisageek.com/webGraphr Added Code -->
+    <!-- webnumbr.com Added Code -->
     <script>
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
@@ -444,7 +442,7 @@ print $xml;
     };
     </script>
     <script src="http://paulisageek.com<?php print dirname(dirname($_SERVER['PHP_SELF'])) ?>/nodeSelector/ns.js" ></script>
-    <!-- paulisageek.com/webGraphr End Added Code -->
+    <!-- webnumbr.com End Added Code -->
 
 </html>
 <?php } ?>

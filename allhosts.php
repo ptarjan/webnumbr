@@ -2,9 +2,8 @@
 $s = (int) $_REQUEST['s'];
 $n = 10;
 $s2 = $s + $n;
-$title = "webGraphr - Host List [$s, $s2)";
-$header = array('    <link rel="icon" href="images/webGraphr-favicon.png" type="image/x-icon" />');
-$logo = "images/webGraphr-banner-100.png";
+$title = "webNumr - Host List [$s, $s2)";
+$logo = "images/webNumbr-banner-100.png";
 ?>
 <?php require "/var/www/paul.slowgeek.com/header.php" ?>
 
@@ -14,7 +13,7 @@ $logo = "images/webGraphr-banner-100.png";
         <ul>
 <?php
 require_once("db.inc");
-$stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, IF(@END = 0, LENGTH(url)+1, @END) - @START-1) as domain FROM graphs GROUP BY domain ORDER BY count DESC LIMIT :n OFFSET :s');
+$stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, IF(@END = 0, LENGTH(url)+1, @END) - @START-1) as domain FROM numbrs GROUP BY domain ORDER BY count DESC LIMIT :n OFFSET :s');
 $stmt->bindValue(':s', $s, PDO::PARAM_INT);
 $stmt->bindValue(':n', $n, PDO::PARAM_INT);
 $stmt->execute();
