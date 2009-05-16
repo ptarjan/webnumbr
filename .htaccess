@@ -1,7 +1,7 @@
 RewriteEngine on
 
-RewriteCond %{HTTP_HOST} dev.webnumbr.com
-RewriteRule ^(.*)$ ../dev/webNumbr/
+RewriteCond %{HTTP_HOST} ^dev\.
+RewriteRule ^(.*)$ dev/$1
 
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
