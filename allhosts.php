@@ -1,12 +1,27 @@
-<?php 
+<?php
 $s = (int) $_REQUEST['s'];
 $n = 10;
 $s2 = $s + $n;
-$title = "webNumr - Host List [$s, $s2)";
-$logo = "images/webNumbr-banner-100.png";
 ?>
-<?php require "/var/www/paul.slowgeek.com/header.php" ?>
+<?php print '<?xml version="1.0" encoding="UTF-8"?>' ?>
 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <title>webNumr - Host List [0, 10)</title>
+    <link rel="stylesheet" href="style.css" type='text/css' />  
+  </head>
+  <body>
+
+    <div id='container'>
+      <div id='header'>
+        <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" title="logo" alt="logo" /></a>
+      </div>
+
+      <div class='content'>
+
+<!-- Start Content -->
 
         <h1>Known Hosts - [<?php print $s ?>, <?php print $s2 ?>)</h1>
 
@@ -40,4 +55,8 @@ pageTracker._trackPageview();
 } catch(err) {}
 </script>
 
-<?php require "/var/www/paul.slowgeek.com/footer.php" ?>
+<!-- End Content -->
+      </div>
+    </div>
+  </body>
+</html>

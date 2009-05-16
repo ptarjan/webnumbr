@@ -51,11 +51,7 @@ switch ($_REQUEST["format"]) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>webNumr : webnumbrs</title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="style.css" type='text/css' />  
-    
-    <link rel="icon" href="/favicon.png" type="image/png" />
-
     <style>
     .webNumbr {
         width: 600px;

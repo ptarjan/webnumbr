@@ -7,14 +7,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>webNumbr - search results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
-    <link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/2.7.0/build/reset/reset-min.css" />
     <link rel="stylesheet" href="style.css" type='text/css' />  
 
   </head>
   <body>
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='smalllogo' src="images/webNumbr-banner-32.png" alt="logo" /></a>
+        <a href='.'><img src="images/webNumbr-banner-100.png" alt="logo" /></a>
       </div>
 
       <div class="content">
@@ -69,6 +68,16 @@ foreach ($data as $row) {
         
       </div>
     </div>
+
+<script src="http://www.google.com/jsapi"></script>
+<script>
+google.load("jquery", "1");
+google.setOnLoadCallback(function() {
+
+$(":input[name=query]").focus()
+
+});
+</script>
 
 <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

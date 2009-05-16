@@ -1,9 +1,61 @@
-#biglogo {
-    height : 200px;
+* {
+    margin : 0px;
+    padding : 0px;
 }
-#logo {
-    height : 100px;
+fieldset,img {
+    border-width:0;
+    border-color:transparent;
 }
-#smalllogo {
-    height : 32px;
+html {
+    background : #0066CC url(./images/blue-gradient.gif) repeat-x;
+}
+body {
+    text-align :            center;
+    line-height :           1.5;
+    font-size :             0.75em;
+    font-family :           'Lucida Grande', sans-serif;
+    color :                 #333333;
+}
+#container {
+    width :                 763px;
+    margin :                0px auto;
+    text-align  :           left;
+}
+.content {
+    border :                1px solid #333;
+    background-color :      #EEEEFF;
+    padding :               5px 0px;
+    margin :                0px;
+    -moz-border-radius :    10px;
+    -webkit-border-radius : 10px;
+}
+#header, #footer {
+    text-align : center; 
+    padding : 0px;
+    margin : 0px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    background-color :      black;
+    color :                 white;
+    text-align :            center;
+}
+
+div, p, ul {
+    margin :                5px 10px;
+}
+li, ol {
+    margin :                0px 1em;
+}
+
+.center {
+    text-align :            center;
+}
+
+.clear {
+    clear :                 both;
+}
+
+.error {
+    color :                 red;
 }
