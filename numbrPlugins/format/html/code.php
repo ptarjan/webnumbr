@@ -54,7 +54,7 @@ td, th {
 <!-- Start Content -->
 
 <form id="numbrForm" action="numbr">
-<input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:649px"/>
+<input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:640px"/>
 <input type="submit" value="reload" />
 </form>
 
