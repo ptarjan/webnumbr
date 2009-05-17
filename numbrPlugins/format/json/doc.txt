@@ -1,0 +1,1 @@
+<a href="http://json.org">JSON</a>. Good for AJAX requests

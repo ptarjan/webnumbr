@@ -1,0 +1,1 @@
+PHP's <a href="http://php.net/print_r">print_r</a>. Nice for seeing data with whitespace

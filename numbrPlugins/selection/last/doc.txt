@@ -1,0 +1,1 @@
+Selects the last <i>count</i> entries. <i>count</i> defaults to 1

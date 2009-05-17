@@ -1,0 +1,1 @@
+Selects the latest number. Equivilent to last(count=1) but will always return just a number.

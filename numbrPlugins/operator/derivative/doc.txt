@@ -1,0 +1,1 @@
+Performs the discrete derivative on the data. Good for seeing change in the data

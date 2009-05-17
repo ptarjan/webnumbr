@@ -1,0 +1,1 @@
+Turns on debug information. Changes return structure to {"debug":{},"data":[]}
