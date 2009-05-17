@@ -104,8 +104,8 @@ foreach ($data as $row) {
       </div>
     </div>
 
-<script src="http://www.google.com/jsapi"></script>
-<script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
 // Load jQuery
 google.load("jquery", "1");
 google.setOnLoadCallback(function() {

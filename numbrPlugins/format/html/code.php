@@ -5,7 +5,7 @@
   <head>
     <title>webNumbr : <?php print htmlspecialchars($_REQUEST['name']) ?></title>
     <link rel="stylesheet" href="style.css" type='text/css' />  
-    <style>
+    <style type="text/css">
 #webNumbr {
     margin : 0px 20px;
     padding : 5px;
@@ -13,7 +13,6 @@
     border : 1px dotted;    
     font-size : 300%;
     width: 710px;
-    height : 0px;
 }
 form#numbrForm {
     margin : 20px;
@@ -59,10 +58,9 @@ td, th {
 <input type="submit" value="reload" />
 </form>
 
-<textarea class="center" id="webNumbr" rows="1">
+<pre class="center" id="webNumbr" rows="1" cols="40">
 <?php print json_encode($data); ?>
-&nbsp;
-</textarea>
+</pre>
 
 <div class="center"><a id="link">&nbsp;</a></div>
 
@@ -116,12 +114,12 @@ function printDoc($dir) {
 <?php printDoc("operator"); ?>
 </table>
 
-<script src="http://www.google.com/jsapi"></script>
-<script>
+<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
 google.load("jquery", "1");
 google.setOnLoadCallback(function() {
 $(document).ready(function() {
-
 var addOp = function(op) {
     $("#name").val($("#name").val() + "." + op);
     reload();
@@ -152,7 +150,7 @@ $("tr td:nth-child(2)")
 });
 
 var reload = function() {
-    $("#webNumbr").html('<img src="images/twirl.gif" alt="thinking" />');
+    $("#webNumbr").addClass("center").html('<img src="images/twirl.gif" alt="thinking" />');
     var val = $("#name").val();
     val = val.toLowerCase();
     val = val.replace(/[^a-z0-9-.()=]/g, '-'); 
@@ -165,15 +163,18 @@ var reload = function() {
         var w = $("#webNumbr");
         if (data.length > 10) {
             w.removeClass("center");
-        } else {
-            w.addClass("center");
         }
+        if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
+            w.html(data);
+        } else {
+            w.text(data);
+        }
+        /* for the textarea
         w.height(0);
-        w.text(data);
         var height = w.get(0).scrollHeight;
         if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
         w.height(height);
-
+        */
         $("#link").text(val);
         $("#link").attr("href", val);
     }, "html");
@@ -182,9 +183,9 @@ var reload = function() {
 $("form#numbrForm").submit(reload);
 reload();
 $("#name").focus();
-
 });
 });
+-->
 </script>
 
 <!-- End Content -->
