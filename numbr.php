@@ -8,10 +8,12 @@ require "db.inc";
 // PREPARSING OF OPERATORS
 $c = array();
 $c['limit'] = 1;
-$c['unused'] = array();
+$c['ops'] = $ops;
 $c['single'] = TRUE;
-while (count($ops) > 0) {
-    $param = array_shift($ops);
+$c['name'] = $name;
+$c['unused'] = array();
+
+foreach ($c['ops'] as $key => $param) {
     preg_match("/([a-z0-9-_]*)(\((.*)\))?/", $param, $matches); // a-z0-9_- then optionally (.*)
     $op = $matches[1];
     $params = $matches[3];
@@ -70,6 +72,7 @@ while (count($ops) > 0) {
             $c['unused'][] = array($op, $params);
     }
 }
+
 if (!isset($c['format'])) {
     if (isset($_REQUEST["format"])) 
         $c['format'] = $_REQUEST["format"];
@@ -159,8 +162,31 @@ foreach ($c['unused'] as $row) {
                 }
                 $data = $newData;
             }
+            break;
 
+        case "debug" :
+            $c["debug"] = TRUE;
+            $c["extra"] = TRUE;
+            break;
+        case "numbr" :
+            $c["numbr"] = TRUE;
+            $c["extra"] = TRUE;
+            break;
 
+    }
+}
+unset($c['unused']);
+
+if ($c['extra']) {
+    unset($c['extra']);
+    $data = array('data' => $data);
+    if ($c['debug']) {
+        unset($c['debug']);
+        $data['debug'] = $c;
+    }
+    if ($c['numbr']) {
+        $s = $PDO->prepare("SELECT * FROM numbr WHERE name = :name");
+        $s->execute($_REQUEST['name']);
     }
 }
 
@@ -225,7 +251,7 @@ td, th {
 
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='logo' src="../images/webNumbr-banner-100.png" title="webNumr" alt="webNumbr logo" /></a>
+        <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" title="webNumr" alt="webNumbr logo" /></a>
       </div>
 
       <div class='content'>
@@ -236,7 +262,7 @@ td, th {
 <input type="submit" value="reload" />
 </form>
 
-<textarea class="center" id="webNumbr">
+<textarea class="center" id="webNumbr" rows="1">
 <?php print json_encode($data); ?>
 &nbsp;
 </textarea>
@@ -322,23 +348,60 @@ td, th {
  <td>Alias for sum</td>
 </tr>
 </table>
-</div>
+
+<table>
+<caption>Misc operators : They dont' fit anywhere else.</caption>
+<tr>
+ <th>name</th>
+ <th>params</th>
+ <th>doc</th>
+</tr>
+<tr>
+ <td>debug</td>
+ <td></td>
+ <td>Turns on debug information. Changes return structure to {"debug":{},"data":[]}</td>
+</tr>
+<tr>
+ <td>numbr</td>
+ <td></td>
+ <td>Shows all the numbr information.Changes return structure to {"numbr":{},"data":[]}</td>
+</tr>
+</table>
 
 <script src="http://www.google.com/jsapi"></script>
 <script>
 google.load("jquery", "1");
 google.setOnLoadCallback(function() {
 
+function addOp(op) {
+    $("#name").val($("#name").val() + "." + op);
+    $("form").submit();
+}
+
+$(document).ready(function() {
+    $("tr td:first-child")
+    .wrapInner("<a>")
+    .children("a")
+    .attr("href", "#")
+    .attr("title", "Add this operator")
+    .click(function() {
+        addOp($(this).text());
+    });
+});
+
 $("form").submit(function() {
     $("#webNumbr").html('<img src="images/twirl.gif" alt="thinking" />');
     var val = $("#name").val();
-    $.get("numbr?format=json&name=" + encodeURIComponent(val), "", function(data) {
+    val = val.toLowerCase();
+    val = val.replace(/[^a-z0-9-.()]/g, '-'); 
+    $("#name").val(val);
+    $.get(encodeURIComponent(val) + "?format=json", "", function(data) {
         $("#webNumbr").height(0);
         $("#webNumbr").text(data);
         $("#webNumbr").height($("#webNumbr").get(0).scrollHeight);
 
         $("#link").text(val);
-        $("#link").attr("href", "numbr?name=" + val);
+        $("#link").attr("href", val);
     }, "html");
     return false;
 });

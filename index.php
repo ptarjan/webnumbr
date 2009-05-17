@@ -63,7 +63,7 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
 ?>
             <li>
-              <a href="numbr?name=<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
+              <a href="<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
                 <?php print htmlspecialchars($row['name']) ?></a>
                 : <a title="<?php print htmlspecialchars($row['title']) ?>"><?php print htmlspecialchars($row['shorttitle']) ?> </a>
               <a title="<?php print htmlspecialchars($row['url']) ?>">(<?php print htmlspecialchars($row['shorturl']) ?>)</a>

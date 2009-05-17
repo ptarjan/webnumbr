@@ -29,7 +29,7 @@ $(document).ready(function() {
     if ($(":input[name='name']").val()) $(":input[name='name']").blur();
 
     var reload = function() {
-        $("#data").html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/>');
+        $("#data").html('<img src="images/twirl.gif" alt="thinking"/>');
         $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
             $("#data").html(data);
         });
