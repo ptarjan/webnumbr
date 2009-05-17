@@ -25,10 +25,10 @@ if (isset($_REQUEST['go'])) {
     //
     chdir("openid");
     require ("common.php");
-    $dirbase = sprintf("http://%s%s/", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
+    $dirbase = sprintf("http://%s%s", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
     $base = $dirbase . "createNumbr?";
 
-    $_REQUEST["_done"] = $base . http_build_query(
+    $_REQUEST["_done"] = $base . "?" . http_build_query(
         $_REQUEST
     );
     $_REQUEST["_root"] = $dirbase;
@@ -117,7 +117,15 @@ if (isset($_REQUEST['go'])) {
         ));
     }
 
-    header("Location: $" . $_REQUEST["name"]);
+    // Fetch it for the first time
+    require ("fetch.inc");
+    $num = fetch($_REQUEST['url'], $_REQUEST['xpath']);
+    $s = $PDO->prepare("INSERT INTO numbr_data (numbr, data) VALUES (:name, :data)");
+    $s->execute(array("name" => $_REQUEST['name'], "data" => $num));
+    $s = $PDO->prepare("UPDATE numbr_table SET goodFetches = goodFetches + 1 WHERE name = :name");
+    $s->execute(array("name" => $_REQUEST["name"]));
+
+    header("Location: " . $_REQUEST["name"]);
     die();
 }
 
@@ -255,18 +263,7 @@ th {
 
 <script src="http://www.google.com/jsapi"></script>
 <script type="text/javascript" src="createNumbr.js"></script>
-
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-// document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<!-- <script src='http://google-analytics.com/ga.js' type='text/javascript'></script> -->
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-149816-4");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
+<?php include("ga.inc") ?>
 
   </body>
 </html>

@@ -9,7 +9,7 @@ $s2 = $s + $n;
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webNumr - Host List [0, 10)</title>
+    <title>webNumbr - Host List [0, 10)</title>
     <link rel="stylesheet" href="style.css" type='text/css' />  
   </head>
   <body>
@@ -43,19 +43,8 @@ foreach ($data as $row) {
         <p> <a href="?s=<?php print $s + $n ?>">Next page</a> </p>
 <?php } ?>
 
-
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-149816-4");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
-
 <!-- End Content -->
+<?php include("ga.inc") ?>
       </div>
     </div>
   </body>

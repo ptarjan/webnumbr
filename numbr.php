@@ -185,8 +185,9 @@ if ($c['extra']) {
         $data['debug'] = $c;
     }
     if ($c['numbr']) {
-        $s = $PDO->prepare("SELECT * FROM numbr WHERE name = :name");
-        $s->execute($_REQUEST['name']);
+        $s = $PDO->prepare("SELECT * FROM numbrs WHERE name = :name");
+        $s->execute(array("name" => $c['name']));
+        $data['numbr'] = $s->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
@@ -220,7 +221,7 @@ switch ($c['format']) {
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webNumr : <?php print htmlspecialchars($_REQUEST['name']) ?></title>
+    <title>webNumbr : <?php print htmlspecialchars($_REQUEST['name']) ?></title>
     <link rel="stylesheet" href="style.css" type='text/css' />  
     <style>
 #webNumbr {
@@ -231,7 +232,7 @@ switch ($c['format']) {
     font-size : 300%;
     width: 710px;
 }
-form {
+form#numbrForm {
     margin : 20px;
 }
 table {
@@ -248,16 +249,29 @@ td, th {
 
   </head>
   <body>
+      <div id="menu" style="float : right; margin : 0px; padding: 5px; color : white; background-color : #0066CC; -moz-border-radius-bottomleft:10px; -moz-border-radius-bottomright:10px">
+        <form action='search' style="display : inline">
+        <label for="query" title="Search within the metadata of any numbr">Search:</label> 
+        <input id="query" name='query' value='' size="20" />
+        </form>
+
+        <form action='selectNode' style="display : inline">
+        <label for="url" title="Create a new numbr from any URL">New Numbr:</label> 
+        <input id="url" name='url' value='http://' size="20" />
+        </form>
+    
+        <a href="random" style="color:white">Random</a>
+      </div>
 
     <div id='container'>
       <div id='header'>
-        <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" title="webNumr" alt="webNumbr logo" /></a>
+        <a href='.'><img id='logo' src="images/webNumbr-banner-50.png" title="webNumbr" alt="webNumbr logo" /></a>
       </div>
 
       <div class='content'>
 <!-- Start Content -->
 
-<form action="numbr">
+<form id="numbrForm" action="numbr">
 <input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:649px"/>
 <input type="submit" value="reload" />
 </form>
@@ -372,28 +386,41 @@ td, th {
 <script>
 google.load("jquery", "1");
 google.setOnLoadCallback(function() {
+$(document).ready(function() {
 
-function addOp(op) {
+var addOp = function(op) {
     $("#name").val($("#name").val() + "." + op);
-    $("form").submit();
+    reload();
 }
 
-$(document).ready(function() {
-    $("tr td:first-child")
-    .wrapInner("<a>")
-    .children("a")
-    .attr("href", "#")
-    .attr("title", "Add this operator")
-    .click(function() {
-        addOp($(this).text());
-    });
+$("tr td:first-child")
+.wrapInner("<a>")
+.children("a")
+.attr("href", "#")
+.attr("title", "Add this operator")
+.css("color", "blue")
+.click(function() {
+    addOp($(this).text());
+    return false;
+});
+$("tr td:nth-child(2)")
+.wrapInner("<a>")
+.children("a")
+.attr("href", "#")
+.attr("title", "Add this operator")
+.css("color", "blue")
+.click(function() {
+    addOp(
+        $(this).parent().prev().text() + "(" + $(this).text() + ")"
+    );
+    return false;
 });
 
-$("form").submit(function() {
+var reload = function() {
     $("#webNumbr").html('<img src="images/twirl.gif" alt="thinking" />');
     var val = $("#name").val();
     val = val.toLowerCase();
-    val = val.replace(/[^a-z0-9-.()]/g, '-'); 
+    val = val.replace(/[^a-z0-9-.()=]/g, '-'); 
     $("#name").val(val);
     $.get(encodeURIComponent(val) + "?format=json", "", function(data) {
         $("#webNumbr").height(0);
@@ -404,14 +431,18 @@ $("form").submit(function() {
         $("#link").attr("href", val);
     }, "html");
     return false;
-});
-$("form").submit();
+}
+$("form#numbrForm").submit(reload);
+reload();
 $("#name").focus();
 
+});
 });
 </script>
 
 <!-- End Content -->
+<?php include("ga.inc") ?>
+
       </div>
     </div>
   </body>
