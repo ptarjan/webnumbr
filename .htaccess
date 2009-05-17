@@ -5,7 +5,7 @@ RewriteRule ^$ %{REQUEST_URI}index [R,L]
 
 #hostnames can work for simple things too
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
-RewriteRule ^(.*)$ http://webnumbr.com/%1 [R,L]
+RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
 
 #/n is old way of doing it
 RewriteRule ^n/(.*)$ http://webnumbr.com/$1 [R=301,L]
