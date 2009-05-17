@@ -23,7 +23,7 @@ $s2 = $s + $n;
 
 <!-- Start Content -->
 
-        <h1>Known Hosts - [<?php print $s ?>, <?php print $s2 ?>)</h1>
+        <h1 class="first">Known Hosts - [<?php print $s ?>, <?php print $s2 ?>)</h1>
 
         <ul>
 <?php

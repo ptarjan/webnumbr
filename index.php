@@ -32,14 +32,14 @@ $count = (int) $data[0]['count'];
         There are <b id="numbrCount"><?php print $count ?></b> numbrs and counting.
         </p>
 
-        <h1 id='start'>
+        <h1 id="start">
           Start a Numbr
         </h1>
 
         <form action='selectNode'>
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
-            <input id="url" name='url' value="http://" />
+            <input id="url" type="text" name='url' value="http://" />
             <input id="submitURL" type='submit' value='Pick the Numbr on the Page' />
           </div>
         </form>
@@ -48,7 +48,7 @@ $count = (int) $data[0]['count'];
 
         <form action="search">
           <div id="searchForm">
-            <input id="query" name='query' />
+            <input id="query" type="text" name='query' />
             <input id="submitQuery" type="submit" value='Search' />
           </div>
         </form>
@@ -63,10 +63,8 @@ $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
 ?>
             <li>
-              <a href="n/<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
-                <?php print htmlspecialchars($row['name']) ?>
-
-              </a>
+              <a href="numbr?name=<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['description']) ?>">
+                <?php print htmlspecialchars($row['name']) ?></a>
                 : <a title="<?php print htmlspecialchars($row['title']) ?>"><?php print htmlspecialchars($row['shorttitle']) ?> </a>
               <a title="<?php print htmlspecialchars($row['url']) ?>">(<?php print htmlspecialchars($row['shorturl']) ?>)</a>
 <?php if (!$row['is_fetching']) { ?>

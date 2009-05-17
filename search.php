@@ -8,7 +8,11 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   <head>
     <title>webNumbr - search results for <?php print htmlspecialchars($_REQUEST['query']) ?></title>
     <link rel="stylesheet" href="style.css" type='text/css' />  
-
+    <style tyle="text/css">
+#searchResults {
+    margin : 10px;
+}
+    </style>
   </head>
   <body>
     <div id='container'>
@@ -18,11 +22,11 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
       <div class="content">
 
-        <h1>Search Results</h1>
+        <h1 class="first">Search Results</h1>
 
         <form action=''>
           <div>
-              <input name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:90%' />
+              <input type="text" name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:80%' />
               <input type='submit' value='Search' />
           </div>
         </form>
@@ -62,9 +66,9 @@ foreach ($data as $row) {
           </ul>
         </div>
 
-        <div>
+        <p>
           Number of Results : <span id='numResults'><?php print $stmt->rowCount() ?></span>. 
-        </div>
+        </p>
         
       </div>
     </div>

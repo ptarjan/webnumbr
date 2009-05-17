@@ -23,8 +23,8 @@ class XMLHelper {
         return str_replace('&#039;', '&apos;', htmlspecialchars($text, ENT_QUOTES));
     }
 
-    public static function xml_encode($array, $i=0, $root = "_") {
-        if(!$i) {
+    public static function xml_encode($array, $i=0, $root = "_", $first = NULL) {
+        if($first == NULL) {
             $data = '<?xml version="1.0" encoding="UTF-8"?>' . "\n" . '<' . self::xml_encode_node($root) . ">";
         } else {
             $data = '';
@@ -39,7 +39,7 @@ class XMLHelper {
 
             foreach($array as $k=>$v) {
                 if (self::is_vector($v)) {
-                    $data .= self::xml_encode($v, $i, $k);
+                    $data .= self::xml_encode($v, $i, $k, TRUE);
                     continue;
                 }
 
@@ -49,21 +49,21 @@ class XMLHelper {
                 $data .= str_repeat("\t", $i);
                 $data .= "<" . self::xml_encode_node($k) . ">";
                 if(is_object($v) || is_array($v)) {
-                    $data .= self::xml_encode($v, ($i+1), $k);
+                    $data .= self::xml_encode($v, ($i+1), $k, TRUE);
                 } else {
                     $dom = @DomDocument::loadXML($v);
                     if ($dom){
                         $xml = $dom->saveXML();
                         $xml = preg_replace("/<\?xml[^>]*>/", "", $xml);
-                        $data .= self::xml_encode($xml, ($i+1), $k);
+                        $data .= self::xml_encode($xml, ($i+1), $k, TRUE);
                     } else {
-                        $data .= self::xml_encode($v, ($i+1), $k);
+                        $data .= self::xml_encode($v, ($i+1), $k, TRUE);
                     }
                 }
                 $data .= '</' . self::xml_encode_node($k) . ">";
             }
         }
-        if(!$i) {
+        if($first == NULL) {
             $data .= '</' . self::xml_encode_node($root) . ">\n";
         }
 
