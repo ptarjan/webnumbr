@@ -13,6 +13,7 @@
     border : 1px dotted;    
     font-size : 300%;
     width: 710px;
+    overflow : auto;
 }
 form#numbrForm {
     margin : 20px;
@@ -29,7 +30,7 @@ td, th {
 }
 
 #menu {
-    float : right;
+    float : left;
     margin : 0px;
    	padding: 5px;
 	border-left : 1px solid;
@@ -46,6 +47,7 @@ td, th {
 </style>
   </head>
   <body>
+<!--
       <div id="menu">
         <form action='search'> 
         <label for="query" title="Search within the metadata of any numbr">Search:</label> 
@@ -59,10 +61,10 @@ td, th {
     
         <a href="random">Random</a>
       </div>
-
-<?php include ("tweet.inc") ?>
+-->
 
     <div id='container'>
+<?php include ("tweet.inc") ?>
       <div id='header'>
         <a href='.'><img id='logo' src="images/webNumbr-banner-50.png" title="webNumbr" alt="webNumbr logo" /></a>
       </div>
@@ -79,7 +81,10 @@ td, th {
 <?php print json_encode($data); ?>
 </pre>
 
-<div class="center"><a id="link">&nbsp;</a></div>
+<div class="center">
+    <a id="link">&nbsp;</a>
+    Embed: <input type="text" />
+</div>
 
 <div>
 </div>
@@ -191,14 +196,14 @@ var reload = function() {
                 .css("height", "400px")
             );
         } else {
+            /* w.height(0); */
             w.text(data);
+            /* for the textarea
+            var height = w.get(0).scrollHeight;
+            if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
+            w.height(height);
+            */
         }
-        /* for the textarea
-        w.height(0);
-        var height = w.get(0).scrollHeight;
-        if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
-        w.height(height);
-        */
         $("#link").text(val);
         $("#link").attr("href", val);
     }, "html");

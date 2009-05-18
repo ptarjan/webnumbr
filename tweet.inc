@@ -17,6 +17,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
 <style type="text/css">
 #tweet {
     float : left; 
+    position : absolute; /* don't take up any space */
     background : white; 
     margin : 0px; 
     padding : 5px;
