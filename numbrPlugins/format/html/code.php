@@ -27,23 +27,40 @@ caption {
 td, th {
     padding : 5px;
 }
-    </style>
 
+#menu {
+    float : right;
+    margin : 0px;
+   	padding: 5px;
+	border-left : 1px solid;
+	border-bottom : 1px solid;
+	background-color : white;
+	vertical-align : middle;
+}
+#menu form {
+    display : inline;
+}
+#menu a {
+    color : blue;
+}
+</style>
   </head>
   <body>
-      <div id="menu" style="float : right; margin : 0px; padding: 5px; color : white; background-color : #0066CC; -moz-border-radius-bottomleft:10px; -moz-border-radius-bottomright:10px">
-        <form action='search' style="display : inline">
+      <div id="menu">
+        <form action='search'> 
         <label for="query" title="Search within the metadata of any numbr">Search:</label> 
         <input id="query" name='query' value='' size="20" />
         </form>
 
-        <form action='selectNode' style="display : inline">
+        <form action='selectNode'>
         <label for="url" title="Create a new numbr from any URL">New Numbr:</label> 
         <input id="url" name='url' value='http://' size="20" />
         </form>
     
-        <a href="random" style="color:white">Random</a>
+        <a href="random">Random</a>
       </div>
+
+<?php include ("tweet.inc") ?>
 
     <div id='container'>
       <div id='header'>
