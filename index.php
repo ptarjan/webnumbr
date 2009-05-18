@@ -53,6 +53,15 @@ $count = (int) $data[0]['count'];
           </div>
         </form>
 
+        <h1>See a Numbr</h1>
+
+        <form action="numbr">
+          <div id="numbrForm">
+            <input id="name" type="text" name='name' />
+            <input id="submitNumbr" type="submit" value='Get Numbr' />
+          </div>
+        </form>
+
         <h1>Last 10 Numbrs</h1>
 
         <ul>
@@ -121,8 +130,14 @@ $("#startForm").ready(function() {
 var resizeSearch = function() {
     $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 20);
 };
-$("#startForm").ready(resizeSearch);
+$("#searchForm").ready(resizeSearch);
 $(window).resize(resizeSearch);
+
+var resizeNumbr = function() {
+    $("#name").width($("#numbrForm").width() - $("#submitNumbr").outerWidth() - 20);
+};
+$("#numbrForm").ready(resizeNumbr);
+$(window).resize(resizeNumbr);
 
 });
 </script>
