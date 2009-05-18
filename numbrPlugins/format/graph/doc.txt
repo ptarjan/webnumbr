@@ -1,0 +1,1 @@
+Displays a graph. Great for combining with <em>.all</em>. Example "webnumbrs.all.graph"
