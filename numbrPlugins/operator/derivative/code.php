@@ -20,7 +20,7 @@ if (is_array($data)) {
                 continue;
             }
             // Discrete derivative (by the hours)
-            $val = ($val - $last[1]) / ($time - $last[0]) * 60 * 60;
+            $val = - ($val - $last[1]) / ($time - $last[0]) * 60 * 60;
             // Put the point directly in between the two values
             // $time -= ($time - $last[0]) / 2;
             $last = $old;
