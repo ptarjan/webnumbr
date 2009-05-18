@@ -48,7 +48,9 @@ h5 {
 <script type="text/javascript" src="numbrPlugins/format/graph/flot/jquery.flot.js"></script>
 <script type="text/javascript" src='numbrPlugins/format/graph/graph.js'></script>
 <script>
-makeGraph(<?php print json_encode($c) ?>, <?php print json_encode($data) ?>);
+$("plot").ready(function($) {
+    makeGraph(<?php print json_encode($c) ?>, <?php print json_encode($data) ?>);
+});
 </script>
 
 <?php include("ga.inc") ?>

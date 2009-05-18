@@ -135,8 +135,7 @@ function printDoc($dir) {
 <script type="text/javascript">
 <!--
 google.load("jquery", "1");
-google.setOnLoadCallback(function() {
-$(document).ready(function() {
+google.setOnLoadCallback(function() {jQuery.noConflict()(document).ready(function($) {
 var addOp = function(op) {
     $("#name").val($("#name").val() + "." + op);
     reload();
@@ -172,7 +171,7 @@ var reload = function() {
     val = val.toLowerCase();
     val = val.replace(/[^a-z0-9-.()=]/g, '-'); 
     $("#name").val(val);
-    $.get(encodeURIComponent(val) + "?format=json", "", function(data, status) {
+    $.get(val + "?format=json", "", function(data, status) {
         if (status != "success") {
             w.text("Error with the request. Try again or email me webNumbr@paulisageek.com");
             return;
@@ -182,7 +181,15 @@ var reload = function() {
             w.removeClass("center");
         }
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
-            w.html(data);
+            // Oops, we wasted an ajax call, oh well.
+            w.html(
+                $('<iframe/>')
+                .attr("src", val)
+                .attr("allowtransparnecy", true)
+                .attr("frameborder", 0)
+                .css("width", "100%")
+                .css("height", "400px")
+            );
         } else {
             w.text(data);
         }
@@ -200,8 +207,7 @@ var reload = function() {
 $("form#numbrForm").submit(reload);
 reload();
 $("#name").focus();
-});
-});
+});});
 -->
 </script>
 
