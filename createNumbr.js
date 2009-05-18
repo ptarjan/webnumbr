@@ -13,10 +13,14 @@ $(document).ready(function() {
 
     var checkName = function() {
         var val = $(this).val();
+        var msg = $("#name_msg");
+        if (val == $(this).attr("defaultValue")) {
+            msg.html('<span style="color: green">Name unchanged</span>');
+            return;
+        }
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
         $(this).val(val);
-        var msg = $("#name_msg");
         msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/>');
         $.get("checkName?" + $.param({name: $(this).val()}), function (data) {
             if (! data)

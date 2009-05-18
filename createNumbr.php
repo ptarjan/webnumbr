@@ -9,16 +9,31 @@ if (isset($_REQUEST['go'])) {
     }
 
     required("name", "url", "xpath", "frequency");
-    ob_start();
-    require "checkName.php";
-    $errors = ob_get_contents();
-    if ($errors) die($errors);
+    require ("db.inc");
+
+    $skipNameCheck = FALSE;
+    if ($_REQUEST['mode'] == "edit") {
+        $stmt = $PDO->prepare("SELECT name FROM numbrs WHERE id=:id");
+        $stmt->execute(array("id" => $_REQUEST['id']));
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        if (count($result) == 1 && isset($result[0]['name'])) {
+            if ($_REQUEST['name'] == $result[0]['name'])
+                $skipNameCheck = true;
+        }
+    }
+    if (!$skipNameCheck) {
+        ob_start();
+        require "checkName.php";
+        $errors = ob_get_contents();
+        ob_end_clean();
+        if ($errors)
+            die($errors);
+    }
 
     if (strpos($_REQUEST["url"], "http") !== 0) {
         die ("Only urls starting with http are supported");
     }
 
-    require ("db.inc");
 
     // 
     // OpenID
@@ -28,7 +43,7 @@ if (isset($_REQUEST['go'])) {
     $dirbase = sprintf("http://%s%s", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
     $base = $dirbase . "createNumbr?";
 
-    $_REQUEST["_done"] = $base . "?" . http_build_query(
+    $_REQUEST["_done"] = $base . http_build_query(
         $_REQUEST
     );
     $_REQUEST["_root"] = $dirbase;
@@ -228,6 +243,9 @@ th {
         <form action="">
         <p> 
           <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
+<?php if (isset($_REQUEST['id'])) { ?>
+          <input name="id" value="<?php print htmlspecialchars($_REQUEST['id']) ?>" type="hidden" /> 
+<?php } ?>
           <input name="go" value="1" type="hidden" /> 
         </p>
           <table>
