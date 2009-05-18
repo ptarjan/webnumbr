@@ -6,12 +6,12 @@ RewriteEngine on
     Header set Expires "Web, 02 May 1984 20:30:00 MST"
 </IfModule>
 
-# make sure "/" isn't served
-RewriteRule ^$ %{REQUEST_URI}index [R,L]
-
 #hostnames can work for simple things too
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
 RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
+
+# make sure "/" isn't served
+RewriteRule ^$ %{REQUEST_URI}index [R,L]
 
 #/n is old way of doing it
 RewriteRule ^n/(.*)$ http://webnumbr.com/$1 [R=301,L]

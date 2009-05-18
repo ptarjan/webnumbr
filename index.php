@@ -11,6 +11,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
     
   </head>
   <body>
+    <?php include ("tweet.inc"); ?>
     <div id='container'>
       <div id='header'>
         <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
