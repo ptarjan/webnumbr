@@ -65,6 +65,12 @@ foreach ($c['ops'] as $key => $row) {
 
 $c['code'] .= makeOrig($c['selection']);
 $c['code'] .= makeOrig($c['format']);
+foreach ($c['ops'] as $key => $row) {
+    list($op, $params) = $row;
+    if (in_array($op, $operators)) {
+        $c['code'] .= makeOrig($row);
+    }
+}
 
 list($op, $params) = $c['selection'];
 require("numbrPlugins/selection/$op/code.php");
@@ -95,7 +101,6 @@ else  {
 foreach ($c['ops'] as $key => $row) {
     list($op, $params) = $row;
     if (in_array($op, $operators)) {
-        $c['code'] .= makeOrig($row);
         require("numbrPlugins/operator/$op/code.php");
     }
 }
