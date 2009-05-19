@@ -1,11 +1,7 @@
 <?php
+preg_match("/[a-z0-9-]+/", $_REQUEST['name'], $matches);
+$name = $matches[0];
 
-$ops = explode(".", $_REQUEST["name"]);
-$name = array_shift($ops);
-
-require "db.inc";
-
-// PREPARSING OF OPERATORS
 $c = array();
 $c['ops'] = array();
 $c['name'] = $name;
@@ -13,19 +9,31 @@ $c['format'] = array("default", "");
 $c['selection'] = array("default", "");
 $c['code'] = $name;
 
-function makeOrig($row) {
-    list($op, $params) = $row;
-    if ($op == "default") return "";
-
-    $r = ".$op";
-    if (!$params) return $r;
-    $p = array();
-    foreach ($params as $key => $value) {
-        $p[] = "$key=$value";
+preg_match_all("/[.]([a-z0-9-]+)(\((.*?)\))?/", $_REQUEST['name'], $matches, PREG_SET_ORDER);
+foreach ($matches as $match) {
+    $op = $match[1];
+    $params = $match[3];
+    if ($params) {
+        $p = array();
+        foreach( explode(",", $params) as $row ) {
+            $boom = explode("=", $row, 2);
+            if (!$boom[1]) {
+                $p[] = $boom[0];
+            } else {
+                $p[$boom[0]] = $boom[1];
+            }
+        }
+        if (count($p) > 0) {
+            $params = $p;
+        }
     }
-    $r .= "(" . implode(",", $p) . ")";
-    return $r;
+    $op = strtolower($op);
+    $c['ops'][] = array($op, $params);
 }
+
+/*
+$ops = explode(".", $_REQUEST["name"]);
+$name = array_shift($ops);
 
 foreach ($ops as $key => $param) {
     preg_match("/([a-z0-9-_]*)(\((.*)\))?/", $param, $matches); // a-z0-9_- then optionally (.*)
@@ -47,6 +55,24 @@ foreach ($ops as $key => $param) {
     }
     $op = strtolower($op);
     $c['ops'][$key] = array($op, $params);
+}
+*/
+
+require "db.inc";
+
+// PREPARSING OF OPERATORS
+function makeOrig($row) {
+    list($op, $params) = $row;
+    if ($op == "default") return "";
+
+    $r = ".$op";
+    if (!$params) return $r;
+    $p = array();
+    foreach ($params as $key => $value) {
+        $p[] = "$key=$value";
+    }
+    $r .= "(" . implode(",", $p) . ")";
+    return $r;
 }
 
 $formats = scandir("numbrPlugins/format");
