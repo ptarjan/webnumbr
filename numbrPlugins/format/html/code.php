@@ -116,7 +116,7 @@ td, th {
 
 <h1>Commands</h1>
 <div>
-<b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>
+<b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>. <a href="/numbrExamples">Examples</a>. <a href="/numbrPlugins">Plugin sources</a>
 </div>
 
 <?php
@@ -222,7 +222,6 @@ var reload = function() {
             w.removeClass("center");
         }
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
-alert("hi");
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
             base = base.replace(/\/[^\/]*$/, '/');
