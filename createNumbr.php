@@ -11,17 +11,9 @@ if (isset($_REQUEST['go'])) {
     required("name", "url", "xpath", "frequency");
     require ("db.inc");
 
-    $skipNameCheck = FALSE;
-    if ($_REQUEST['mode'] == "edit") {
-        $stmt = $PDO->prepare("SELECT name FROM numbrs WHERE id=:id");
-        $stmt->execute(array("id" => $_REQUEST['id']));
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        if (count($result) == 1 && isset($result[0]['name'])) {
-            if ($_REQUEST['name'] == $result[0]['name'])
-                $skipNameCheck = true;
-        }
-    }
-    if (!$skipNameCheck) {
+    if ($_REQUEST["mode"] == "edit") {
+        // Edit mode doesn't check name
+    } else {
         ob_start();
         require "checkName.php";
         $errors = ob_get_contents();
@@ -66,8 +58,8 @@ if (isset($_REQUEST['go'])) {
         } else {
             // This part redirects them to their openid provider
             if ($_REQUEST["mode"] == "edit") {
-                $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE id=:id");
-                $stmt->execute(array("id" => $_REQUEST['id']));
+                $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
+                $stmt->execute(array("name" => $_REQUEST['name']));
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
                 $openid = $result[0]['openid'];
@@ -243,10 +235,10 @@ th {
         <form action="">
         <p> 
           <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
-<?php if (isset($_REQUEST['id'])) { ?>
-          <input name="id" value="<?php print htmlspecialchars($_REQUEST['id']) ?>" type="hidden" /> 
-<?php } ?>
           <input name="go" value="1" type="hidden" /> 
+<?php if ($_REQUEST["mode"] == "edit") { ?>
+          <input name="name" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" type="hidden" />
+<?php } ?>
         </p>
           <table>
 <?php if (isset($_REQUEST["parent"])) { ?>
@@ -255,7 +247,7 @@ th {
             <tr><th><a href="http://openid.net">OpenID</a></th><td>
                 <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%; width : 330px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
             </td></tr>
-            <tr><th><a title="unique name to fetch this numbr">Name (?)</a></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" /></td><td id="name_msg"></td></tr>
+            <tr><th><a title="unique name to fetch this numbr">Name (?)</a></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> /></td><td id="name_msg"></td></tr>
             <tr><th><a title="human readable title">Title (?)</a></th><td><input type="text" name="title" maxlength="255" value="<?php print htmlspecialchars($_REQUEST["title"]) ?>" /></td></tr>
             <tr><th><a title="longer description, used in searches">Description (?)</a></th><td><textarea name="description" rows="3" maxlength="1000"><?php print htmlspecialchars($_REQUEST["description"]) ?></textarea></td></tr>
             <tr><th>URL</th><td><input type="text" name="url" value="<?php print htmlspecialchars($url) ?>" maxlength="2000" /></td></tr>

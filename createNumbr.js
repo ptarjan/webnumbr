@@ -15,7 +15,7 @@ $(document).ready(function() {
         var val = $(this).val();
         var msg = $("#name_msg");
         if (val == $(this).attr("defaultValue")) {
-            msg.html('<span style="color: green">Name unchanged</span>');
+            msg.html('<span style="color: green">Good Old Name</span>');
             return;
         }
         val = val.toLowerCase();
