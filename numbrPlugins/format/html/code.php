@@ -83,7 +83,7 @@ td, th {
 
 <div class="center">
     <a id="link">&nbsp;</a>
-    Embed: <input type="text" />
+    <div title="Put this on your website to embed the current version of this number. Your users without javascript will only see the version as of right now."><label for="embed">Embed:</label><input type="text" id="embed" style="width : 90%"/></div>
 </div>
 
 <div>
@@ -161,7 +161,7 @@ $("tr td:nth-child(2)")
 .wrapInner("<a>")
 .children("a")
 .attr("href", "#")
-.attr("title", "Add this operator")
+.attr("title", "Add this operator with params")
 .css("color", "blue")
 .click(function() {
     addOp(
@@ -187,14 +187,17 @@ var reload = function() {
         }
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
             // Oops, we wasted an ajax call, oh well.
+            var base = document.location.href;
+            base = base.replace(/\/[^\/]*$/, '/');
             w.html(
                 $('<iframe/>')
-                .attr("src", val)
+                .attr("src", base + val)
                 .attr("allowtransparnecy", true)
                 .attr("frameborder", 0)
                 .css("width", "100%")
                 .css("height", "400px")
             );
+            $("#embed").val(w.html());
         } else {
             /* w.height(0); */
             w.text(data);
@@ -203,6 +206,31 @@ var reload = function() {
             if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
             w.height(height);
             */
+            function randString(length, charset) {
+                var ret = "";
+                if (! charset)
+                    charset = "abcdefghijklmnopqrstuvwxyz";
+                for (var i=0; i < length; i++) {
+                    var r = Math.floor(Math.random() * charset.length);
+                    ret += charset.substring(r, r+1);
+                }
+                return ret;
+            }
+            // var rand = Math.floor(Math.random() * Math.pow(2, 32));
+            var rand = randString(6);
+            var wnval = "webnumbr_" + rand;
+            var embed = 
+            $("<span/>").append(
+                $("<span/>")
+                .text(data)
+                .attr("id", wnval)
+                .attr("class", "webnumbr")
+            ).html();
+            embed = embed 
+            + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + wnval + '").innerHTML = data; }</' + 'script>'
+            + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
+            console.log(embed);
+            $("#embed").val(embed);
         }
         $("#link").text(val);
         $("#link").attr("href", val);
@@ -212,6 +240,11 @@ var reload = function() {
 $("form#numbrForm").submit(reload);
 reload();
 $("#name").focus();
+
+$("#embed").focus(function() {
+    $("#embed").select();
+});
+
 });});
 -->
 </script>
