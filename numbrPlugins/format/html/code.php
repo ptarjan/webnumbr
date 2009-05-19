@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>webNumbr : <?php print htmlspecialchars($_REQUEST['name']) ?></title>
-    <link rel="stylesheet" href="style.css" type='text/css' />  
+    <link rel="stylesheet" href="/style.css" type='text/css' />  
     <style type="text/css">
 #webNumbr {
     margin : 0px 20px;
@@ -65,8 +65,33 @@ td, th {
 
     <div id='container'>
 <?php include ("tweet.inc") ?>
+<style type="text/css">
+#random {
+    float : right;
+    background : white;
+    margin : 0px;
+    padding : 5px;
+    vertical-align : middle;
+    border : 1px solid;
+    border-top : none;
+    height : 21px;
+}
+#random a {
+    text-decoration : none
+}
+#random a:visited {
+    color : blue
+}
+#random a:hover {
+    text-decoration : underline
+}
+</style>
+    <div id="random">
+        <a href="/random">Random</a>
+    </div>
+
       <div id='header'>
-        <a href='.'><img id='logo' src="images/webNumbr-banner-50.png" title="webNumbr" alt="webNumbr logo" /></a>
+        <a href='/'><img id='logo' src="/images/webNumbr-banner-50.png" title="webNumbr" alt="webNumbr logo" /></a>
       </div>
 
       <div class='content'>
@@ -105,9 +130,11 @@ function printDoc($dir) {
 <?php
     $p = scandir("numbrPlugins/$dir");
     sort($p);
-    $default = $p['default'];
-    unset($p['default']);
-    array_unshift($p, $default);
+
+    // Put default at the top
+    $key = array_search("default", $p);
+    unset($p[$key]);
+    array_unshift($p, 'default');
     foreach ($p as $name) {
         if (substr($name, 0, 1) == ".") continue;
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
@@ -165,21 +192,27 @@ $("tr td:nth-child(2)")
 .children("a")
 .attr("href", "#")
 .attr("title", "Add this operator with params")
+.each(function(i) { 
+    var text = $(this).text(); 
+    $(this).click(function() {
+        addOp(
+            $(this).parent().prev().text() + "(" + text + ")"
+        );
+        return false;
+    });
+    if (text.length > 20) {
+        $(this).text(text.substring(0, 17) + "...");
+    }
+})
 .css("color", "blue")
-.click(function() {
-    addOp(
-        $(this).parent().prev().text() + "(" + $(this).text() + ")"
-    );
-    return false;
-});
-
+;
 var reload = function() {
     $("#webNumbr").addClass("center").html('<img src="images/twirl.gif" alt="thinking" />');
     var val = $("#name").val();
-    val = val.toLowerCase();
-    val = val.replace(/[^a-z0-9-.()=]/g, '-'); 
+    // val = val.toLowerCase();
+    // val = val.replace(/[^a-z0-9-.,()=]/g, '-'); 
     $("#name").val(val);
-    $.get(val + "?format=json", "", function(data, status) {
+    $.get("/" + val + "?format=json", "", function(data, status) {
         if (status != "success") {
             w.text("Error with the request. Try again or email me webNumbr@paulisageek.com");
             return;
@@ -189,6 +222,7 @@ var reload = function() {
             w.removeClass("center");
         }
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
+alert("hi");
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
             base = base.replace(/\/[^\/]*$/, '/');
