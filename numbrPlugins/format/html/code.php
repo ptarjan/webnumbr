@@ -222,11 +222,21 @@ if (trim($hvalue) != "") {
 <?php } ?>
 </table>
 
-<script src="http://www.google.com/jsapi" type="text/javascript"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+<script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/jquery.bgiframe.min.js'></script>
+<script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/jquery.ajaxQueue.js'></script>
+<script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/thickbox-compressed.js'></script>
+<script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/jquery.autocomplete.min.js'></script>
+<link rel="stylesheet" type="text/css" href="/numbrPlugins/format/html/jquery-autocomplete/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="/numbrPlugins/format/html/jquery-autocomplete/lib/thickbox.css" />
+
 <script type="text/javascript">
 <!--
-google.load("jquery", "1");
-google.setOnLoadCallback(function() {jQuery.noConflict()(document).ready(function($) {
+$(document).ready(function($) {
+
+$("#name").attr("autocomplete", "off").autocomplete("/prefix");
+$("#name").focus();
+
 var addOp = function(op) {
     $("#name").val($("#name").val() + "." + op);
     reload();
@@ -336,14 +346,12 @@ var reload = function() {
     return false;
 }
 $("form#numbrForm").submit(reload);
-reload();
-$("#name").focus();
 
+reload();
 $("#embed").focus(function() {
     $("#embed").select();
 });
-
-});});
+});
 -->
 </script>
 
