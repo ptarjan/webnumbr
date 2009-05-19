@@ -151,19 +151,75 @@ function printDoc($dir) {
 }
 ?>
 
-<table>
+<table class="docs">
 <caption>Selectors : These choose which piece of data you want. Last one wins.</caption>
 <?php printDoc("selection"); ?>
 </table>
 
-<table>
+<table class="docs">
 <caption>Formats : These can appear anywhere. Last one wins.</caption>
 <?php printDoc("format"); ?>
 </table>
 
-<table>
+<table class="docs">
 <caption>Operators : These are evaluated in order and are chained together.</caption>
 <?php printDoc("operator"); ?>
+</table>
+
+<h1 class="numbr_info">Numbr Info</h1>
+<table class="numbr_info">
+<?php
+foreach ($c['numbr'] as $key => $value) {
+switch ($key) {
+    case "id" : continue; break;
+}
+?>
+<tr>
+    <th><?php print htmlspecialchars($key); ?></th>
+    <td><?php 
+$hvalue = htmlspecialchars($value);
+$link = "";
+switch ($key) {
+    case "name" :
+        $link = "/$hvalue";
+        break;
+    case "title" :
+    case "description" :
+        $parts = explode(" ", $value);
+        foreach ($parts as $part) {
+            print '<a href="/search?query=' . urlencode($part) . '">' . htmlspecialchars($part) . '</a> ';
+        }
+        $hvalue = "";
+        break;
+    case "url" :
+        $link = $hvalue;
+        break;
+    case "xpath" :
+        $link = '/selectNode?' . http_build_query(array("url" => $c['numbr']['url'], "xpath" => $c['numbr']['xpath'], "action" => "show"));
+        break;
+    case "frequency" :
+        $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
+        break;
+    case "openid" :
+        $link = $hvalue;
+        break;
+    case "is_fetching" :
+        if ($value == 1)
+            $hvalue = '<span style="color:green">Good : this numbr is fetching</span>';
+        else 
+            $hvalue = '<span style="color:green">Bad : this numbr is not fetching due to too many fetch errors</span>';
+}
+if (trim($hvalue) != "") {
+    if (trim($link) != "") {
+        print '<a href="' . $link . '">' . $hvalue . '</a>' ;
+    } else {
+        print $hvalue;
+    }
+}
+?>
+</td>
+</tr>
+<?php } ?>
 </table>
 
 <script src="http://www.google.com/jsapi" type="text/javascript"></script>
@@ -176,7 +232,7 @@ var addOp = function(op) {
     reload();
 }
 
-$("tr td:first-child")
+$("table.docs tr td:first-child")
 .filter(function() { return $(this).text() != "default" })
 .wrapInner("<a>")
 .children("a")
@@ -187,7 +243,7 @@ $("tr td:first-child")
     addOp($(this).text());
     return false;
 });
-$("tr td:nth-child(2)")
+$("table.docs tr td:nth-child(2)")
 .wrapInner("<a>")
 .children("a")
 .attr("href", "#")
@@ -270,7 +326,12 @@ var reload = function() {
             $("#embed").val(embed);
         }
         $("#link").text(val);
-        $("#link").attr("href", val);
+        $("#link").attr("href", "/" + val);
+        var name = $("#name").val().replace(/\..*/, '');
+        if (name != $("#name").attr("defaultValue").replace(/\..*/, '')) {
+            $("table.numbr_info").html("")
+            $("h1.numbr_info").html('<a href="/' + name +'">Click to Load This Numbr\'s Info</a>');
+        }
     }, "html");
     return false;
 }

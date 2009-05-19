@@ -1,4 +1,4 @@
-This directory contains all the plugins for working with numbrs. If you write one send me an email, and I'm happy to code review it and put it in the default distribution if it is useful to many people.
+This directory contains all the plugins for working with numbrs. If you wish to write one, first do it as a "remote" plugin. If it is in PHP you can contact me, and I'm happy to code review it and put it in the default distribution if it is useful to many people.
 
 Filenames : 
     code.php    The PHP code to run (only PHP supported for now)
@@ -6,13 +6,13 @@ Filenames :
     params.txt  A complete example parameter list
 
 Special Inputs :
-    $c          Configuration array. The "Model" for MVC coding.
-    $data       The data that was returned. Could be a single value or an array of [[timestamp, number],...)]. Only useful for format and operation plugins.
-    $params     An array of parameters to your function. In the form of array(key => value).
+    $c          Configuration array. The "Model" for MVC coding
+    $data       The data that was returned. Could be a single value or an array of [[timestamp, number],...)]. Only useful for format and operation plugins
+    $params     An array of parameters to your function. In the form of array(key => value)
 
 Special Ouputs :
     $c          Configuration array
-    $data       The output data. Applicable to operations.
+    $data       The output data. Applicable to operations
 
 Configuration :
     $c['ops']           Segmented operations into [name, [[key1, val1], ..]]
@@ -20,5 +20,6 @@ Configuration :
     $c['format']        The selected format plugin
     $c['selection']     The selected selection plugin
     $c['code']          The original code
-    $c['limit']         How many rows to select. Applicable to selection plugins.
-    $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins.
+    $c['numbr']         The static data about the numbr
+    $c['limit']         How many rows to select. Applicable to selection plugins
+    $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins

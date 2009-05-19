@@ -26,7 +26,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
         <form action=''>
           <div>
-              <input type="text" name='query' value='<?php print htmlspecialchars($_REQUEST['query']) ?>' style='width:80%' />
+              <input type="text" name='query' value="<?php print htmlspecialchars($_REQUEST['query']) ?>" style='width:80%' />
               <input type='submit' value='Search' />
           </div>
         </form>
