@@ -114,7 +114,7 @@ google.load("jquery", "1");
 google.setOnLoadCallback(function() {
 
 var resizeURL = function() {
-    $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 20);
+    $("#url").width($("#startForm").width() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 25);
 };
 $("#startForm").ready(function() {
     $(window).resize(resizeURL);
@@ -122,13 +122,13 @@ $("#startForm").ready(function() {
 });
 
 var resizeSearch = function() {
-    $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 20);
+    $("#query").width($("#searchForm").width() - $("#submitQuery").outerWidth() - 25);
 };
 $("#searchForm").ready(resizeSearch);
 $(window).resize(resizeSearch);
 
 var resizeNumbr = function() {
-    $("#name").width($("#numbrForm").width() - $("#submitNumbr").outerWidth() - 20);
+    $("#name").width($("#numbrForm").width() - $("#submitNumbr").outerWidth() - 25);
 };
 $("#numbrForm").ready(resizeNumbr);
 $(window).resize(resizeNumbr);
