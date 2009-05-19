@@ -13,9 +13,6 @@ RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
 # make sure "/" isn't served
 RewriteRule ^$ %{REQUEST_URI}index [R,L]
 
-#/n is old way of doing it
-RewriteRule ^n/(.*)$ http://webnumbr.com/$1 [R=301,L]
-
 # rewrite form submits to the direct form
 RewriteCond %{REQUEST_URI} ^/numbr$
 RewriteCond %{QUERY_STRING} ^name=(.*)$
