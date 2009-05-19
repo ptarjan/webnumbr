@@ -3,6 +3,7 @@ This directory contains all the plugins for working with numbrs. If you write on
 Filenames : 
     code.php    The PHP code to run (only PHP supported for now)
     doc.txt     The documentation string to show to the user
+    params.txt  A complete example parameter list
 
 Special Inputs :
     $c          Configuration array. The "Model" for MVC coding.
@@ -14,10 +15,10 @@ Special Ouputs :
     $data       The output data. Applicable to operations.
 
 Configuration :
-    $c['ops']   Segmented operations into [name, [[key1, val1], ..]]
-    $c['name']  The base name of the numbr
-    $c['format']    The selected format plugin
-    $c['selection'] The selected selection plugin
-    $c['code']  The original code
-    $c['limit'] How many rows to select. Applicable to selection plugins.
+    $c['ops']           Segmented operations into [name, [[key1, val1], ..]]
+    $c['name']          The base name of the numbr
+    $c['format']        The selected format plugin
+    $c['selection']     The selected selection plugin
+    $c['code']          The original code
+    $c['limit']         How many rows to select. Applicable to selection plugins.
     $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins.
