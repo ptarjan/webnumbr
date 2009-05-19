@@ -1,1 +1,1 @@
-webnumbrs.remote(http---paulisageek.com-tmp-webnumbr-remote.php-a=b-c=d-e=f).debug
+webnumbrs.remote(url=http://webnumbr.com/numbrPlugins/operator/remote/example.txt)

@@ -1,1 +1,1 @@
-Remote <a href="http://webnumbr.com/numbrPlugins/README.txt">plugins</a>. 3 inputs are passed in "c, data, params". Expects 2 outputs in json "c, data".
+Remote <a href="http://webnumbr.com/numbrPlugins/README.txt">plugins</a>. 3 inputs are passed in "c, data, params". Expects 2 outputs in json "c, data". Allowed params are <i>url</i> (the remote endpoint), and <i>url_encoded</i> (a percent encoded url if needed, which takes precedence)

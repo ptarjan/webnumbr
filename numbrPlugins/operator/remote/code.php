@@ -3,6 +3,8 @@
 if (count($params) == 1 && isset($params[0])) {
     $params['url'] = $params[0];
 }
+if (isset($params['url_encoded'])) 
+    $params['url'] = urldecode($params['url_encoded']);
 
 $url = $params['url'];
 // $url .= (strpos("?", $url) === FALSE ? '?' : '&');
