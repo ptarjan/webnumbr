@@ -370,7 +370,7 @@ $xml = $data->saveXML($data);
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>webNumbr - XML selection</title>
-    <link rel="stylesheet" href="/style.css" type='text/css' />  
+    <link rel="stylesheet" href="style.css" type='text/css' />  
   </head>
   <body>
 
