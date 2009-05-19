@@ -105,6 +105,9 @@ function printDoc($dir) {
 <?php
     $p = scandir("numbrPlugins/$dir");
     sort($p);
+    $default = $p['default'];
+    unset($p['default']);
+    array_unshift($p, $default);
     foreach ($p as $name) {
         if (substr($name, 0, 1) == ".") continue;
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
