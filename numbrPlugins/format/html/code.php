@@ -122,13 +122,13 @@ function printDoc($dir) {
 ?>
 
 <table>
-<caption>Formats : These can appear anywhere and the last one to appear wins.</caption>
-<?php printDoc("format"); ?>
+<caption>Selectors : These choose which piece of data you want. Last one wins.</caption>
+<?php printDoc("selection"); ?>
 </table>
 
 <table>
-<caption>Selectors : These choose which piece of data you want. Last one wins.</caption>
-<?php printDoc("selection"); ?>
+<caption>Formats : These can appear anywhere. Last one wins.</caption>
+<?php printDoc("format"); ?>
 </table>
 
 <table>
