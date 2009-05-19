@@ -218,13 +218,14 @@ var reload = function() {
             }
             // var rand = Math.floor(Math.random() * Math.pow(2, 32));
             var rand = randString(6);
-            var wnval = "webnumbr_" + rand;
+            // var wnval = "webnumbr_" + rand;
+            var wnval = "webnumbr";
             var embed = 
             $("<span/>").append(
                 $("<span/>")
                 .text(data)
                 .attr("id", wnval)
-                .attr("class", "webnumbr")
+                // .attr("class", "webnumbr")
             ).html();
             embed = embed 
             + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + wnval + '").innerHTML = data; }</' + 'script>'
