@@ -1,0 +1,1 @@
+<span id="webnumbr"><?php print htmlspecialchars($data) ?></span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/<?php print $c['name'] ?>.json(callback=webnumbr)"></script>
