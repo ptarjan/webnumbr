@@ -16,6 +16,11 @@ RewriteRule ^$ %{REQUEST_URI}index [R,L]
 #/n is old way of doing it
 RewriteRule ^n/(.*)$ http://webnumbr.com/$1 [R=301,L]
 
+# rewrite form submits to the direct form
+RewriteCond %{REQUEST_URI} ^/numbr$
+RewriteCond %{QUERY_STRING} ^name=(.*)$
+RewriteRule ^.*$ http://%{HTTP_HOST}/%1? [R=301,L]
+
 #check if you can add .php and get a good file
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php
