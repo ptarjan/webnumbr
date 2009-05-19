@@ -98,7 +98,7 @@ td, th {
 <!-- Start Content -->
 
 <form id="numbrForm" action="numbr">
-<input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:640px"/>
+<input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:640px" />
 <input type="submit" value="reload" />
 </form>
 
@@ -234,7 +234,12 @@ if (trim($hvalue) != "") {
 <!--
 $(document).ready(function($) {
 
-$("#name").attr("autocomplete", "off").autocomplete("/autocomplete");
+$("#name").attr("autocomplete", "off").autocomplete("/autocomplete", {
+    autoFill : true,
+    matchCase : true,
+    max : 50,
+});
+
 $("#name").focus();
 
 var addOp = function(op) {
@@ -351,6 +356,7 @@ reload();
 $("#embed").focus(function() {
     $("#embed").select();
 });
+
 });
 -->
 </script>
