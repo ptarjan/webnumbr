@@ -170,9 +170,7 @@ function printDoc($dir) {
 <table class="numbr_info">
 <?php
 foreach ($c['numbr'] as $key => $value) {
-switch ($key) {
-    case "id" : continue; break;
-}
+if ($key == "id") continue;
 ?>
 <tr>
     <th><?php print htmlspecialchars($key); ?></th>
