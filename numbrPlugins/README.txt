@@ -11,6 +11,13 @@ Special Inputs :
 
 Special Ouputs :
     $c          Configuration array
+    $data       The output data. Applicable to operations.
+
+Configuration :
+    $c['ops']   Segmented operations into [name, [[key1, val1], ..]]
+    $c['name']  The base name of the numbr
+    $c['format']    The selected format plugin
+    $c['selection'] The selected selection plugin
+    $c['code']  The original code
     $c['limit'] How many rows to select. Applicable to selection plugins.
     $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins.
-    $data       The output data. Applicable to operations.
