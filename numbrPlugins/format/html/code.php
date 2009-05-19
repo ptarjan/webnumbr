@@ -212,7 +212,8 @@ var reload = function() {
     // val = val.toLowerCase();
     // val = val.replace(/[^a-z0-9-.,()=]/g, '-'); 
     $("#name").val(val);
-    $.get("/numbr?format=json&name=" + encodeURIComponent(val), "", function(data, status) {
+    // $.get("/numbr?format=json&name=" + encodeURIComponent(val), "", function(data, status) {
+    $.get(val + "?format=json", "", function(data, status) {
         if (status != "success") {
             w.text("Error with the request. Try again or email me webNumbr@paulisageek.com");
             return;
