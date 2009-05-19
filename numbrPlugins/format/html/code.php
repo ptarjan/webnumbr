@@ -234,7 +234,7 @@ if (trim($hvalue) != "") {
 <!--
 $(document).ready(function($) {
 
-$("#name").attr("autocomplete", "off").autocomplete("/prefix");
+$("#name").attr("autocomplete", "off").autocomplete("/autocomplete");
 $("#name").focus();
 
 var addOp = function(op) {
