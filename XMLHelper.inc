@@ -33,18 +33,21 @@ class XMLHelper {
         if (!is_array($array))  {
             $data .= self::xmlspecialchars($array);
         } else {
+/*
             $vector = false;
             if (self::is_vector($array))
                 $vector = true;
+*/
 
             foreach($array as $k=>$v) {
+/*
                 if (self::is_vector($v)) {
                     $data .= self::xml_encode($v, $i, $k, TRUE);
                     continue;
                 }
 
                 if ($vector) $k = $root;
-
+*/
                 $data .= "\n";
                 $data .= str_repeat("\t", $i);
                 $data .= "<" . self::xml_encode_node($k) . ">";
