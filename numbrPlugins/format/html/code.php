@@ -229,7 +229,6 @@ var reload = function() {
             embed = embed 
             + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + wnval + '").innerHTML = data; }</' + 'script>'
             + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
-            console.log(embed);
             $("#embed").val(embed);
         }
         $("#link").text(val);
