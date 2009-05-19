@@ -34,7 +34,6 @@ if (isset($_REQUEST['go'])) {
         die ("Only urls starting with http are supported");
     }
 
-
     // 
     // OpenID
     //
@@ -67,8 +66,8 @@ if (isset($_REQUEST['go'])) {
         } else {
             // This part redirects them to their openid provider
             if ($_REQUEST["mode"] == "edit") {
-                $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
-                $stmt->execute(array("name" => $_REQUEST['name']));
+                $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE id=:id");
+                $stmt->execute(array("id" => $_REQUEST['id']));
                 $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
                 $openid = $result[0]['openid'];
@@ -100,14 +99,15 @@ if (isset($_REQUEST['go'])) {
     }
 
     if ($_REQUEST["mode"] == "edit") {
-        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency WHERE name=:name");
+        $stmt = $PDO->prepare("UPDATE numbrs SET name=:name, title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency WHERE id=:id");
         $r = $stmt->execute(array(
+            "name" => $_REQUEST['name'], 
             "title" => $_REQUEST['title'], 
             "description" => $_REQUEST['description'], 
             "url" => $_REQUEST['url'], 
             "xpath" => $_REQUEST['xpath'], 
             "frequency" => $_REQUEST['frequency'], 
-            "name" => $_REQUEST['name'], 
+            "id" => $_REQUEST['id'], 
         ));
     } else {
         $stmt = $PDO->prepare("INSERT INTO numbr_table (name, title, description, url, xpath, frequency, openid, createdTime) VALUES (:name, :title, :description, :url, :xpath, :frequency, :openid, NOW())");
