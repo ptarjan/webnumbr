@@ -78,7 +78,7 @@ foreach ($c['ops'] as $key => $row) {
 list($op, $params) = $c['selection'];
 require("numbrPlugins/selection/$op/code.php");
 
-$s = $PDO->prepare("SELECT data, UNIX_TIMESTAMP(timestamp) as timestamp FROM numbr_data WHERE numbr = :name ORDER BY timestamp DESC LIMIT :limit");
+$s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE numbr = :name ORDER BY timestamp DESC LIMIT :limit");
 $s->bindValue("limit", $c['limit'], PDO::PARAM_INT);
 $s->bindValue("name", $c['name']);
 $r = $s->execute();
