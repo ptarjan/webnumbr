@@ -1,0 +1,1 @@
+Lower bound on date. Accepts unixtime or anything <a href="http://php.net/strtotime">strtotime</a> accepts.
