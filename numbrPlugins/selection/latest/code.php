@@ -1,4 +1,4 @@
 <?php
-$c['limit'] = 1;
+$c['sql']['params']['limit'] = 1;
 $c['singleValue'] = TRUE;
 ?>

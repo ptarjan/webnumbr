@@ -1,4 +1,4 @@
 <?php
-$c['limit'] = PHP_INT_MAX;
+$c['sql']['params']['limit'] = PHP_INT_MAX;
 $c['singleValue'] = FALSE;
 ?>

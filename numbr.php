@@ -8,10 +8,9 @@ $c['name'] = $name;
 $c['format'] = array("default", "");
 $c['selection'] = array("default", "");
 $c['code'] = $name;
-$c['where'] = array();
+$c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $name, "limit" => array(1, PDO::PARAM_INT)));
 /* Reserved
 $c['numbr'] ;
-$c['limit'];
 $c['singleValue'];
 */
 
@@ -79,11 +78,18 @@ foreach ($c['ops'] as $key => $row) {
 list($op, $params) = $c['selection'];
 require("numbrPlugins/selection/$op/code.php");
 
-$c['where'][] = "numbr = :name";
-
-$s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE numbr = :name ORDER BY timestamp DESC LIMIT :limit");
-$s->bindValue("limit", $c['limit'], PDO::PARAM_INT);
-$s->bindValue("name", $c['name']);
+$where = implode(" AND ", $c['sql']['where']);
+$orderby = $c['sql']['orderby'];
+$s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE $where ORDER BY $orderby LIMIT :limit");
+foreach ($c['sql']['params'] as $key => $value) {
+    if (is_string($value))
+        $s->bindValue($key, $value);
+    else if (is_int($value))
+        $s->bindValue($key, $value, PDO::PARAM_INT);
+    else if (is_array($value) && count($value) == 2) {
+        $s->bindValue($key, $value[0], $value[1]);
+    }
+}
 $r = $s->execute();
 if (!$r) 
     $data = array("error" => array("PDO" => $s->errorInfo()));
@@ -100,6 +106,7 @@ else  {
         foreach ($result as $ind => $row) {
             $data[] = array((int) $row['timestamp'], (float) $row['data']);
         }
+        sort($data);
     }
 }
 
