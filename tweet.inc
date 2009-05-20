@@ -36,5 +36,5 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
 }
 </style>
     <div id="tweet">
-        <a href="http://twitter.com/home?status=<?php print urlencode("@ptarjan http://webnumbr.com is $thought") ?>"><img src="http://twitter.com/favicon.ico"/ >Comments?</a>
+        <a href="http://twitter.com/home?status=<?php print urlencode("@ptarjan http://webnumbr.com is $thought") ?>"><img src="http://twitter.com/favicon.ico"/>Comments?</a>
     </div>
