@@ -3,10 +3,10 @@ preg_match("/[a-z0-9-]+/", $_REQUEST['name'], $matches);
 $name = $matches[0];
 
 $c = array();
-$c['ops'] = array();
 $c['name'] = $name;
-$c['format'] = array("default", "");
-$c['selection'] = array("default", "");
+$c['ops'] = array();
+$c['formats'] = array();
+$c['selections'] = array();
 $c['code'] = $name;
 $c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $name, "limit" => array(1, PDO::PARAM_INT)));
 /* Reserved
@@ -60,23 +60,31 @@ $operators = scandir("numbrPlugins/operator");
 foreach ($c['ops'] as $key => $row) {
     list($op, $params) = $row;
     if (in_array($op, $formats))
-        $c['format'] = $row;
+        $c['formats'][] = $row;
 
     if (in_array($op, $selections))
-        $c['selection'] = $row;
+        $c['selections'][] = $row;
 }
+if (count($c['selections']) == 0)
+    $c['selections'] = array(array("default", ""));
+if (count($c['formats']) == 0)
+    $c['formats'] = array(array("default", ""));
 
-$c['code'] .= makeOrig($c['selection']);
-$c['code'] .= makeOrig($c['format']);
-foreach ($c['ops'] as $key => $row) {
-    list($op, $params) = $row;
-    if (in_array($op, $operators)) {
-        $c['code'] .= makeOrig($row);
+foreach (array("selections", "ops", "formats") as $type) {
+    foreach ($c[$type] as $key => $row) {
+        list($op, $params) = $row;
+        if (in_array($op, $operators)) {
+            $c['code'] .= makeOrig($row);
+        }
     }
 }
 
-list($op, $params) = $c['selection'];
-require("numbrPlugins/selection/$op/code.php");
+foreach ($c['selections'] as $key => $row) {
+    list($op, $params) = $row;
+    if (in_array($op, $selections)) {
+        require("numbrPlugins/selection/$op/code.php");
+    }
+}
 
 $where = implode(" AND ", $c['sql']['where']);
 $orderby = $c['sql']['orderby'];
@@ -132,7 +140,15 @@ foreach ($c['ops'] as $key => $row) {
     }
 }
 
-list($op, $params) = $c['format'];
-require("numbrPlugins/format/$op/code.php");
+foreach ($c['formats'] as $key => $row) {
+    list($op, $params) = $row;
+    if (in_array($op, $formats)) {
+        ob_start();
+        require("numbrPlugins/format/$op/code.php");
+        $data = ob_get_contents();
+        ob_end_clean();
+    }
+}
 
+print $data;
 ?>
