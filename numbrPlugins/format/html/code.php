@@ -201,7 +201,7 @@ switch ($key) {
         if ($value == 1)
             $hvalue = '<span style="color:green">Good : this numbr is fetching</span>';
         else 
-            $hvalue = '<span style="color:green">Bad : this numbr is not fetching due to too many fetch errors</span>';
+            $hvalue = '<span style="color:red">Bad : this numbr is not fetching due to too many fetch errors</span>';
 }
 if (trim($hvalue) != "") {
     if (trim($link) != "") {
