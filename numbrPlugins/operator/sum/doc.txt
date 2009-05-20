@@ -1,1 +1,1 @@
-Sums up the numbers. Basically the inverse of the derivative
+Sums up the numbers.

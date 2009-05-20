@@ -28,7 +28,7 @@ $s2 = $s + $n;
         <ul>
 <?php
 require_once("db.inc");
-$stmt = $PDO->prepare('SELECT COUNT(*) AS count, @START:=LOCATE("/", url)+1, @END:=LOCATE("/", url, @START+1), SUBSTRING(url, @START+1, IF(@END = 0, LENGTH(url)+1, @END) - @START-1) as domain FROM numbrs GROUP BY domain ORDER BY count DESC LIMIT :n OFFSET :s');
+$stmt = $PDO->prepare('SELECT COUNT(*) AS count, domain FROM numbrs GROUP BY domain ORDER BY count DESC LIMIT :n OFFSET :s');
 $stmt->bindValue(':s', $s, PDO::PARAM_INT);
 $stmt->bindValue(':n', $n, PDO::PARAM_INT);
 $stmt->execute();

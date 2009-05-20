@@ -15,6 +15,9 @@
     width: 710px;
     overflow : auto;
 }
+#header img {
+    margin-left : 48px;
+}
 form#numbrForm {
     margin : 20px;
 }
@@ -69,6 +72,7 @@ table.numbr_info a:visited {
     border : 1px solid;
     border-top : none;
     height : 21px;
+    width : 48px;
 }
 #random a {
     text-decoration : none
@@ -92,12 +96,16 @@ table.numbr_info a:visited {
 <!-- Start Content -->
 
 <form id="numbrForm" action="numbr">
-<input id="name" name="name" value="<?php print htmlspecialchars($_REQUEST['name']) ?>" style="width:640px" />
+<input id="name" name="name" value="<?php print htmlspecialchars(str_replace(".html", "", $_REQUEST['name'])) ?>" style="width:640px" />
 <input type="submit" value="reload" />
 </form>
 
 <pre class="center" id="webNumbr" rows="1" cols="40">
-<?php print json_encode($data); ?>
+<?php 
+if (strpos($data, "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") === FALSE) {
+    print json_encode($data); 
+}
+?>
 </pre>
 
 <div class="center">
