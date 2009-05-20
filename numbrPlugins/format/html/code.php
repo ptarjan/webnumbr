@@ -29,19 +29,7 @@ td, th {
     padding : 5px;
 }
 
-#menu {
-    float : left;
-    margin : 0px;
-   	padding: 5px;
-	border-left : 1px solid;
-	border-bottom : 1px solid;
-	background-color : white;
-	vertical-align : middle;
-}
-#menu form {
-    display : inline;
-}
-#menu a {
+table.numbr_info a:visited {
     color : blue;
 }
 </style>
