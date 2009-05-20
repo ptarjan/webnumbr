@@ -8,8 +8,8 @@ if (strpos($name, ".") === FALSE) {
     $s = $PDO->prepare("SELECT name FROM numbrs WHERE name LIKE CONCAT(:name,'%') LIMIT 10");
     $s->execute(array("name"=>$_REQUEST['q']));
     $results = $s->fetchAll(PDO::FETCH_NUM);
-    foreach ($results as $r) {
-        $r[] = "{$r[0]}";
+    foreach ($results as $result) {
+        $r[] = "{$result[0]}";
     }
 } else {
     $ops = explode(".", $_REQUEST['q']);
@@ -24,6 +24,9 @@ if (strpos($name, ".") === FALSE) {
             if ($name == "default") continue;
             if ($last == "" || strpos($name, $last) === 0) {
                 $r[] =  implode(".", $ops) . ".$name";
+                $params = @file_get_contents("$base/$dir/$name/params.txt");
+                if (trim($params) != "")
+                    $r[] =  implode(".", $ops) . ".$name(" . trim($params) . ")";
             }
         }
     }
