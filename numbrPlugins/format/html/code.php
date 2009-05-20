@@ -29,6 +29,12 @@ td, th {
     padding : 5px;
 }
 
+table.docs {
+    padding: 0px 10px;
+}
+table.docs caption {
+    padding-top : 20px;
+}
 table.numbr_info a:visited {
     color : blue;
 }
@@ -104,7 +110,9 @@ table.numbr_info a:visited {
 
 <h1>Commands</h1>
 <div>
-<b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>. <a href="/numbrExamples">Examples</a>. <a href="/numbrPlugins">Plugin sources</a>
+<b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>. <a href="/numbrExamples">Examples</a>. <a href="/numbrPlugins">Plugin sources</a>. 
+</div><div>
+Order of operations (all selectors, "SQL", all operators, all formats, "print")
 </div>
 
 <?php
@@ -140,18 +148,18 @@ function printDoc($dir) {
 ?>
 
 <table class="docs">
-<caption>Selectors : These choose which piece of data you want. Last one wins.</caption>
+<caption>Selectors : These choose which piece of data you want.</caption>
 <?php printDoc("selection"); ?>
-</table>
-
-<table class="docs">
-<caption>Formats : These can appear anywhere. Last one wins.</caption>
-<?php printDoc("format"); ?>
 </table>
 
 <table class="docs">
 <caption>Operators : These are evaluated in order and are chained together.</caption>
 <?php printDoc("operator"); ?>
+</table>
+
+<table class="docs">
+<caption>Formats : Output encoding. Can be chained.</caption>
+<?php printDoc("format"); ?>
 </table>
 
 <h1 class="numbr_info">Numbr Info</h1>
