@@ -233,7 +233,6 @@ if (trim($hvalue) != "") {
 $(document).ready(function($) {
 
 $("#name").attr("autocomplete", "off").autocomplete("/autocomplete", {
-    autoFill : true,
     matchCase : true,
     max : 50,
 });
