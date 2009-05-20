@@ -294,7 +294,7 @@ var reload = function() {
         if (data.length > 10) {
             w.removeClass("center");
         }
-        if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1) {
+        if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1 || data.search('<?php print '<?xml version="1.0" encoding="UTF-8"?' ?>') != -1) {
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
             base = base.replace(/\/[^\/]*$/, '/');
