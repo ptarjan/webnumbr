@@ -13,7 +13,7 @@
     border : 1px dotted;    
     font-size : 300%;
     width: 710px;
-    overflow : auto;
+    overflow-x : auto;
 }
 #header a {
     margin-left : 48px; /* width of random thing */
@@ -243,7 +243,7 @@ div.yui-skin-sam, .yui-skin-sam div {
     margin  : 0px;
 }
 #name, #autocomplete {
-    width : 649px;
+    width : 643px;
 }
 #name {
     position : static;
@@ -364,7 +364,7 @@ var reload = function() {
         } else {
             /* w.height(0); */
             w.slideUp("normal", function(){ 
-                if (data.length > 10) {
+                if (data.length > 20) {
                     w.removeClass("center");
                 } else {
                     w.addClass("center");
@@ -390,14 +390,7 @@ var reload = function() {
             var rand = randString(6);
             // var wnval = "webnumbr_" + rand;
             var wnval = "webnumbr";
-            var embed = 
-            $("<span/>").append(
-                $("<span/>")
-                .text(data)
-                .attr("id", wnval)
-                // .attr("class", "webnumbr")
-            ).html();
-            embed = embed 
+            var embed = '<span id="webnumbr">' + wnval + '</span>'
             + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + wnval + '").innerHTML = data; }</' + 'script>'
             + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
             $("#embed").val(embed);
