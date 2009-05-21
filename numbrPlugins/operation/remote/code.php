@@ -17,7 +17,7 @@ $data = curl_exec($ch);
 $json = json_decode($data, TRUE);
 $bad = FALSE;
 if ($json === FALSE) {
-    $bad = TRUE;
+    // Leave $data as the curled data
 } else if (!isset($json['data']) || !isset($json['c'])) { 
     $bad = TRUE;
 }
