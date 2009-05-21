@@ -58,10 +58,14 @@ h1, h2, h3, h4, h5, h6 {
 p {
     margin :                10px;
 }
+/*
 div {
     margin :                10px;
 }
-
+*/
+.content div {
+    margin :                10px;
+}
 li, ol {
     margin :                0px 2em;
 }

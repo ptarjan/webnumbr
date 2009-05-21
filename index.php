@@ -57,9 +57,10 @@ $count = (int) $data[0]['count'];
         <h1>See a Numbr</h1>
 
         <form action="numbr">
-          <div id="numbrForm">
+          <div id="numbrForm" class="yui-skin-sam" style="margin-left : 10px">
             <input id="name" type="text" name='name' />
             <input id="submitNumbr" type="submit" value='Get Numbr' />
+            <div id="autocomplete"></div>
           </div>
         </form>
 
@@ -108,13 +109,62 @@ foreach ($data as $row) {
     </div>
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" type="text/javascript"></script>
+<!--
 <script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/jquery.bgiframe.min.js'></script>
 <script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/jquery.ajaxQueue.js'></script>
 <script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/lib/thickbox-compressed.js'></script>
 <script type='text/javascript' src='/numbrPlugins/format/html/jquery-autocomplete/jquery.autocomplete.min.js'></script>
 <link rel="stylesheet" type="text/css" href="/numbrPlugins/format/html/jquery-autocomplete/jquery.autocomplete.css" />
 <link rel="stylesheet" type="text/css" href="/numbrPlugins/format/html/jquery-autocomplete/lib/thickbox.css" />
+-->
+<!-- Combo-handled YUI CSS files: -->
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/autocomplete/assets/skins/sam/autocomplete.css">
+<!-- Combo-handled YUI JS files: -->
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/animation/animation-min.js&2.7.0/build/connection/connection-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/autocomplete/autocomplete-min.js"></script>
+<style type="text/css">
+div.yui-skin-sam, .yui-skin-sam div {
+    margin  : 0px;
+}
+#name, #autocomplete {
+    width : 649px;
+}
+#name {
+    position : static;
+}
+</style>
 
+<script type="text/javascript">
+<!--
+$(document).ready(function($) {
+// YAHOO autocomplete
+(function() {
+var oDS = new YAHOO.util.XHRDataSource("/autocomplete");
+oDS.responseType = YAHOO.util.XHRDataSource.TYPE_TEXT;
+oDS.responseSchema = {
+    recordDelim: "\n",
+    fieldDelim: "\t"
+};
+// Enable caching
+oDS.maxCacheEntries = 5;
+
+var oAC = new YAHOO.widget.AutoComplete("name", "autocomplete", oDS);
+oAC.useShadow = true;
+
+oAC.generateRequest = function (sQuery) {
+    return "?q=" + sQuery;
+};
+
+// Keeps container centered
+oAC.doBeforeExpandContainer = function(oTextbox, oContainer, sQuery, aResults) {
+    var pos = YAHOO.util.Dom.getXY(oTextbox);
+    pos[1] += YAHOO.util.Dom.get(oTextbox).offsetHeight + 2;
+    YAHOO.util.Dom.setXY(oContainer,pos);
+    return true;
+}
+}());
+});
+-->
+</script>
 <script type="text/javascript">
 $(function($) {
 var resizeURL = function() {
@@ -137,11 +187,12 @@ var resizeNumbr = function() {
 $("#numbrForm").ready(resizeNumbr);
 $(window).resize(resizeNumbr);
 
+/*
 $("#name").attr("autocomplete", "off").autocomplete("/autocomplete", {
     matchCase : true,
     max : 50,
 });
-
+*/
 });
 </script>
 
