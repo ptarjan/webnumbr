@@ -10,41 +10,44 @@ PARAM   {OPTKEY}{VALUE}
 PARAMS  \({PARAM}?(,{PARAM})*\)|
 END;
 
-preg_match("/[a-z0-9-]+/", $_REQUEST['name'], $matches);
-$name = $matches[0];
+function parse($string, &$c) {
+    preg_match("/[a-z0-9-]+/", $string, $matches);
+    $c['name'] = $matches[0];
+
+    preg_match_all("/[.]([a-z0-9-]+)(\((.*?)\))?/", $string, $matches, PREG_SET_ORDER);
+    foreach ($matches as $match) {
+        $op = $match[1];
+        $params = $match[3];
+        if ($params) {
+            $p = array();
+            foreach( explode(",", $params) as $row ) {
+                $boom = explode("=", $row, 2);
+                if (!$boom[1]) {
+                    $p[] = $boom[0];
+                } else {
+                    $p[$boom[0]] = $boom[1];
+                }
+            }
+            if (count($p) > 0) {
+                $params = $p;
+            }
+        }
+        $op = strtolower($op);
+        $c['ops'][] = array($op, $params);
+    }
+}
 
 $c = array();
-$c['name'] = $name;
+$c['name'] = "";
 $c['ops'] = array();
+parse($_REQUEST['name'], $c);
 $c['plugins'] = array();
-$c['code'] = $name;
-$c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $name, "limit" => array(1, PDO::PARAM_INT)));
+$c['code'] = $c['name']; // Start the code off with the name
+$c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $c['name'], "limit" => array(1, PDO::PARAM_INT)));
 /* Reserved
 $c['numbr'] ;
 $c['singleValue'];
 */
-
-preg_match_all("/[.]([a-z0-9-]+)(\((.*?)\))?/", $_REQUEST['name'], $matches, PREG_SET_ORDER);
-foreach ($matches as $match) {
-    $op = $match[1];
-    $params = $match[3];
-    if ($params) {
-        $p = array();
-        foreach( explode(",", $params) as $row ) {
-            $boom = explode("=", $row, 2);
-            if (!$boom[1]) {
-                $p[] = $boom[0];
-            } else {
-                $p[$boom[0]] = $boom[1];
-            }
-        }
-        if (count($p) > 0) {
-            $params = $p;
-        }
-    }
-    $op = strtolower($op);
-    $c['ops'][] = array($op, $params);
-}
 
 require "db.inc";
 
