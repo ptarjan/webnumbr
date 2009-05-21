@@ -1,17 +1,15 @@
 RewriteEngine on
 
-<IfModule mod_headers.c>
-    Header set Pragma "no-cache"
-    Header set Cache-Control "no-cache"
-    Header set Expires "Web, 02 May 1984 20:30:00 MST"
-</IfModule>
+# hostnames can work for simple things too
+RewriteCond %{HTTP_HOST} ^dev\.webnumbr\.com$
+RewriteRule ^(.*) /dev/$1 [L]
 
 # hostnames can work for simple things too
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
 RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
 
 # make sure "/" isn't served
-RewriteRule ^$ %{REQUEST_URI}index [R,L]
+RewriteRule ^$ /index [R,L]
 
 # rewrite form submits to the direct form
 # RewriteCond %{REQUEST_URI} ^/numbr$
@@ -30,3 +28,4 @@ RewriteCond %{REQUEST_URI} ^/(.*)$
 # append query string
 RewriteRule ^(.*)$ numbr.php?name=%1 [QSA] 
 
+# RewriteRule ^(.*) http://example.com/$1 [R,L]
