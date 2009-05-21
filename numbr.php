@@ -132,7 +132,7 @@ else  {
     $result = $s->fetchAll(PDO::FETCH_ASSOC);
 
     if (count($result) == 0) {
-        $c['numbr'] = NULL;
+        $c['numbr'] = array();
     } else {
         $c['numbr'] = $result[0];
     }

@@ -15,9 +15,6 @@
     width: 710px;
     overflow-x : auto;
 }
-#header a {
-    margin-left : 48px; /* width of random thing */
-}
 form#numbrForm {
     margin : 20px;
 }
@@ -41,26 +38,6 @@ table.docs caption {
 table.numbr_info a:visited {
     color : blue;
 }
-#random {
-    float : right;
-    background : white;
-    margin : 0px;
-    padding : 5px;
-    vertical-align : middle;
-    border : 1px solid;
-    border-top : none;
-    height : 21px;
-    width : 48px;
-}
-#random a {
-    text-decoration : none
-}
-#random a:visited {
-    color : blue
-}
-#random a:hover {
-    text-decoration : underline
-}
 </style>
   </head>
   <body>
@@ -81,10 +58,7 @@ table.numbr_info a:visited {
 -->
 
     <div id='container'>
-<?php include ("tweet.inc") ?>
-    <div id="random">
-        <a href="/random">Random</a>
-    </div>
+<?php include ("menu.inc") ?>
 
       <div id='header'>
         <a href='/'><img id='logo' src="/images/webNumbr-banner-50.png" title="webNumbr" alt="webNumbr logo" /></a>

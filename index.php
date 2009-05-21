@@ -12,7 +12,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
   </head>
   <body>
     <div id='container'>
-    <?php include ("tweet.inc"); ?>
+    <?php include ("menu.inc"); ?>
       <div id='header'>
         <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
       </div>

@@ -34,7 +34,36 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
 #tweet a:hover {
     text-decoration : underline
 }
+
+#random {
+    float : right;
+    background : white;
+    margin : 0px;
+    padding : 5px;
+    vertical-align : middle;
+    border : 1px solid;
+    border-top : none;
+    height : 21px;
+    width : 48px;
+}
+#random a {
+    text-decoration : none
+}
+#random a:visited {
+    color : blue
+}
+#random a:hover {
+    text-decoration : underline
+}
+
+#header a {
+    margin-left : 48px; /* width of random thing */
+}
 </style>
     <div id="tweet">
         <a href="http://twitter.com/home?status=<?php print urlencode("@ptarjan http://webnumbr.com is $thought") ?>"><img src="http://twitter.com/favicon.ico"/>Comments?</a>
     </div>
+    <div id="random">
+        <a href="/random">Random</a>
+    </div>
+
