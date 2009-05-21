@@ -1,4 +1,15 @@
 <?php
+
+$regexlist = <<<END
+NAME    [a-z0-9-]+
+OP      \.[a-z0-9-]+
+KEY     [^=]+
+VALUE   [^,)]+
+OPTKEY  {KEY}=|
+PARAM   {OPTKEY}{VALUE}
+PARAMS  \({PARAM}?(,{PARAM})*\)|
+END;
+
 preg_match("/[a-z0-9-]+/", $_REQUEST['name'], $matches);
 $name = $matches[0];
 
