@@ -5,8 +5,7 @@ $name = $matches[0];
 $c = array();
 $c['name'] = $name;
 $c['ops'] = array();
-$c['formats'] = array();
-$c['selections'] = array();
+$c['plugins'] = array();
 $c['code'] = $name;
 $c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $name, "limit" => array(1, PDO::PARAM_INT)));
 /* Reserved
@@ -52,36 +51,43 @@ function makeOrig($row) {
     return $r;
 }
 
-$formats = scandir("numbrPlugins/format");
-$selections = scandir("numbrPlugins/selection");
-$operators = scandir("numbrPlugins/operator");
+// Order of cannonical operations
+$pluginTypes = array("selection", "operation", "format");
+foreach ($pluginTypes as $type) {
+    $plugins[$type] = scandir("numbrPlugins/$type");
+}
+foreach ($pluginTypes as $type) {
+    $c['plugins'][$type] = array();
+}
 
 // The single value plugins (format, selection)
 foreach ($c['ops'] as $key => $row) {
     list($op, $params) = $row;
-    if (in_array($op, $formats))
-        $c['formats'][] = $row;
-
-    if (in_array($op, $selections))
-        $c['selections'][] = $row;
+    foreach ($plugins as $type => $p) {
+        if (in_array($op, $p)) {
+            $c['plugins'][$type][] = $row;
+        }
+    }
 }
-if (count($c['selections']) == 0)
-    $c['selections'] = array(array("default", ""));
-if (count($c['formats']) == 0)
-    $c['formats'] = array(array("default", ""));
 
-foreach (array("selections", "ops", "formats") as $type) {
-    foreach ($c[$type] as $key => $row) {
+foreach ($pluginTypes as $type) {
+    if (!isset($c['plugins'][$type])) continue;
+    foreach ($c['plugins'][$type] as $key => $row) {
         list($op, $params) = $row;
-        if (in_array($op, $operators)) {
+        if (in_array($op, $plugins[$type])) {
             $c['code'] .= makeOrig($row);
         }
     }
 }
 
-foreach ($c['selections'] as $key => $row) {
+if (count($c['plugins']['selection']) == 0)
+    $c['plugins']['selection'] = array(array("default", ""));
+if (count($c['plugins']['format']) == 0)
+    $c['plugins']['format'] = array(array("default", ""));
+
+foreach ($c['plugins']['selection'] as $key => $row) {
     list($op, $params) = $row;
-    if (in_array($op, $selections)) {
+    if (in_array($op, $plugins['selection'])) {
         require("numbrPlugins/selection/$op/code.php");
     }
 }
@@ -133,16 +139,16 @@ else  {
 }
 
 // operator plugins
-foreach ($c['ops'] as $key => $row) {
+foreach ($c['plugins']['operation'] as $key => $row) {
     list($op, $params) = $row;
-    if (in_array($op, $operators)) {
-        require("numbrPlugins/operator/$op/code.php");
+    if (in_array($op, $plugins['operation'])) {
+        require("numbrPlugins/operation/$op/code.php");
     }
 }
 
-foreach ($c['formats'] as $key => $row) {
+foreach ($c['plugins']['format'] as $key => $row) {
     list($op, $params) = $row;
-    if (in_array($op, $formats)) {
+    if (in_array($op, $plugins['format'])) {
         ob_start();
         require("numbrPlugins/format/$op/code.php");
         $data = ob_get_contents();

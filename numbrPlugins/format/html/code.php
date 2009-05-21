@@ -15,8 +15,8 @@
     width: 710px;
     overflow : auto;
 }
-#header img {
-    margin-left : 48px;
+#header a {
+    margin-left : 48px; /* width of random thing */
 }
 form#numbrForm {
     margin : 20px;
@@ -41,28 +41,6 @@ table.docs caption {
 table.numbr_info a:visited {
     color : blue;
 }
-</style>
-  </head>
-  <body>
-<!--
-      <div id="menu">
-        <form action='search'> 
-        <label for="query" title="Search within the metadata of any numbr">Search:</label> 
-        <input id="query" name='query' value='' size="20" />
-        </form>
-
-        <form action='selectNode'>
-        <label for="url" title="Create a new numbr from any URL">New Numbr:</label> 
-        <input id="url" name='url' value='http://' size="20" />
-        </form>
-    
-        <a href="random">Random</a>
-      </div>
--->
-
-    <div id='container'>
-<?php include ("tweet.inc") ?>
-<style type="text/css">
 #random {
     float : right;
     background : white;
@@ -84,6 +62,26 @@ table.numbr_info a:visited {
     text-decoration : underline
 }
 </style>
+  </head>
+  <body>
+<!--
+      <div id="menu">
+        <form action='search'> 
+        <label for="query" title="Search within the metadata of any numbr">Search:</label> 
+        <input id="query" name='query' value='' size="20" />
+        </form>
+
+        <form action='selectNode'>
+        <label for="url" title="Create a new numbr from any URL">New Numbr:</label> 
+        <input id="url" name='url' value='http://' size="20" />
+        </form>
+    
+        <a href="random">Random</a>
+      </div>
+-->
+
+    <div id='container'>
+<?php include ("tweet.inc") ?>
     <div id="random">
         <a href="/random">Random</a>
     </div>
@@ -120,7 +118,7 @@ if (strpos($data, "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") === FALSE
 <div>
 <b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>. <a href="/numbrExamples">Examples</a>. <a href="/numbrPlugins">Plugin sources</a>. 
 </div><div>
-Order of operations (all selectors, "SQL", all operators, all formats, "print")
+Order of operations (all selectors, "SQL", all operations, all formats, "print")
 </div>
 
 <?php
@@ -161,8 +159,8 @@ function printDoc($dir) {
 </table>
 
 <table class="docs">
-<caption>Operators : These are evaluated in order and are chained together.</caption>
-<?php printDoc("operator"); ?>
+<caption>Operations : These are evaluated in order and are chained together.</caption>
+<?php printDoc("operation"); ?>
 </table>
 
 <table class="docs">
@@ -253,7 +251,7 @@ $("table.docs tr td:first-child")
 .wrapInner("<a>")
 .children("a")
 .attr("href", "#")
-.attr("title", "Add this operator")
+.attr("title", "Add this")
 .css("color", "blue")
 .click(function() {
     addOp($(this).text());
@@ -263,7 +261,7 @@ $("table.docs tr td:nth-child(2)")
 .wrapInner("<a>")
 .children("a")
 .attr("href", "#")
-.attr("title", "Add this operator with params")
+.attr("title", "Add this with params")
 .each(function(i) { 
     var text = $(this).text(); 
     $(this).click(function() {
@@ -279,7 +277,7 @@ $("table.docs tr td:nth-child(2)")
 .css("color", "blue")
 ;
 var reload = function() {
-    $("#webNumbr").addClass("center").html('<img src="images/twirl.gif" alt="thinking" />');
+    // $("#webNumbr").addClass("center").html('<img src="images/twirl.gif" alt="thinking" />');
     var val = $("#name").val();
     // val = val.toLowerCase();
     // val = val.replace(/[^a-z0-9-.,()=]/g, '-'); 
@@ -291,9 +289,6 @@ var reload = function() {
             return;
         }
         var w = $("#webNumbr");
-        if (data.length > 10) {
-            w.removeClass("center");
-        }
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1 || data.search('<?php print '<?xml version="1.0" encoding="UTF-8"?' ?>') != -1) {
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
@@ -309,7 +304,12 @@ var reload = function() {
             $("#embed").val(w.html());
         } else {
             /* w.height(0); */
-            w.text(data);
+            w.slideUp("normal", function(){ 
+                if (data.length > 10) {
+                    w.removeClass("center");
+                }
+                $(this).text(data).slideDown("normal")
+            });
             /* for the textarea
             var height = w.get(0).scrollHeight;
             if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
