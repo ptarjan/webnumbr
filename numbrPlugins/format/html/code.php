@@ -188,7 +188,7 @@ switch ($key) {
 }
 if (trim($hvalue) != "") {
     if (trim($link) != "") {
-        print '<a href="' . $link . '">' . $hvalue . '</a>' ;
+        print '<a href="' . htmlspecialchars($link) . '">' . $hvalue . '</a>' ;
     } else {
         print $hvalue;
     }
@@ -209,9 +209,9 @@ if (trim($hvalue) != "") {
 <link rel="stylesheet" type="text/css" href="/numbrPlugins/format/html/jquery-autocomplete/lib/thickbox.css" />
 -->
 <!-- Combo-handled YUI CSS files: -->
-<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/autocomplete/assets/skins/sam/autocomplete.css">
+<link rel="stylesheet" type="text/css" href="http://yui.yahooapis.com/combo?2.7.0/build/autocomplete/assets/skins/sam/autocomplete.css"/>
 <!-- Combo-handled YUI JS files: -->
-<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&2.7.0/build/animation/animation-min.js&2.7.0/build/connection/connection-min.js&2.7.0/build/datasource/datasource-min.js&2.7.0/build/autocomplete/autocomplete-min.js"></script>
+<script type="text/javascript" src="http://yui.yahooapis.com/combo?2.7.0/build/yahoo-dom-event/yahoo-dom-event.js&amp;2.7.0/build/animation/animation-min.js&amp;2.7.0/build/connection/connection-min.js&amp;2.7.0/build/datasource/datasource-min.js&amp;2.7.0/build/autocomplete/autocomplete-min.js"></script>
 <style type="text/css">
 div.yui-skin-sam, .yui-skin-sam div {
     margin  : 0px;
