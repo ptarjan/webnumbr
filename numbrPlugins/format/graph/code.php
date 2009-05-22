@@ -47,7 +47,7 @@ h5 {
 <!--[if IE]><script type="text/javascript" src="/numbrPlugins/format/graph/flot/excanvas.pack.js"></script><![endif]-->
 <script type="text/javascript" src="/numbrPlugins/format/graph/flot/jquery.flot.js"></script>
 <script type="text/javascript" src='/numbrPlugins/format/graph/graph.js'></script>
-<script>
+<script type="text/javascript">
 $("plot").ready(function($) {
     makeGraph(<?php print json_encode($c) ?>, <?php print json_encode($data) ?>);
 });
