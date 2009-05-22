@@ -1,1 +1,1 @@
-url=http://webnumbr.com/numbrPlugins/operator/remote/remote_example.txt
+url=http://webnumbr.com/numbrPlugins/operation/remote/remote_example.txt
