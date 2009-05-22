@@ -61,6 +61,7 @@ public function __construct( $string ) {
 public function run() {
     global $PDO;
     $this->c['plugins'] = array();
+    $this->c['headers'] = array();
     $this->c['code'] = $this->c['name']; // Start the code off with the name
     $this->c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $this->c['name'], "limit" => array(1, PDO::PARAM_INT)));
     /* Reserved
@@ -187,9 +188,8 @@ public function run() {
 
 $numbr = new Numbr($_REQUEST['name']);
 $data = $numbr->run();
-if (json_decode($data))
-    header("Content-Type: application/json");
-else if (simplexml_load_string($data))
-    header("Content-Type: application/xml");
+foreach ($numbr->c['headers'] as $header)
+    header($header);
+
 print $data;
 ?>
