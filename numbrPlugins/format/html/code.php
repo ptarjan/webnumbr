@@ -323,6 +323,7 @@ $("table.docs tr td:nth-child(4)")
     $(this).click(function() {
         $("#name").val(text);
         reload();
+        window.scroll(0,0);
         return false;
     });
     if (text.length > 20) {
@@ -343,6 +344,9 @@ var reload = function() {
             return;
         }
         var w = $("#webNumbr");
+
+        document.title = ("webNumbr : " + val);
+
         if (data.search("http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd") != -1 || data.search('<?php print '<?xml version="1.0" encoding="UTF-8"?' ?>') != -1) {
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
