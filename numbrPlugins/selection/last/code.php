@@ -6,6 +6,7 @@ if (!isset($params['count'])) {
         $count =1;
 } else
     $count = (int) $params['count'];
-$c['sql']['params']['limit'] = $count;
+$c['sql']['where'] = array("numbr = :name");
+$c['sql']['params'] = array("limit" => $count);
 $c['singleValue'] = FALSE;
 ?>

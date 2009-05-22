@@ -24,6 +24,6 @@ Configuration :
     $c['sql']           Selection information
     $c['sql']['where']  Strings to be joined into the SQL where clause. Defaults to 'numbr = :name'
     $c['sql']['orderby']    ORDERBY string. Defaults to 'timestamp DESC'
-    $c['sql']['params'] PDO parameters. Defaults to 'array("name" => $this->c['name'], "limit" => array(1, PDO::PARAM_INT))'
+    $c['sql']['params'] PDO parameters. Defaults to 'array("name" => $this->c['name'], "limit" => array(PHP_INT_MAX, PDO::PARAM_INT))'
     $c['numbr']         The static data about the numbr from the database
     $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins

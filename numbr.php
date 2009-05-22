@@ -63,7 +63,7 @@ public function run() {
     $this->c['plugins'] = array();
     $this->c['headers'] = array();
     $this->c['code'] = $this->c['name']; // Start the code off with the name
-    $this->c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $this->c['name'], "limit" => array(1, PDO::PARAM_INT)));
+    $this->c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $this->c['name'], "limit" => array(PHP_INT_MAX, PDO::PARAM_INT)));
     /* Reserved
     $this->c['numbr'] ;
     $this->c['singleValue'];
@@ -126,6 +126,11 @@ public function run() {
             $s->bindValue($key, $value);
         }
     }
+    // Default value for name
+    if (in_array("numbr = :name" , $this->c['sql']['where']) && !isset($this->c['sql']['params']['name'])) {
+        $s->bindValue("name", $this->c['name']);
+    }
+
     $r = $s->execute();
     if (!$r) 
         $data = array("error" => array("PDO" => $s->errorInfo()));

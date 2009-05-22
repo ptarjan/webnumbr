@@ -9,4 +9,3 @@ if (!isset($params['date'])) $params['date'] = pow(2,31)-1;
 
 $c['sql']['where'][] = "UNIX_TIMESTAMP(timestamp) <= :todate";
 $c['sql']['params']['todate'] = ($params['date']);
-require("numbrPlugins/selection/all/code.php");

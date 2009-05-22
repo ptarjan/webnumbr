@@ -9,4 +9,3 @@ if (!isset($params['date'])) $params['date'] = 0;
 
 $c['sql']['where'][] = "UNIX_TIMESTAMP(timestamp) >= :fromdate";
 $c['sql']['params']['fromdate'] = ($params['date']);
-require("numbrPlugins/selection/all/code.php");
