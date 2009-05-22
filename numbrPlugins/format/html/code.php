@@ -351,13 +351,14 @@ var reload = function() {
             // Oops, we wasted an ajax call, oh well.
             var base = document.location.href;
             base = base.replace(/\/[^\/]*$/, '/');
+            w.slideDown(0);
             w.html(
                 $('<iframe/>')
-                .attr("src", base + val)
                 .attr("allowtransparnecy", true)
                 .attr("frameborder", 0)
                 .css("width", "100%")
                 .css("height", "400px")
+                .attr("src", base + val)
             );
             $("#embed").val(w.html());
         } else {
