@@ -1,6 +1,8 @@
 makeGraph = function (c, data) {
     $(document).ready(function ($) {
         var graph = [];
+        if (data == null)  
+            data = 0;
         if (typeof data == "number")
             data = [[0, data]];
         if ($.isArray(data)) {
