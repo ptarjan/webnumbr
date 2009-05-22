@@ -381,7 +381,7 @@ var reload = function() {
 }
 $("form#numbrForm").submit(reload);
 
-reload();
+$("#webNumbr").slideUp(0, reload);
 $("#embed").focus(function() {
     $("#embed").select();
 });
