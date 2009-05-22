@@ -1,18 +1,14 @@
 <?php
 
-$regexlist = <<<END
-NAME    [a-z0-9-]+
-OP      \.[a-z0-9-]+
-KEY     [^=]+
-VALUE   [^,)]+
-OPTKEY  {KEY}=|
-PARAM   {OPTKEY}{VALUE}
-PARAMS  \({PARAM}?(,{PARAM})*\)|
-END;
+require "db.inc";
 
-function parse($string, &$c) {
-    preg_match("/[a-z0-9-]+/", $string, $matches);
-    $c['name'] = $matches[0];
+class Numbr {
+
+public $c = array();
+
+public function parse($string) {
+    preg_match("/^[a-z0-9-]+/", $string, $matches);
+    $this->c['name'] = $matches[0];
 
     preg_match_all("/[.]([a-z0-9-]+)(\((.*?)\))?/", $string, $matches, PREG_SET_ORDER);
     foreach ($matches as $match) {
@@ -33,142 +29,167 @@ function parse($string, &$c) {
             }
         }
         $op = strtolower($op);
-        $c['ops'][] = array($op, $params);
+        $this->c['ops'][] = array($op, $params);
     }
 }
 
-$c = array();
-$c['name'] = "";
-$c['ops'] = array();
-parse($_REQUEST['name'], $c);
-$c['plugins'] = array();
-$c['code'] = $c['name']; // Start the code off with the name
-$c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $c['name'], "limit" => array(1, PDO::PARAM_INT)));
-/* Reserved
-$c['numbr'] ;
-$c['singleValue'];
-*/
-
-require "db.inc";
-
-function makeOrig($row) {
+public function makeOrig($row) {
     list($op, $params) = $row;
     if ($op == "default") return "";
 
     $r = ".$op";
     if (!$params) return $r;
-    $p = array();
+    $p = array();   
+    $count = 0;
     foreach ($params as $key => $value) {
-        $p[] = "$key=$value";
+        if ($key === $count++)
+            $p[] = $value;
+        else 
+            $p[] = "$key=$value";
     }
     $r .= "(" . implode(",", $p) . ")";
     return $r;
 }
 
-// Order of cannonical operations
-$pluginTypes = array("selection", "operation", "format");
-foreach ($pluginTypes as $type) {
-    $plugins[$type] = scandir("numbrPlugins/$type");
-}
-foreach ($pluginTypes as $type) {
-    $c['plugins'][$type] = array();
+
+public function __construct( $string ) {
+    $this->c['name'] = "";
+    $this->c['ops'] = array();
+    $this->parse($string);
 }
 
-// The single value plugins (format, selection)
-foreach ($c['ops'] as $key => $row) {
-    list($op, $params) = $row;
-    foreach ($plugins as $type => $p) {
-        if (in_array($op, $p)) {
-            $c['plugins'][$type][] = $row;
-        }
+public function run() {
+    global $PDO;
+    $this->c['plugins'] = array();
+    $this->c['code'] = $this->c['name']; // Start the code off with the name
+    $this->c['sql'] = array("where" => array('numbr = :name'), "orderby" => "timestamp DESC", "params" => array("name" => $this->c['name'], "limit" => array(1, PDO::PARAM_INT)));
+    /* Reserved
+    $this->c['numbr'] ;
+    $this->c['singleValue'];
+    */
+
+    // Order of cannonical operations
+    $pluginTypes = array("selection", "operation", "format");
+    foreach ($pluginTypes as $type) {
+        $plugins[$type] = scandir("numbrPlugins/$type");
     }
-}
+    foreach ($pluginTypes as $type) {
+        $this->c['plugins'][$type] = array();
+    }
 
-foreach ($pluginTypes as $type) {
-    if (!isset($c['plugins'][$type])) continue;
-    foreach ($c['plugins'][$type] as $key => $row) {
+    // The single value plugins (format, selection)
+    foreach ($this->c['ops'] as $key => $row) {
         list($op, $params) = $row;
-        if (in_array($op, $plugins[$type])) {
-            $c['code'] .= makeOrig($row);
+        foreach ($plugins as $type => $p) {
+            if (in_array($op, $p)) {
+                $this->c['plugins'][$type][] = $row;
+            }
         }
     }
-}
 
-if (count($c['plugins']['selection']) == 0)
-    $c['plugins']['selection'] = array(array("default", ""));
-if (count($c['plugins']['format']) == 0)
-    $c['plugins']['format'] = array(array("default", ""));
-
-foreach ($c['plugins']['selection'] as $key => $row) {
-    list($op, $params) = $row;
-    if (in_array($op, $plugins['selection'])) {
-        require("numbrPlugins/selection/$op/code.php");
-    }
-}
-
-$where = implode(" AND ", $c['sql']['where']);
-$orderby = $c['sql']['orderby'];
-$s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE $where ORDER BY $orderby LIMIT :limit");
-foreach ($c['sql']['params'] as $key => $value) {
-    if (is_string($value))
-        $s->bindValue($key, $value);
-    else if (is_int($value))
-        $s->bindValue($key, $value, PDO::PARAM_INT);
-    else if (is_array($value) && count($value) == 2) {
-        $s->bindValue($key, $value[0], $value[1]);
-    }
-}
-$r = $s->execute();
-if (!$r) 
-    $data = array("error" => array("PDO" => $s->errorInfo()));
-else  {
-    $result = $s->fetchAll(PDO::FETCH_ASSOC);
-
-    if (count($result) == 0) {
-        $data = NULL;
-    } else if ($c['singleValue']) {
-        $data = (float) $result[0]['data'];
-    } else {
-        // Its an array
-        $data = array();
-        foreach ($result as $ind => $row) {
-            $data[] = array((int) $row['timestamp'], (float) $row['data']);
+    foreach ($pluginTypes as $type) {
+        if (!isset($this->c['plugins'][$type])) continue;
+        foreach ($this->c['plugins'][$type] as $key => $row) {
+            list($op, $params) = $row;
+            if (in_array($op, $plugins[$type])) {
+                $this->c['code'] .= $this->makeOrig($row);
+            }
         }
-        sort($data);
     }
-}
 
-$s = $PDO->prepare("SELECT * FROM numbrs WHERE name = :name LIMIT 1");
-$r = $s->execute(array("name" => $c['name']));
-if (!$r) 
-    $c['numbr'] = array("error" => array("PDO" => $s->errorInfo()));
-else  {
-    $result = $s->fetchAll(PDO::FETCH_ASSOC);
+    if (count($this->c['plugins']['selection']) == 0)
+        $this->c['plugins']['selection'] = array(array("default", ""));
+    if (count($this->c['plugins']['format']) == 0)
+        $this->c['plugins']['format'] = array(array("default", ""));
 
-    if (count($result) == 0) {
-        $c['numbr'] = array();
-    } else {
-        $c['numbr'] = $result[0];
+    foreach ($this->c['plugins']['selection'] as $key => $row) {
+        list($op, $params) = $row;
+        if (in_array($op, $plugins['selection'])) {
+            $c = $this->c;
+            require("numbrPlugins/selection/$op/code.php");
+            $this->c = $c;
+        }
     }
-}
 
-// operator plugins
-foreach ($c['plugins']['operation'] as $key => $row) {
-    list($op, $params) = $row;
-    if (in_array($op, $plugins['operation'])) {
-        require("numbrPlugins/operation/$op/code.php");
+    $where = implode(" AND ", $this->c['sql']['where']);
+    $orderby = $this->c['sql']['orderby'];
+    $s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE $where ORDER BY $orderby LIMIT :limit");
+    foreach ($this->c['sql']['params'] as $key => $value) {
+        if (is_string($value))
+            $s->bindValue($key, $value);
+        else if (is_int($value))
+            $s->bindValue($key, $value, PDO::PARAM_INT);
+        else if (is_array($value) && count($value) == 2) {
+            $s->bindValue($key, $value[0], $value[1]);
+        } else {
+            $s->bindValue($key, $value);
+        }
     }
-}
+    $r = $s->execute();
+    if (!$r) 
+        $data = array("error" => array("PDO" => $s->errorInfo()));
+    else  {
+        $result = $s->fetchAll(PDO::FETCH_ASSOC);
 
-foreach ($c['plugins']['format'] as $key => $row) {
-    list($op, $params) = $row;
-    if (in_array($op, $plugins['format'])) {
-        ob_start();
-        require("numbrPlugins/format/$op/code.php");
-        $data = ob_get_contents();
-        ob_end_clean();
+        if (count($result) == 0) {
+            $data = NULL;
+        } else if ($this->c['singleValue']) {
+            $data = (float) $result[0]['data'];
+        } else {
+            // Its an array
+            $data = array();
+            foreach ($result as $ind => $row) {
+                $data[] = array((int) $row['timestamp'], (float) $row['data']);
+            }
+            sort($data);
+        }
     }
-}
 
+    $s = $PDO->prepare("SELECT * FROM numbrs WHERE name = :name LIMIT 1");
+    $r = $s->execute(array("name" => $this->c['name']));
+    if (!$r) 
+        $this->c['numbr'] = array("error" => array("PDO" => $s->errorInfo()));
+    else  {
+        $result = $s->fetchAll(PDO::FETCH_ASSOC);
+
+        if (count($result) == 0) {
+            $this->c['numbr'] = array();
+        } else {
+            $this->c['numbr'] = $result[0];
+        }
+    }
+
+    // operator plugins
+    foreach ($this->c['plugins']['operation'] as $key => $row) {
+        list($op, $params) = $row;
+        if (in_array($op, $plugins['operation'])) {
+            $c = $this->c;
+            require("numbrPlugins/operation/$op/code.php");
+            $this->c = $c;
+        }
+    }
+
+    foreach ($this->c['plugins']['format'] as $key => $row) {
+        list($op, $params) = $row;
+        if (in_array($op, $plugins['format'])) {
+            ob_start();
+            $c = $this->c;
+            require("numbrPlugins/format/$op/code.php");
+            $this->c = $c;
+            $data = ob_get_contents();
+            ob_end_clean();
+        }
+    }
+
+    return $data;
+}
+} // End class
+
+$numbr = new Numbr($_REQUEST['name']);
+$data = $numbr->run();
+if (json_decode($data))
+    header("Content-Type: application/json");
+else if (simplexml_load_string($data))
+    header("Content-Type: application/xml");
 print $data;
 ?>

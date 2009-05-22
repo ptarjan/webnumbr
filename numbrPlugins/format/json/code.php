@@ -1,5 +1,5 @@
 <?php
-header("Content-Type: application/json");
+// header("Content-Type: application/json");
 
 //default
 if (count($params) == 1 && isset($params[0]))
