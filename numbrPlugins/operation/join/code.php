@@ -6,7 +6,10 @@ foreach ($params as $param) {
     if ($newData !== null) {
         if ($first) {
             $first = FALSE;
-            $data = array($c['name'] => $data);
+            if ($c['name'] && $data)
+                $data = array($c['name'] => $data);
+            else
+                $data = array();
         }
         $data[$numbr->c['name']] = json_decode($newData);
     }

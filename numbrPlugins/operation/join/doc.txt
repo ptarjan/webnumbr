@@ -1,0 +1,1 @@
+Takes current data and creates array(name => data, param1_name = param1_data, ...)

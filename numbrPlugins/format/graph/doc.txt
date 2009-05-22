@@ -1,1 +1,1 @@
-Displays a graph. Great for combining with <em>.all</em>. Example <a href="http://webnumbr.com/webnumbrs.all.graph">webnumbrs.all.graph</a>
+Displays a graph. Great for combining with <em>.all</em>

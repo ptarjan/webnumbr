@@ -105,6 +105,7 @@ function printDoc($dir) {
  <th>name</th>
  <th>params</th>
  <th>doc</th>
+ <th>examples</th>
 </tr>
 <?php
     $p = scandir("numbrPlugins/$dir");
@@ -118,12 +119,15 @@ function printDoc($dir) {
         if (substr($name, 0, 1) == ".") continue;
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
         $doc = @file_get_contents("numbrPlugins/$dir/$name/doc.txt");
+        $example = @file_get_contents("numbrPlugins/$dir/$name/example.txt");
+        $examples = implode("<br/>", explode("\n", $example));
         if (!$doc) continue;
 ?>
 <tr>
  <td><?php print $name ?></td>
  <td><?php print trim($params) ?></td>
  <td><?php print $doc ?></td>
+ <td><?php print $examples ?></td>
 </tr>
 <?php
     }
@@ -294,7 +298,8 @@ $("table.docs tr td:nth-child(2)")
 .wrapInner("<a>")
 .children("a")
 .attr("href", "#")
-.attr("title", "Add this with params")
+.attr("title", "Add this")
+.css("color", "blue")
 .each(function(i) { 
     var text = $(this).text(); 
     $(this).click(function() {
@@ -306,8 +311,24 @@ $("table.docs tr td:nth-child(2)")
     if (text.length > 20) {
         $(this).text(text.substring(0, 17) + "...");
     }
-})
+});
+$("table.docs tr td:nth-child(4)")
+.wrapInner("<a>")
+.children("a")
+.attr("href", "#")
+.attr("title", "Replace query with example")
 .css("color", "blue")
+.each(function(i) { 
+    var text = $(this).text(); 
+    $(this).click(function() {
+        $("#name").val(text);
+        reload();
+        return false;
+    });
+    if (text.length > 20) {
+        $(this).text(text.substring(0, 17) + "...");
+    }
+});
 ;
 var reload = function() {
     // $("#webNumbr").addClass("center").html('<img src="images/twirl.gif" alt="thinking" />');
