@@ -20,7 +20,8 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
       <div class="content">
 
         <p class="center">
-        Numbers are all over the web, but they are hard to access. webNumbr does 3 things : Extracts numbers from any webpage, gives you a short name for them, and keeps a history of them.
+        Numbers are all over the web, but they are hard to access. <br/>
+        webNumbr does 3 things : Extracts numbers from any webpage, gives you a short name for them, and keeps a history of them.
         </p>
         <p class="center">
 <?php
@@ -32,7 +33,11 @@ $count = (int) $data[0]['count'];
 ?>
         There are <b id="numbrCount"><?php print $count ?></b> numbrs and counting.
         </p>
-
+<!--
+        <div class="center">
+            <img src="images/webnumbr-Explanation.png" />
+        </div>
+-->
         <h1 id="start">
           Start a Numbr
         </h1>
@@ -100,11 +105,6 @@ foreach ($data as $row) {
 ?>
         </ul>
           
-        <h1>News</h1>
-        <ul><li>
-        <span class="date">May 16, 2009</span> : With an idea from my friend <a href="http://yury.name">Yury</a>, <a href="http://paulisageek.com/webGraphr/">webGraphr</a> has now been split into two pieces. And so <a href="http://webnumbr.com">webNumbr</a> is born.
-        </li></ul>
-
       </div>
     </div>
 

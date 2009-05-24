@@ -17,7 +17,7 @@ body {
 }
 #container {
     width :                 763px;
-    margin :                0px auto;
+    margin :                0px auto 10px auto;
     text-align  :           left;
 }
 .content {
