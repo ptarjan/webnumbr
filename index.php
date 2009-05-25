@@ -94,7 +94,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-temperature-sanjose">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-temperature-sanjose">52</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                         </table>

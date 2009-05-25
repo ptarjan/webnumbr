@@ -391,7 +391,7 @@ var reload = function() {
             // var wnval = "webnumbr_" + rand;
             var wnval = "webnumbr";
             var id = "webNumbr-" + val.replace(/[^a-z0-9-].*/, "");
-            var embed = '<span id="' + id + '">' + wnval + '</span>'
+            var embed = '<span id="' + id + '">' + data + '</span>'
             + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + id + '").innerHTML = data; }</' + 'script>'
             + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
             $("#embed").val(embed);
