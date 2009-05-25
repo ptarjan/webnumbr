@@ -14,10 +14,6 @@ $(document).ready(function() {
     var checkName = function() {
         var val = $(this).val();
         var msg = $("#name_msg");
-        if (val == $(this).attr("defaultValue")) {
-            msg.html('<span style="color: green">Good Old Name</span>');
-            return;
-        }
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
         $(this).val(val);

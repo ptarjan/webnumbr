@@ -196,6 +196,13 @@ if (empty($url)) {
     }
 }
 
+if (!isset($_REQUEST['name'])) {
+   $set = "abcdefghijiklmnopqrstuvwxyz0123456789";
+    $_REQUEST['name'] = "";
+    for ($i=0; $i < 12; $i++)
+        $_REQUEST['name'] .= $set[rand(0, strlen($set) - 1)]; 
+}
+
 ?>
 <?php
 print '<?xml version="1.0" encoding="UTF-8"?>';
