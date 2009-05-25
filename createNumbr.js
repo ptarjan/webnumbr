@@ -63,7 +63,7 @@ $(document).ready(function() {
         }
 
         if ($("#name_msg span").css("color") !== "green") {
-            $("#name_msg").wrap("<span class='error' style='border:5px solid red'></span>").focus();
+            $("#name_msg").wrapInner("<span class='error' style='border:5px solid red'></span>").focus();
             return false;
         }
 
