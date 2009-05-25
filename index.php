@@ -78,7 +78,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Number of webnumbers
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-webnumbrs">76</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +86,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Yahoo stock price
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-yhoo">14.98</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -94,7 +94,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-temperature-sanjose">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                         </table>

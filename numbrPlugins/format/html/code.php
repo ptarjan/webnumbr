@@ -390,8 +390,9 @@ var reload = function() {
             var rand = randString(6);
             // var wnval = "webnumbr_" + rand;
             var wnval = "webnumbr";
-            var embed = '<span id="webnumbr">' + wnval + '</span>'
-            + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + wnval + '").innerHTML = data; }</' + 'script>'
+            var id = "webNumbr-" + val.replace(/[^a-z0-9-].*/, "");
+            var embed = '<span id="' + id + '">' + wnval + '</span>'
+            + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + id + '").innerHTML = data; }</' + 'script>'
             + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
             $("#embed").val(embed);
         }
