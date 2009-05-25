@@ -19,7 +19,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 
       <div class="content">
 
-	<p>Hi from Yury</p>
         <p class="center">
         Numbers are all over the web, but they are hard to access. <br/> webNumbr does 3 things : Extracts numbers from any webpage; Gives you a short name; Keeps a history as they change.
         </p>
