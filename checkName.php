@@ -8,7 +8,7 @@ foreach ($reserved as $r) {
     $reserved[] = strtolower($r);
 }
 $reserved = array_merge($reserved, array(
-"login", "register", "edit", "create", "make", "delete", "update", "save",
+"login", "register", "edit", "create", "make", "delete", "update", "save","www",
 ));
 
 $name = $_REQUEST['name'];

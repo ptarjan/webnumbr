@@ -15,6 +15,7 @@ RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
 
 # make sure "/" isn't served
 RewriteRule ^$ /index [R,L]
+RewriteRule ^www$ /index [R=301,L]
 
 # rewrite form submits to the direct form
 # RewriteCond %{REQUEST_URI} ^/numbr$
