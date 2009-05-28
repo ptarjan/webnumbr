@@ -287,9 +287,18 @@ ul.searchresults {
 .search_url a {
     color : #080;
 }
-/*
-html {
-    background : #0066CC url(./images/blue-gradient.gif) repeat-x;
-}
 
-*/
+.numbr_title{
+    font-size:24px;
+    padding-bottom:15px;
+}
+.numbr_box{
+    font-size:24px;
+    float:left;
+    padding:10px 20px;
+    border: 1px solid black;
+    margin-right:30px;
+}
+.numbr_graph{
+    padding:40px 0px;
+}
