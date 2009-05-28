@@ -64,7 +64,7 @@ $content = <<<END
                             </tr>
                         </table>
                 </div>
-                <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, updating their values <b>every hour</b> and keep the history. 
+                <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, update their values <b>every hour</b> and keep the history. 
                                   <b><a href="/create">Create</a></b> a numbr from any webpage. 
                                   
                                   <br><br>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
