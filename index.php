@@ -48,34 +48,18 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Crude Brent Oil 
+                                    Cheapest gas in San Jose
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
+                                    <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.json(callback=webNumbr_gas_sanjose)"></script>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Crude Brent Oil 
+                                    Number of seamntic video files
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Crude Brent Oil 
-                                </td>
-                                <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Crude Brent Oil 
-                                </td>
-                                <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
+                                    <span id="webNumbr_semantic-sm-video">452000000</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.json(callback=webNumbr_semantic_sm_video)"></script>
                                 </td>
                             </tr>
                         </table>
