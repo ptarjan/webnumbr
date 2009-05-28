@@ -31,7 +31,7 @@ $status = urlencode("@webnumbr  http://webnumbr.com  is $thought");
             <div id="wrap">
                 <div id="header">
                             <span class="mainmenu">
-                            <a href="/">Home</a> <a href="/create">Create</a> <a href="/all">All</a> <a href="/random">Random</a> <a href="/about">About</a> 
+                            <a href="/">Home</a> <a href="/create">Create</a> <a href="/all">All</a> <a href="/random">Random</a> <a href="/help">Help</a> 
                             <br>    search
                             </span>
                             <span class="logo">
