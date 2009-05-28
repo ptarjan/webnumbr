@@ -7,34 +7,11 @@ $subtitle = "Can I get your number?";
 
 $content = <<<END
 
-                <h2 style="margin:0px auto;"></h2>
+                <div class="slogan">Follow interesting numbers on our website or yours</div>
 
-                <div id="top">
-                    <div id="idea">
-                        <h1>What we do:</h1>
-                        <ul>
-                            <li>
-                                Extract numbers values from any webpage
-                            </li>
-                            <li>
-                                Give them short names
-                            </li>
-                            <li>
-                                Keep a history as they change
-                            </li>
-                           <li>
-                                Make them reusable in all possible ways
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
                 <div id="examples">
-                    <div id="supply">
-                 
-                        <h1>Broadcasted numbrs</h1>
-
- 
-                        <table cellpadding="5" >
+                        <table cellpadding="5" width="90%" >
                             <tr>
                                 <td>
                                     Number of webNumbrs
@@ -59,24 +36,61 @@ $content = <<<END
                                     <span id="webNumbr_temperature-sanjose">64</span><script>var webNumbr_temperature-sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.embed.json(callback=webNumbr_temperature-sanjose)"></script>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    Crude Brent Oil 
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Crude Brent Oil 
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Crude Brent Oil 
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Crude Brent Oil 
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Crude Brent Oil 
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                </td>
+                            </tr>
                         </table>
-
-                    </div>
-                    <div id="demand">
-                        <h1>Use numbrs</h1>
-
-                        <ul>
-                            <li>
-                                Embed code: include real-time values of webNumbrs in your website
-                            </li>
-                            <li>
-                                JSON, RSS, Email notifications
-                            </li>
-                            <li>Graph numbrs
-                            </li>
-                        </ul>
-                    </div>
-                <div class="clear"></div>
+                </div>
+                <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, updating their values <b>every hour</b> and keep the history. 
+                                  You can <b><a href="/create">create</a></b> them too! 
+                                  
+                                  <br><br>Search numbrs, check a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
+                </div>
+                <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
+                Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it to your website.
+                You can embed graphs too.
+                
+                <br><br>Embed numbr example
+                <br>Embed graph example
+                </div>
+                <div class="clear">
                 </div>
                 <div id="feedback">
                     <form action="/emailus">
