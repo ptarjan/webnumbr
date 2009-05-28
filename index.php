@@ -78,7 +78,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Number of webnumbers
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-webnumbrs">76</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-webnumbrs">76</span><script>var webnumbr_webnumbrs = function(data) { document.getElementById("webNumbr-webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webnumbr_webnumbrs)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -86,15 +86,15 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Yahoo stock price
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-yhoo">14.98</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-yhoo">14.98</span><script>var webnumbr_yhoo = function(data) { document.getElementById("webNumbr-yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webnumbr_yhoo)"></script>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Crude Brent Oil 
+                                    Temperature in San Jose
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-temperature-sanjose">52</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr-temperature-sanjose">52</span><script>var webnumbr_temperature-sanjose = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr_temperature-sanjose)"></script>
                                 </td>
                             </tr>
                         </table>
