@@ -34,7 +34,7 @@ $(document).ready(function() {
 
     var reload = function() {
         $("#data").html('<img src="images/twirl.gif" alt="thinking"/>');
-        $.get("selectNode?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
+        $.get("create?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
             $("#data").html(data);
         });
         messages();

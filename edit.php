@@ -1,4 +1,9 @@
 <?php
+$subtitle = 'Edit numbr details';
+ob_start(); 
+?>
+
+<?php
 if (!isset($_REQUEST['mode'])) $_REQUEST['mode'] = "create";
 if (isset($_REQUEST['go'])) {
     function required($p) {
@@ -32,7 +37,7 @@ if (isset($_REQUEST['go'])) {
     chdir("openid");
     require ("common.php");
     $dirbase = sprintf("http://%s%s", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
-    $base = $dirbase . "createNumbr?";
+    $base = $dirbase . "edit?";
 
     $_REQUEST["_done"] = $base . http_build_query(
         $_REQUEST
@@ -197,18 +202,7 @@ if (empty($url)) {
 }
 
 ?>
-<?php
-print '<?xml version="1.0" encoding="UTF-8"?>';
-?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>webNumbr - Create Numbr</title>
-    <link rel="stylesheet" href="style.css" type='text/css' />  
-
-    <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />
     <style type="text/css">
 input[type=text], textarea {
     width : 350px;
@@ -221,16 +215,7 @@ th {
     padding: 0px 10px;
 }
     </style>
-  </head>
-  <body>
-    <div id='container'>
-      <div id='header'>
-        <a href='.'><img src="images/webNumbr-banner-100.png" alt="logo" /></a>
-      </div>
 
-      <div class="content">
-
-        <h1 class="first">Last Step</h1>
 
         <form action="">
         <p> 
@@ -262,8 +247,7 @@ th {
             <tr><td></td><td><input type="submit" value="<?php print ($_REQUEST["mode"] == "edit" ? "Edit" : "Create" ) . " Numbr"?>" /></td></tr>
           </table>
         </form>
-      </div>
-    </div>
+
 
     <div id='dialog' style='display:none'>
         <p>Everything look good?</p>
@@ -272,8 +256,8 @@ th {
 
 
 <script src="http://www.google.com/jsapi"></script>
-<script type="text/javascript" src="createNumbr.js"></script>
-<?php include("ga.inc") ?>
+<script type="text/javascript" src="edit.js"></script>
 
-  </body>
-</html>
+<?php
+    $content = ob_get_clean(); require("template.php");
+?>

@@ -1,49 +1,25 @@
 <?php
 if (! isset($_REQUEST['url']) || $_REQUEST['url'] == "http://" || trim($_REQUEST['url']) == "") {
-print '<?xml version="1.0" encoding="UTF-8"?>';
+$subtitle = 'Create new numbr';
+ob_start(); 
 ?>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
- "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <title>webNumbr: Can I get your Numbr?</title>
-    <link rel="stylesheet" href="style.css" type='text/css' />  
-    
-  </head>
-  <body>
-    <div id='container'>
-      <div id='header'>
-        <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
-      </div>
-
-      <div class="content">
 
         <h1 id="start" class="first">
           Start a Numbr
         </h1>
 
-        <form action='selectNode'>
+        <form action='create'>
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
             <input id="url" name='url' value="http://" />
             <input id="submitURL" type='submit' value='Pick the Numbr on the Page' />
           </div>
         </form>
-      </div>
-    </div>
-<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jquery/1.3/jquery.js'></script>
-<script type='text/javascript'>
-var resizeURL = function() {
-    $("#url").width($("#startForm").outerWidth() - $("#urlLabel").outerWidth(true) - $("#submitURL").outerWidth(true) - 15);
-};
-$("#startForm").ready(resizeURL);
-$(window).resize(resizeURL);
-</script>
-  </body>
-</html>
+
 
 <?php
+    $content = ob_get_clean(); require("template.php");
     die();
 }
 if (strpos($_REQUEST["url"], "http") !== 0) {
@@ -80,7 +56,7 @@ try {
     die();
 }
 
-$next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/createNumbr';
+$next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/edit';
 
 if ($type === "num") {
     die($data);
@@ -457,3 +433,5 @@ print $xml;
 
 </html>
 <?php } ?>
+
+
