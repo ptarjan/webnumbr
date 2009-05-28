@@ -362,7 +362,6 @@ var reload = function() {
             );
             $("#embed").val(w.html());
         } else {
-            /* w.height(0); */
             w.slideUp("normal", function(){ 
                 if (data.length > 20) {
                     w.removeClass("center");
@@ -371,16 +370,10 @@ var reload = function() {
                 }
                 $(this).text(data).slideDown("normal")
             });
-            /* for the textarea
-            var height = w.get(0).scrollHeight;
-            if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
-            w.height(height);
-            */
-            var id = "webNumbr_" + val.replace(/[^a-z0-9-].*/, "");
-            var embed = '<span id="' + id + '">' + data + '</span>'
-            + '<script>var ' + id + ' = function(data) { document.getElementById("' + id + '").innerHTML = data; }</' + 'script>'
-            + '<script src="http://webnumbr.com/' + val + '.json(callback=' + id + ')"></' + 'script>'
-            $("#embed").val(embed);
+            $("#embed").val();
+            $.get(val + ".embed", "", function(data, status) {
+                $("#embed").val(data);
+            });
         }
         $("#link").text(val);
         $("#link").attr("href", "/" + val);

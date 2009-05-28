@@ -17,7 +17,7 @@ $content = <<<END
                                     Number of webNumbrs
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_webnumbrs">76</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webNumbr_webnumbrs)"></script>
+                                    <span id="webNumbr_webnumbrs">76</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webNumbr_webnumbrs)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -25,7 +25,7 @@ $content = <<<END
                                     Yahoo stock price
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_yhoo">14.94</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webNumbr_yhoo)"></script>
+                                    <span id="webNumbr_yhoo">14.94</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webNumbr_yhoo)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -33,7 +33,7 @@ $content = <<<END
                                     Temperature in San Jose
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_temperature-sanjose">64</span><script>var webNumbr_temperature-sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.embed.json(callback=webNumbr_temperature-sanjose)"></script>
+                                    <span id="webNumbr_temperature-sanjose">62</span><script>var webNumbr_temperature_sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webNumbr_temperature_sanjose)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -41,7 +41,7 @@ $content = <<<END
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -49,7 +49,7 @@ $content = <<<END
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -57,7 +57,7 @@ $content = <<<END
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -65,7 +65,7 @@ $content = <<<END
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -73,7 +73,7 @@ $content = <<<END
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
                         </table>
