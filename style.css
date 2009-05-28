@@ -16,6 +16,14 @@ fieldset,img {
     border-right: 1px solid black;
 }
 
+#search_form {
+    padding : 0.5em;
+}
+#search_form input {
+    width : 300px;
+    padding : 4px;
+}
+
 #logopic{
     padding-top:10px;
 }
@@ -134,7 +142,7 @@ a.secretlink{
 	color:black;
 }
 
-a.secretlink:visited{
+a.secretlink:visited {
 	color:black;
 }
 
