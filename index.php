@@ -1,17 +1,5 @@
 <?php
-print '<?xml version="1.0" encoding="UTF-8"?>
-';
-?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <title>webNumbr: Can I get your Numbr?</title>
-        <link rel="stylesheet" href="style.css" type='text/css' />
-    </head>
-    <body>
-        <center>
-            <div id="wrap">
-                <div id="header">
-                    <?php
+
 // webnumbr is ...
 $thoughts = array(
 "like OMG the GREATEST thing in like EVER!!!!",
@@ -26,18 +14,15 @@ $thoughts = array(
 */
 );
 $thought = $thoughts[rand(0, count($thoughts)-1)];
-                    ?>
-                    <table>
-                        <tr>
-                            <td valigin="center">
-                                <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
-                            </td>
-                            <td valign="center" style="padding-left:100px; font-size:48px;">
-                                <a style="text-decoration:none;" href="http://twitter.com/home?status=<?php print urlencode("@webnumbr  http://webnumbr.com  is $thought") ?>">Comments?<img height="36" src="/images/twitter.jpg"/></a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
+$status = urlencode("@webnumbr  http://webnumbr.com  is $thought");
+
+// ================ templates parts ===================
+
+$subtitle = "Can I get your number?";
+
+$content = <<<END
+
                 <div id="top">
                     <div id="idea">
                         <h1>What we do:</h1>
@@ -129,22 +114,25 @@ How should we provide access to them?
                     </form>
                 </div>
 
-                <center>
-                    <div id="footer">
-                        <a href="/">webNumbr</a> by <a  href="http://paulisageek.com">Paul</a> and <a href="yury.name">Yury</a>
-                    </div>
-                </center>
-            </div>
-        </center>
+END;
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <script>
-$(function() {
-    $("#feedbacktext").focus(function() {
-        $(this).css("color", "black").val("");
-    });
-});
-        </script>
-        <?php include("ga.inc") ?>
-    </body>
-</html>
+$header = <<<END
+                    <table>
+                        <tr>
+                            <td valigin="center">
+                                <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
+                            </td>
+                            <td valign="center" style="padding-left:100px; font-size:48px;">
+                                <a style="text-decoration:none;" href="http://twitter.com/home?status=$status">Comments?<img height="36" src="/images/twitter.jpg"/></a>
+                            </td>
+                        </tr>
+                    </table>
+
+END;
+
+
+
+//========== template =========================
+
+include ("template.php");
+?>
