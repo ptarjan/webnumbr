@@ -207,6 +207,42 @@ a img{
 	text-decoration:underline;
 }
 
+/* SEARCH PAGE */
+ul.searchresults {
+    list-style-type: none; 
+    margin-top : 40px;
+}
+.searchresults li {
+    padding : 5px;
+    margin : 7px;
+}
+
+.searchresults a {
+    color: black;
+    text-decoration : none;
+    padding : 5px;
+}
+
+.searchresults a:hover {
+    background : #eee;
+    color: black;
+}
+
+.search_data {
+    float : left;
+    font-size : 20px;
+    padding-top : 9px;
+    margin-right : 10px;
+    height : 33px;
+    border : 1px black solid;
+}
+
+.search_url {
+    font-size : 60%;
+}
+.search_url a {
+    color : #080;
+}
 /*
 html {
     background : #0066CC url(./images/blue-gradient.gif) repeat-x;
