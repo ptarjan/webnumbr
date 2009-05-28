@@ -376,24 +376,10 @@ var reload = function() {
             if (w.get(0).scrollWidth != w.get(0).clientWidth) height += 24;
             w.height(height);
             */
-            function randString(length, charset) {
-                var ret = "";
-                if (! charset)
-                    charset = "abcdefghijklmnopqrstuvwxyz";
-                for (var i=0; i < length; i++) {
-                    var r = Math.floor(Math.random() * charset.length);
-                    ret += charset.substring(r, r+1);
-                }
-                return ret;
-            }
-            // var rand = Math.floor(Math.random() * Math.pow(2, 32));
-            var rand = randString(6);
-            // var wnval = "webnumbr_" + rand;
-            var wnval = "webnumbr";
-            var id = "webNumbr-" + val.replace(/[^a-z0-9-].*/, "");
+            var id = "webNumbr_" + val.replace(/[^a-z0-9-].*/, "");
             var embed = '<span id="' + id + '">' + data + '</span>'
-            + '<script>var ' + wnval + ' = function(data) { document.getElementById("' + id + '").innerHTML = data; }</' + 'script>'
-            + '<script src="http://webnumbr.com/' + val + '.json(callback=' + wnval + ')"></' + 'script>'
+            + '<script>var ' + id + ' = function(data) { document.getElementById("' + id + '").innerHTML = data; }</' + 'script>'
+            + '<script src="http://webnumbr.com/' + val + '.json(callback=' + id + ')"></' + 'script>'
             $("#embed").val(embed);
         }
         $("#link").text(val);
