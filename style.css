@@ -7,20 +7,50 @@ fieldset,img {
     border-color:transparent;
 }
 
-.mainmenu{
-    float:right;
-    padding:10px 10px 10px 10px;
-    background:#eee;
+
+#onsite, #embedcodes {
+    width:388px; /* 2 px for border */
+    background : #e9fcff;
+}
+.top-menu {
+    background : #e9fcff;
     border-bottom: 1px solid black;
-    border-left: 1px solid black;
-    border-right: 1px solid black;
+    float : right;
+    display : inline-block;
+    padding : 0 0.7em;
+    white-space : nowrap;
+}
+.top-menu * {
+    display : inline;
+}
+.top-menu ul {
+    list-style-image : none;
+    list-style-position : outside;
+    list-style-type : none;
+    padding : 0px;
+}
+.top-menu li {
+    position : relative;
+    margin : 0px;
+}
+.top-menu li a {
+    border:1px solid transparent;
+    display:inline-block;
+    font-size:1.05em;
+    padding:0.5em 0.5em;
+    color : black;
+    text-decoration : none;
+}
+.top-menu li a:hover {
+    background : #fff;
 }
 
 #search_form {
-    padding : 0.5em;
+    padding : 0.7em;
+    display : block;
 }
-#search_form input {
-    width : 300px;
+#search_form input[type=text] {
+    width : 250px;
     padding : 4px;
 }
 
@@ -28,12 +58,11 @@ fieldset,img {
     padding-top:10px;
 }
 
-.slogan{
- text-align:center;
- margin:0px auto; 
- padding:30px 0px 20px 0px; 
- font-size:24px; 
-  
+.slogan {
+    text-align : center;
+    margin : 10px 0px;
+    padding : 10px;
+    font-size : 24px; 
 }
 
 #examples{
@@ -42,26 +71,16 @@ fieldset,img {
 }
 
 #onsite, #embedcodes{
-    width:450px;
-    float:left;
-    padding:15px;
+    float:right;
+    padding:10px;;
     margin-bottom:20px;
-}
-
-#onsite{
-        background:#FFECB3;
+    border-top : 1px solid black;
+    background : #e9fcff;
 }
 
 .logo{
     padding-top:10px;
 /*        float:left; */
-}
-
-.mainmenu a{
-     font-weight:bold; 
-     font-size:18px;
-     margin-right:.5em;
-     margin-left:.5em;
 }
 
 input, select {
@@ -82,7 +101,7 @@ p {
 }
 
 #content {
-    margin-top:               20px;
+    margin-top:               10px;
 }
 li, ol {
     margin :                0px 2em;
@@ -166,7 +185,7 @@ a.secretlink:visited {
 	color:black;
 }
 
-a:visited {
+a, a:visited {
 	color:blue;
 }
 

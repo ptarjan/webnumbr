@@ -30,12 +30,31 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
     <body>
             <div id="wrap">
                 <div id="header">
-                    <span class="mainmenu">
-                    <a href="/">Home</a> <a href="/create">Create</a> <a href="/all">All</a> <a href="/random">Random</a> <a href="/about">About</a> 
-                    <form id="search_form" action="/search"> Search : <input name="query" value="<?php print $current_search ?>" /> </form>
-                    </span>
+                    <div class="top-menu">
+                        <ul>
+                            <li>
+                                <a href="/">Home</a>
+                            </li>
+                            <li>
+                                <a href="/create">Create</a>
+                            </li>
+                            <li>
+                                <a href="/all">All</a>
+                            </li>
+                            <li>
+                                <a href="/random">Random</a>
+                            </li>
+                            <li>
+                                <a href="/help">Help</a> 
+                            </li>
+                        </ul>
+                        <form id="search_form" action="/search"> 
+                            <input type="text" name="query" value="<?php print $current_search ?>" /> 
+                            <input type="submit" value="Search " />
+                        </form>
+                    </div>
                     <span class="logo">
-                        <a href='/'><img id='logopic' src="images/webNumbr-banner-50.png" alt="logo" /></a>
+                        <a href='/'><img id='logopic' src="images/webNumbr-banner-63.png" alt="logo" /></a>
                     </span>
                     <div class="clear"></div>
                 </div>

@@ -7,7 +7,9 @@ $subtitle = "Can I get your number?";
 
 $content = <<<END
 
-                <div class="slogan">Follow interesting numbers on our website or yours</div>
+                <div class="slogan">
+                    Follow interesting numbers from anywhere on the web
+                </div>
 
 
                 <div id="examples">
@@ -79,26 +81,18 @@ $content = <<<END
                         </table>
                 </div>
                 <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, updating their values <b>every hour</b> and keep the history. 
-                                  You can <b><a href="/create">create</a></b> them too! 
+                                  <b><a href="/create">Create</a></b> a numbr from any webpage. 
                                   
-                                  <br><br>Search numbrs, check a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
+                                  <br><br>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
                 </div>
                 <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
-                Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it to your website.
+                Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.
                 You can embed graphs too.
                 
                 <br><br>Embed numbr example
                 <br>Embed graph example
                 </div>
                 <div class="clear">
-                </div>
-                <div id="feedback">
-                    <form action="/emailus">
-                        <textarea id="feedbacktext" rows="3" name="useridea" type="text">Which numbers (and other data) should we broadcast?
-How should we provide access to them?
-                        </textarea>
-                        <input type="submit" value="Send idea">
-                    </form>
                 </div>
 
 END;
