@@ -10,10 +10,13 @@ fieldset,img {
 
 #onsite, #embedcodes {
     width:388px; /* 2 px for border */
-    background : #e9fcff;
 }
+#onsite, #embedcodes, .top-menu {
+    /* background : #e9fcff; */
+    background : #eee;
+}
+
 .top-menu {
-    background : #e9fcff;
     border-bottom: 1px solid black;
     float : right;
     display : inline-block;
@@ -60,9 +63,11 @@ fieldset,img {
 
 .slogan {
     text-align : center;
-    margin : 10px 0px;
+    margin : 30px 0px;
     padding : 10px;
     font-size : 24px; 
+    background-color : #777;
+    color : #fff;
 }
 
 #examples{
@@ -75,7 +80,7 @@ fieldset,img {
     padding:10px;;
     margin-bottom:20px;
     border-top : 1px solid black;
-    background : #e9fcff;
+    background : #eee;
 }
 
 .logo{
@@ -165,7 +170,7 @@ body {
     padding: 0px 0px 0px 0px;
     margin: 0;
 	color:#111;
-/*    background:#f8f8f8;  */
+    /* background:#f8f8f8; */
 }
 
 
