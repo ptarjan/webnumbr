@@ -14,6 +14,10 @@ $(document).ready(function() {
     var checkName = function() {
         var val = $(this).val();
         var msg = $("#name_msg");
+        if (val == $(this).attr("defaultValue")) {
+            msg.html('<span style="color: green">Good Old Name</span>');
+            return;
+        }
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
         $(this).val(val);
@@ -63,7 +67,7 @@ $(document).ready(function() {
         }
 
         if ($("#name_msg span").css("color") !== "green") {
-            $("#name_msg").wrapInner("<span class='error' style='border:5px solid red'></span>").focus();
+            $("#name_msg").wrap("<span class='error' style='border:5px solid red'></span>").focus();
             return false;
         }
 

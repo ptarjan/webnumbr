@@ -1,3 +1,2 @@
 <?php
-include "password.inc";
-$PDO = new PDO("mysql:dbname=$dbname", "$dbuser", "$dbpass");
+$PDO = new PDO("mysql:dbname=webnumbr", "webnumbruser", "");

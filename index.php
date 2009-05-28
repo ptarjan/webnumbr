@@ -1,17 +1,5 @@
 <?php
-print '<?xml version="1.0" encoding="UTF-8"?>
-';
-?> <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-    <head>
-        <title>webNumbr: Can I get your Numbr?</title>
-        <link rel="stylesheet" href="style.css" type='text/css' />
-    </head>
-    <body>
-        <center>
-            <div id="wrap">
-                <div id="header">
-                    <?php
+
 // webnumbr is ...
 $thoughts = array(
 "like OMG the GREATEST thing in like EVER!!!!",
@@ -26,18 +14,15 @@ $thoughts = array(
 */
 );
 $thought = $thoughts[rand(0, count($thoughts)-1)];
-                    ?>
-                    <table>
-                        <tr>
-                            <td valigin="center">
-                                <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
-                            </td>
-                            <td valign="center" style="padding-left:100px; font-size:48px;">
-                                <a style="text-decoration:none;" href="http://twitter.com/home?status=<?php print urlencode("@webnumbr  http://webnumbr.com  is $thought") ?>">Comments?<img height="36" src="/images/twitter.jpg"/></a>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
+
+$status = urlencode("@webnumbr  http://webnumbr.com  is $thought");
+
+// ================ templates parts ===================
+
+$subtitle = "Can I get your number?";
+
+$content = <<<END
+
                 <div id="top">
                     <div id="idea">
                         <h1>What we do:</h1>
@@ -78,7 +63,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Number of webnumbers
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-webnumbrs">76</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webnumbr)"></script>
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -86,7 +71,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Yahoo stock price
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-yhoo">14.98</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webnumbr)"></script>
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -94,7 +79,7 @@ $thought = $thoughts[rand(0, count($thoughts)-1)];
                                     Crude Brent Oil 
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr-temperature-sanjose">52</span><script>var webnumbr = function(data) { document.getElementById("webNumbr-temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webnumbr)"></script>
+                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
                                 </td>
                             </tr>
                         </table>
@@ -129,22 +114,25 @@ How should we provide access to them?
                     </form>
                 </div>
 
-                <center>
-                    <div id="footer">
-                        <a href="/">webNumbr</a> by <a  href="http://paulisageek.com">Paul</a> and <a href="yury.name">Yury</a>
-                    </div>
-                </center>
-            </div>
-        </center>
+END;
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <script>
-$(function() {
-    $("#feedbacktext").focus(function() {
-        $(this).css("color", "black").val("");
-    });
-});
-        </script>
-        <?php include("ga.inc") ?>
-    </body>
-</html>
+$header = <<<END
+                    <table>
+                        <tr>
+                            <td valigin="center">
+                                <a href='.'><img id='logo' src="images/webNumbr-banner-100.png" alt="logo" /></a>
+                            </td>
+                            <td valign="center" style="padding-left:100px; font-size:48px;">
+                                <a style="text-decoration:none;" href="http://twitter.com/home?status=$status">Comments?<img height="36" src="/images/twitter.jpg"/></a>
+                            </td>
+                        </tr>
+                    </table>
+
+END;
+
+
+
+//========== template =========================
+
+include ("template.php");
+?>
