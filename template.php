@@ -49,7 +49,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                             </li>
                         </ul>
                         <form id="search_form" action="/search"> 
-                            <input type="text" name="query" value="<?php print $current_search ?>" /> 
+                            <input type="text" name="query" value="<?php print isset($current_search) ? $current_search : "" ?>" /> 
                             <input type="submit" value="Search " />
                         </form>
                     </div>
