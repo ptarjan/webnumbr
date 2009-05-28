@@ -6,30 +6,32 @@ fieldset,img {
     border-width:0;
     border-color:transparent;
 }
-body {
-    text-align :            center;
-    line-height :           1.5;
-    font-size :             0.75em;
-    font-family :           'Lucida Grande', sans-serif;
+
+.mainmenu{
+    float:right;
+    padding:10px 10px 10px 10px;
+    background:#eee;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
 }
-#container {
-    width :                 763px;
-    margin :                0px auto 10px auto;
-    text-align  :           left;
+
+#logopic{
+    padding-top:10px;
 }
-.content {
-    border :                1px solid #333;
-    background-color :      #EEEEFF;
-    padding :               5px 0px;
-    margin :                0px;
-    -moz-border-radius :    10px;
-    -webkit-border-radius : 10px;
+
+.logo{
+    padding-top:10px;
+/*        float:left; */
 }
-#header, #footer {
-    text-align : center; 
-    padding : 0px;
-    margin : 0px;
+
+.mainmenu a{
+     font-weight:bold; 
+     font-size:18px;
+     margin-right:.5em;
+     margin-left:.5em;
 }
+
 input, select {
     padding : 5px;
 }
@@ -116,7 +118,7 @@ body {
     padding: 0px 0px 0px 0px;
     margin: 0;
 	color:#111;
-    background:#f8f8f8;
+/*    background:#f8f8f8;  */
 }
 
 
@@ -164,20 +166,22 @@ h3, h4, h5, h6 {
 }
 
 div#wrap{
+    margin:0px auto;
     width: 980px; 
     padding: 0px 10px 0px 10px; 
     text-align:left;
-    border-left: #ddd solid 2px;
-    border-right: #ddd solid 2px;
+/*    border-left: #ddd solid 2px;
+    border-right: #ddd solid 2px;  */
     background:#fff;
 }
 
 #footer {
+    text-align:center;
 	margin-top:1em;
 	margin-bottom:1em;
     margin-left: auto;
     margin-right: auto;
-    font-size: 14px;
+    font-size: 20px;
 	color:#777;
 }
 
@@ -188,6 +192,11 @@ a img{
 
 #footer a {
 	color:#777;
+	text-decoration:none;
+}
+
+#footer a:hover {
+	text-decoration:underline;
 }
 
 /*
