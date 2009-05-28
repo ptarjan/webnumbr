@@ -37,10 +37,10 @@ $content = <<<END
                         <table cellpadding="5" >
                             <tr>
                                 <td>
-                                    Number of webnumbers
+                                    Number of webNumbrs
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_webnumbrs">76</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.embed.json(callback=webNumbr_webnumbrs)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -48,15 +48,15 @@ $content = <<<END
                                     Yahoo stock price
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_yhoo">14.94</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.embed.json(callback=webNumbr_yhoo)"></script>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    Crude Brent Oil 
+                                    Temperature in San Jose
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webnumbr">webnumbr</span><script>var webnumbr = function(data) { document.getElementById("webnumbr").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webnumbr)"></script>
+                                    <span id="webNumbr_temperature-sanjose">64</span><script>var webNumbr_temperature-sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.embed.json(callback=webNumbr_temperature-sanjose)"></script>
                                 </td>
                             </tr>
                         </table>
