@@ -51,8 +51,10 @@ ob_start();
 
 <?php $content = ob_get_clean(); ob_start(); ?>
 <script>
-$("input").focus(function() {
-    $(this).select();
+$(function() {
+    $("input").focus(function() {
+        $(this).select();
+    });
 });
 </script>
 <?php
