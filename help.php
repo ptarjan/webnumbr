@@ -26,7 +26,7 @@ function printDoc($dir) {
  <th>name</th>
  <th>params</th>
  <th>doc</th>
- <th>examples</th>
+ <th>example</th>
 </tr>
 <?php
     $p = scandir("numbrPlugins/$dir");
@@ -41,14 +41,14 @@ function printDoc($dir) {
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
         $doc = @file_get_contents("numbrPlugins/$dir/$name/doc.txt");
         $example = @file_get_contents("numbrPlugins/$dir/$name/example.txt");
-        $examples = implode("<br/>", explode("\n", $example));
+        $example = "<a href=\"/$example\">$example</a>";
         if (!$doc) continue;
 ?>
 <tr>
  <td><?php print $name ?></td>
  <td><?php print trim($params) ?></td>
  <td><?php print $doc ?></td>
- <td><?php print $examples ?></td>
+ <td><?php print $example ?></td>
 </tr>
 <?php
     }

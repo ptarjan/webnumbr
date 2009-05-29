@@ -220,11 +220,18 @@ h4, h5, h6 {
     font-size: 18px;
 }
 
-.docs caption{
-    text-align:left;
-    padding-top:30px;
+
+/* help */
+.docs caption {
+    background : #eee;
+    margin : 40px 0px 10px 0px;
+    padding-top:10px;
     padding-bottom:10px;
     font-size:18px;
+    border-bottom : 1px solid black;
+}
+.docs tr {
+    margin-top : 5px;
 }
 
 #examples caption{
@@ -311,6 +318,7 @@ ul.searchresults {
     color : #080;
 }
 
+/* numbr */
 .numbr_title{
     font-size:24px;
     padding-bottom:20px;
