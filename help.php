@@ -10,9 +10,13 @@ webNumber is created by <a href="http://paulisageek.com">Paul Tarjan</a> and <a 
 <h3>webNumbr API</h3>
 
 <div>
-<b>Basics</b> : All commands are seperated by <i>.</i> All parameters are wrapped by <i>()</i>. <a href="/numbrPlugins">Plugin sources</a>. 
-</div><div>
-Order of operations (all selectors, "SQL", all operations, all formats, "print")
+<h5>Basics</h5>
+<ul> 
+<li>All commands are seperated by <i>.</i> 
+</li><li>All parameters are wrapped by <i>()</i>. 
+</li><li><a href="/numbrPlugins">Plugin sources</a>. 
+</li><li>Order of operations (all selectors, "SQL", all operations, all formats, "print")
+</li></ul>
 </div>
 
 <?php
@@ -52,17 +56,17 @@ function printDoc($dir) {
 ?>
 
 <table class="docs">
-<caption>Selectors : These choose which piece of data you want.</caption>
+<caption>Selectors: These choose which piece of data you want.</caption>
 <?php printDoc("selection"); ?>
 </table>
 
 <table class="docs">
-<caption>Operations : These are evaluated in order and are chained together.</caption>
+<caption>Operations: These are evaluated in order and are chained together.</caption>
 <?php printDoc("operation"); ?>
 </table>
 
 <table class="docs">
-<caption>Formats : Output encoding. Can be chained.</caption>
+<caption>Formats: Output encoding. Can be chained.</caption>
 <?php printDoc("format"); ?>
 </table>
 
