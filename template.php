@@ -25,7 +25,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
         <title>webNumbr | <?php print $subtitle ?></title>
-        <link rel="stylesheet" href="style.css" type='text/css' />
+        <link rel="stylesheet" href="/style.css" type='text/css' />
     </head>
     <body>
             <div id="wrap">
@@ -54,7 +54,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                         </form>
                     </div>
                     <span class="logo">
-                        <a href='/'><img id='logopic' src="images/webNumbr-banner-63.png" alt="logo" /></a>
+                        <a href='/'><img id='logopic' src="/images/webNumbr-banner-63.png" alt="logo" /></a>
                     </span>
                     <div class="clear"></div>
                 </div>

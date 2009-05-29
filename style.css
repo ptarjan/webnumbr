@@ -328,7 +328,7 @@ ul.searchresults {
     float:left;
     padding:10px 20px;
     border: 1px solid black;
-    margin-right:30px;
+    margin : 0px 30px 10px 0px;
 }
 .numbr_graph{
     padding:20px 0px;

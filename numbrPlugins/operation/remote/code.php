@@ -7,11 +7,16 @@ if (isset($params['url_encoded']))
     $params['url'] = urldecode($params['url_encoded']);
 
 $url = $params['url'];
+
+// HACK FOR RASMUS'S SERVER
+$url = str_replace("http:/", "http://", $url);
 // $url .= (strpos("?", $url) === FALSE ? '?' : '&');
 // $url .= http_build_query(array("c" => $c, "data" => $data, "params" => $params));
 
 $ch = curl_init($url);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+curl_setopt($ch, CURLOPT_POST, TRUE);
+curl_setopt($ch, CURLOPT_POSTFIELDS, array("c" => $c, "data" => $data, "params" => $params));
 $data = curl_exec($ch);
 
 $json = json_decode($data, TRUE);
