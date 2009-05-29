@@ -1,1 +1,1 @@
-Default is "format=" query parameter or if not present then "html"
+A basic "Numbr Page" showing information on a numbr. Only really useful for numbrs without operations done on them.

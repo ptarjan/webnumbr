@@ -302,3 +302,9 @@ ul.searchresults {
 .numbr_graph{
     padding:40px 0px;
 }
+.numbr_embed_code input, .numbr_graph_embed_code input {
+    width : 700px;
+}
+.numbr_description {
+    padding-bottom : 30px;
+}
