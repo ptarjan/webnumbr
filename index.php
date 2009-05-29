@@ -75,6 +75,14 @@ ob_start();
                                     <span id="webNumbr_wiki-en-pages">2896040</span><script>var webNumbr_wiki_en_pages = function(data) { document.getElementById("webNumbr_wiki-en-pages").innerHTML = data; }</script><script src="http://webnumbr.com/wiki-en-pages.json(callback=webNumbr_wiki_en_pages)"></script>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <a href="/slashdot-poll-votes">Votes on current /. poll </a>
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webNumbr_slashdot-poll-votes">4772</span><script>var webNumbr_slashdot_poll_votes = function(data) { document.getElementById("webNumbr_slashdot-poll-votes").innerHTML = data; }</script><script src="http://webnumbr.com/slashdot-poll-votes.json(callback=webNumbr_slashdot_poll_votes)"></script>
+                                </td>
+                            </tr>
                         </table>
                 
                 <br>
