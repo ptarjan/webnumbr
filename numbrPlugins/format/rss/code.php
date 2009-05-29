@@ -1,3 +1,8 @@
+<?php
+$link = "http://webnumbr.com/" . htmlspecialchars(str_replace(".rss", "", $c['code']));
+$time = strtotime($c['numbr']['modifiedTime']);
+$permlink = $link . ".latest.to($time).from($time)";
+?>
 <?php print '<?xml version="1.0"?>' ?>
 <rss version="2.0">
   <channel>
@@ -12,10 +17,10 @@
  
     <item>
       <title><?php print htmlspecialchars($c['numbr']['title']) ?></title>
-      <link>http://webnumbr.com/<?php print htmlspecialchars($c['code']) ?></link>
+      <link><?php print $link ?></link>
       <description><?php print $data ?></description>
-      <pubDate><?php print date(DATE_RFC822, strtotime($c['numbr']['modifiedTime'])) ?></pubDate>
-      <guid>http://webnumbr.com/<?php print htmlspecialchars($c['code']) ?>#<?php print strtotime($c['numbr']['modifiedTime']) ?></guid>
+      <pubDate><?php print date(DATE_RFC822, $time) ?></pubDate>
+      <guid><?php print $permlink ?></guid>
     </item>
   </channel>
 </rss>
