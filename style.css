@@ -213,8 +213,26 @@ h2 {
     font-size: 24px;
 }
 
-h3, h4, h5, h6 {
+h3 {
     font-size: 20px;
+}
+h4, h5, h6 {
+    font-size: 18px;
+}
+
+.docs caption{
+    text-align:left;
+    padding-top:30px;
+    padding-bottom:10px;
+    font-size:18px;
+}
+
+table.docs{
+    width:100%
+}
+
+.docs td{
+    padding-right:10px;
 }
 
 div#wrap{
