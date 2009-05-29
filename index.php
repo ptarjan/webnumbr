@@ -4,9 +4,8 @@
 // ================ templates parts ===================
 
 $subtitle = "Can I get your number?";
-
-$content = <<<END
-
+ob_start();
+?>
                 <div class="slogan">
                     Follow interesting numbers from anywhere on the web
                 </div>
@@ -16,7 +15,7 @@ $content = <<<END
                         <table cellpadding="5" width="90%" >
                             <tr>
                                 <td>
-                                    Number of webNumbrs
+                                    <a href="/webnumbrs">Number of webNumbrs</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_webnumbrs">76</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webNumbr_webnumbrs)"></script>
@@ -24,7 +23,7 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Yahoo stock price
+                                    <a href="/yhoo">Yahoo stock price</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_yhoo">14.94</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webNumbr_yhoo)"></script>
@@ -32,7 +31,7 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Temperature in San Jose
+                                    <a href="/temperature-sanjose">Temperature in San Jose</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_temperature-sanjose">62</span><script>var webNumbr_temperature_sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webNumbr_temperature_sanjose)"></script>
@@ -40,7 +39,7 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Crude Brent Oil 
+                                    <a href="/crude-oil-brent">Crude Brent Oil</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
@@ -48,7 +47,7 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Cheapest gas in San Jose
+                                    <a href="/gas-sanjose">Cheapest gas in San Jose</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.json(callback=webNumbr_gas_sanjose)"></script>
@@ -56,7 +55,7 @@ $content = <<<END
                             </tr>
                             <tr>
                                 <td>
-                                    Number of seamntic video files
+                                    <a href="/semantic-sm-video">Number of semantic video files</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_semantic-sm-video">452000000</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.json(callback=webNumbr_semantic_sm_video)"></script>
@@ -78,11 +77,8 @@ $content = <<<END
                 </div>
                 <div class="clear">
                 </div>
-
-END;
-
-
-
+<?php 
+$content = ob_get_clean();
 
 //========== template =========================
 
