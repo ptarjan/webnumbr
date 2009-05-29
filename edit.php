@@ -88,7 +88,7 @@ if (isset($_REQUEST['go'])) {
     // End OpendID
     //
 
-    if (strpos($_SERVER["REQUEST_URI"], "/dev/") === 0) {
+    if (strpos($_SERVER["SERVER_NAME"], "dev.") === 0) {
         print "<pre>";
         print_r($_REQUEST);
         print "</pre>";
@@ -96,7 +96,7 @@ if (isset($_REQUEST['go'])) {
     }
 
     if ($_REQUEST["mode"] == "edit") {
-        $stmt = $PDO->prepare("UPDATE numbrs SET name=:name, title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency WHERE id=:id");
+        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency WHERE name=:name");
         $r = $stmt->execute(array(
             "name" => $_REQUEST['name'], 
             "title" => $_REQUEST['title'], 
@@ -104,7 +104,6 @@ if (isset($_REQUEST['go'])) {
             "url" => $_REQUEST['url'], 
             "xpath" => $_REQUEST['xpath'], 
             "frequency" => $_REQUEST['frequency'], 
-            "id" => $_REQUEST['id'], 
         ));
     } else {
         $stmt = $PDO->prepare("INSERT INTO numbr_table (name, title, description, url, xpath, frequency, openid, createdTime) VALUES (:name, :title, :description, :url, :xpath, :frequency, :openid, NOW())");
