@@ -5,17 +5,27 @@ ob_start();
 ?>
 
 
-        <h1 id="start" class="first">
+        <h3 id="start" class="first">
           Start a Numbr
-        </h1>
+        </h3>
+        
+        <br><ol>
+        <li>Think about some interesting number. 
+        <br>E.g. finance, sports, transportation, prices, or web statistics.</li>
+        <li>Find a website on the web that has this number on a page.</li>
+        <li>Enter its URL to the box below. </li>
+        <li>You then will point the number on a page, enter a few details and its DONE!</li>
+        </ol>
 
-        <form action='create'>
+        <br><form action='create'>
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
-            <input id="url" name='url' value="http://" />
+            <input id="url" name='url' style="width:400px;" value="http://" />
             <input id="submitURL" type='submit' value='Pick the Numbr on the Page' />
           </div>
         </form>
+
+<br><br><br>&nbsp;
 
 
 <?php
