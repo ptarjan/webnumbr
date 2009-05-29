@@ -218,7 +218,7 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
             <tr><th>Extends (inherits all data from)</th><td><input type="text" name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
 <?php } ?>
             <tr><th>OpenID</th><td>
-                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%; width : 330px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
+                <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%; width : 340px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
             </td></tr>
             <tr><th><span title="unique name to fetch this numbr">Name (?)</span></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> /></td><td id="name_msg"></td></tr>
             <tr><th><span title="human readable title">Title (?)</span></th><td><input type="text" name="title" maxlength="255" value="<?php print htmlspecialchars($_REQUEST["title"]) ?>" /></td></tr>

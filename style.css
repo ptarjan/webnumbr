@@ -354,25 +354,22 @@ ul.searchresults {
 }
 
 /* EDIT */
+.edit-form input[type="submit"], .edit-form input[type="text"], .edit-form input[type="password"], .edit-form textarea, .edit-form select {
+    -moz-border-radius-bottomleft:5px;
+    -moz-border-radius-bottomright:5px;
+    -moz-border-radius-topleft:5px;
+    -moz-border-radius-topright:5px;
+    margin:10px;
+    padding:8px;
+    width:350px;
+}
 .edit-form input[type="text"], .edit-form input[type="password"], .edit-form textarea, .edit-form select {
-    -moz-border-radius-bottomleft:5px;
-    -moz-border-radius-bottomright:5px;
-    -moz-border-radius-topleft:5px;
-    -moz-border-radius-topright:5px;
     border:1px solid #DDDDDD;
-    margin:10px;
-    padding:8px;
-    width:350px;
 }
-.edit-form input[type="submit"] {
-    -moz-border-radius-bottomleft:5px;
-    -moz-border-radius-bottomright:5px;
-    -moz-border-radius-topleft:5px;
-    -moz-border-radius-topright:5px;
-    margin:10px;
-    padding:8px;
-    width:350px;
+.edit-form input[type="submit"], .edit-form select {
+    width : 370px;
 }
+
 .edit-form th {
     font-weight : normal;
     text-align: right;
