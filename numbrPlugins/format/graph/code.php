@@ -36,7 +36,7 @@ div.content {
   </head>
   <body>
     <div class="content">
-        <div id="plot" class='center'>_______/\___|\___/\</div>
+        <div id="plot" class='center'>Loading Numbr Graph...</div>
     </div>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
