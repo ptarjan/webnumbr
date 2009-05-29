@@ -36,7 +36,7 @@ if (isset($_REQUEST['go'])) {
     //
     chdir("openid");
     require ("common.php");
-    $dirbase = sprintf("http://%s%s", $_SERVER['SERVER_NAME'], dirname($_SERVER['PHP_SELF']));
+    $dirbase = sprintf("http://%s/", $_SERVER['SERVER_NAME']);
     $base = $dirbase . "edit?";
 
     $_REQUEST["_done"] = $base . http_build_query(
