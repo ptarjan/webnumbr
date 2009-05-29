@@ -1,29 +1,24 @@
 <?php
-    $current_search = htmlspecialchars($_REQUEST['query']);
-    $subtitle = "search : " . htmlspecialchars($_REQUEST['query']);
+
+$subtitle = "All Numbrs";
 
 function cutzero($value) {
    return preg_replace("/(\.?)0+$/", "", $value);
 }
-
-?>
-<?php ob_start() ?>
-        <h3 class="first">Search Results for <tt><?php print $current_search ?></tt></h3>
-
-        <div id='searchResults'>
-          <ul class='searchresults'>
+?> 
+<?php ob_start() ?> 
+<h3 class="first">All Numbrs</h3> 
+<div id='searchResults'> 
+<ul class='searchresults'>
 <?php
 require("db.inc");
 $stmt = $PDO->prepare("
 SELECT 
     name, short(title, 100) as shorttitle, title, description, url, short(url, 100) as shorturl
 
-FROM numbrs WHERE
+FROM numbrs 
 
-name LIKE CONCAT('%', :query, '%') OR 
-url LIKE CONCAT('%', :query, '%') OR 
-title LIKE CONCAT('%', :query, '%') OR 
-description LIKE CONCAT('%', :query, '%')
+ORDER BY createdTime DESC
 ");
 $stmt->execute(array("query" => $_REQUEST['query'])) || die(json_encode($stmt->errorInfo()));
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
