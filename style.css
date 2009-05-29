@@ -95,6 +95,9 @@ input[type=submit], input[type=button] {
     padding : 3px;
 }
 
+#number_of_numbrs {
+    font-weight : bold;
+}
 
 h1.first {
     margin-top :            0px;
