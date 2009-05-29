@@ -5,15 +5,13 @@ print '<?xml version="1.0" encoding="UTF-8"?>
 // webnumbr is ...
 $thoughts = array(
 "like OMG the GREATEST thing in like EVER!!!!",
-/*
 "superfly",
 "adequate for my honored needs",
 "like shooting a Winnebago over a crocodile pond",
-"greater than e^(i\pi) - 1",
+"greater than e^(i \pi) - 1",
 "<insert comment here>",
 "horrible and should nev[CARRIER LOST]",
 "in need of an urgent makeover",
-*/
 );
 $thought = $thoughts[rand(0, count($thoughts)-1)];
 
@@ -49,8 +47,10 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                             </li>
                         </ul>
                         <form id="search_form" action="/search"> 
-                            <input type="text" name="query" value="<?php print isset($current_search) ? $current_search : "" ?>" /> 
-                            <input type="submit" value="Search " />
+                            <div>
+                                <input type="text" name="query" value="<?php print isset($current_search) ? $current_search : "" ?>" /> 
+                                <input type="submit" value="Search " />
+                            </div>
                         </form>
                     </div>
                     <span class="logo">
@@ -62,20 +62,13 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 				<?php print $content ?>
 				</div>
                     <div id="footer">
-                                <a href="http://twitter.com/home?status=<?php print $status ?>">Comments? <img height="20" src="/images/twitter.jpg"/></a>
+                                <a href="http://twitter.com/home?status=<?php print $status ?>">Comments? <img height="20" src="/images/twitter.jpg" alt="twitter logo"/></a>
                         
                     </div>
             </div>
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
-        <script>
-$(function() {
-    $("#feedbacktext").focus(function() {
-        $(this).css("color", "black").val("");
-    });
-});
-            
-        </script>
+        <script type="type/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+        <?php print isset($script) ? $script : "" ?>
         <?php include("ga.inc") ?>
 
     </body>

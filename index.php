@@ -85,16 +85,16 @@ ob_start();
                             </tr>
                         </table>
                 
-                <br>
+                <br/>
                 <table id="embedexamples">
                 <caption>Embed code examples</caption>
                 <tr><td>
-                    <span href="#" title="To embed the numbr <b>wiki-en-pages</b> you can simply paste this onto your page">Pages in English Wikipedia (number)</span>
+                    <span title="To embed the numbr 'wiki-en-pages' you can simply paste this onto your page">Pages in English Wikipedia (number)</span>
                 </td><td>
                     <input value="<?php print $embed ?>" />
                 </td></tr>
                 <tr><td>
-                    <span href="#" title="To embed the graph <b>piratebay-peers</b> you can simply paste this onto your page">Users of Piratebay (graph)</span>
+                    <span title="To embed the graph 'piratebay-peers' you can simply paste this onto your page">Users of Piratebay (graph)</span>
                 </td><td>
                     <input value="<?php print $embedgraph ?>" />
                 </td></tr>
@@ -104,7 +104,7 @@ ob_start();
                 <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, update their values <b>every hour</b> and keep the history. 
                                   <b><a href="/create">Create</a></b> a numbr from any webpage. 
                                   
-                                  <br><br>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
+                                  <br/><br/>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
                 </div>
                 <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
                 Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.

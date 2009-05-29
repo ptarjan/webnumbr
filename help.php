@@ -5,7 +5,7 @@ ob_start();
 ?>
 <h3>About webNumber</h3>
 webNumber is created by <a href="http://paulisageek.com">Paul Tarjan</a> and <a href="http://yury.name">Yury Lifshits</a>.
-<br><br>
+<br/><br/>
 
 <h3>webNumbr API</h3>
 

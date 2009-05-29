@@ -167,7 +167,7 @@ if (isset($_REQUEST['parent'])) {
 }
 
 $url = "";
-// print $_REQUEST['referer'] . "<br>" . $_SERVER['HTTP_REFERER'];
+// print $_REQUEST['referer'] . "<br/>" . $_SERVER['HTTP_REFERER'];
 if (isset($_REQUEST['url']))
     $url = $_REQUEST['url'];
 else {
@@ -205,21 +205,7 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
 
 ?>
 
-    <style type="text/css">
-input[type=text], textarea {
-    width : 350px;
-}
-textarea {
-    width : 364px;
-}
-th {
-    text-align: right;
-    padding: 0px 10px;
-}
-    </style>
-
-
-        <form action="">
+        <form action="" class="edit-form">
         <p> 
           <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
           <input name="go" value="1" type="hidden" /> 
@@ -229,14 +215,14 @@ th {
         </p>
           <table>
 <?php if (isset($_REQUEST["parent"])) { ?>
-            <tr><th>Extends (inherits all data from)</th><td><input name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
+            <tr><th>Extends (inherits all data from)</th><td><input type="text" name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
 <?php } ?>
-            <tr><th><span href="http://openid.net">OpenID</span></th><td>
+            <tr><th>OpenID</th><td>
                 <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%; width : 330px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
             </td></tr>
             <tr><th><span title="unique name to fetch this numbr">Name (?)</span></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> /></td><td id="name_msg"></td></tr>
             <tr><th><span title="human readable title">Title (?)</span></th><td><input type="text" name="title" maxlength="255" value="<?php print htmlspecialchars($_REQUEST["title"]) ?>" /></td></tr>
-            <tr><th><span title="longer description, used in searches">Description (?)</span><br(optional)></th><td><textarea name="description" rows="3" maxlength="1000"><?php print htmlspecialchars($_REQUEST["description"]) ?></textarea></td></tr>
+            <tr><th><span title="longer description, used in searches">Description (?)</span></th><td><textarea name="description" rows="3" maxlength="1000"><?php print htmlspecialchars($_REQUEST["description"]) ?></textarea></td></tr>
             <tr><th>URL</th><td><input type="text" name="url" value="<?php print htmlspecialchars($url) ?>" maxlength="2000" /></td></tr>
             <tr><th>Xpath</th><td><input type="text" name='xpath' value="<?php print htmlspecialchars($_REQUEST["xpath"]); ?>" maxlength="1000" /></td></tr>
             <tr><th>Example of the data (<b>must be a number</b>)</th><td><b id='data' style="margin : 0px 10px"></b> <input type="button" id='reload' value="Reload" /> <span id="messages"></span></td></tr>

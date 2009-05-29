@@ -9,15 +9,15 @@ ob_start();
           Start a Numbr
         </h3>
         
-        <br><ol>
+        <br/><ol>
         <li>Think of an interesting number. 
-          <br>E.g. finance, sports, transportation, prices, or web statistics.</li>
+          <br/>E.g. finance, sports, transportation, prices, or web statistics.</li>
         <li>Find a website that has this number on some page.</li>
         <li>Enter the URL into the box below. </li>
         <li>You then will point and click on the number, enter a few details and its DONE!</li>
         </ol>
 
-        <br><form action='create'>
+        <br/><form action='create'>
           <div id="startForm"> 
             <label id="urlLabel" for="url">URL:</label>
             <input id="url" name='url' style="width:400px;" value="http://" />
@@ -25,7 +25,7 @@ ob_start();
           </div>
         </form>
 
-<br><br><br>&nbsp;
+<br/><br/><br/>&nbsp;
 
 
 <?php

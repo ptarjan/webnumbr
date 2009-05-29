@@ -18,47 +18,45 @@ $subtitle = $numbr['title'];
 
 ob_start();
 ?>
-<div class="numbr_card">
             <div class="numbr_title">
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
                     <?php print $data ?>
             </div>
-<div class="numbr_embed_code">
-    Embed code: 
-    <input type="text" value="<?php print $embed ?>"/>
-    <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
-</div>
+
+            <div class="numbr_embed_code">
+                Embed code: 
+                <input type="text" value="<?php print $embed ?>"/>
+                <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
+            </div>
 
             <div class="clear"></div>
 
-<div class="numbr_graph">
-<iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparnecy="true" frameborder="0"></iframe>
+            <div class="numbr_graph">
+            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparnecy="true" frameborder="0"></iframe>
 
-<br><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
-</div>
+            <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
+            </div>
 
             <h3>Description</h3> 
             <div class="numbr_description">
                     <?php print $numbr['description'] ?>
             </div>
 
-             <h3>Source</h3>
-
-             <a href="<?php print $numbr['url'] ?>" class="numbr_url">
+            <h3>Source</h3>
+            <a href="<?php print $numbr['url'] ?>" class="numbr_url">
                 <?php print $numbr['url'] ?>
-             </a>
+            </a>
 
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>
+<?php $content = ob_get_clean(); ob_start(); ?>
 <script>
 $("input").focus(function() {
     $(this).select();
 });
 </script>
 <?php
-$content = ob_get_clean();
-
+$script = ob_get_clean();
 
 
 
