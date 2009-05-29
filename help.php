@@ -10,11 +10,10 @@ webNumber is created by <a href="http://paulisageek.com">Paul Tarjan</a> and <a 
 <h3>webNumbr API</h3>
 
 <div>
-<h5>Basics</h5>
 <ul> 
 <li>All commands are seperated by <i>.</i> 
-</li><li>All parameters are wrapped by <i>()</i>. 
-</li><li><a href="/numbrPlugins">Plugin sources</a>. 
+</li><li>All parameters are wrapped by <i>()</i>.
+</li><li><a href="/numbrPlugins">Plugin sources</a>.
 </li><li>Order of operations (all selectors, "SQL", all operations, all formats, "print")
 </li></ul>
 </div>
