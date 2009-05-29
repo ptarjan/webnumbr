@@ -32,8 +32,9 @@ makeGraph = function (c, data) {
                     [35, 0]
                 ];
             }
+            
             var a = $("<a/>")
-            .text(c.numbr.title)
+            .text(typeof c.numbr.title != "undefined" ? c.numbr.title : name)
             .attr("href", "/" + name)
             .attr("target", "webNumbr");
             a.attr("title", a.text());
