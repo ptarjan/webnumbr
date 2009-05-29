@@ -86,7 +86,7 @@ ob_start();
                         </table>
                 
                 <br>
-                <table id="examples">
+                <table id="embedexamples">
                 <caption>Embed code examples</caption>
                 <tr><td>
                     <span href="#" title="To embed the numbr <b>wiki-en-pages</b> you can simply paste this onto your page">Pages in English Wikipedia (number)</span>
