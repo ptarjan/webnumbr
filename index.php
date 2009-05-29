@@ -1,5 +1,11 @@
 <?php
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/piratebay-peers.embed");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+$embed = htmlspecialchars(curl_exec($ch));
 
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/wiki-en-pages.all.graph.embed");
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+$embedgraph = htmlentities(curl_exec($ch));
 
 // ================ templates parts ===================
 
@@ -61,7 +67,31 @@ ob_start();
                                     <span id="webNumbr_semantic-sm-video">452000000</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.json(callback=webNumbr_semantic_sm_video)"></script>
                                 </td>
                             </tr>
+                            <tr>
+                                <td>
+                                    <a href="/wiki-en-pages">Pages in English Wikipedia</a>
+                                </td>
+                                <td class="leftpadding">
+                                    <span id="webNumbr_wiki-en-pages">2896040</span><script>var webNumbr_wiki_en_pages = function(data) { document.getElementById("webNumbr_wiki-en-pages").innerHTML = data; }</script><script src="http://webnumbr.com/wiki-en-pages.json(callback=webNumbr_wiki_en_pages)"></script>
+                                </td>
+                            </tr>
                         </table>
+                
+                <br>
+                <table id="examples">
+                <caption>Embed code examples</caption>
+                <tr><td>
+                    <span href="#" title="To embed the numbr <b>wiki-en-pages</b> you can simply paste this onto your page">Pages in English Wikipedia</span>
+                </td><td>
+                    <input value="<?php print $embed ?>" />
+                </td></tr>
+                <tr><td>
+                    <span href="#" title="To embed the graph <b>piratebay-peers</b> you can simply paste this onto your page">Users of Piratebay</span>
+                </td><td>
+                    <input value="<?php print $embedgraph ?>" />
+                </td></tr>
+                </table>
+
                 </div>
                 <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, update their values <b>every hour</b> and keep the history. 
                                   <b><a href="/create">Create</a></b> a numbr from any webpage. 
@@ -72,8 +102,6 @@ ob_start();
                 Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.
                 You can embed graphs too.
                 
-                <br><br>Embed numbr example
-                <br>Embed graph example
                 </div>
                 <div class="clear">
                 </div>
