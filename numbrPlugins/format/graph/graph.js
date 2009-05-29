@@ -59,7 +59,6 @@ makeGraph = function (c, data) {
         var plotFunction = function(json) {
             $("#plot").height($(".content").innerHeight());
             $("#plot").width(($(".content").width() - 15));
-            $("#plot").css("margin", -10);
             $.plot($('#plot'), graph, config);
         }
 

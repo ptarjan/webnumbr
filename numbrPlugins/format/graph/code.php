@@ -7,7 +7,6 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
     <title>webNumbr</title>
-    <link rel="stylesheet" href="http://webnumbr.com/style.css" type='text/css' />  
 
     <style type="text/css">
 html {
@@ -18,6 +17,7 @@ html {
 }
 body {
     height : 100%;
+    margin : 0px;
 }
 
 div.content {
@@ -29,16 +29,12 @@ div.content {
     height : 100%;
     border : 0px;
     background-color : transparent;
-}
-
-h5 {
-    margin : 0px;
-    text-decoration : underline;
+    padding : 0px;
+    font-size : 0.75em;
 }
     </style>
   </head>
   <body>
-    <h5 id='title'></h5>
     <div class="content">
         <div id="plot" class='center'>_______/\___|\___/\</div>
     </div>
