@@ -81,12 +81,12 @@ ob_start();
                 <table id="examples">
                 <caption>Embed code examples</caption>
                 <tr><td>
-                    <span href="#" title="To embed the numbr <b>wiki-en-pages</b> you can simply paste this onto your page">Pages in English Wikipedia</span>
+                    <span href="#" title="To embed the numbr <b>wiki-en-pages</b> you can simply paste this onto your page">Pages in English Wikipedia (number)</span>
                 </td><td>
                     <input value="<?php print $embed ?>" />
                 </td></tr>
                 <tr><td>
-                    <span href="#" title="To embed the graph <b>piratebay-peers</b> you can simply paste this onto your page">Users of Piratebay</span>
+                    <span href="#" title="To embed the graph <b>piratebay-peers</b> you can simply paste this onto your page">Users of Piratebay (graph)</span>
                 </td><td>
                     <input value="<?php print $embedgraph ?>" />
                 </td></tr>
