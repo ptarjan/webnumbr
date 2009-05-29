@@ -75,7 +75,7 @@ if ($type === "num") {
         header("Content-Type: text/xml");
         header("X-Content-Type-Options: nosniff");
         // stupid browser sniffing the content type
-        $xml = $data->saveXML();
+        $xml = @$data->saveXML();
         $xml = str_replace('xmlns="http://www.w3.org/1999/xhtml"', "", $xml);
         die($xml);
     }

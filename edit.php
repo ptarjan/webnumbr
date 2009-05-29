@@ -211,7 +211,7 @@ input[type=text], textarea {
     width : 350px;
 }
 textarea {
-    width : 360px;
+    width : 364px;
 }
 th {
     text-align: right;
