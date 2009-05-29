@@ -105,6 +105,15 @@ ob_start();
                 </div>
                 <div class="clear">
                 </div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>
+<script>
+$("input").focus(function() {
+    $(this).select();
+    });
+</script>
+
+
 <?php 
 $content = ob_get_clean();
 
