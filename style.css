@@ -335,6 +335,10 @@ ul.searchresults {
 }
 .numbr_embed_code input {
     width : 400px;
+    vertical-align : top;
+}
+.numbr_embed_code img {
+    vertical-align : top;
 }
 .numbr_graph_embed_code input {
     width : 400px;

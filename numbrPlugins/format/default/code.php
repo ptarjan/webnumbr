@@ -25,7 +25,11 @@ ob_start();
             <div class="numbr_box">
                     <?php print $data ?>
             </div>
-<div class="numbr_embed_code">Embed code: <input type="text" value="<?php print $embed ?>"/></div>
+<div class="numbr_embed_code">
+    Embed code: 
+    <input type="text" value="<?php print $embed ?>"/>
+    <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
+</div>
 
             <div class="clear"></div>
 
