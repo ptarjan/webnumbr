@@ -1,11 +1,9 @@
 <?php
-$stmt = $PDO->prepare("SELECT * FROM numbrs WHERE name = :name");
-$stmt->execute(array("name" => $c['name'])) || die(json_encode($stmt->errorInfo()));
-$sql = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (count($sql) == 0) die("No numbr found");
+if ($data == NULL) die("No numbr found");
 $numbr = array();
-foreach ($sql[0] as $key => $val) 
+foreach ($c['numbr'] as $key => $val) 
     $numbr[$key] = htmlspecialchars($val);
+
 $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $embed = htmlentities(curl_exec($ch));
@@ -13,6 +11,7 @@ $embed = htmlentities(curl_exec($ch));
 $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.all.graph.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $graphembed = htmlentities(curl_exec($ch));
+
 // ================ templates parts ===================
 
 $subtitle = $numbr['title'];
