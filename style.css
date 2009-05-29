@@ -313,7 +313,7 @@ ul.searchresults {
 
 .numbr_title{
     font-size:24px;
-    padding-bottom:15px;
+    padding-bottom:20px;
 }
 .numbr_box{
     font-size:24px;
@@ -323,10 +323,16 @@ ul.searchresults {
     margin-right:30px;
 }
 .numbr_graph{
-    padding:40px 0px;
+    padding:20px 0px;
 }
-.numbr_embed_code input, .numbr_graph_embed_code input {
-    width : 700px;
+.numbr_embed_code input {
+    width : 660px;
+}
+.numbr_graph_embed_code input {
+    width : 770px;
+}
+.numbr_embed_code {
+    padding : 10px;
 }
 .numbr_graph_embed_code {
     margin-top : 20px;
