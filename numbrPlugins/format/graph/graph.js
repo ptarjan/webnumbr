@@ -33,7 +33,7 @@ makeGraph = function (c, data) {
                 ];
             }
             var a = $("<a/>")
-            .text(name)
+            .text(c.numbr.title)
             .attr("href", "/" + name)
             .attr("target", "webNumbr");
             a.attr("title", a.text());
