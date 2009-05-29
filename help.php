@@ -56,17 +56,23 @@ function printDoc($dir) {
 
 <table class="docs">
 <caption>Selectors: These choose which piece of data you want.</caption>
+<tbody>
 <?php printDoc("selection"); ?>
+</tbody>
 </table>
 
 <table class="docs">
 <caption>Operations: These are evaluated in order and are chained together.</caption>
+<tbody>
 <?php printDoc("operation"); ?>
+</tbody>
 </table>
 
 <table class="docs">
 <caption>Formats: Output encoding. Can be chained.</caption>
+<tbody>
 <?php printDoc("format"); ?>
+</tbody>
 </table>
 
 <?php
