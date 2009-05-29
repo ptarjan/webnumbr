@@ -205,6 +205,9 @@ if (trim($url) == "") {
     die();
 }
 
+// FIREFOX HACK
+$_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
+
 ?>
 
     <style type="text/css">
