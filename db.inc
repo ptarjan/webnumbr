@@ -1,2 +1,2 @@
 <?php
-$PDO = new PDO("mysql:dbname=paul", "paul", "");
+$PDO = new PDO("mysql:dbname=webnumbr", "webnumbruser", "");
