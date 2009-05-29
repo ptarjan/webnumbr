@@ -1,19 +1,13 @@
 <?php
 
-require ("db.inc");
-$stmt = $PDO->prepare("SELECT COUNT(name) as count FROM numbrs");
-$stmt->execute();
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-$count = (int) $data[0]['count'];
-
-$subtitle = "All $count Numbrs";
+$subtitle = "All Numbrs";
 
 function cutzero($value) {
    return preg_replace("/(\.?)0+$/", "", $value);
 }
 ?> 
 <?php ob_start() ?> 
-<h3 class="first">All <span id="number_of_numbrs"><?php print $count ?></span> Numbrs</h3> 
+<h3 class="first">All Numbrs</h3> 
 <div id='searchResults'> 
 <ul class='searchresults'>
 <?php

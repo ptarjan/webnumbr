@@ -95,9 +95,6 @@ input[type=submit], input[type=button] {
     padding : 3px;
 }
 
-#number_of_numbrs {
-    font-weight : bold;
-}
 
 h1.first {
     margin-top :            0px;
@@ -228,6 +225,11 @@ h4, h5, h6 {
     padding-top:30px;
     padding-bottom:10px;
     font-size:18px;
+}
+
+#examples caption{
+    padding-top:30px;
+    padding-bottom:10px;
 }
 
 table.docs{
