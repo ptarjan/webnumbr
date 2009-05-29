@@ -200,6 +200,11 @@ if (empty($url)) {
     }
 }
 
+if (trim($url) == "") {
+    header("Location: /create");
+    die();
+}
+
 ?>
 
     <style type="text/css">
