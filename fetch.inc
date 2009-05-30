@@ -32,7 +32,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_USERAGENT => "webGraphr 1.0 http://paulisageek.com/webGraphr/",
+            CURLOPT_USERAGENT => "webnumbr 1.0 http://webnumbr.com/",
             CURLOPT_ENCODING => "gzip",
         );
         curl_setopt_array($ch, $options);
