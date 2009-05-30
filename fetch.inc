@@ -30,7 +30,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
-            CURLOPT_TIMEOUT => 30,
+            CURLOPT_TIMEOUT => 15,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_USERAGENT => "webnumbr 1.0 http://webnumbr.com/",
             CURLOPT_ENCODING => "gzip",
