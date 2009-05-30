@@ -1,9 +1,9 @@
 <?php
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/piratebay-peers.embed");
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/wiki-en-pages.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $embed = htmlspecialchars(curl_exec($ch));
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/wiki-en-pages.all.graph.embed");
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/piratebay-peers.all.graph.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $embedgraph = htmlentities(curl_exec($ch));
 
