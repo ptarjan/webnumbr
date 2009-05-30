@@ -19,7 +19,7 @@ function cache($url,$ttl,$prefix='', &$headers) {
           'http'=>array(
             'timeout' => 10,
             'max_redirects' => 10,
-            'user_agent' => "numbrFetcher/1.0 (http://webnumbr.com/)",
+            'user_agent' => "webnumbrFetcher/1.0 (http://webnumbr.com/)",
           )
         );
 
@@ -65,14 +65,13 @@ function buildDom($data) {
 
 function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
     if (is_string($url)) {
-        /*
         $ch = curl_init($url);
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => 15,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_USERAGENT => "webnumbr/1.0 (http://webnumbr.com/)",
+            CURLOPT_USERAGENT => "webnumbrFetcher/1.0 (http://webnumbr.com/)",
             CURLOPT_ENCODING => "gzip",
         );
         curl_setopt_array($ch, $options);
@@ -85,8 +84,8 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
         $ct = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
         $boom = explode(";", $ct);
         $ct = $boom[0];
-        */
 
+        /*
         $data = cache($url, 30, '', $headers);
         $ct = "";
         foreach ($headers as $header) {
@@ -95,6 +94,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                 $ct = $boom[1];
         }
         $finalURL = $url;
+        */
 
         switch ($ct) {
             case "application/xml":

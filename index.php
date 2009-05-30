@@ -102,9 +102,9 @@ ob_start();
 
                 </div>
                 <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, update their values <b>every hour</b> and keep the history. 
-                                  <b><a href="/create">Create</a></b> a numbr from any webpage. 
+                <b><a href="/create">Create</a></b> a numbr from any webpage. 
                                   
-                                  <br/><br/>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
+                <br/><br/>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
                 </div>
                 <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
                 Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.
@@ -116,9 +116,11 @@ ob_start();
 
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>
 <script>
-$("input").focus(function() {
-    $(this).select();
+$(function() {
+    $("input").focus(function() {
+        $(this).select();
     });
+});
 </script>
 
 

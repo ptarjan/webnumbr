@@ -205,6 +205,8 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
 
 ?>
 
+
+
         <form action="" class="edit-form">
         <p> 
           <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
