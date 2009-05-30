@@ -77,10 +77,10 @@ ob_start();
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/slashdot-poll-votes">Votes on current /. poll </a>
+                                    <a href="/earthquake-ca">Last earthquake in CA</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_slashdot-poll-votes">4772</span><script>var webNumbr_slashdot_poll_votes = function(data) { document.getElementById("webNumbr_slashdot-poll-votes").innerHTML = data; }</script><script src="http://webnumbr.com/slashdot-poll-votes.json(callback=webNumbr_slashdot_poll_votes)"></script>
+                                    <span id="webNumbr_earthquake-ca">2.1</span><script>var webNumbr_earthquake_ca = function(data) { document.getElementById("webNumbr_earthquake-ca").innerHTML = data; }</script><script src="http://webnumbr.com/earthquake-ca.json(callback=webNumbr_earthquake_ca)"></script>
                                 </td>
                             </tr>
                         </table>
