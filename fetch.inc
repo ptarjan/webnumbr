@@ -7,6 +7,45 @@ function noLineErrorHandler( $errno, $errstr, $errfile, $errline, $errcontext ) 
 }
 require("XMLHelper.inc");
 
+function cache($url,$ttl,$prefix='', &$headers) {
+    $headers = array();
+    $tmp = '/var/tmp/webnumbr/'.$prefix.md5($url);
+    if(file_exists($tmp)) $st = stat($tmp);
+    else $st = false;
+    if(!$st || $st && ($st['mtime']<($_SERVER['REQUEST_TIME']-$ttl))) {
+        if($st) touch($tmp);
+
+        $opts = array(
+          'http'=>array(
+            'timeout' => 10,
+            'max_redirects' => 10,
+            'user_agent' => "numbrFetcher/1.0 (http://webnumbr.com/)",
+          )
+        );
+
+        $context = stream_context_create($opts);
+
+        $stream = fopen($url,'r', false, $context);
+        if(!$stream) {
+          if($st) return $tmp;
+          return false;
+        }
+        $tmpf = tempnam('/var/tmp/webnumbr','tmp');
+        $tmpstream = fopen($tmpf, 'w');
+        $bytes = stream_copy_to_stream($stream, $tmpstream, 1000001);
+        if ($bytes == 1000001)
+            throw new FetchException("Documents larger than 1000000 bytes are unsupported");
+
+        $meta = (stream_get_meta_data($stream));
+        $headers = $meta['wrapper_data'];
+        fclose($stream);
+
+        fclose($tmpstream);
+        rename($tmpf, $tmp);
+    } else $bytes = $st['size'];
+    return file_get_contents($tmp);
+}
+
 function buildDom($data) {
 
     $data = preg_replace("/xmlns='[^']*'/", "", $data);
@@ -26,23 +65,37 @@ function buildDom($data) {
 
 function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
     if (is_string($url)) {
+        /*
         $ch = curl_init($url);
         $options = array(
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_TIMEOUT => 15,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_USERAGENT => "webnumbr 1.0 http://webnumbr.com/",
+            CURLOPT_USERAGENT => "webnumbr/1.0 (http://webnumbr.com/)",
             CURLOPT_ENCODING => "gzip",
         );
         curl_setopt_array($ch, $options);
         $data = curl_exec($ch);
+        if (strlen($data) > 1000000)
+            throw new FetchException("Document larger than 1000000 bytes unsupported");
         
         $finalURL = curl_getinfo($ch, CURLINFO_EFFECTIVE_URL);
     
         $ct = curl_getinfo($ch, CURLINFO_CONTENT_TYPE);
         $boom = explode(";", $ct);
         $ct = $boom[0];
+        */
+
+        $data = cache($url, 30, '', $headers);
+        $ct = "";
+        foreach ($headers as $header) {
+            $boom = explode(":", $header, 2);
+            if (strtolower($boom[0]) == "content-type")
+                $ct = $boom[1];
+        }
+        $finalURL = $url;
+
         switch ($ct) {
             case "application/xml":
             case "text/xml":
@@ -113,14 +166,15 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
     } else {
         $num = $nl;
     }
+    $oldnum = $num;
 
     // Number matches
-    preg_match("/(-?\s*[0-9,]+[.]?[0-9]*)/", $num, $matches);
+    preg_match("/(-?\s*[0-9]+[0-9,]+[.]?[0-9]*)/", $num, $matches);
     if (isset($matches[1])) $num = $matches[1];
     $num = str_replace(",", "", $num);
 
     if (!is_numeric($num)) {
-        throw new FetchException("Not a number: $num");
+        throw new FetchException("Not a number: $oldnum");
     }
     $type = "num";
     return $num;
