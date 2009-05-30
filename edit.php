@@ -31,56 +31,60 @@ if (isset($_REQUEST['go'])) {
         die ("Only urls starting with http are supported");
     }
 
-    // 
-    // OpenID
-    //
-    chdir("openid");
-    require ("common.php");
-    $dirbase = sprintf("http://%s/", $_SERVER['SERVER_NAME']);
-    $base = $dirbase . "edit?";
+    if (isset($_REQUEST['openid']) && trim($_REQUEST['openid']) != "") {
+        // 
+        // OpenID
+        //
+        chdir("openid");
+        require ("common.php");
+        $dirbase = sprintf("http://%s/", $_SERVER['SERVER_NAME']);
+        $base = $dirbase . "edit?";
 
-    $_REQUEST["_done"] = $base . http_build_query(
-        $_REQUEST
-    );
-    $_REQUEST["_root"] = $dirbase;
+        $_REQUEST["_done"] = $base . http_build_query(
+            $_REQUEST
+        );
+        $_REQUEST["_root"] = $dirbase;
 
-    $consumer = getConsumer();
+        $consumer = getConsumer();
 
-    // Complete the authentication process using the server's
-    // response.
-    $response = $consumer->complete($_REQUEST['_done']);
+        // Complete the authentication process using the server's
+        // response.
+        $response = $consumer->complete($_REQUEST['_done']);
 
-    $openid = "";
-    // Check the response status.
-    if ($response->status == Auth_OpenID_CANCEL) {
-        // This means the authentication was cancelled.
-        print ('Verification cancelled.');
-    } else if ($response->status == Auth_OpenID_FAILURE) {
-        // Authentication failed; display the error message.
-        if (strpos($response->message, "<No mode set>") === FALSE)  {
-            error_log ("OpenID authentication failed: " . $response->message);
-            die ("OpenID authentication failed: " . $response->message);
-        } else {
-            // This part redirects them to their openid provider
-            if ($_REQUEST["mode"] == "edit") {
-                $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
-                $stmt->execute(array("name" => $_REQUEST['name']));
-                $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
-                $openid = $result[0]['openid'];
+        $openid = "";
+        // Check the response status.
+        if ($response->status == Auth_OpenID_CANCEL) {
+            // This means the authentication was cancelled.
+            print ('Verification cancelled.');
+        } else if ($response->status == Auth_OpenID_FAILURE) {
+            // Authentication failed; display the error message.
+            if (strpos($response->message, "<No mode set>") === FALSE)  {
+                error_log ("OpenID authentication failed: " . $response->message);
+                die ("OpenID authentication failed: " . $response->message);
+            } else {
+                // This part redirects them to their openid provider
+                if ($_REQUEST["mode"] == "edit") {
+                    $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
+                    $stmt->execute(array("name" => $_REQUEST['name']));
+                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+                    if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
+                    $openid = $result[0]['openid'];
+                }
+                if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
+                    $openid = $_REQUEST['openid'];
+                };
+                require("try_auth.php");
+                doOpenID($openid);
+                die();
             }
-            if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
-                $openid = $_REQUEST['openid'];
-            };
-            require("try_auth.php");
-            doOpenID($openid);
-            die();
+        } else if ($response->status == Auth_OpenID_SUCCESS) {
+            // This means the authentication succeeded; extract the
+            // identity URL and Simple Registration data (if it was
+            // returned).
+            $openid = $response->getDisplayIdentifier();
         }
-    } else if ($response->status == Auth_OpenID_SUCCESS) {
-        // This means the authentication succeeded; extract the
-        // identity URL and Simple Registration data (if it was
-        // returned).
-        $openid = $response->getDisplayIdentifier();
+    } else {
+        $openid = "";
     }
 
     chdir("..");
@@ -205,7 +209,7 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
 
 ?>
 
-
+        <link type="text/css" href="http://jquery-ui.googlecode.com/svn/tags/1.7.1/themes/base/ui.all.css" rel="stylesheet" />
 
         <form action="" class="edit-form">
         <p> 

@@ -49,16 +49,17 @@ ob_start();
                 <?php print $numbr['url'] ?>
             </a>
 
-<?php $content = ob_get_clean(); ob_start(); ?>
-<script>
-$(function() {
-    $("input").focus(function() {
-        $(this).select();
-    });
-});
-</script>
+
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+            <script type="text/javascript">
+            $(function() {
+                $("input").focus(function() {
+                    $(this).select();
+                });
+            });
+            </script>
 <?php
-$script = ob_get_clean();
+    $content = ob_get_clean();
 
 
 
