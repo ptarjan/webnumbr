@@ -45,10 +45,67 @@ ob_start();
             </div>
 
             <h3>Source</h3>
-            <a href="<?php print $numbr['url'] ?>" class="numbr_url">
-                <?php print $numbr['url'] ?>
-            </a>
+            <div class="numbr_description">
+                <a href="<?php print $numbr['url'] ?>" class="numbr_url">
+                    <?php print $numbr['url'] ?>
+                </a>
+            </div>
 
+<?php if (isset($_REQUEST['info'])) { ?>
+<h3 class="numbr_info">Numbr Info</h3>
+<table class="numbr_info">
+<?php
+foreach ($c['numbr'] as $key => $value) {
+if ($key == "id") continue;
+?>
+<tr>
+    <th><?php print htmlspecialchars($key); ?></th>
+    <td><?php 
+$hvalue = htmlspecialchars($value);
+$link = "";
+switch ($key) {
+    case "name" :
+        $link = "/$hvalue";
+        break;
+    case "title" :
+    case "description" :
+        $parts = explode(" ", $value);
+        foreach ($parts as $part) {
+            print '<a href="/search?query=' . urlencode($part) . '">' . htmlspecialchars($part) . '</a> ';
+        }
+        $hvalue = "";
+        break;
+    case "url" :
+        $link = $hvalue;
+        break;
+    case "xpath" :
+        $link = '/create?' . http_build_query(array("url" => $c['numbr']['url'], "xpath" => $c['numbr']['xpath'], "action" => "show"));
+        break;
+    case "frequency" :
+        $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
+        break;
+    case "openid" :
+        $link = $hvalue;
+        break;
+    case "is_fetching" :
+        if ($value == 1)
+            $hvalue = '<span style="color:green">Good : this numbr is fetching</span>';
+        else 
+            $hvalue = '<span style="color:red">Bad : this numbr is not fetching due to too many fetch errors</span>';
+}
+if (trim($hvalue) != "") {
+    if (trim($link) != "") {
+        print '<a href="' . htmlspecialchars($link) . '">' . $hvalue . '</a>' ;
+    } else {
+        print $hvalue;
+    }
+}
+?>
+</td>
+</tr>
+<?php } ?>
+</table>
+<?php } ?>
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
             <script type="text/javascript">
