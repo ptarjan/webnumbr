@@ -1,5 +1,5 @@
 <?php
-if ($data == NULL) die("No numbr found");
+if ($data === NULL) die("No numbr found");
 $numbr = array();
 foreach ($c['numbr'] as $key => $val) 
     $numbr[$key] = htmlspecialchars($val);
