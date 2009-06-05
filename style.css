@@ -353,6 +353,12 @@ ul.searchresults {
 .numbr_description {
     padding-bottom : 30px;
 }
+.numbr_info td {
+    padding: 5px;
+}
+h3.numbr_info {
+    margin-top: 50px;
+}
 
 /* EDIT */
 .edit-form input[type="submit"], .edit-form input[type="text"], .edit-form input[type="password"], .edit-form textarea, .edit-form select {

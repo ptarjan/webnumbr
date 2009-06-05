@@ -51,7 +51,6 @@ ob_start();
                 </a>
             </div>
 
-<?php if (isset($_REQUEST['info'])) { ?>
 <h3 class="numbr_info">Numbr Info</h3>
 <table class="numbr_info">
 <?php
@@ -105,7 +104,6 @@ if (trim($hvalue) != "") {
 </tr>
 <?php } ?>
 </table>
-<?php } ?>
 
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
             <script type="text/javascript">
