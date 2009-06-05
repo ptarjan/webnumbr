@@ -22,7 +22,19 @@ ob_start();
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
-                    <?php print $data ?>
+                    <?php 
+                    function print_num($data) {
+                       print preg_replace("/(\.?)0+$/", "", number_format($data, 4, ".", ","));
+                    }
+                    if (is_string($data))
+                        print_num($data);
+                    else if (is_array($data)) {
+                        $count = count($data);
+                        if (isset($data[$count-1]) && is_array($data[$count-1])) {
+                            print_num($data[$count-1][1]);
+                        }
+                    }
+                    ?>
             </div>
 
             <div class="numbr_embed_code">
