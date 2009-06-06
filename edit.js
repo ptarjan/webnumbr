@@ -65,6 +65,10 @@ $(document).ready(function() {
             $("#data").wrapInner("<span class='error' style='color:red'></span>");
             return false;
         }
+        if ( $.trim($(":input[name='title']").val()) == "") {
+            $(":input[name='title']").wrap("<span class='error' style='border:10px solid red'></span>").focus();
+            return false;
+        }
 
         if ($("#name_msg span").css("color") !== "green") {
             $("#name_msg").wrap("<span class='error' style='border:5px solid red'></span>").focus();
