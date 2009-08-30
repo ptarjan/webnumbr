@@ -9,7 +9,7 @@ $embedgraph = htmlentities(curl_exec($ch));
 
 // ================ templates parts ===================
 
-$subtitle = "Can I get your number?";
+$subtitle = "Follow interesting numbers from anywhere on the web";
 ob_start();
 ?>
                 <div class="slogan">
