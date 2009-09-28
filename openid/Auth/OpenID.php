@@ -29,7 +29,6 @@ require_once "Auth/Yadis/PlainHTTPFetcher.php";
 require_once "Auth/Yadis/ParanoidHTTPFetcher.php";
 require_once "Auth/OpenID/BigMath.php";
 require_once "Auth/OpenID/URINorm.php";
-
 /**
  * Status code returned by the server when the only option is to show
  * an error page, since we do not have enough information to redirect

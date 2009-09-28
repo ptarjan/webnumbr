@@ -376,7 +376,7 @@ function Auth_OpenID_detectMathLibrary($exts)
         // Try to load dynamic modules.
         if (!$loaded) {
             foreach ($extension['modules'] as $module) {
-                if (@dl($module . "." . PHP_SHLIB_SUFFIX)) {
+                if (false && dl($module . "." . PHP_SHLIB_SUFFIX)) {
                     $loaded = true;
                     break;
                 }
@@ -422,6 +422,7 @@ function &Auth_OpenID_getMathLib()
     // supply will be stored here, so that subseqent calls to this
     // method will return a reference to the same object.
     static $lib = null;
+
 
     if (isset($lib)) {
         return $lib;
