@@ -12,6 +12,10 @@ $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.all.graph.emb
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $graphembed = htmlentities(curl_exec($ch));
 
+function cutzero($value) {
+   return preg_replace("/(\.?)0+$/", "", $value);
+}
+
 // ================ templates parts ===================
 
 $subtitle = $numbr['title'];
@@ -22,7 +26,7 @@ ob_start();
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
-                    <?php print $data ?>
+                    <?php print cutzero(number_format($data, 4, ".", ",")); ?>
             </div>
 
             <div class="numbr_embed_code">
