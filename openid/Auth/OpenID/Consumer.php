@@ -268,9 +268,9 @@ class Auth_OpenID_Consumer {
         $this->session =& $session;
 
         if ($consumer_cls !== null) {
-            $this->consumer =& new $consumer_cls($store);
+            $this->consumer = new $consumer_cls($store);
         } else {
-            $this->consumer =& new Auth_OpenID_GenericConsumer($store);
+            $this->consumer = new Auth_OpenID_GenericConsumer($store);
         }
 
         $this->_token_key = $this->session_key_prefix . $this->_token_suffix;
@@ -672,7 +672,7 @@ class Auth_OpenID_GenericConsumer {
     /**
      * @access private
      */
-    function _completeInvalid($message, &$endpoint, $unused)
+    function _completeInvalid($message, $endpoint, $unused)
     {
         $mode = $message->getArg(Auth_OpenID_OPENID_NS, 'mode',
                                  '<No mode set>');
@@ -684,7 +684,7 @@ class Auth_OpenID_GenericConsumer {
     /**
      * @access private
      */
-    function _complete_cancel($message, &$endpoint, $unused)
+    function _complete_cancel($message, $endpoint, $unused)
     {
         return new Auth_OpenID_CancelResponse($endpoint);
     }
@@ -692,7 +692,7 @@ class Auth_OpenID_GenericConsumer {
     /**
      * @access private
      */
-    function _complete_error($message, &$endpoint, $unused)
+    function _complete_error($message, $endpoint, $unused)
     {
         $error = $message->getArg(Auth_OpenID_OPENID_NS, 'error');
         $contact = $message->getArg(Auth_OpenID_OPENID_NS, 'contact');
@@ -705,7 +705,7 @@ class Auth_OpenID_GenericConsumer {
     /**
      * @access private
      */
-    function _complete_setup_needed($message, &$endpoint, $unused)
+    function _complete_setup_needed($message, $endpoint, $unused)
     {
         if (!$message->isOpenID2()) {
             return $this->_completeInvalid($message, $endpoint);
@@ -719,7 +719,7 @@ class Auth_OpenID_GenericConsumer {
     /**
      * @access private
      */
-    function _complete_id_res($message, &$endpoint, $return_to)
+    function _complete_id_res($message, $endpoint, $return_to)
     {
         $user_setup_url = $message->getArg(Auth_OpenID_OPENID1_NS,
                                            'user_setup_url');
@@ -1295,7 +1295,8 @@ class Auth_OpenID_GenericConsumer {
             Auth_OpenID_OPENID2_NS => array_merge($basic_sig_fields,
                                                   array('response_nonce',
                                                         'claimed_id',
-                                                        'assoc_handle')),
+                                                        'assoc_handle',
+                                                        'op_endpoint')),
             Auth_OpenID_OPENID1_NS => array_merge($basic_sig_fields,
                                                   array('nonce'))
             );
@@ -1460,7 +1461,7 @@ class Auth_OpenID_GenericConsumer {
      *
      * @access private
      */
-    function _extractSupportedAssociationType(&$server_error, &$endpoint,
+    function _extractSupportedAssociationType(&$server_error, $endpoint,
                                               $assoc_type)
     {
         // Any error message whose code is not 'unsupported-type'
@@ -1747,7 +1748,7 @@ class Auth_OpenID_AuthRequest {
      * class.  Instances of this class are created by the library when
      * needed.
      */
-    function Auth_OpenID_AuthRequest(&$endpoint, $assoc)
+    function Auth_OpenID_AuthRequest($endpoint, $assoc)
     {
         $this->assoc = $assoc;
         $this->endpoint =& $endpoint;

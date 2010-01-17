@@ -22,7 +22,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
     <head>
-        <title>webNumbr | <?php print $subtitle ?></title>
+        <title>web Number | <?php print $subtitle ?></title>
         <link rel="stylesheet" href="/style.css" type='text/css' />
     </head>
     <body>
@@ -70,6 +70,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
         <script type="type/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
         <?php print isset($script) ? $script : "" ?>
         <?php include("ga.inc") ?>
+        <?php include("uservoice.inc") ?>
 
     </body>
 </html>

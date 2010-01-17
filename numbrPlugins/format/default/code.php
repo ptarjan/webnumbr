@@ -12,6 +12,10 @@ $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.all.graph.emb
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $graphembed = htmlentities(curl_exec($ch));
 
+function cutzero($value) {
+   return preg_replace("/(\.?)0+$/", "", $value);
+}
+
 // ================ templates parts ===================
 
 $subtitle = $numbr['title'];
@@ -22,19 +26,7 @@ ob_start();
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
-                    <?php 
-                    function print_num($data) {
-                       print preg_replace("/(\.?)0+$/", "", number_format($data, 4, ".", ","));
-                    }
-                    if (is_string($data))
-                        print_num($data);
-                    else if (is_array($data)) {
-                        $count = count($data);
-                        if (isset($data[$count-1]) && is_array($data[$count-1])) {
-                            print_num($data[$count-1][1]);
-                        }
-                    }
-                    ?>
+                    <?php if (is_array($data)) { $data = end($data); if (is_array($data)) $data = $data[1]; }; print cutzero(number_format($data, 4, ".", ",")); ?>
             </div>
 
             <div class="numbr_embed_code">
@@ -46,7 +38,7 @@ ob_start();
             <div class="clear"></div>
 
             <div class="numbr_graph">
-            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparnecy="true" frameborder="0"></iframe>
+            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
 
             <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
             </div>

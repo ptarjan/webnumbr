@@ -12,12 +12,7 @@ function doOpenID($openid) {
         die("Authentication error; not a valid OpenID.");
     }
 
-    $sreg_request = Auth_OpenID_SRegRequest::build(
-                                     // Required
-                                     array(''),
-                                     // Optional
-                                     array('')
-    );
+    $sreg_request = Auth_OpenID_SRegRequest::build(array('email'));
 
     if ($sreg_request) {
         $auth_request->addExtension($sreg_request);

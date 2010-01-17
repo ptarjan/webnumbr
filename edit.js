@@ -32,6 +32,14 @@ $(document).ready(function() {
     $(":input[name='name']").blur(checkName);
     if ($(":input[name='name']").val()) $(":input[name='name']").blur();
 
+    var updateName = function() {
+        var val = $(this).val();
+        val = val.toLowerCase().replace(/[^a-z0-9-]/g, '-'); 
+        $(":input[name='name']").val(val);
+        $(":input[name='name']").blur();
+    }
+    $(":input[name='title']").blur(updateName);
+
     var reload = function() {
         $("#data").html('<img src="images/twirl.gif" alt="thinking"/>');
         $.get("create?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {

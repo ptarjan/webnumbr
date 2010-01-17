@@ -45,6 +45,7 @@ foreach ($data as $row) {
 
 <!-- End Content -->
 <?php include("ga.inc") ?>
+<?php include("uservoice.inc") ?>
       </div>
     </div>
   </body>
