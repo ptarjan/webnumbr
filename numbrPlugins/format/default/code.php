@@ -68,7 +68,11 @@ $hvalue = htmlspecialchars($value);
 $link = "";
 switch ($key) {
     case "name" :
-        $link = "/$hvalue";
+        if (isset($c['numbr']['openid'])) {
+            $hvalue = "<a href=\"/$hvalue\">$hvalue</a> <a href=\"/edit?mode=edit&name=" . urlencode($hvalue) . "\">(edit)</a>";
+        } else {
+            $link = "/$hvalue";
+        }
         break;
     case "title" :
     case "description" :
@@ -88,7 +92,6 @@ switch ($key) {
         $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
         break;
     case "openid" :
-        $link = $hvalue;
         break;
     case "is_fetching" :
         if ($value == 1)
