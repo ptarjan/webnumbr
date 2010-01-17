@@ -51,6 +51,7 @@ ob_start();
                                     <span id="webNumbr_crude-oil-brent">60.75</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
+<!--
                             <tr>
                                 <td>
                                     <a href="/gas-sanjose">Cheapest gas in San Jose</a>
@@ -59,6 +60,7 @@ ob_start();
                                     <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.json(callback=webNumbr_gas_sanjose)"></script>
                                 </td>
                             </tr>
+-->
                             <tr>
                                 <td>
                                     <a href="/semantic-sm-video">Number of semantic video files</a>

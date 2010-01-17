@@ -26,7 +26,7 @@ ob_start();
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
-                    <?php print cutzero(number_format($data, 4, ".", ",")); ?>
+                    <?php if (is_array($data)) { $data = end($data); if (is_array($data)) $data = $data[1]; }; print cutzero(number_format($data, 4, ".", ",")); ?>
             </div>
 
             <div class="numbr_embed_code">
@@ -38,7 +38,7 @@ ob_start();
             <div class="clear"></div>
 
             <div class="numbr_graph">
-            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparnecy="true" frameborder="0"></iframe>
+            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
 
             <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
             </div>
