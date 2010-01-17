@@ -9,7 +9,11 @@ RewriteEngine on
 RewriteCond %{HTTP_HOST} ^dev\.webnumbr\.com$
 RewriteRule ^(.*) /dev/$1 [L]
 
-# hostnames can work for simple things too
+# hostnames without paths
+RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
+RewriteRule ^/?$ http://webnumbr.com/%1 [R,L]
+
+# hostnames with paths
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
 RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
 
