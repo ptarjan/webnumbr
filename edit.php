@@ -30,8 +30,8 @@ if (isset($_REQUEST['go'])) {
     if (strpos($_REQUEST["url"], "http") !== 0) {
         die ("Only urls starting with http are supported");
     }
-
-    if (isset($_REQUEST['openid']) && trim($_REQUEST['openid']) != "") {
+    
+    if ($_REQUEST["mode"] == "edit" || (isset($_REQUEST['openid']) && trim($_REQUEST['openid']) != "")) {
         // 
         // OpenID
         //
