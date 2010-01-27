@@ -6,7 +6,7 @@ $numbr = array();
 foreach ($c['numbr'] as $key => $val) 
     $numbr[$key] = htmlspecialchars($val);
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.embed");
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . str_replace(" ", "%20", "/{$c['code']}.embed"));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $embed = htmlentities(curl_exec($ch));
 
@@ -17,7 +17,7 @@ if (count($c['plugins']['selection']) == 1 && $c['plugins']['selection'][0][0] =
 
 $graphCode .= ".graph";
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/$graphCode.embed");
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . str_replace(" ", "%20", "/$graphCode.embed"));
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $graphembed = htmlentities(curl_exec($ch));
 
