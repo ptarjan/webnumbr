@@ -1,0 +1,1 @@
+Upper bound on value. Accepts any number that SQL can understand
