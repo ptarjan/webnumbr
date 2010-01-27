@@ -191,7 +191,12 @@ public function run() {
 }
 } // End class
 
-$numbr = new Numbr($_REQUEST['name']);
+$name = $_REQUEST['name'];
+if (substr($name, 0, 13) == "dev/webnumbr/")
+    $name = substr($name, 13);
+
+$numbr = new Numbr($name);
+
 $data = $numbr->run();
 foreach ($numbr->c['headers'] as $header)
     header($header);
