@@ -30,6 +30,7 @@ if ($bad) {
     $data = "$url returned '$data'. Expected json {\"data\":3.14159,\"c\":{\"key\":\"value\"}}";
 } else {
     $data = $json['data'];
+    unset($json['c']['sql']); // No SQL exploits allowed
     foreach ($json['c'] as $k => $v)
         $c[$k] = $v;
 }
