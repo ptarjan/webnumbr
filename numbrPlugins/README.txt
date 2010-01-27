@@ -4,6 +4,7 @@ Filenames :
     code.php    The PHP code to run (only PHP supported for now)
     doc.txt     The documentation string to show to the user
     params.txt  A complete example parameter list
+    example.txt A full example to show in the docs
 
 Special Inputs :
     $c          Configuration array. The "Model" for MVC coding
@@ -15,15 +16,15 @@ Special Ouputs :
     $data       The output data. Applicable to operations
 
 Configuration :
-    $c['ops']           Segmented operations into [name, [[key1, val1], ..]]
-    $c['name']          The base name of the numbr
-    $c['numbr']         The meta data about the numbr from the database
+    $c['ops']               Segmented operations into [name, [[key1, val1], ..]]
+    $c['name']              The base name of the numbr
+    $c['numbr']             The meta data about the numbr from the database
 
-    $c['plugins']       The set of enabled plugins split into type 
-    $c['headers']       Headers to be printed to the browser
-    $c['code']          The canonical code for this graph
-    $c['sql']           Selection information
-    $c['sql']['where']  Strings to be joined into the SQL where clause. Defaults to 'numbr = :name'
+    $c['plugins']           The set of enabled plugins split into type 
+    $c['headers']           Headers to be printed to the browser
+    $c['code']              The canonical code for this graph
+    $c['sql']               Selection information. Not allowed for remote plugins
+    $c['sql']['where']      Strings to be joined into the SQL where clause. Defaults to 'numbr = :name'
     $c['sql']['orderby']    ORDERBY string. Defaults to 'timestamp DESC'
-    $c['sql']['params'] PDO parameters. Defaults to 'array("name" => $this->c['name'], "limit" => array(PHP_INT_MAX, PDO::PARAM_INT))'
-    $c['singleValue']   Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins
+    $c['sql']['params']     PDO parameters. Defaults to 'array("name" => $this->c['name'], "limit" => array(PHP_INT_MAX, PDO::PARAM_INT))'
+    $c['singleValue']       Whether to only return the latest row as a single number instead of an array. Applicable to selection plugins
