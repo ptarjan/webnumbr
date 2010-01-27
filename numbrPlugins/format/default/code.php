@@ -1,5 +1,7 @@
 <?php
-if ($data === NULL) die("No numbr found");
+if ($data === NULL) {
+    header("Location: /search?query={$c['name']}");
+}
 $numbr = array();
 foreach ($c['numbr'] as $key => $val) 
     $numbr[$key] = htmlspecialchars($val);
