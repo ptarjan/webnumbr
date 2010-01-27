@@ -25,6 +25,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
         <title>Web Numbr | <?php print $subtitle ?></title>
         <link rel="stylesheet" href="/style.css" type='text/css' />
         <meta name="keywords" content="webnumbr, webnumber, web number, web numbr, web graph, web plot, web grapher" />
+        <?php print $htmlHead ?>
     </head>
     <body>
             <div id="wrap">

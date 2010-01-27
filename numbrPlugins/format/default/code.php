@@ -26,7 +26,9 @@ function cutzero($value) {
 // ================ templates parts ===================
 
 $subtitle = $numbr['title'];
-
+$htmlHead = <<<END
+<link rel="alternate" type="application/rss+xml" title="{$c['name']}" href="{$c['code']}.rss" />
+END;
 ob_start();
 ?>
             <div class="numbr_title">
