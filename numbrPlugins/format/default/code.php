@@ -8,7 +8,13 @@ $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $embed = htmlentities(curl_exec($ch));
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/{$c['code']}.all.graph.embed");
+$graphCode = $c['code'];
+if (count($c['plugins']['selection']) == 1 && $c['plugins']['selection'][0][0] == 'default')
+    $graphCode = str_replace($graphCode, $c['name'], "{$c['name']}.all");
+
+$graphCode .= ".graph";
+
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/$graphCode.embed");
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
 $graphembed = htmlentities(curl_exec($ch));
 
@@ -38,7 +44,7 @@ ob_start();
             <div class="clear"></div>
 
             <div class="numbr_graph">
-            <iframe src="/<?php print $c['code'] ?>.all.graph" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
+            <iframe src="/<?php print $graphCode ?>" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
 
             <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
             </div>
