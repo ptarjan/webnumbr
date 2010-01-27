@@ -5,10 +5,6 @@
 </IfModule>
 RewriteEngine on
 
-# hostnames can work for simple things too
-RewriteCond %{HTTP_HOST} ^dev\.webnumbr\.com$
-RewriteRule ^(.*) /dev/$1 [L]
-
 # hostnames without paths
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
 RewriteRule ^/?$ http://webnumbr.com/%1 [R,L]
