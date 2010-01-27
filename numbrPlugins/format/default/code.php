@@ -10,7 +10,7 @@ $embed = htmlentities(curl_exec($ch));
 
 $graphCode = $c['code'];
 if (count($c['plugins']['selection']) == 1 && $c['plugins']['selection'][0][0] == 'default') {
-    $graphCode = str_replace($c['name'], "{$c['name']}.all", $graphcode);
+    $graphCode = str_replace($c['name'], "{$c['name']}.all", $graphCode);
 }
 
 $graphCode .= ".graph";
