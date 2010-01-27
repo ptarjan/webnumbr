@@ -243,8 +243,11 @@ table.docs{
     width:100%
 }
 
-.docs td{
-    padding-right:10px;
+.docs td {
+    padding: 6px 10px;
+}
+.evenRow {
+    background-color: #EDF5FF;
 }
 
 div#wrap{

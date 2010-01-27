@@ -35,6 +35,7 @@ function printDoc($dir) {
     $key = array_search("default", $p);
     unset($p[$key]);
     array_unshift($p, 'default');
+    $i = 0;
     foreach ($p as $name) {
         if (substr($name, 0, 1) == ".") continue;
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
@@ -42,8 +43,9 @@ function printDoc($dir) {
         $example = @file_get_contents("numbrPlugins/$dir/$name/example.txt");
         $example = "<a href=\"/$example\">$example</a>";
         if (!$doc) continue;
+        $i++;
 ?>
-<tr>
+ <tr class="<?php print ($i % 2 == 0 ? "evenRow" : "oddRow") ?>">
  <td><?php print $name ?></td>
  <td><?php print trim($params) ?></td>
  <td><?php print $doc ?></td>
