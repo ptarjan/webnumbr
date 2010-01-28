@@ -22,6 +22,9 @@ arsort($data);
 foreach ($data as $row) {
     $time = $row[0];
     $value = $row[1];
+
+    if ($value == null) continue;
+
     $link = "http://webnumbr.com/" . htmlspecialchars(preg_replace("/.rss\([^)]*\)/", "", $c['code']));
     $permlink = $link . ".at($time)";
 ?>
