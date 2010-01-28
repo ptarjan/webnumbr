@@ -37,7 +37,7 @@ $htmlHead = <<<END
 END;
 ob_start();
 ?>
-            <div class="numbr_title">
+            <div id="numbr_title">
                     <?php print $numbr['title'] ?>
             </div>
 <?php 
@@ -49,11 +49,11 @@ if (is_array($data)) {
 
 if (is_numeric($data)) {
 ?>
-            <div class="numbr_box">
+            <div id="numbr_box">
                 <?php print cutzero(number_format($data, 4, ".", ",")); ?>
             </div>
 
-            <div class="numbr_embed_code">
+            <div id="numbr_embed_code">
                 Embed code: 
                 <input type="text" value="<?php print $embed ?>"/>
                 <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
@@ -62,21 +62,21 @@ if (is_numeric($data)) {
 
             <div class="clear"></div>
 
-            <div class="numbr_graph">
+            <div id="numbr_graph">
             <iframe src="/<?php print $graphCode ?>" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
 
-            <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
+            <br/><div id="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
             </div>
 
 <?php if (count($c['numbr'])) { ?>
             <h3>Description</h3> 
-            <div class="numbr_description">
+            <div id="numbr_description">
                     <?php print $numbr['description'] ?>
             </div>
 
             <h3>Source</h3>
-            <div class="numbr_description">
-                <a href="<?php print $numbr['url'] ?>" class="numbr_url">
+            <div id="numbr_url">
+                <a href="<?php print $numbr['url'] ?>">
                     <?php print $numbr['url'] ?>
                 </a>
             </div>

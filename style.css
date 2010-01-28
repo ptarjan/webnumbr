@@ -333,37 +333,37 @@ ul.searchresults {
 }
 
 /* numbr */
-.numbr_title{
+#numbr_title{
     font-size:24px;
     padding-bottom:20px;
 }
-.numbr_box{
+#numbr_box{
     font-size:24px;
     float:left;
     padding:10px 20px;
     border: 1px solid black;
     margin : 0px 30px 10px 0px;
 }
-.numbr_graph{
+#numbr_graph{
     padding:20px 0px;
 }
-.numbr_embed_code input {
+#numbr_embed_code input {
     width : 400px;
     vertical-align : top;
 }
-.numbr_embed_code img {
+#numbr_embed_code img {
     vertical-align : top;
 }
-.numbr_graph_embed_code input {
+#numbr_graph_embed_code input {
     width : 400px;
 }
-.numbr_embed_code {
+#numbr_embed_code {
     padding : 10px;
 }
-.numbr_graph_embed_code {
+#numbr_graph_embed_code {
     margin-top : 20px;
 }
-.numbr_description {
+#numbr_description {
     padding-bottom : 30px;
 }
 .numbr_info td {
