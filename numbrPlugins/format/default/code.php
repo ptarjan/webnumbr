@@ -6,14 +6,16 @@ $numbr = array();
 foreach ($c['numbr'] as $key => $val) 
     $numbr[$key] = htmlspecialchars($val);
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . str_replace(" ", "%20", "/{$c['code']}.embed"));
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-$embed = htmlentities(curl_exec($ch));
-
+$embedCode = $c['code'];
 $graphCode = $c['code'];
 if (count($c['plugins']['selection']) == 1 && $c['plugins']['selection'][0][0] == 'default') {
     $graphCode = str_replace($c['name'], "{$c['name']}.all", $graphCode);
+    $embedCode = str_replace($c['name'], "{$c['name']}.latest", $embedCode);
 }
+
+$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . str_replace(" ", "%20", "/$embedCode.embed"));
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+$embed = htmlentities(curl_exec($ch));
 
 $graphCode .= ".graph";
 
