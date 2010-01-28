@@ -222,13 +222,14 @@ h4, h5, h6 {
 
 
 /* help */
-.docs caption {
+.docs h3 {
     background : #eee;
     margin : 40px 0px 10px 0px;
     padding-top:10px;
     padding-bottom:10px;
     font-size:18px;
     border-bottom : 1px solid black;
+    text-align: center;
 }
 .docs tr {
     margin-top : 5px;
@@ -239,7 +240,7 @@ h4, h5, h6 {
     padding-bottom:10px;
 }
 
-table.docs{
+.docs table{
     width:100%
 }
 
@@ -247,7 +248,7 @@ table.docs{
     padding: 6px 10px;
 }
 .evenRow {
-    background-color: #EDF5FF;
+    background-color: #eef;
 }
 
 div#wrap{

@@ -3,7 +3,7 @@
 $subtitle = "About webNumbr";
 ob_start();
 ?>
-<h3>About webNumber</h3>
+<h3>About webNumbr</h3>
 Created by <a href="http://paulisageek.com">Paul Tarjan</a> and <a href="http://yury.name">Yury Lifshits</a>.
 <br/><br/>
 
@@ -56,26 +56,28 @@ function printDoc($dir) {
 }
 ?>
 
-<table class="docs">
-<caption>Selectors: These choose which piece of data you want.</caption>
+<div class="docs">
+<table>
+<h3>Selectors: These choose which piece of data you want.</h3>
 <tbody>
 <?php printDoc("selection"); ?>
 </tbody>
 </table>
 
-<table class="docs">
-<caption>Operations: These are evaluated in order and are chained together.</caption>
+<table>
+<h3>Operations: These are evaluated in order and are chained together.</h3>
 <tbody>
 <?php printDoc("operation"); ?>
 </tbody>
 </table>
 
-<table class="docs">
-<caption>Formats: Output encoding. Can be chained.</caption>
+<table>
+<h3>Formats: Output encoding. Can be chained.</h3>
 <tbody>
 <?php printDoc("format"); ?>
 </tbody>
 </table>
+</div>
 
 <?php
 $content = ob_get_clean();
