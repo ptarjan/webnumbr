@@ -24,7 +24,7 @@ ob_start();
                                     <a href="/webnumbrs">Number of webNumbrs</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_webnumbrs">Loading ...</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.json(callback=webNumbr_webnumbrs)"></script>
+                                    <span id="webNumbr_webnumbrs">Loading ...</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.latest.json(callback=webNumbr_webnumbrs)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -32,7 +32,7 @@ ob_start();
                                     <a href="/yhoo">Yahoo stock price</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_yhoo">Loading ...</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.json(callback=webNumbr_yhoo)"></script>
+                                    <span id="webNumbr_yhoo">Loading ...</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.latest.json(callback=webNumbr_yhoo)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -40,7 +40,7 @@ ob_start();
                                     <a href="/temperature-sanjose">Temperature in San Jose</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_temperature-sanjose">Loading ...</span><script>var webNumbr_temperature_sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.json(callback=webNumbr_temperature_sanjose)"></script>
+                                    <span id="webNumbr_temperature-sanjose">Loading ...</span><script>var webNumbr_temperature_sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.latest.json(callback=webNumbr_temperature_sanjose)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -48,7 +48,7 @@ ob_start();
                                     <a href="/crude-oil-brent">Crude Brent Oil</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">Loading ...</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.json(callback=webNumbr_crude_oil_brent)"></script>
+                                    <span id="webNumbr_crude-oil-brent">Loading ...</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.latest.json(callback=webNumbr_crude_oil_brent)"></script>
                                 </td>
                             </tr>
 <!--
@@ -57,7 +57,7 @@ ob_start();
                                     <a href="/gas-sanjose">Cheapest gas in San Jose</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.json(callback=webNumbr_gas_sanjose)"></script>
+                                    <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.latest.json(callback=webNumbr_gas_sanjose)"></script>
                                 </td>
                             </tr>
 -->
@@ -66,7 +66,7 @@ ob_start();
                                     <a href="/semantic-sm-video">Number of semantic video files</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_semantic-sm-video">Loading ...</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.json(callback=webNumbr_semantic_sm_video)"></script>
+                                    <span id="webNumbr_semantic-sm-video">Loading ...</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.latest.json(callback=webNumbr_semantic_sm_video)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -74,7 +74,7 @@ ob_start();
                                     <a href="/wiki-en-pages">Pages in English Wikipedia</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_wiki-en-pages">Loading ...</span><script>var webNumbr_wiki_en_pages = function(data) { document.getElementById("webNumbr_wiki-en-pages").innerHTML = data; }</script><script src="http://webnumbr.com/wiki-en-pages.json(callback=webNumbr_wiki_en_pages)"></script>
+                                    <span id="webNumbr_wiki-en-pages">Loading ...</span><script>var webNumbr_wiki_en_pages = function(data) { document.getElementById("webNumbr_wiki-en-pages").innerHTML = data; }</script><script src="http://webnumbr.com/wiki-en-pages.latest.json(callback=webNumbr_wiki_en_pages)"></script>
                                 </td>
                             </tr>
                             <tr>
@@ -82,7 +82,7 @@ ob_start();
                                     <a href="/earthquake-ca">Last earthquake in CA</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_earthquake-ca">Loading ...</span><script>var webNumbr_earthquake_ca = function(data) { document.getElementById("webNumbr_earthquake-ca").innerHTML = data; }</script><script src="http://webnumbr.com/earthquake-ca.json(callback=webNumbr_earthquake_ca)"></script>
+                                    <span id="webNumbr_earthquake-ca">Loading ...</span><script>var webNumbr_earthquake_ca = function(data) { document.getElementById("webNumbr_earthquake-ca").innerHTML = data; }</script><script src="http://webnumbr.com/earthquake-ca.latest.json(callback=webNumbr_earthquake_ca)"></script>
                                 </td>
                             </tr>
                         </table>
