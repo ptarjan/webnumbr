@@ -39,7 +39,17 @@ ob_start();
                     <?php print $numbr['title'] ?>
             </div>
             <div class="numbr_box">
-                    <?php if (is_array($data)) { $data = end($data); if (is_array($data)) $data = $data[1]; }; print cutzero(number_format($data, 4, ".", ",")); ?>
+                    <?php 
+if (is_array($data)) { 
+    $data = end($data); 
+    if (is_array($data)) 
+        $data = $data[1]; 
+}
+if (is_array($data))
+    print "Multiple";
+else if (is_numeric($data))
+    print cutzero(number_format($data, 4, ".", ","));
+                    ?>
             </div>
 
             <div class="numbr_embed_code">

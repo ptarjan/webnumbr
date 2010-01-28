@@ -52,13 +52,16 @@ if (isset($_REQUEST['go'])) {
         $response = $consumer->complete($_REQUEST['_done']);
 
         $openid = "";
-        // This part redirects them to their openid provider
+        if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
+            $openid = $_REQUEST['openid'];
+        };
+
         if ($_REQUEST["mode"] == "edit") {
             $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
             $stmt->execute(array("name" => $_REQUEST['name']));
             $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
             if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
-            $curopenid = $result[0]['openid'];
+            $openid = $result[0]['openid'];
         }
 
         // Check the response status.
@@ -71,13 +74,7 @@ if (isset($_REQUEST['go'])) {
                 error_log ("OpenID authentication failed: " . $response->message);
                 die ("OpenID authentication failed: " . $response->message);
             } else {
-                $openid = $curopenid;
-
-                /* Why was this here, what an exploit... ????
-                if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
-                    $openid = $_REQUEST['openid'];
-                };
-                 */
+                // This part redirects them to their openid provider
                 require("try_auth.php");
                 doOpenID($openid);
                 die();
@@ -86,9 +83,13 @@ if (isset($_REQUEST['go'])) {
             // This means the authentication succeeded; extract the
             // identity URL and Simple Registration data (if it was
             // returned).
-            $openid = $response->getDisplayIdentifier();
-            if ($openid != $curopenid)
-                die ("That isn't the same openid as in the database. Bad Hacker!");
+            $newopenid = $response->getDisplayIdentifier();
+            if ($_REQUEST["mode"] == "edit") {
+                if ($openid != $newopenid)
+                    die ("That isn't the same openid as in the database. Bad Hacker!");
+            } else {
+                $openid = $newopenid;
+            }
         }
     } else {
         $openid = "";
