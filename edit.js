@@ -90,7 +90,7 @@ $(document).ready(function() {
         $("#dialog").dialog("open");
         return false;
     }
-    $("form").submit(validate);
+    $("form.edit-form").submit(validate);
 
     $("#dialog").dialog({
         modal : true,
