@@ -1,1 +1,1 @@
-Default is "latest" without any parameters
+Default is "all"
