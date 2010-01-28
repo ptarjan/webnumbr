@@ -45,7 +45,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                                 <a href="/random">Random</a>
                             </li>
                             <li>
-                                <a href="/help">Help</a> 
+                                <a href="/api">API</a> 
                             </li>
                         </ul>
                         <form id="search_form" action="/search"> 

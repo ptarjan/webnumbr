@@ -1,22 +1,20 @@
 <?php
 // ================ templates parts ===================
-$subtitle = "About webNumbr";
+$subtitle = "API";
 ob_start();
 ?>
-<h3>About webNumbr</h3>
-Created by <a href="http://paulisageek.com">Paul Tarjan</a> and <a href="http://yury.name">Yury Lifshits</a>.
-<br/><br/>
 
-<h3>webNumbr API</h3>
+<div class="docs">
+<h2>WebNumbr API</h2>
 
-<div>
+Simply change the url you use to access your numbr and you can do neat things.
+
 <ul> 
 <li>All commands are seperated by <i>.</i> 
 </li><li>All parameters are wrapped by <i>()</i>
-</li><li><a href="/numbrPlugins">Plugin sources</a>
-</li><li>Order of operations (all selectors, "SQL", all operations, all formats, "print")
+</li><li>You can read the <a href="/numbrPlugins">plugin sources</a>
+</li><li>Order of operations (all selectors, "do SQL", all operations, all formats, "do output")
 </li></ul>
-</div>
 
 <?php
 function printDoc($dir) {
@@ -56,7 +54,6 @@ function printDoc($dir) {
 }
 ?>
 
-<div class="docs">
 <table>
 <h3>Selectors: These choose which piece of data you want.</h3>
 <tbody>

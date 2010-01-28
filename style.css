@@ -221,8 +221,8 @@ h4, h5, h6 {
 }
 
 
-/* help */
-.docs h3 {
+/* api */
+.docs h3, .docs h2 {
     background : #eee;
     margin : 40px 0px 10px 0px;
     padding-top:10px;
