@@ -52,27 +52,32 @@ if (isset($_REQUEST['go'])) {
         $response = $consumer->complete($_REQUEST['_done']);
 
         $openid = "";
+        // This part redirects them to their openid provider
+        if ($_REQUEST["mode"] == "edit") {
+            $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
+            $stmt->execute(array("name" => $_REQUEST['name']));
+            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
+            $curopenid = $result[0]['openid'];
+        }
+
         // Check the response status.
         if ($response->status == Auth_OpenID_CANCEL) {
             // This means the authentication was cancelled.
-            print ('Verification cancelled.');
+            die ('OpenID cancelled.');
         } else if ($response->status == Auth_OpenID_FAILURE) {
             // Authentication failed; display the error message.
             if (strpos($response->message, "<No mode set>") === FALSE)  {
                 error_log ("OpenID authentication failed: " . $response->message);
                 die ("OpenID authentication failed: " . $response->message);
             } else {
-                // This part redirects them to their openid provider
-                if ($_REQUEST["mode"] == "edit") {
-                    $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
-                    $stmt->execute(array("name" => $_REQUEST['name']));
-                    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-                    if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
-                    $openid = $result[0]['openid'];
-                }
+                $openid = $curopenid;
+
+                /* Why was this here, what an exploit... ????
                 if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
                     $openid = $_REQUEST['openid'];
                 };
+                 */
                 require("try_auth.php");
                 doOpenID($openid);
                 die();
@@ -82,6 +87,8 @@ if (isset($_REQUEST['go'])) {
             // identity URL and Simple Registration data (if it was
             // returned).
             $openid = $response->getDisplayIdentifier();
+            if ($openid != $curopenid)
+                die ("That isn't the same openid as in the database. Bad Hacker!");
         }
     } else {
         $openid = "";
