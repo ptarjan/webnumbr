@@ -12,6 +12,8 @@ $(document).ready(function() {
     }
 
     var checkName = function() {
+        if ($(":input[name='name'][type='text']").attr('disabled')) return;
+
         var val = $(this).val();
         var msg = $("#name_msg");
         if (val == $(this).attr("defaultValue")) {
@@ -33,6 +35,8 @@ $(document).ready(function() {
     if ($(":input[name='name']").val()) $(":input[name='name']").blur();
 
     var updateName = function() {
+        if ($(":input[name='name'][type='text']").attr('disabled')) return;
+
         var val = $(this).val();
         val = val.toLowerCase().replace(/[^a-z0-9-]/g, '-'); 
         $(":input[name='name']").val(val);
@@ -78,7 +82,7 @@ $(document).ready(function() {
             return false;
         }
 
-        if ($("#name_msg span").css("color") !== "green") {
+        if ($("#name_msg span").text() != "" && $("#name_msg span").css("color") !== "green") {
             $("#name_msg").wrap("<span class='error' style='border:5px solid red'></span>").focus();
             return false;
         }
