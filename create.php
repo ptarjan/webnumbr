@@ -10,11 +10,11 @@ ob_start();
         </h3>
         
         <br/><ol>
-        <li>Think of an interesting number. 
+        <li>Think of an interesting number:
           <br/>E.g. finance, sports, transportation, prices, or web statistics.</li>
         <li>Find a website that has this number on some page.</li>
         <li>Enter the URL into the box below. </li>
-        <li>You then will point and click on the number, enter a few details and its DONE!</li>
+        <li>You then will <b>point and click</b> on the number, enter a few details and you're DONE!</li>
         </ol>
 
         <br/><form action='create'>
