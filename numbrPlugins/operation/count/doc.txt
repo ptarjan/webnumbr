@@ -1,1 +1,1 @@
-Simply counts
+Simply counts the number of data points
