@@ -21,7 +21,7 @@ ob_start();
                         <table cellpadding="5" width="90%" >
                             <tr>
                                 <td>
-                                    <a href="/webnumbrs">Number of webNumbrs</a>
+                                    <a href="/webnumbrs">Number of Web Numbrs</a>
                                 </td>
                                 <td class="leftpadding">
                                     <span id="webNumbr_webnumbrs">Loading ...</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.latest.json(callback=webNumbr_webnumbrs)"></script>
