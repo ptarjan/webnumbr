@@ -1,0 +1,1 @@
+Exact match on date. Same as .latest.to(date).from(date)
