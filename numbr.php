@@ -7,10 +7,10 @@ class Numbr {
 public $c = array();
 
 public function parse($string) {
-    preg_match("/^[a-z0-9-]+/", $string, $matches);
+    preg_match("/^[a-z0-9-_]+/", $string, $matches);
     $this->c['name'] = $matches[0];
 
-    preg_match_all("/[.]([a-z0-9-]+)(\((.*?)\))?/", $string, $matches, PREG_SET_ORDER);
+    preg_match_all("/[.]([a-z0-9-_]+)(\((.*?)\))?/", $string, $matches, PREG_SET_ORDER);
     foreach ($matches as $match) {
         $op = $match[1];
         $params = $match[3];
