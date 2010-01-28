@@ -38,18 +38,17 @@ ob_start();
             <div class="numbr_title">
                     <?php print $numbr['title'] ?>
             </div>
-            <div class="numbr_box">
-                    <?php 
+<?php 
 if (is_array($data)) { 
     $data = end($data); 
     if (is_array($data)) 
         $data = $data[1]; 
 }
-if (is_array($data))
-    print "Multiple";
-else if (is_numeric($data))
-    print cutzero(number_format($data, 4, ".", ","));
-                    ?>
+
+if (is_numeric($data)) {
+?>
+            <div class="numbr_box">
+                <?php print cutzero(number_format($data, 4, ".", ",")); ?>
             </div>
 
             <div class="numbr_embed_code">
@@ -57,6 +56,7 @@ else if (is_numeric($data))
                 <input type="text" value="<?php print $embed ?>"/>
                 <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
             </div>
+<?php } ?>
 
             <div class="clear"></div>
 
@@ -66,6 +66,7 @@ else if (is_numeric($data))
             <br/><div class="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
             </div>
 
+<?php if (count($c['numbr'])) { ?>
             <h3>Description</h3> 
             <div class="numbr_description">
                     <?php print $numbr['description'] ?>
@@ -135,6 +136,20 @@ if (trim($hvalue) != "") {
 <?php } ?>
 </table>
 
+<?php } else { ?>
+Made from:
+<ul>
+<?php 
+foreach ($c['plugins']['operation'] as $op) {
+    if ($op[0] == 'join') {
+        foreach ($op[1] as $numbr) {
+            print '<li><a href="/' . htmlspecialchars($numbr) . '">' . htmlspecialchars($numbr) . '</a>';
+        }
+    }
+}
+?>
+</ul>
+<?php } ?>
             <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
             <script type="text/javascript">
             $(function() {
