@@ -1,3 +1,3 @@
 <?php
-require ("numbrPlugins/selection/latest/code.php");
+require ("numbrPlugins/selection/all/code.php");
 ?>
