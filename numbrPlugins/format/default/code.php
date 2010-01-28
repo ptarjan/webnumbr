@@ -79,7 +79,7 @@ $hvalue = htmlspecialchars($value);
 $link = "";
 switch ($key) {
     case "name" :
-        if (isset($c['numbr']['openid'])) {
+        if (isset($c['numbr']['openid']) && !empty($c['numbr']['openid'])) {
             $hvalue = "<a href=\"/$hvalue\">$hvalue</a> <a href=\"/edit?mode=edit&name=" . urlencode($hvalue) . "\">(edit)</a>";
         } else {
             $link = "/$hvalue";
