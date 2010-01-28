@@ -309,6 +309,16 @@ ul.searchresults {
     color: black;
 }
 
+.searchresults .external {
+    color: blue;
+    text-decoration : underline;
+    padding : 0;
+}
+.searchresults .external:hover {
+    color: blue;
+    background: white;
+}
+
 .search_data {
     float : left;
     font-size : 20px;
