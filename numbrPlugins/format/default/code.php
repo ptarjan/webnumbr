@@ -1,6 +1,8 @@
 <?php
 if ($data === NULL) {
-    header("Location: /search?query={$c['name']}");
+    if (isset($c['numbr']['error']) || count($c['numbr']) == 0) {
+        header("Location: /search?query={$c['name']}");
+    }
 }
 $numbr = array();
 foreach ($c['numbr'] as $key => $val) 

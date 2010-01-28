@@ -1,16 +1,14 @@
 makeGraph = function (c, data) {
     $(document).ready(function ($) {
         var graph = [];
-        if (data == null)  
-            data = 0;
-        if (typeof data == "number")
+        if (typeof data == "number" || data == null)
             data = [[0, data]];
         if ($.isArray(data)) {
             var newData = new Object();
             newData[c.name] = data;
             data = newData;
         }
-        
+
         $.each(data, function(name) {
             var series = [];
             var offset = new Date().getTimezoneOffset();
@@ -20,7 +18,7 @@ makeGraph = function (c, data) {
                 series.push([time * 1000, val]);
             }
 
-            if (series.length === 0 || (this.length == 1 && this[0][1] === null)) {
+            if (series == null || series.length === 0 || (this.length == 1 && this[0][1] === null)) {
                 series = [
                     [0, 0],
                     [2, 0], [2, 1], [4, 0], [4, 1], [4, 0], // N
