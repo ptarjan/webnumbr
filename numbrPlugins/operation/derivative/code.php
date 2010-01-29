@@ -8,6 +8,7 @@ if (is_array($data)) {
     if (!is_numeric($derivative))
         $derivative = 1;
     $derivative = (int) $derivative;
+
     for ($d = 0; $d < $derivative; $d ++) {
         $newData = array();
         $last = NULL;
