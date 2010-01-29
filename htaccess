@@ -5,6 +5,10 @@
 </IfModule>
 RewriteEngine on
 
+# dev environment
+#RewriteCond %{HTTP_HOST} dev\.webnumbr\.com
+#RewriteRule ^(.*)$ dev/webnumbr/$1 [NC,L]
+
 # hostnames without paths
 RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
 RewriteRule ^/?$ http://webnumbr.com/%1 [R,L]
