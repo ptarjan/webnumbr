@@ -52,7 +52,7 @@ LIMIT 1
             </div>
             <div class="search_title">
                 <a href="<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['title'])?>">
-                    <?php print htmlspecialchars($row['shorttitle']) ?>
+                    <?php print ($row['shorttitle'] == "" ? "&nbsp;" : htmlspecialchars($row['shorttitle'])) ?>
                 </a>
             </div>
             <div class="search_url">
