@@ -86,7 +86,7 @@ if (isset($_REQUEST['go'])) {
             $newopenid = $response->getDisplayIdentifier();
             if ($_REQUEST["mode"] == "edit") {
                 if ($openid != $newopenid)
-                    die ("That isn't the same openid as in the database. Bad Hacker!");
+                    die ("That isn't the same openid as in the database. Did you really make this numbr?");
             } else {
                 $openid = $newopenid;
             }
@@ -233,6 +233,7 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
 <?php } ?>
             <tr><th>OpenID</th><td>
                 <input type="text" style="padding-left: 20px; background: #FFFFFF url(https://s.fsdn.com/sf/images//openid/openid_small_logo.png) no-repeat scroll 0 50%; width : 340px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
+                <?php if ($_REQUEST["mode"] == "edit") print '<span style="color: red"><--- This must be you</span>'; ?>
             </td></tr>
             <tr><th><span title="human readable title">Title (?)</span></th><td><input type="text" name="title" maxlength="255" value="<?php print htmlspecialchars($_REQUEST["title"]) ?>" /></td></tr>
             <tr><th><span title="unique name to fetch this numbr">Name (?)</span></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> /></td><td id="name_msg"></td></tr>
