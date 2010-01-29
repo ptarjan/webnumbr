@@ -39,7 +39,9 @@ function printDoc($dir) {
         $params = @file_get_contents("numbrPlugins/$dir/$name/params.txt");
         $doc = @file_get_contents("numbrPlugins/$dir/$name/doc.txt");
         $example = @file_get_contents("numbrPlugins/$dir/$name/example.txt");
-        $example = "<a href=\"/$example\">$example</a>";
+        $examplebreak = str_replace("/", "/&#x200b;", $example);
+        $params = str_replace("/", "/&#x200b;", $params);
+        $example = "<a href=\"/$example\">$examplebreak</a>";
         if (!$doc) continue;
         $i++;
 ?>
