@@ -42,6 +42,8 @@ function printDoc($dir) {
         $examplebreak = str_replace("/", "/&#x200b;", $example);
         $params = str_replace("/", "/&#x200b;", $params);
         $example = "<a href=\"/$example\">$examplebreak</a>";
+        $name = "<a href=\"numbrPlugins/$dir/$name/code.php\">$name</a>";
+        
         if (!$doc) continue;
         $i++;
 ?>
