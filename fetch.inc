@@ -111,6 +111,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                 $json = json_decode($data, TRUE);
                 if ($json) {
                     $data = XMLHelper::xml_encode($json, 0, "json");
+
                     $dom = buildDom($data);
                     $type = "json";
                 } else {
@@ -129,6 +130,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     $data = tidy_repair_string ($data, $config);
 
                     $dom = buildDom($data);
+
                     $type = "html";
                 }
 
