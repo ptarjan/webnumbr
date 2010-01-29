@@ -26,6 +26,9 @@ RewriteRule ^www.*$ / [R=301,L]
 # RewriteCond %{QUERY_STRING} ^name=(.*)$
 # RewriteRule ^.*$ http://%{HTTP_HOST}/%1? [R=301,L]
 
+# profiles
+RewriteRule ^profile/(.*)$ profile.php?name=$1 [QSA] 
+
 # check if you can add .php and get a good file
 RewriteCond %{REQUEST_FILENAME}.php -f
 RewriteRule ^(.*)$ $1.php

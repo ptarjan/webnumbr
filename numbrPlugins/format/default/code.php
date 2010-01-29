@@ -118,6 +118,7 @@ switch ($key) {
         $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
         break;
     case "openid" :
+        $hvalue = '<a href="/profile/' . $hvalue . '">' . $hvalue . '</a>';
         break;
     case "is_fetching" :
         if ($value == 1)
