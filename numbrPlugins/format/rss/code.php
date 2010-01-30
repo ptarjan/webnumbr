@@ -1,8 +1,10 @@
-<?php print '<?xml version="1.0"?>' ?>
+<?php
+    $link = "http://webnumbr.com/" . htmlspecialchars(preg_replace("/.rss(\([^)]*\))?/", "", $c['code']));
+?><?php print '<?xml version="1.0"?>' ?>
 <rss version="2.0">
   <channel>
     <title><?php print htmlspecialchars($c['numbr']['title']) ?> - <?php print $c['code'] ?></title>
-    <link>http://webnumbr.com/<?php print $c['code'] ?></link>
+    <link><?php print $link ?></link>
     <description><?php print htmlspecialchars($c['numbr']['description']) ?></description>
 
 <?php
@@ -11,12 +13,14 @@ if (!is_array($data)) {
 }
 $all = false;
 
-foreach ($params as $key => $value) {
-    if (!is_numeric($key)) continue;
-    if (is_numeric($value))
-        $params['count'] = $value;
-    else if($value == "all")
-        $params['all'] = TRUE;
+if (is_array($param)) {
+    foreach ($params as $key => $value) {
+        if (!is_numeric($key)) continue;
+        if (is_numeric($value))
+            $params['count'] = $value;
+        else if($value == "all")
+            $params['all'] = TRUE;
+    }
 }
 
 if (isset($params['count']))
@@ -47,7 +51,6 @@ foreach ($data as $row) {
 
     $last = $value;
 
-    $link = "http://webnumbr.com/" . htmlspecialchars(preg_replace("/.rss\([^)]*\)/", "", $c['code']));
     $permlink = $link . ".at($time)";
 ?>
  
