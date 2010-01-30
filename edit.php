@@ -213,7 +213,7 @@ if (empty($url)) {
 }
 
 // FIREFOX HACK
-$_REQUEST['xpath'] = preg_replace(",/tbody,", "", $_REQUEST['xpath']);
+$_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
 
 ?>
 
