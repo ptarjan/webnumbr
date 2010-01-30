@@ -160,7 +160,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
 
     if ($nl instanceof DOMNodeList) {
         if ($nl->length == 0) {
-            throw new FetchException("No nodes selected");
+            throw new FetchException("No data at that location. Bad XPath?");
         } else if ($nl->length > 1) {
             // throw new FetchException(" entries for xpath", "warning");
         }

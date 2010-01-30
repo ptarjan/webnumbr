@@ -10,6 +10,7 @@ foreach ($reserved as $r) {
 $reserved = array_merge($reserved, array(
 "www", "login", "register", "edit", "create", "make", "delete", "update", "save",
 ));
+$dict = explode("\n", file_get_contents("/usr/share/dict/words"));
 
 $name = $_REQUEST['name'];
 
@@ -23,6 +24,8 @@ else if (! preg_match("/^[a-z0-9-]*$/", $name)) {
     print("Must be >= 4 chars. Get creative");
 } else if (in_array($name, $reserved)) {
     print("That is a reserved name. Hands off");
+} else if (in_array($name, $dict)) {
+    print("That is an English word. Please choose something a bit more unique.");
 } else {
 
 $s = $PDO->prepare("SELECT COUNT(*) as count FROM numbrs WHERE name=:name");
