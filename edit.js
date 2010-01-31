@@ -11,27 +11,31 @@ $(document).ready(function() {
         }
     }
 
-    var checkName = function() {
+    var checkName = function(node, callback) {
         if ($(":input[name='name'][type='text']").attr('disabled')) return;
 
-        var val = $(this).val();
+        var val = node.val();
         var msg = $("#name_msg");
-        if (val == $(this).attr("defaultValue")) {
-            msg.html('<span style="color: green">Good Old Name</span>');
+        if (val != "" && val == node.attr("defaultValue")) {
+            msg.html('<span style="color: green">Good old name</span>');
             return;
         }
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
-        $(this).val(val);
-        msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/>');
-        $.get("checkName?" + $.param({name: $(this).val()}), function (data) {
+        node.val(val);
+        msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/> Validating...');
+        $.get("checkName?" + $.param({name: node.val()}), function (data) {
             if (! data)
-                msg.html('<span style="color: green">Good Name!</span>');
+                msg.html('<span style="color: green">Good name!</span>');
             else
                 msg.html('<span style="color: red">' + data + '</span>');
+            if (typeof callback == "function")
+                callback();
         });
     };
-    $(":input[name='name']").blur(checkName);
+    $(":input[name='name']").blur(function() {
+            checkName($(this))
+    });
     if ($(":input[name='name']").val()) $(":input[name='name']").blur();
 
     var updateName = function() {
@@ -45,9 +49,9 @@ $(document).ready(function() {
     $(":input[name='title']").blur(updateName);
 
     var reload = function() {
-        $("#data").html('<img src="images/twirl.gif" alt="thinking"/>');
+        $("#data").html('<img src="/images/twirl.gif" alt="thinking"/>');
         $.get("create?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
-            $("#data").html(data);
+            $("#data").html(data.replace("Fetch Exception: ", ""));
         });
         messages();
     };
@@ -63,35 +67,42 @@ $(document).ready(function() {
         }
     });
 
-    var validate = function(ev) { 
+    var validate = function(ev) {
+        if (validate.bypass)
+            return true;
+
+        validate.bypass = false;
+
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
+        checkName($(":input[name='title']"), function() {
 
-        if ($.trim($(":input[name='name']").val()) == "") {
-            $(":input[name='name']").wrap("<span class='error' style='border:10px solid red'></span>").focus();
-            return false;
-        }
-        var data = parseInt($("#data").text());
-        if (isNaN(data)) {
-            $("#data").wrapInner("<span class='error' style='color:red'></span>");
-            return false;
-        }
-        if ( $.trim($(":input[name='title']").val()) == "") {
-            $(":input[name='title']").wrap("<span class='error' style='border:10px solid red'></span>").focus();
-            return false;
-        }
+            var good = true;
 
-        if ($("#name_msg span").text() != "" && $("#name_msg span").css("color") !== "green") {
-            $("#name_msg").wrap("<span class='error' style='border:5px solid red'></span>").focus();
-            return false;
-        }
+            var data = parseInt($("#data").text());
+            if (isNaN(data)) {
+                $("#data").wrapInner("<span class='error' style='color:red'></span>");
+                good = false;
+            }
 
-        $("#dialog").dialog("open");
+            if ($("#name_msg span").text() == "" || $("#name_msg span").css("color") !== "green") {
+                $("#name_msg").wrap("<span class='error'></span>").focus();
+                good = false;
+            }
+
+            // $("#dialog").dialog("open");
+            if (good) {
+                validate.bypass = true;
+                $("form.edit-form").submit();
+            }
+
+        });
         return false;
     }
     $("form.edit-form").submit(validate);
 
+    /*
     $("#dialog").dialog({
         modal : true,
         autoOpen : false,
@@ -105,6 +116,13 @@ $(document).ready(function() {
             "No! (Go back and edit)" : function () { $("#dialog").dialog("close"); }
         },
         title : "Check your work",
+    });
+    */
+
+    $("#advanced_toggle").toggle(function() {
+        $("#advanced").show();
+    }, function() {
+        $("#advanced").hide();
     });
 });
 
