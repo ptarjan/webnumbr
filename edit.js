@@ -26,7 +26,7 @@ $(document).ready(function() {
         msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/> Validating...');
         $.get("checkName?" + $.param({name: node.val()}), function (data) {
             if (! data)
-                msg.html('<span style="color: green">Good name!</span> You get http://webnumbr.com/' + val);
+                msg.html('<span style="color: green">Your number will be at </span> http://webnumbr.com/' + val);
             else
                 msg.html('<span style="color: red">' + data + '</span>');
             if (typeof callback == "function")
