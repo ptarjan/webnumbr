@@ -76,7 +76,7 @@ $(document).ready(function() {
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
-        checkName($(":input[name='title']"), function() {
+        checkName($(":input[name='name']"), function() {
 
             var good = true;
 
