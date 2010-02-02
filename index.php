@@ -13,7 +13,7 @@ $subtitle = "Follow interesting numbers from anywhere on the web";
 ob_start();
 ?>
                 <div class="slogan">
-                    Follow interesting numbers from anywhere on the web
+                    Track numbers from anywhere on the web
                 </div>
 
 

@@ -62,12 +62,21 @@ fieldset,img {
 }
 
 .slogan {
-    text-align : center;
-    margin : 30px 0px;
-    padding : 10px;
-    font-size : 24px; 
-    background-color : #777;
-    color : #fff;
+    text-align:     center;
+    margin:         30px 0px;
+    padding:        10px;
+    font-size:      24px; 
+    background-color: #777;
+    color:          #fff;
+    border-top:     2px solid #333;
+    font-size:      1em;
+    font-weight:    bold;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin:         2em 0 1em;
+    padding:        4px 0 3px;
+    text-shadow:    3px 3px 7px #333;
+    text-align:     center;
 }
 
 #examples{
