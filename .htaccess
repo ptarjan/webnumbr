@@ -1,1 +1,42 @@
-htaccess
+<IfModule mod_headers.c>
+    Header set Pragma "no-cache"
+    Header set Cache-Control "no-cache"
+    Header set Expires "Web, 02 May 1984 20:30:00 MST"
+</IfModule>
+RewriteEngine on
+
+# dev environment
+RewriteCond %{HTTP_HOST} ^dev\.webnumbr\.com$
+RewriteCond %{REQUEST_FILENAME} !^.*/dev/.*$
+RewriteRule ^(.*)$ dev/$1 [NC,L]
+
+# hostnames without paths (not a good idea)
+#RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
+#RewriteRule ^/?$ http://webnumbr.com/%1 [R,L]
+#RewriteCond %{HTTP_HOST} ^(.*)\.webnumbr\.com$
+#RewriteRule ^(.*)$ http://webnumbr.com/%1/$1 [R,L]
+
+# make sure "/" is served
+RewriteRule ^index$ / [R=301,L]
+
+# rewrite form submits to the direct form
+# RewriteCond %{REQUEST_URI} ^/numbr$
+# RewriteCond %{QUERY_STRING} ^name=(.*)$
+# RewriteRule ^.*$ http://%{HTTP_HOST}/%1? [R=301,L]
+
+# profiles
+RewriteRule ^profile/(.*)$ profile.php?name=$1 [QSA] 
+
+# check if you can add .php and get a good file
+RewriteCond %{REQUEST_FILENAME}.php -f
+RewriteRule ^(.*)$ $1.php
+
+# check if the file doesn't exist and then assume it is a numbr
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# remove the /
+RewriteCond %{REQUEST_URI} ^/(.*)$
+# append query string
+RewriteRule ^(.*)$ numbr.php?name=%1 [QSA] 
+
+# RewriteRule ^(.*) http://example.com/$1 [R,L]
