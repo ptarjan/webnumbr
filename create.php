@@ -72,7 +72,7 @@ try {
     die();
 }
 
-$next = 'http://' . $_SERVER['SERVER_NAME'] . dirname($_SERVER['PHP_SELF']) . '/edit';
+$next = 'http://' . $_SERVER['SERVER_NAME'] . '/edit';
 
 if ($type === "num") {
     die($data);
