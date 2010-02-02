@@ -1,6 +1,10 @@
 <?php
-    $current_search = htmlspecialchars($_REQUEST['query']);
-    $subtitle = "search : " . htmlspecialchars($_REQUEST['query']);
+    // Silly bug
+$_REQUEST['name'] = str_replace('http:/', 'http://', $_REQUEST['name']);
+$_REQUEST['name'] = str_replace('https:/', 'https://', $_REQUEST['name']);
+
+$current_search = htmlspecialchars($_REQUEST['name']);
+$subtitle = "search : " . htmlspecialchars($_REQUEST['name']);
 
 function cutzero($value) {
    return preg_replace("/(\.?)0+$/", "", $value);
@@ -8,7 +12,7 @@ function cutzero($value) {
 
 ?>
 <?php ob_start() ?>
-        <h3 class="first">Search Results for <tt><?php print $current_search ?></tt></h3>
+        <h3 class="first">Numbrs made by <tt><?php print $current_search ?></tt></h3>
 
         <div id='searchResults'>
           <ul class='searchresults'>
@@ -20,17 +24,15 @@ SELECT
 
 FROM numbrs WHERE
 
-name LIKE CONCAT('%', :query, '%') OR 
-url LIKE CONCAT('%', :query, '%') OR 
-title LIKE CONCAT('%', :query, '%') OR 
-description LIKE CONCAT('%', :query, '%')
+openid LIKE CONCAT('%', :query, '%')
 ");
-$stmt->execute(array("query" => $_REQUEST['query'])) || die(json_encode($stmt->errorInfo()));
+$stmt->execute(array("query" => $_REQUEST['name'])) || die(json_encode($stmt->errorInfo()));
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($data) == 0) {
-    print '0 results. Try <a class="external" href="http://google.com/search?q=' . urlencode("site:webnumbr.com " . htmlentities($_REQUEST['query'])) . '">google</a>?';
+    print '0 results. Try <a class="external" href="http://google.com/search?q=' . urlencode("site:webnumbr.com " . htmlentities($_REQUEST['name'])) . '">google</a>?';
 }
+
 foreach ($data as $row) {
     $sd = $PDO->prepare("
 SELECT 

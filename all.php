@@ -48,10 +48,10 @@ LIMIT 1
 ?>
         <li>
             <div class="search_data">
-                <a href="<?php print htmlspecialchars($row['name']) ?>"><?php print htmlspecialchars($data) ?></a>
+                <a href="/<?php print htmlspecialchars($row['name']) ?>"><?php print htmlspecialchars($data) ?></a>
             </div>
             <div class="search_title">
-                <a href="<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['title'])?>">
+                <a href="/<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['title'])?>">
                     <?php print ($row['shorttitle'] == "" ? "&nbsp;" : htmlspecialchars($row['shorttitle'])) ?>
                 </a>
             </div>

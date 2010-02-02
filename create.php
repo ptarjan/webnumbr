@@ -121,6 +121,7 @@ if ($type === "html") {
     }
 
     $data = @$data->saveXML();
+
     // Eliminate shorttags
     $data = preg_replace('/<\s*([a-z]+)\s([^>]*)\/>/', "<$1 $2></$1>", $data);
 

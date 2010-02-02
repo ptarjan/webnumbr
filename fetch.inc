@@ -111,6 +111,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                 $json = json_decode($data, TRUE);
                 if ($json) {
                     $data = XMLHelper::xml_encode($json, 0, "json");
+
                     $dom = buildDom($data);
                     $type = "json";
                 } else {
@@ -129,6 +130,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     $data = tidy_repair_string ($data, $config);
 
                     $dom = buildDom($data);
+
                     $type = "html";
                 }
 
@@ -158,7 +160,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
 
     if ($nl instanceof DOMNodeList) {
         if ($nl->length == 0) {
-            throw new FetchException("No nodes selected");
+            throw new FetchException("No data at that location. Bad XPath?");
         } else if ($nl->length > 1) {
             // throw new FetchException(" entries for xpath", "warning");
         }
