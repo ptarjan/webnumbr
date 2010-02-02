@@ -76,6 +76,7 @@ $(document).ready(function() {
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
+        $(":input[name='title']").blur();
         checkName($(":input[name='name']"), function() {
 
             var good = true;
