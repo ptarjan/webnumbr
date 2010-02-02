@@ -13,8 +13,14 @@ ob_start();
         <li>Think of an interesting number:
           <br/>E.g. finance, sports, transportation, prices, or web statistics.</li>
         <li>Find a website that has this number on some page.</li>
-        <li>Enter the URL into the box below. </li>
-        <li>You then will <b>point and click</b> on the number, enter a few details and you're DONE!</li>
+        <li>Enter the URL into the box below. (Or use the <a href="
+javascript:(
+    function() {
+        document.location = 'http://webnumbr.com/create?url=' + encodeURIComponent(document.location)
+    }
+)();
+">webnumbr : create</a> bookmarklet)</li>
+        <li>You then <b>point and click</b> on the number, enter a title and you're DONE!</li>
         </ol>
 
         <br/><form action='create'>
