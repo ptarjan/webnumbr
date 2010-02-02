@@ -65,21 +65,10 @@ if (is_numeric($data)) {
             <div id="numbr_graph">
             <iframe src="/<?php print $graphCode ?>" style="width: 100%; height: 400px;" allowtransparency="true" frameborder="0"></iframe>
 
-            <br/><div id="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>"/></div>
+            <br/><div id="numbr_graph_embed_code">Embed code for graph: <input type="text" value="<?php print $graphembed ?>" style="width: 750px;" /></div>
             </div>
 
 <?php if (count($c['numbr'])) { ?>
-            <h3>Description</h3> 
-            <div id="numbr_description">
-                    <?php print $numbr['description'] ?>
-            </div>
-
-            <h3>Source</h3>
-            <div id="numbr_url">
-                <a href="<?php print $numbr['url'] ?>">
-                    <?php print $numbr['url'] ?>
-                </a>
-            </div>
 
 <h3 class="numbr_info">Numbr Info</h3>
 <table class="numbr_info">
