@@ -12,13 +12,13 @@ $embedgraph = htmlentities(curl_exec($ch));
 $subtitle = "Follow interesting numbers from anywhere on the web";
 ob_start();
 ?>
-                <div class="slogan">
+                <div id="slogan">
                     Follow interesting numbers from anywhere on the web
                 </div>
 
 
                 <div id="examples">
-                        <table cellpadding="5" width="90%" >
+                        <table cellpadding="5" >
                             <tr>
                                 <td>
                                     <a href="/webnumbrs">Number of Web Numbrs</a>
@@ -86,7 +86,8 @@ ob_start();
                                 </td>
                             </tr>
                         </table>
-                
+                <iframe src="http://webnumbr.com/webnumbrs.all.graph" style="width: 100%; height: 200px;" allowtransparency="true" frameborder="0"></iframe>
+
                 <br/>
                 <table id="embedexamples">
                 <caption>Embed code examples</caption>
@@ -108,6 +109,11 @@ ob_start();
                                   
                 <br/><br/>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
                 </div>
+
+                <div id="create">
+                <a class="action-btn" href="/create">Create a Numbr</a>
+                </div>
+
                 <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
                 Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.
                 You can embed graphs too.
