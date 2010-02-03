@@ -109,7 +109,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
 
             default :
                 $json = json_decode($data, TRUE);
-                if ($json) {
+                if ($json !== NULL) {
                     $data = XMLHelper::xml_encode($json, 0, "json");
 
                     $dom = buildDom($data);
