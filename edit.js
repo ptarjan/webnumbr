@@ -23,7 +23,7 @@ $(document).ready(function() {
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
         node.val(val);
-        msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/> Validating...');
+        // msg.html('<img src="http://l.yimg.com/a/i/eu/sch/smd/busy_twirl2_1.gif" alt="thinking"/> Validating...');
         $.get("checkName?" + $.param({name: node.val()}), function (data) {
             if (! data)
                 msg.html('<span style="color: green">Your number will be at </span> http://webnumbr.com/' + val);
@@ -44,9 +44,9 @@ $(document).ready(function() {
         var val = $(this).val();
         val = val.toLowerCase().replace(/[^a-z0-9-]/g, '-'); 
         $(":input[name='name']").val(val);
-        $(":input[name='name']").blur();
+        checkName($(":input[name='name']"));
     }
-    $(":input[name='title']").blur(updateName);
+    $(":input[name='title']").keyup(updateName);
 
     var reload = function() {
         $("#data").html('<img src="/images/twirl.gif" alt="thinking"/>');
@@ -76,7 +76,7 @@ $(document).ready(function() {
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
-        $(":input[name='title']").blur();
+        $(":input[name='title']").keyup();
         checkName($(":input[name='name']"), function() {
 
             var good = true;
