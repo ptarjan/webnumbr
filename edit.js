@@ -12,14 +12,20 @@ $(document).ready(function() {
     }
 
     var checkName = function(node, callback) {
-        if ($(":input[name='name'][type='text']").attr('disabled')) return;
+        if ($(":input[name='name'][type='text']").attr('disabled')) {
+            if (typeof callback == "function")
+                callback();
+            return
+        }
 
         var val = node.val();
         var msg = $("#name_msg");
+        /*
         if (val != "" && val == node.attr("defaultValue")) {
             msg.html('<span style="color: green">Good old name</span>');
             return;
         }
+        */
         val = val.toLowerCase();
         val = val.replace(/[^a-z0-9-]/g, '-'); 
         node.val(val);
@@ -87,9 +93,11 @@ $(document).ready(function() {
                 good = false;
             }
 
-            if ($("#name_msg span").text() == "" || $("#name_msg span").css("color") !== "green") {
-                $("#name_msg").wrap("<span class='error'></span>").focus();
-                good = false;
+            if (! $(":input[name='name'][type='text']").attr('disabled')) {
+                if ($("#name_msg span").text() == "" || $("#name_msg span").css("color") !== "green") {
+                    $("#name_msg").wrap("<span class='error'></span>").focus();
+                    good = false;
+                }
             }
 
             // $("#dialog").dialog("open");
