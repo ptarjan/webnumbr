@@ -59,7 +59,7 @@ foreach ($data as $row) {
       <link><?php print $link ?></link>
       <description><?php print $value ?></description>
       <pubDate><?php print date(DATE_RFC822, $time) ?></pubDate>
-      <guid><?php print $permlink ?></guid>
+      <guid isPermalink="false"><?php print $permalink ?></guid>
     </item>
 
 <?php } ?>
