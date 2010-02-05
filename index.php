@@ -1,19 +1,24 @@
 <?php
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/wiki-en-pages.embed");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-$embed = htmlspecialchars(curl_exec($ch));
+function getEmbed($name) {
+    $cache = apc_fetch("embed_code_$name");
+    if ($cache) return $cache;
 
-$ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "/piratebay-peers.all.graph.embed");
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
-$embedgraph = htmlentities(curl_exec($ch));
+    $link = "/$name";
+    $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "$link.latest.embed");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
+    $embed = (curl_exec($ch));
+    
+    apc_store("embed_code_$name", $embed, 60*60*24); // 1 day
+    return $embed;
+}
 
 // ================ templates parts ===================
 
-$subtitle = "Follow interesting numbers from anywhere on the web";
+$subtitle = "Track numbers from anywhere on the web";
 ob_start();
 ?>
                 <div class="slogan">
-                    Track numbers from anywhere on the web
+                    <?php print $subtitle ?>
                 </div>
 
 
@@ -24,7 +29,7 @@ ob_start();
                                     <a href="/webnumbrs">Number of Web Numbrs</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_webnumbrs">Loading ...</span><script>var webNumbr_webnumbrs = function(data) { document.getElementById("webNumbr_webnumbrs").innerHTML = data; }</script><script src="http://webnumbr.com/webnumbrs.latest.json(callback=webNumbr_webnumbrs)"></script>
+                                    <?php print getEmbed("webnumbrs") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -32,7 +37,7 @@ ob_start();
                                     <a href="/yhoo">Yahoo stock price</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_yhoo">Loading ...</span><script>var webNumbr_yhoo = function(data) { document.getElementById("webNumbr_yhoo").innerHTML = data; }</script><script src="http://webnumbr.com/yhoo.latest.json(callback=webNumbr_yhoo)"></script>
+                                    <?php print getEmbed("yhoo") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -40,7 +45,7 @@ ob_start();
                                     <a href="/temperature-sanjose">Temperature in San Jose</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_temperature-sanjose">Loading ...</span><script>var webNumbr_temperature_sanjose = function(data) { document.getElementById("webNumbr_temperature-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/temperature-sanjose.latest.json(callback=webNumbr_temperature_sanjose)"></script>
+                                    <?php print getEmbed("temperature-sanjose") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -48,25 +53,15 @@ ob_start();
                                     <a href="/crude-oil-brent">Crude Brent Oil</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_crude-oil-brent">Loading ...</span><script>var webNumbr_crude_oil_brent = function(data) { document.getElementById("webNumbr_crude-oil-brent").innerHTML = data; }</script><script src="http://webnumbr.com/crude-oil-brent.latest.json(callback=webNumbr_crude_oil_brent)"></script>
+                                    <?php print getEmbed("crude-oil-brent") ?>
                                 </td>
                             </tr>
-<!--
-                            <tr>
-                                <td>
-                                    <a href="/gas-sanjose">Cheapest gas in San Jose</a>
-                                </td>
-                                <td class="leftpadding">
-                                    <span id="webNumbr_gas-sanjose">2.666</span><script>var webNumbr_gas_sanjose = function(data) { document.getElementById("webNumbr_gas-sanjose").innerHTML = data; }</script><script src="http://webnumbr.com/gas-sanjose.latest.json(callback=webNumbr_gas_sanjose)"></script>
-                                </td>
-                            </tr>
--->
                             <tr>
                                 <td>
                                     <a href="/semantic-sm-video">Number of semantic video files</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_semantic-sm-video">Loading ...</span><script>var webNumbr_semantic_sm_video = function(data) { document.getElementById("webNumbr_semantic-sm-video").innerHTML = data; }</script><script src="http://webnumbr.com/semantic-sm-video.latest.json(callback=webNumbr_semantic_sm_video)"></script>
+                                    <?php print getEmbed("semantic-sm-video") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -74,7 +69,7 @@ ob_start();
                                     <a href="/wiki-en-pages">Pages in English Wikipedia</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_wiki-en-pages">Loading ...</span><script>var webNumbr_wiki_en_pages = function(data) { document.getElementById("webNumbr_wiki-en-pages").innerHTML = data; }</script><script src="http://webnumbr.com/wiki-en-pages.latest.json(callback=webNumbr_wiki_en_pages)"></script>
+                                    <?php print getEmbed("wiki-en-pages") ?>
                                 </td>
                             </tr>
                             <tr>
@@ -82,41 +77,65 @@ ob_start();
                                     <a href="/earthquake-ca">Last earthquake in CA</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <span id="webNumbr_earthquake-ca">Loading ...</span><script>var webNumbr_earthquake_ca = function(data) { document.getElementById("webNumbr_earthquake-ca").innerHTML = data; }</script><script src="http://webnumbr.com/earthquake-ca.latest.json(callback=webNumbr_earthquake_ca)"></script>
+                                    <?php print getEmbed("earthquake-ca") ?>
                                 </td>
                             </tr>
+<!--
+<?php
+require("db.inc");
+$stmt = $PDO->prepare("
+SELECT name, title FROM numbrs WHERE is_fetching = TRUE ORDER BY rand() LIMIT 1
+");
+$ret = $stmt->execute();
+if (!$ret) {
+    $name = NULL;
+}
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (count ($data) == 1) {
+    $name = $data[0]['name'];
+    $title = $data[0]['title'];
+} else {
+    $name = NULL;
+}
+
+if ($name) {
+    $embed = getEmbed($name);
+    if (strlen($title) > 43)
+        $title = substr($title, 0, 40) . "...";
+?>
+                            <tr>
+                                <th colspan="2">
+                                    Random user-made numbr
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
+                                </td>
+                                <td class="leftpadding">
+                                    <?php print $embed . "\n" ?>
+                                </td>
+                            </tr>
+<?php } ?>
+-->
                         </table>
                 <iframe src="http://webnumbr.com/webnumbrs.all.graph" style="width: 100%; height: 200px;" allowtransparency="true" frameborder="0"></iframe>
 
                 <br/>
-                <table id="embedexamples">
-                <caption>Embed code examples</caption>
-                <tr><td>
-                    <span title="To embed the numbr 'wiki-en-pages' you can simply paste this onto your page">Pages in English Wikipedia (number)</span>
-                </td><td>
-                    <input value="<?php print $embed ?>" />
-                </td></tr>
-                <tr><td>
-                    <span title="To embed the graph 'piratebay-peers' you can simply paste this onto your page">Users of Piratebay (graph)</span>
-                </td><td>
-                    <input value="<?php print $embedgraph ?>" />
-                </td></tr>
-                </table>
 
                 </div>
-                <div id="onsite">We find interesting numbers, create <b>numbr pages</b>, update their values <b>every hour</b> and keep the history. 
-                <b><a href="/create">Create</a></b> a numbr from any webpage. 
+                <div id="onsite">Extract any number from <b>any webpage</b> and graph how it changes over time
                                   
-                <br/><br/>Search numbrs, see a <b><a href="/random">random</a></b> one, browse <b><a href="/all">all</a></b> and bookmark your favorite.
+                <br/><br/><a href="/search">Search</a> numbrs, see a <a href="/random">random</a> one, browse <a href="/all">all</a>
                 </div>
 
                 <div id="create">
                 <a class="action-btn" href="/create">Create a Numbr</a>
                 </div>
 
-                <div id="embedcodes">With webNumbr.com you can <b>embed near real-time values</b> of any number on your page. 
-                Just <b><a href="/create">create</a></b> the one you need, grab an embed code and place it on your website.
-                You can embed graphs too.
+                <div id="embedcodes">You can also embed <b>near real-time values</b> of any number on your page. 
+                Just create the one you need, grab the <b>embed</b> code and place it on your website.
+                You can embed <b>graphs</b> too.
                 
                 </div>
                 <div class="clear">

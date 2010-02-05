@@ -1,4 +1,16 @@
+<?php ob_start() ?>
 <?php
+if (!isset($_REQUEST['query']) || empty($_REQUEST['query'])) {
+    $subtitle = "search";
+?>
+<form id="search_form" action="/search"> 
+    <div>
+        <input type="text" name="query" value="" /> 
+        <input type="submit" value="Search " />
+    </div>
+</form>
+<?php
+} else {
     $current_search = htmlspecialchars($_REQUEST['query']);
     $subtitle = "search : " . htmlspecialchars($_REQUEST['query']);
 
@@ -7,7 +19,6 @@ function cutzero($value) {
 }
 
 ?>
-<?php ob_start() ?>
         <h3 class="first">Search Results for <tt><?php print $current_search ?></tt></h3>
 
         <div id='searchResults'>
@@ -71,4 +82,7 @@ LIMIT 1
         </div>
 
       </div>
+<?php 
+} // End of empty check
+?>
 <?php $content = ob_get_clean(); require("template.php"); ?>
