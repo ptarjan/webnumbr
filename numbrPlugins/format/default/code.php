@@ -85,7 +85,7 @@ if ($openid) {
 <a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=$next">(login to edit)</a>
 END;
     } else if ($openid != $_SESSION['openid']) {
-        print ' <a href="/logout">(logout, and then login to edit)</a>';
+        print ' <a href="/logout">(logout, and then login with this openid to edit)</a>';
     } else {
         print " <a href=\"/edit?mode=edit&name=" . urlencode($c['numbr']['name']) . "\">(edit)</a>";
     }
