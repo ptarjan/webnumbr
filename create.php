@@ -86,6 +86,43 @@ if ($type === "num") {
     }
 }
 
+$msg = '
+        <div id="webnumbr-message"> 
+            <img src="http://webnumbr.com/images/webNumbr-banner-50.png"> Click on the number that you are interested in...
+        </div>
+        <script>
+            $(function() {
+                $("#webnumbr-message").fadeIn(2000);
+            });
+        </script>
+        <style>
+        html {
+            margin-top: 2.5em;
+        }
+        #webnumbr-message {
+            position: fixed; 
+            display: none;
+            margin: auto;
+            color: white; 
+            background: black;
+            border-bottom: 1px solid white;
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 20pt; 
+            text-align:center; 
+            font-weight: bold;
+            font-size: 12pt;
+            padding-top: 7px;
+            z-index: 100;
+        }
+        #webnumbr-message img {
+            height: 16pt;
+            margin-right: 20px;
+        }
+        </style>
+';
+
 if ($type === "html") {
 
     if ($_REQUEST['action'] == "show") {
@@ -147,41 +184,8 @@ if ($type === "html") {
         $rep = '
 
         <!-- webnumbr.com Added Code -->
-        <div id="webnumbr-message"> 
-            <img src="http://webnumbr.com/images/webNumbr-banner-50.png"> Click on the number that you are interested in...
-        </div>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
-        <script>
-            $(function() {
-                $("#webnumbr-message").fadeIn(2000);
-            });
-        </script>
-        <style>
-        html {
-            margin-top: 2.5em;
-        }
-        #webnumbr-message {
-            position: fixed; 
-            display: none;
-            margin: auto;
-            color: white; 
-            background: black;
-            border-bottom: 1px solid white;
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 20pt; 
-            text-align:center; 
-            font-weight: bold;
-            font-size: 12pt;
-            padding-top: 7px;
-            z-index: 100;
-        }
-        #webnumbr-message img {
-            height: 16pt;
-            margin-right: 20px;
-        }
-        </style>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        ' . $msg . '
         <script>
         if (typeof paulisageek == "undefined") { paulisageek = {}; }
         if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
@@ -223,6 +227,7 @@ $(document).ready(function($) {
     } else { 
         $rep = "";
     }
+    
     $data = preg_replace('/(.*<\/\s*[bB][oO][dD][yY]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
     if ($count == 0) {
         $data = preg_replace('/(.*<\/\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
@@ -449,11 +454,13 @@ print $xml;
   </body>
 
     <!-- webnumbr.com Added Code -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <?php print $msg ?>
     <script>
     if (typeof paulisageek == "undefined") { paulisageek = {}; }
     if (typeof paulisageek.ns == "undefined") { paulisageek.ns = {}; }
     paulisageek.ns.doneURL = "<?php print $next ?>";
-    paulisageek.ns.params = {"url" : "<?php print $finalURL ?>"};
+    paulisageek.ns.params = <?php print json_encode(array("url" => $finalURL)) ?>;
     paulisageek.ns.getXpath = function(e, oldXpath) {
         var xpath = "";
         while (e.nodeName.toLowerCase() != "pre") {
