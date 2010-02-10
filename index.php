@@ -133,8 +133,8 @@ if ($name) {
                 <a class="action-btn" href="/create">Create a Numbr</a>
                 </div>
 
-                <div id="embedcodes">You can also embed <b>near real-time values</b> of any number on your page. 
-                Just create the one you need, grab the <b>embed</b> code and place it on your website.
+                <div id="embedcodes">Embed <b>near real-time values</b> of any number on your page. 
+                Create the one you need, grab the <b>embed</b> code and place it on your website.
                 You can embed <b>graphs</b> too.
                 
                 </div>
