@@ -1,4 +1,5 @@
 <?php
+session_start();
 if ($data === NULL) {
     if (isset($c['numbr']['error']) || count($c['numbr']) == 0) {
         header("Location: /search?query={$c['name']}");
@@ -70,9 +71,29 @@ if (is_numeric($data)) {
 
 <?php if (count($c['numbr'])) { ?>
 
-<h3 class="numbr_info">Numbr Info</h3>
+<h3 class="numbr_info">Numbr Info
+<?php
+if (isset($c['numbr']['openid']) && !empty($c['numbr']['openid']))
+    $openid = $c['numbr']['openid'];
+else
+    $openid = "";
+
+if ($openid) {
+    if (!isset($_SESSION['openid'])) {
+        $next = urlencode('http://' . $_SERVER['SERVER_NAME'] . '/rpx?_next=' . urlencode($_SERVER['REQUEST_URI']));
+        print <<<END
+<a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=$next">(login to edit)</a>
+END;
+    } else if ($openid != $_SESSION['openid']) {
+        print ' <a href="/logout">(logout, and then login to edit)</a>';
+    } else {
+        print " <a href=\"/edit?mode=edit&name=" . urlencode($c['numbr']['name']) . "\">(edit)</a>";
+    }
+}
+?></h3>
 <table class="numbr_info">
 <?php
+
 foreach ($c['numbr'] as $key => $value) {
 if ($key == "id") continue;
 ?>
@@ -83,11 +104,7 @@ $hvalue = htmlspecialchars($value);
 $link = "";
 switch ($key) {
     case "name" :
-        if (isset($c['numbr']['openid']) && !empty($c['numbr']['openid'])) {
-            $hvalue = "<a href=\"/$hvalue\">$hvalue</a> <a href=\"/edit?mode=edit&name=" . urlencode($hvalue) . "\">(edit)</a>";
-        } else {
-            $link = "/$hvalue";
-        }
+        $link = "/$hvalue";
         break;
     case "title" :
     case "description" :

@@ -35,6 +35,8 @@ name LIKE CONCAT('%', :query, '%') OR
 url LIKE CONCAT('%', :query, '%') OR 
 title LIKE CONCAT('%', :query, '%') OR 
 description LIKE CONCAT('%', :query, '%')
+
+ORDER BY createdTime DESC
 ");
 $stmt->execute(array("query" => $_REQUEST['query'])) || die(json_encode($stmt->errorInfo()));
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

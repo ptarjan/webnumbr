@@ -64,7 +64,6 @@ default :
 }
 
 require ("fetch.inc");
-
 try {
     $data = fetch($_REQUEST['url'], $_REQUEST['xpath'], $type, $finalURL);
 } catch (FetchException $e) {
@@ -134,7 +133,7 @@ if ($type === "html") {
     $rep = '
 
     <!-- webnumbr.com Added Code -->
-    <base href="' . htmlspecialchars($_REQUEST['url']) . '" />
+    <base href="' . htmlspecialchars($_REQUEST['url']) . '"></base>
     <!-- webnumbr.com End Added Code -->
 
     ';

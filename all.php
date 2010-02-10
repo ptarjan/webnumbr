@@ -11,8 +11,8 @@ $subtitle = "All $count Numbrs";
 function cutzero($value) {
    return preg_replace("/(\.?)0+$/", "", $value);
 }
-?> 
-<?php ob_start() ?> 
+
+ob_start() ?> 
 <h3 class="first">All <span id="number_of_numbrs"><?php print $count ?></span> Numbrs</h3> 
 <div id='searchResults'> 
 <ul class='searchresults'>

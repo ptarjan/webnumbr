@@ -25,6 +25,8 @@ SELECT
 FROM numbrs WHERE
 
 openid LIKE CONCAT('%', :query, '%')
+
+ORDER BY createdTime DESC
 ");
 $stmt->execute(array("query" => $_REQUEST['name'])) || die(json_encode($stmt->errorInfo()));
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);

@@ -140,7 +140,7 @@ if ($name) {
                 </div>
                 <div class="clear">
                 </div>
-
+                        
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js" ></script>
 <script>
 $(function() {
@@ -153,6 +153,10 @@ $(function() {
 
 <?php 
 $content = ob_get_clean();
+$footer = <<<END
+                        <br/>
+                        <a id="tos" href="tos">Terms of Service</a>
+END;
 
 //========== template =========================
 

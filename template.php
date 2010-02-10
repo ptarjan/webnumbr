@@ -1,4 +1,5 @@
 <?php
+session_start();
 print '<?xml version="1.0" encoding="UTF-8"?>
 ';
 
@@ -16,7 +17,6 @@ $thoughts = array(
 $thought = $thoughts[rand(0, count($thoughts)-1)];
 
 $status = urlencode("@webnumbr http://webnumbr.com is $thought");
-
 ?> 
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -33,7 +33,13 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                     <div class="top-menu">
                         <ul>
                             <li>
-                                <a href="/">Home</a>
+<?php if (isset($_SESSION['openid'])){ ?>
+                                <a href="/logout" title="You are <?php print htmlspecialchars($_SESSION['openid']) ?>">Log out</a>
+<?php } else { 
+    $next = 'http://' . $_SERVER['SERVER_NAME'] . '/rpx?_next=' . urlencode($_SERVER['REQUEST_URI']);
+?>
+                                <a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=<?php print urlencode($next) ?>">Log In</a>
+<?php } ?>
                             </li>
                             <li>
                                 <a href="/create">Create</a>
@@ -57,6 +63,9 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                     </div>
                     <span class="logo">
                         <a href='/'><img id='logopic' src="/images/webNumbr-banner-63.png" alt="logo" /></a>
+<?php if (substr($_SERVER['SERVER_NAME'], 0, 4) === "dev.") { ?>
+                        <br/> <span style="color: red">Development version - <a href="http://twitter.com/webnumbr">File Bugs</a></span>
+<?php } ?>
                     </span>
                     <div class="clear"></div>
                 </div>
@@ -64,12 +73,20 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 				<?php print $content ?>
 				</div>
                     <div id="footer">
-                                <a href="http://twitter.com/home?status=<?php print $status ?>">Comments? <img height="20" src="/images/twitter.jpg" alt="twitter logo"/></a>
-                        
+                        <a id="comments" href="http://twitter.com/home?status=<?php print $status ?>">Comments? <img height="20" src="/images/twitter.jpg" alt="twitter logo"/></a>
+<?php if (isset($footer)) print $footer; ?>
                     </div>
             </div>
-
         <script type="type/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script type="text/javascript">
+  var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
+  document.write(unescape("%3Cscript src='" + rpxJsHost +
+      "rpxnow.com/js/lib/rpx.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+<script type="text/javascript">
+  RPXNOW.overlay = true;
+  RPXNOW.language_preference = 'en';
+</script>
         <?php print isset($script) ? $script : "" ?>
         <?php include("ga.inc") ?>
         <?php include("uservoice.inc") ?>

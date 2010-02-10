@@ -1,10 +1,21 @@
 <?php
+session_start();
 $subtitle = 'Edit numbr details';
 ob_start(); 
 ?>
 
 <?php
 if (!isset($_REQUEST['mode'])) $_REQUEST['mode'] = "create";
+
+if ($_REQUEST["mode"] == "edit") {
+    require ("db.inc");
+    $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
+    $stmt->execute(array("name" => $_REQUEST['name']));
+    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+    if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
+    $openid = $result[0]['openid'];
+}
+
 if (isset($_REQUEST['go'])) {
     function required($p) {
         if (is_array($p)) 
@@ -14,10 +25,12 @@ if (isset($_REQUEST['go'])) {
     }
 
     required("name", "url", "xpath", "frequency");
-    require ("db.inc");
+    require_once("db.inc");
 
+    // edit checks openid, otherwise check name
     if ($_REQUEST["mode"] == "edit") {
-        // Edit mode doesn't check name
+        if ($openid != $_SESSION['openid'])
+            die ("You aren't the same openid as in the database. Did you really make this numbr?");
     } else {
         ob_start();
         require "checkName.php";
@@ -29,82 +42,6 @@ if (isset($_REQUEST['go'])) {
 
     if (strpos($_REQUEST["url"], "http") !== 0) {
         die ("Only urls starting with http are supported");
-    }
-    
-    if ($_REQUEST["mode"] == "edit" || (isset($_REQUEST['openid']) && trim($_REQUEST['openid']) != "")) {
-        // 
-        // OpenID
-        //
-        chdir("openid");
-        require ("common.php");
-        $dirbase = sprintf("http://%s/", $_SERVER['SERVER_NAME']);
-        $base = $dirbase . "edit?";
-
-        $_REQUEST["_done"] = $base . http_build_query(
-            $_REQUEST
-        );
-        $_REQUEST["_root"] = $dirbase;
-
-        $consumer = getConsumer();
-
-        // Complete the authentication process using the server's
-        // response.
-        $response = $consumer->complete($_REQUEST['_done']);
-
-        $openid = "";
-        if (isset($_REQUEST['openid']) && $_REQUEST['openid'] !== "http://" && $_REQUEST['openid'] !== "") {
-            $openid = $_REQUEST['openid'];
-        };
-
-        if ($_REQUEST["mode"] == "edit") {
-            $stmt = $PDO->prepare("SELECT openid FROM numbrs WHERE name=:name");
-            $stmt->execute(array("name" => $_REQUEST['name']));
-            $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            if (count($result) != 1 || trim($result[0]['openid']) == "") die ("Invalid openid. How did you get here in the first place?");
-            $openid = $result[0]['openid'];
-        }
-
-        // Check the response status.
-        if ($response->status == Auth_OpenID_CANCEL) {
-            // This means the authentication was cancelled.
-            die ('OpenID cancelled.');
-        } else if ($response->status == Auth_OpenID_FAILURE) {
-            // Authentication failed; display the error message.
-            if (strpos($response->message, "<No mode set>") === FALSE)  {
-                error_log ("OpenID authentication failed: " . $response->message);
-                die ("OpenID authentication failed: " . $response->message);
-            } else {
-                // This part redirects them to their openid provider
-                require("try_auth.php");
-                doOpenID($openid);
-                die();
-            }
-        } else if ($response->status == Auth_OpenID_SUCCESS) {
-            // This means the authentication succeeded; extract the
-            // identity URL and Simple Registration data (if it was
-            // returned).
-            $newopenid = $response->getDisplayIdentifier();
-            if ($_REQUEST["mode"] == "edit") {
-                if ($openid != $newopenid)
-                    die ("That isn't the same openid as in the database. Did you really make this numbr?");
-            } else {
-                $openid = $newopenid;
-            }
-        }
-    } else {
-        $openid = "";
-    }
-
-    chdir("..");
-    //
-    // End OpendID
-    //
-
-    if (strpos($_SERVER["SERVER_NAME"], "dev.") === 0) {
-        print "<pre>";
-        print_r($_REQUEST);
-        print "</pre>";
-        // die("Not inserting in dev mode");
     }
 
     if ($_REQUEST["mode"] == "edit") {
@@ -119,6 +56,7 @@ if (isset($_REQUEST['go'])) {
         ));
     } else {
         $stmt = $PDO->prepare("INSERT INTO numbr_table (name, title, description, url, xpath, frequency, openid, createdTime) VALUES (:name, :title, :description, :url, :xpath, :frequency, :openid, NOW())");
+        $newopenid = (isset($_SESSION['openid']) ? $_SESSION['openid'] : "");
         $r = $stmt->execute(array(
             "name" => $_REQUEST['name'], 
             "title" => $_REQUEST['title'], 
@@ -126,7 +64,7 @@ if (isset($_REQUEST['go'])) {
             "url" => $_REQUEST['url'], 
             "xpath" => $_REQUEST['xpath'], 
             "frequency" => $_REQUEST['frequency'], 
-            "openid" => $openid, 
+            "openid" => $newopenid,
         ));
     }
     if (!$r) 
@@ -223,6 +161,9 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
         <p>
           <input name="mode" value="<?php print htmlspecialchars($_REQUEST['mode']) ?>" type="hidden" /> 
           <input name="go" value="1" type="hidden" /> 
+<?php
+    $next = 'http://' . $_SERVER['SERVER_NAME'] . '/rpx?_next=' . urlencode($_SERVER['REQUEST_URI']);
+?>
 <?php if ($_REQUEST["mode"] == "edit") { ?>
           <input name="name" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" type="hidden" />
 <?php } ?>
@@ -232,12 +173,26 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
             <input type="text" name="title" maxlength="255" value="<?php print htmlspecialchars($_REQUEST["title"]) ?>" />
             <input type="submit" value="<?php print ($_REQUEST["mode"] == "edit" ? "Edit" : "Create" ) . " Numbr"?>" />
         </p>
+<?php if (!isset($_SESSION['openid'])) { ?>
+        <p style="color:red">
+            You should
+            <a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=<?php print urlencode($next) ?>">Log In</a>
+            if you ever want to edit this.
+        </p>
+<?php } ?>
         <p>
             <span id="name_msg"></span>
         </p>
         <p>
             Current value <b id='data' style="margin : 0px 10px"></b> <span id="messages"></span>
         </p>
+<?php if ($_REQUEST["mode"] == "edit" && (! isset($_SESSION['openid']) || $_SESSION['openid'] != $openid)) { ?>
+        <p class="error">
+            You must
+            <a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=<?php print urlencode($next) ?>">Log In</a>
+            as <b><?php print $openid ?></b> to edit this.
+        </p>
+<?php } ?>
         <p>
             <a href="#" id="advanced_toggle">Advanced settings</a>
         <p>
@@ -246,10 +201,6 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
 <?php if (isset($_REQUEST["parent"])) { ?>
             <tr><th>Extends (inherits all data from)</th><td><input type="text" name="parent" value="<?php print htmlspecialchars($_REQUEST["parent"]); ?>" /></td></tr>
 <?php } ?>
-            <tr><th>OpenID</th><td>
-                <input type="text" style="padding-left: 20px; background: #FFFFFF url(/images/openid.png) no-repeat scroll 0 50%; width : 340px" maxlength="255" value="<?php $_REQUEST["openid"] ? print htmlspecialchars($_REQUEST["openid"]) : "http://" ?>" name="openid" id="openid" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> />
-                <?php if ($_REQUEST["mode"] == "edit") print '<span style="color: red"><--- This must be you</span>'; ?>
-            </td></tr>
             <tr><th><span title="unique name to fetch this numbr">Slug</span></th><td><input type="text" name="name" maxlength="63" value="<?php print htmlspecialchars($_REQUEST["name"]) ?>" <?php print $_REQUEST["mode"] == "edit" ? 'disabled="disabled" ' : "" ?> /></td></tr>
             <tr><th><span title="longer description, used in searches">Description</span></th><td><textarea name="description" rows="3" maxlength="1000"><?php print htmlspecialchars($_REQUEST["description"]) ?></textarea></td></tr>
             <tr><th>URL</th><td><input type="text" name="url" value="<?php print htmlspecialchars($url) ?>" maxlength="2000" /></td></tr>
@@ -264,14 +215,9 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
         </form>
 
 
-    <div id='dialog' style='display:none'>
-        <p>Everything look good?</p>
-        <p>You can only edit things if you put in a valid openid.</p>
-    </div>
-
-
-<script src="http://www.google.com/jsapi"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js"></script>
 <script type="text/javascript" src="edit.js"></script>
+<?php ?>
 <?php
     $content = ob_get_clean(); require("template.php");
 ?>

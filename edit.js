@@ -1,6 +1,4 @@
-google.load("jquery", "1");
-google.load("jqueryui", "1");
-google.setOnLoadCallback(function() {
+$(function() {
 
 $(document).ready(function() {
     var messages = function() { 
@@ -12,6 +10,8 @@ $(document).ready(function() {
     }
 
     var checkName = function(node, callback) {
+        if (typeof node == "undefined")
+            node = $(this);
         if ($(":input[name='name'][type='text']").attr('disabled')) {
             if (typeof callback == "function")
                 callback();
@@ -39,9 +39,7 @@ $(document).ready(function() {
                 callback();
         });
     };
-    $(":input[name='name']").blur(function() {
-            checkName($(this))
-    });
+    $(":input[name='name']").blur(checkName);
     if ($(":input[name='name']").val()) $(":input[name='name']").blur();
 
     var updateName = function() {
@@ -54,6 +52,7 @@ $(document).ready(function() {
     }
     $(":input[name='title']").keyup(updateName);
 
+    // Run the XPath on the page again
     var reload = function() {
         $("#data").html('<img src="/images/twirl.gif" alt="thinking"/>');
         $.get("create?" + $.param({url : $(":input[name='url']").attr("value"), xpath : $(":input[name='xpath']").attr("value"), action : "run" }), function (data) {
@@ -82,7 +81,7 @@ $(document).ready(function() {
         $(".error").each(function() {
             $(this).replaceWith($(this).contents());
         });
-        $(":input[name='title']").keyup();
+        // $(":input[name='title']").keyup();
         checkName($(":input[name='name']"), function() {
 
             var good = true;
