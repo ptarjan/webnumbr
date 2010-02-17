@@ -127,7 +127,7 @@ function fetch($url, $xpath = NULL, &$type = "", &$finalURL = NULL) {
                     }
 
                     $data = preg_replace_callback("/<\s*(\/\s*)?(\w+)/", "fetch_preg_lowercase", $data);
-                    $data = tidy_repair_string ($data, $config);
+                    $data = tidy_repair_string ($data, $config, 'utf8');
 
                     $dom = buildDom($data);
 
