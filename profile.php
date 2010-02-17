@@ -1,8 +1,4 @@
 <?php
-    // Silly bug
-$_REQUEST['name'] = str_replace('http:/', 'http://', $_REQUEST['name']);
-$_REQUEST['name'] = str_replace('https:/', 'https://', $_REQUEST['name']);
-
 $current_search = htmlspecialchars($_REQUEST['name']);
 $subtitle = "search : " . htmlspecialchars($_REQUEST['name']);
 
