@@ -9,7 +9,7 @@ if (isset($params['url_encoded']))
 $url = $params['url'];
 
 // HACK FOR RASMUS'S SERVER
-$url = str_replace("http:/", "http://", $url);
+// $url = str_replace("http:/", "http://", $url);
 // $url .= (strpos("?", $url) === FALSE ? '?' : '&');
 // $url .= http_build_query(array("c" => $c, "data" => $data, "params" => $params));
 
