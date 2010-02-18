@@ -138,6 +138,37 @@ if ($name) {
                 You can embed <b>graphs</b> too.
                 
                 </div>
+                            
+<?php
+require("db.inc");
+$stmt = $PDO->prepare("
+SELECT name, title FROM numbrs WHERE is_fetching = TRUE ORDER BY createdTime DESC LIMIT 1
+");
+$ret = $stmt->execute();
+if (!$ret) {
+    $name = NULL;
+}
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (count ($data) == 1) {
+    $name = $data[0]['name'];
+    $title = $data[0]['title'];
+} else {
+    $name = NULL;
+}
+
+if ($name) {
+    $link = "/$name";
+    $embed = getEmbed($name);
+    if (strlen($title) > 33)
+        $title = substr($title, 0, 30) . "...";
+?>
+                <div id="newest">
+                    Newest: 
+                    <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
+                    <?php print $embed . "\n" ?>
+                </div>
+<?php } ?>
+
                 <div class="clear">
                 </div>
                         

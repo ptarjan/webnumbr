@@ -8,7 +8,7 @@ fieldset,img {
 }
 
 
-#onsite, #embedcodes, #create {
+#onsite, #embedcodes, #create, #newest {
     width : 388px; /* 2 px for border */
     float : right;
     padding : 10px;;

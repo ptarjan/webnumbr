@@ -57,7 +57,7 @@ if(isset($_POST['token'])) {
     } else {
         header("Location: /");
     }
- 
+
     /* an error occurred */
   } else {
     // gracefully handle the error.  Hook this into your native error handling system.
