@@ -148,6 +148,7 @@ if (count ($data) == 1) {
 }
 
 if ($name) {
+    $link = "/$name";
     $embed = getEmbed($name);
     if (strlen($title) > 30)
         $title = substr($title, 0, 27) . "...";
