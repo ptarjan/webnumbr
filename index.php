@@ -80,44 +80,6 @@ ob_start();
                                     <?php print getEmbed("earthquake-ca") ?>
                                 </td>
                             </tr>
-<!--
-<?php
-require("db.inc");
-$stmt = $PDO->prepare("
-SELECT name, title FROM numbrs WHERE is_fetching = TRUE ORDER BY rand() LIMIT 1
-");
-$ret = $stmt->execute();
-if (!$ret) {
-    $name = NULL;
-}
-$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
-if (count ($data) == 1) {
-    $name = $data[0]['name'];
-    $title = $data[0]['title'];
-} else {
-    $name = NULL;
-}
-
-if ($name) {
-    $embed = getEmbed($name);
-    if (strlen($title) > 43)
-        $title = substr($title, 0, 40) . "...";
-?>
-                            <tr>
-                                <th colspan="2">
-                                    Random user-made numbr
-                                </th>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
-                                </td>
-                                <td class="leftpadding">
-                                    <?php print $embed . "\n" ?>
-                                </td>
-                            </tr>
-<?php } ?>
--->
                         </table>
                 <iframe src="http://webnumbr.com/webnumbrs.all.graph" style="width: 100%; height: 200px;" allowtransparency="true" frameborder="0"></iframe>
 
@@ -164,6 +126,34 @@ if ($name) {
 ?>
                 <div id="newest">
                     Newest: 
+                    <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
+                    <?php print $embed . "\n" ?>
+                </div>
+<?php } ?>
+<?php
+require("db.inc");
+$stmt = $PDO->prepare("
+SELECT name, title FROM numbrs WHERE is_fetching = TRUE ORDER BY rand() LIMIT 1
+");
+$ret = $stmt->execute();
+if (!$ret) {
+    $name = NULL;
+}
+$data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+if (count ($data) == 1) {
+    $name = $data[0]['name'];
+    $title = $data[0]['title'];
+} else {
+    $name = NULL;
+}
+
+if ($name) {
+    $embed = getEmbed($name);
+    if (strlen($title) > 30)
+        $title = substr($title, 0, 27) . "...";
+?>
+                <div id="random">
+                    Random: 
                     <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
                     <?php print $embed . "\n" ?>
                 </div>

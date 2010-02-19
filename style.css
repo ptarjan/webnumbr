@@ -8,16 +8,20 @@ fieldset,img {
 }
 
 
-#onsite, #embedcodes, #create, #newest {
+#onsite, #embedcodes, #create, #newest, #random {
     width : 388px; /* 2 px for border */
     float : right;
     padding : 10px;;
     margin-bottom : 20px;
 }
 
+#newest, #random {
+    margin-bottom : 0px;
+    padding: 0 10px;
+}
+
 #onsite, #embedcodes {
     border-top : 1px solid black;
-    background : #eee;
 }
 
 #create {
