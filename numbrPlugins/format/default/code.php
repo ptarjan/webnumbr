@@ -79,13 +79,11 @@ else
     $openid = "";
 
 if ($openid) {
-    if (!isset($_SESSION['openid'])) {
+    if (!isset($_SESSION['openid']) || $openid != $_SESSION['openid']) {
         $next = urlencode('http://' . $_SERVER['SERVER_NAME'] . '/rpx?_next=' . urlencode($_SERVER['REQUEST_URI']));
         print <<<END
-<a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=$next">(login to edit)</a>
+(<a id="login" class="rpxnow" onclick="return false;" href="https://webnumbr.rpxnow.com/openid/v2/signin?token_url=$next">login</a> as the owner of this graph to edit)
 END;
-    } else if ($openid != $_SESSION['openid']) {
-        print ' <a href="/logout">(logout, and then login with this openid to edit)</a>';
     } else {
         print " <a href=\"/edit?mode=edit&name=" . urlencode($c['numbr']['name']) . "\">(edit)</a>";
     }

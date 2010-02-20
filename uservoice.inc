@@ -6,7 +6,7 @@ var uservoiceOptions = {
   forum: '38506',
   showTab: true,  
   /* optional */
-  alignment: 'left',
+  alignment: 'right',
   background_color:'#004fff', 
   text_color: 'white',
   hover_color: '#ff4f00',
