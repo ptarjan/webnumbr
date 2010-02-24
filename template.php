@@ -62,7 +62,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                         </form>
                     </div>
                     <span class="logo">
-                        <a href='/'><img id='logopic' src="/images/webNumbr-banner-63.png" alt="logo" /></a>
+                        <a href='/'><img id='logopic' src="/images/webnumbr-banner-63.png" alt="logo" /></a>
 <?php if (substr($_SERVER['SERVER_NAME'], 0, 4) === "dev.") { ?>
                         <br/> <span style="color: red">Development version - <a href="http://twitter.com/webnumbr">File Bugs</a></span>
 <?php } ?>

@@ -88,7 +88,7 @@ if ($type === "num") {
 
 $msg = '
         <div id="webnumbr-message"> 
-            <img src="http://webnumbr.com/images/webNumbr-banner-50.png"> Click on the number that you are interested in...
+            <img src="http://webnumbr.com/images/webnumbr-banner-50.png"> Click on the number that you are interested in...
         </div>
         <script>
             $(function() {
@@ -135,7 +135,7 @@ if ($type === "html") {
                 "No nodes found from the Xpath. It is probably a string match. Search in the document for this :"
             ));
             $blink = $data->createElement("blink");
-            $blink->setAttribute("id", "paulisaageek_webNumbr_blink");
+            $blink->setAttribute("id", "webnumbr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; margin: 10px; padding: 10px");
             $node = @$dx->evaluate($showxpath);
             if (!is_string($node) && !is_int($node))
@@ -151,7 +151,7 @@ if ($type === "html") {
         } else {
             $node = $nl->item(0);
             $blink = $data->createElement("blink");
-            $blink->setAttribute("id", "paulisaageek_webNumbr_blink");
+            $blink->setAttribute("id", "webnumbr_blink");
             $blink->setAttribute("style", "border: 5px solid red; background-color: #0cf; color: black; z-index: 999");
             while ($node->childNodes->length > 0) {
                 $child = $node->firstChild;
@@ -204,7 +204,7 @@ if ($type === "html") {
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script>
 $(document).ready(function($) {
-    var node = $("#paulisaageek_webNumbr_blink");
+    var node = $("#webnumbr_blink");
     node.ready(function($) {
         node
         .clone()
@@ -401,7 +401,7 @@ $xml = $data->saveXML($data);
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webNumbr - XML selection</title>
+    <title>webnumbr - XML selection</title>
     <link rel="stylesheet" href="style.css" type='text/css' />  
   </head>
   <body>

@@ -68,7 +68,7 @@ if (isset($_REQUEST['go'])) {
         ));
     }
     if (!$r) 
-        die("Something is wrong with the database right now. It could be that someone just took your name, or something else is weird. Please retry again later, and send me an email webNumbr@paulisageek.com<br/>" . print_r($stmt->errorInfo(), TRUE));
+        die("Something is wrong with the database right now. It could be that someone JUST took your name, or something else is weird. Please retry again later, and send an email bugs@webnumbr.com<br/>" . print_r($stmt->errorInfo(), TRUE));
 
     if (isset($_REQUEST['parent'])) {
         $stmt = $PDO->prepare("INSERT INTO numbr_data (data, timestamp, numbr) SELECT data, timestamp, :numbr FROM numbr_data WHERE numbr = :parent");

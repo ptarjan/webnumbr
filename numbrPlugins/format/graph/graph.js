@@ -35,7 +35,7 @@ makeGraph = function (c, data) {
             var a = $("<a/>")
             .text(typeof c.numbr.title != "undefined" ? c.numbr.title : name)
             .attr("href", "/" + name)
-            .attr("target", "webNumbr");
+            .attr("target", "webnumbr");
             a.attr("title", a.text());
             if (a.text().length > 30) {
                 a.text(a.text().substring(0, 27) + "...");
