@@ -114,7 +114,7 @@ $msg = '
             font-weight: bold;
             font-size: 12pt;
             padding-top: 7px;
-            z-index: 100;
+            z-index: 999999;
         }
         #webnumbr-message img {
             height: 16pt;
@@ -175,9 +175,9 @@ if ($type === "html") {
 
     ';
 
-    $data = preg_replace('/(.*<\s*[hH][eE][aA][dD]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
+    $data = preg_replace('/(<\s*[hH][eE][aA][dD]\s?[^>]*>)/', "$1" . $rep, $data, -1, $count);
     if ($count == 0) {
-        $data = preg_replace('/(.*<\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . "<head>" . $rep . "</head>" . "$2", $data, -1, $count);
+        $data = preg_replace('/(<\s*[hH][tT][mM][lL]\s?[^>]*>)/', "$1" . "<head>" . $rep . "</head>", $data, -1, $count);
     }
 
     if ($_REQUEST['action'] == "pick") {
@@ -228,9 +228,9 @@ $(document).ready(function($) {
         $rep = "";
     }
     
-    $data = preg_replace('/(.*<\/\s*[bB][oO][dD][yY]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
+    $data = preg_replace('/(<\/\s*[bB][oO][dD][yY]\s?[^>]*>)/', "$1" . $rep, $data, -1, $count);
     if ($count == 0) {
-        $data = preg_replace('/(.*<\/\s*[hH][tT][mM][lL]\s?[^>]*>)(.*)/', "$1" . $rep . "$2", $data, -1, $count);
+        $data = preg_replace('/(<\/\s*[hH][tT][mM][lL]\s?[^>]*>)/', "$1" . $rep, $data, -1, $count);
     }
 
     print $data;
