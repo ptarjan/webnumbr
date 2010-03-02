@@ -113,7 +113,7 @@ switch ($key) {
         $hvalue = "";
         break;
     case "url" :
-        $link = $hvalue;
+        $link = $value;
         break;
     case "xpath" :
         $link = '/create?' . http_build_query(array("url" => $c['numbr']['url'], "xpath" => $c['numbr']['xpath'], "action" => "show"));
