@@ -74,10 +74,10 @@ ob_start();
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/earthquake-ca">Last earthquake in CA</a>
+                                    <a href="/xkcdusrs">xkcd forum users</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <?php print getEmbed("earthquake-ca") ?>
+                                    <?php print getEmbed("xkcdusrs") ?>
                                 </td>
                             </tr>
                         </table>
