@@ -6,7 +6,7 @@ print '<?xml version="1.0" encoding="UTF-8"?>';
  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
   <head>
-    <title>webnumbr</title>
+    <title><?php print htmlentities($c['numbr']['title']); ?> - Graph</title>
 
     <style type="text/css">
 html {
@@ -36,7 +36,7 @@ div.content {
   </head>
   <body>
     <div class="content">
-        <div id="plot" class='center'>Loading Numbr Graph...</div>
+        <div id="plot" class='center'>Loading WebNumbr Graph...</div>
     </div>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
@@ -45,7 +45,7 @@ div.content {
 <script type="text/javascript" src="/numbrPlugins/format/graph/graph.js"></script>
 <script type="text/javascript">
 $("plot").ready(function($) {
-    makeGraph(<?php print json_encode($c) ?>, <?php print json_encode($data) ?>);
+    makeGraph(<?php print json_encode($c) ?>, <?php print json_encode($data) ?>, <?php print json_encode($params) ?>);
 });
 </script>
 

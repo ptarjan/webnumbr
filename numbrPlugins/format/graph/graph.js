@@ -1,5 +1,6 @@
-makeGraph = function (c, data) {
+makeGraph = function (c, data, params) {
     $(document).ready(function ($) {
+        if (params == null) params = {};
         var graph = [];
         if (typeof data == "number" || data == null)
             data = [[0, data]];
@@ -20,7 +21,6 @@ makeGraph = function (c, data) {
 
             if (series == null || series.length === 0 || (this.length == 1 && this[0][1] === null)) {
                 series = [
-                    [0, 1.5],
                     [0, 0],
                     [2, 0], [2, 1], [4, 0], [4, 1], [4, 0], // N
                     [7, 0], [6, 0.15], [5, 0.5], [6, 0.85], [7, 1], [8, 0.85], [9, 0.5], [8, 0.15], [7, 0], // O
@@ -30,6 +30,8 @@ makeGraph = function (c, data) {
                     [31, 0], [32, 1], [32.5, 0.5], [31.5, 0.5], [32.5, 0.5], [33, 0], // A
                     [35, 0],
                 ];
+                params.min = 0;
+                params.max = 1.5;
             }
             
             var a = $("<a/>")
@@ -48,6 +50,7 @@ makeGraph = function (c, data) {
  
         var config = {
             xaxis: { mode : "time" },
+            yaxis: { },
             legend : { 
                 position : "nw",
                 show : 1,
@@ -55,6 +58,10 @@ makeGraph = function (c, data) {
             },
             lines : { show : true }
         };
+        if (typeof params.min != "undefined")
+            config.yaxis.min = params.min;
+        if (typeof params.max != "undefined")
+            config.yaxis.max = params.max;
 
         var plotFunction = function(json) {
             $("#plot").height($(".content").innerHeight());
