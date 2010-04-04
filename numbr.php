@@ -19,9 +19,9 @@ public function parse($string) {
             foreach( explode(",", $params) as $row ) {
                 $boom = explode("=", $row, 2);
                 if (!$boom[1]) {
-                    $p[] = $boom[0];
+                    $p[] = trim($boom[0]);
                 } else {
-                    $p[$boom[0]] = $boom[1];
+                    $p[trim($boom[0])] = trim($boom[1]);
                 }
             }
             if (count($p) > 0) {
