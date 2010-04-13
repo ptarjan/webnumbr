@@ -45,7 +45,7 @@ if (isset($_REQUEST['go'])) {
     }
 
     if ($_REQUEST["mode"] == "edit") {
-        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency WHERE name=:name");
+        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency badFetchesSequential=0 WHERE name=:name");
         $r = $stmt->execute(array(
             "name" => $_REQUEST['name'], 
             "title" => $_REQUEST['title'], 

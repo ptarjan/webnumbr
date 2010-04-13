@@ -58,7 +58,7 @@ CREATE VIEW numbrs AS
 
 SELECT *,
 -- 1 week of brokenness
-badFetches < 100 OR badFetchesSequential > (24*7 / frequency) AS is_fetching,
+badFetches < 100 OR badFetchesSequential < (24*7 / frequency) AS is_fetching,
 domain(url) AS domain
 
 FROM numbr_table;

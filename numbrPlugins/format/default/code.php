@@ -94,42 +94,51 @@ END;
 
 foreach ($c['numbr'] as $key => $value) {
 if ($key == "id") continue;
+$hvalue = htmlspecialchars($value);
+$link = "";
+$key = trim(preg_replace('/[A-Z]/', ' $0', ucfirst($key)));
+switch ($key) {
+    case "Name" :
+        $link = "/$hvalue";
+        break;
+    case "Title" :
+    case "Description" :
+        $parts = explode(" ", $value);
+        $hvalue = "";
+        foreach ($parts as $part) {
+            $hvalue .= '<a href="/search?query=' . urlencode($part) . '">' . htmlspecialchars($part) . '</a> ';
+        }
+        break;
+    case "Url" :
+        $link = $value;
+        $key = strtoupper($key);
+        break;
+    case "Xpath" :
+        $link = '/create?' . http_build_query(array("url" => $c['numbr']['url'], "xpath" => $c['numbr']['xpath'], "action" => "show"));
+        break;
+    case "Frequency" :
+        $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
+        break;
+    case "Openid" :
+        $hvalue = '<a href="/profile?name=' . urlencode($hvalue) . '">' . $hvalue . '</a>';
+        break;
+    case "Is_fetching" :
+        $key = "Is Fetching?";
+        if ($value == 1)
+            $hvalue = '<span style="color:green">Good : this numbr is fetching</span>';
+        else 
+            $hvalue = '<span style="color:red">Bad : this numbr is not fetching because the site was down for 1 week. Restart it by editing the numbr and then clicking save or contact me.</span>';
+        break;
+    case "Bad Fetches Sequential" :
+        $key = "Sequential Bad Fetches";
+        if ($value > 0)
+            $hvalue = '<span style="color:red">'.$value.'</span>';
+        break;
+}
 ?>
 <tr>
     <th><?php print htmlspecialchars($key); ?></th>
     <td><?php 
-$hvalue = htmlspecialchars($value);
-$link = "";
-switch ($key) {
-    case "name" :
-        $link = "/$hvalue";
-        break;
-    case "title" :
-    case "description" :
-        $parts = explode(" ", $value);
-        foreach ($parts as $part) {
-            print '<a href="/search?query=' . urlencode($part) . '">' . htmlspecialchars($part) . '</a> ';
-        }
-        $hvalue = "";
-        break;
-    case "url" :
-        $link = $value;
-        break;
-    case "xpath" :
-        $link = '/create?' . http_build_query(array("url" => $c['numbr']['url'], "xpath" => $c['numbr']['xpath'], "action" => "show"));
-        break;
-    case "frequency" :
-        $hvalue = "Every $hvalue hour" . ($value == 1 ? "" : "s");
-        break;
-    case "openid" :
-        $hvalue = '<a href="/profile?name=' . urlencode($hvalue) . '">' . $hvalue . '</a>';
-        break;
-    case "is_fetching" :
-        if ($value == 1)
-            $hvalue = '<span style="color:green">Good : this numbr is fetching</span>';
-        else 
-            $hvalue = '<span style="color:red">Bad : this numbr is not fetching due to too many fetch errors</span>';
-}
 if (trim($hvalue) != "") {
     if (trim($link) != "") {
         print '<a href="' . htmlspecialchars($link) . '">' . $hvalue . '</a>' ;
