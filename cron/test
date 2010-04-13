@@ -1,0 +1,12 @@
+echo "running dev"
+php webNumbr.php -n -f -d -p > test.dev
+cat test.dev | cut -d " " -f 7- | grep "^[0-9]\+:" | sort -n > test.dev.nums
+
+echo "running prod"
+php webNumbr.php -n -f -p > test.prod
+cat test.prod | cut -d " " -f 7- | grep "^[0-9]\+:" | sort -n > test.prod.nums
+
+echo "< == Dev"
+echo "> == Prod"
+
+diff test.dev.nums test.prod.nums
