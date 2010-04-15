@@ -73,11 +73,29 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 				<?php print $content ?>
 				</div>
                     <div id="footer">
-                        <a id="comments" href="http://twitter.com/home?status=<?php print $status ?>">Comments? <img height="20" src="/images/twitter.jpg" alt="twitter logo"/></a>
+                        <span id="comments"></span>
 <?php if (isset($footer)) print $footer; ?>
                     </div>
             </div>
-        <script type="type/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+<script src="http://platform.twitter.com/anywhere.js?id=nMRMU8hXQyqSHOGxydMOA&v=1" type="text/javascript"></script>
+<script type="text/javascript">
+  twttr.anywhere("1", function (twitter) {
+    //  Any of the default options can be modified by passing an
+    //  object literal to the tweetBox method.
+
+    twitter("#comments").tweetBox({
+      counter: false,
+      height: 100,
+      width: 400,
+      label: "What do you think about this page?",
+      defaultContent: "http://<?php print $_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI']; ?> ",
+    });
+
+  });
+
+</script>
+    
+<script type="type/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 <script type="text/javascript">
   var rpxJsHost = (("https:" == document.location.protocol) ? "https://" : "http://static.");
   document.write(unescape("%3Cscript src='" + rpxJsHost +
