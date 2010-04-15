@@ -77,7 +77,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
 <?php if (isset($footer)) print $footer; ?>
                     </div>
             </div>
-<script src="http://platform.twitter.com/anywhere.js?id=oRfatkNVBrocKWbgMI8V7g&v=1" type="text/javascript"></script>
+<script src="http://platform.twitter.com/anywhere.js?id=tlwTvZwcqmB9F63gAhb9fw&v=1" type="text/javascript"></script>
 <script type="text/javascript">
   twttr.anywhere("1", function (twitter) {
     //  Any of the default options can be modified by passing an
