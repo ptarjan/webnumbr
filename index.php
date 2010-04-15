@@ -176,6 +176,23 @@ $(function() {
 <?php 
 $content = ob_get_clean();
 $footer = <<<END
+<span id="comments"></span>
+<script src="http://platform.twitter.com/anywhere.js?id=guJ54lAsrWlx72B8bjnCcA&v=1" type="text/javascript"></script>
+<script type="text/javascript">
+  twttr.anywhere("1", function (twitter) {
+    //  Any of the default options can be modified by passing an
+    //  object literal to the tweetBox method.
+
+    twitter("#comments").tweetBox({
+      counter: false,
+      height: 100,
+      width: 400,
+      label: "What do you think about @webnumbr?",
+      defaultContent: "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']} is awesome!",
+    });
+
+  });
+</script>
                         <br/>
                         <a id="tos" href="tos">Terms of Service</a>
 END;
