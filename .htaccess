@@ -1,5 +1,4 @@
 <IfModule mod_headers.c>
-    Header set Pragma "no-cache"
     Header set Cache-Control "no-cache"
     Header set Expires "Web, 02 May 1984 20:30:00 MST"
 </IfModule>
