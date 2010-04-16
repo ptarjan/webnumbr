@@ -37,7 +37,8 @@ javascript:(
         <script>
 $('#url').keyup(function() {
   $.getJSON('/checkURL', {url: $(this).val()}, function(urls) {
-    $('#other_numbrs').html('Does your numbr already exist? <ul>');
+    if (urls.length == 0) $('#other_numbrs').text('');
+    else $('#other_numbrs').html('Does your numbr already exist? <ul>');
     $.each(urls, function(i, url) {
       $('#other_numbrs').append($('<li>').append(
         $('<a>').attr('href', '/'+url.name).append(
