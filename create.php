@@ -30,10 +30,30 @@ javascript:(
             <input id="submitURL" type='submit' value='Pick the Numbr on the Page' />
           </div>
         </form>
+        
+        <div id="other_numbrs"></div>
 
-<br/><br/><br/>&nbsp;
-
-
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script>
+$('#url').keyup(function() {
+  $.getJSON('/checkURL', {url: $(this).val()}, function(urls) {
+    $('#other_numbrs').html('Does your numbr already exist? <ul>');
+    $.each(urls, function(i, url) {
+      $('#other_numbrs').append($('<li>').append(
+        $('<a>').attr('href', '/'+url.name).append(
+          $('<span>').text(
+            url.title ? url.title : url.name
+          )
+        )).append(' ').append(
+          $('<span>').text(
+            url.url.length > 50 ? url.url.substring(0,50) + '...' : url.url
+          )
+        )
+      );
+    });
+  });
+});
+        </script>
 <?php
     $content = ob_get_clean(); require("template.php");
     die();
