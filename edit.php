@@ -45,7 +45,7 @@ if (isset($_REQUEST['go'])) {
     }
 
     if ($_REQUEST["mode"] == "edit") {
-        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency badFetchesSequential=0 WHERE name=:name");
+        $stmt = $PDO->prepare("UPDATE numbrs SET title=:title, description=:description, url=:url, xpath=:xpath, frequency=:frequency, badFetchesSequential=0 WHERE name=:name");
         $r = $stmt->execute(array(
             "name" => $_REQUEST['name'], 
             "title" => $_REQUEST['title'], 
@@ -55,7 +55,7 @@ if (isset($_REQUEST['go'])) {
             "frequency" => $_REQUEST['frequency'], 
         ));
     } else {
-        $stmt = $PDO->prepare("INSERT INTO numbr_table (name, title, description, url, xpath, frequency, openid, createdTime) VALUES (:name, :title, :description, :url, :xpath, :frequency, :openid, NOW())");
+        $stmt = $PDO->prepare("INSERT INTO numbr_table (name, title, description, url, xpath, frequency, openid, badFetchesSequential, createdTime) VALUES (:name, :title, :description, :url, :xpath, :frequency, :openid, 0, NOW())");
         $newopenid = (isset($_SESSION['openid']) ? $_SESSION['openid'] : "");
         $r = $stmt->execute(array(
             "name" => $_REQUEST['name'], 
