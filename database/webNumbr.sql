@@ -10,17 +10,10 @@ CREATE TABLE numbr_table (
     openid VARCHAR(255) NOT NULL,
     goodFetches INT NOT NULL DEFAULT 0,
     badFetches INT NOT NULL DEFAULT 0,
+    badFetchesSequential INT NOT NULL DEFAULT 0,
     createdTime TIMESTAMP NOT NULL DEFAULT '0000-00-00 00:00:00',
     modifiedTime TIMESTAMP NOT NULL default CURRENT_TIMESTAMP on update NOW(),
     UNIQUE INDEX name(name)
-);
-
-DROP TALBE IF EXISTS numbr_names;
-DROP TALBE IF EXISTS numbr_names (
-    id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
-    numbr_id INT NOT NULL,
-    name VARCHAR(63) NOT NULL,
-    FOREIGN KEY (numbr_id) REFERENCES numbr_table(id),
 );
 
 DROP FUNCTION IF EXISTS domain;
