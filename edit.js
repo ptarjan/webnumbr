@@ -51,6 +51,8 @@ $(document).ready(function() {
         checkName($(":input[name='name']"));
     }
     $(":input[name='title']").keyup(updateName);
+    if ($(":input[name='title']").val() != "")
+      $(":input[name='title']").keyup();
 
     // Run the XPath on the page again
     var reload = function() {
