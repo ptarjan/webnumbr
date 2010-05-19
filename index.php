@@ -14,7 +14,7 @@ function getEmbed($name) {
 
 // ================ templates parts ===================
 
-$subtitle = "Track numbers from anywhere on the web";
+$subtitle = "Track Numbers from Anywhere on the Web";
 ob_start();
 ?>
                 <div class="slogan">
