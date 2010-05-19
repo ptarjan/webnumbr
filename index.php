@@ -176,6 +176,7 @@ $(function() {
 <?php 
 $content = ob_get_clean();
 $footer = <<<END
+<!--
 <span id="comments"></span>
 <script src="http://platform.twitter.com/anywhere.js?id=guJ54lAsrWlx72B8bjnCcA&v=1" type="text/javascript"></script>
 <script type="text/javascript">
@@ -193,6 +194,7 @@ $footer = <<<END
 
   });
 </script>
+-->
                         <br/>
                         <a id="tos" href="tos">Terms of Service</a>
 END;

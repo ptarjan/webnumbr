@@ -55,9 +55,14 @@ if (is_numeric($data)) {
             </div>
 
             <div id="numbr_embed_code">
-                Embed code: 
+                <span>
+                  Embed code: 
+                </span>
                 <input type="text" value="<?php print $embed ?>"/>
                 <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
+                
+                <iframe src="http://www.facebook.com/plugins/like.php?href=<?php print urlencode('http://webnumbr.com'.$_SERVER['REQUEST_URI']); ?>&amp;width=250&amp;height=27" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:250px; height:27px; margin-left: 10px" allowTransparency="true"></iframe> 
+
             </div>
 <?php } ?>
 
@@ -182,6 +187,7 @@ foreach ($c['plugins']['operation'] as $op) {
 //========== template =========================
 
 $footer = <<<END
+<!--
 <span id="comments"></span>
 <script src="http://platform.twitter.com/anywhere.js?id=guJ54lAsrWlx72B8bjnCcA&v=1" type="text/javascript"></script>
 <script type="text/javascript">
@@ -199,6 +205,7 @@ $footer = <<<END
 
   });
 </script>
+-->
 END;
 include ("template.php");
 ?>
