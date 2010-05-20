@@ -58,10 +58,10 @@ if (is_numeric($data)) {
                 <span style="vertical-align:top">
                   Embed code: 
                 </span>
-                <input type="text" value="<?php print $embed ?>"/>
+                <input type="text" value="<?php print $embed ?>" style="width: 200px" />
                 <a href="/<?php print $c['code'] ?>.rss"><img title="RSS feed" alt="RSS feed" src="/images/feed-icon-28x28.png" /></a>
                 
-                <iframe src="http://www.facebook.com/plugins/like.php?href=<?php print urlencode('http://webnumbr.com'.$_SERVER['REQUEST_URI']); ?>&amp;width=200&amp;height=27" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:200px; height:27px; margin-left: 10px" allowTransparency="true"></iframe> 
+                <iframe src="http://www.facebook.com/plugins/like.php?href=<?php print urlencode('http://webnumbr.com'.$_SERVER['REQUEST_URI']); ?>&amp;width=300&amp;height=27" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:300px; height:27px; margin-left: 10px; float:right" allowTransparency="true"></iframe> 
 
             </div>
 <?php } ?>
