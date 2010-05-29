@@ -41,7 +41,11 @@ function printDoc($dir) {
         $example = @file_get_contents("numbrPlugins/$dir/$name/example.txt");
         $examplebreak = str_replace("/", "/&#x200b;", $example);
         $params = str_replace("/", "/&#x200b;", $params);
-        $example = "<a href=\"/$example\">$examplebreak</a>";
+
+        // Add a relative URL slash if it doesn't start with http://
+        if (strpos($example, 'http://') !== 0)
+          $example = '/'.$example;
+        $example = "<a href=\"$example\">$examplebreak</a>";
         $name = "<a href=\"numbrPlugins/$dir/$name/code.php\">$name</a>";
         
         if (!$doc) continue;
