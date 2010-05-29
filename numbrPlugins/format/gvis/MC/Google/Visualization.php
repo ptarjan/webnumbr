@@ -426,7 +426,7 @@ class MC_Google_Visualization {
                 if($alias) $sql .= ' AS ' . $q . implode(',', $pivot) . ' ' . $func . '-' . $name . $q;
             }
         } elseif($alias) {
-            $sql .= ' AS ' . $name;
+            $sql .= ' AS `' . $name . '`';
         }
         
         return $sql;
