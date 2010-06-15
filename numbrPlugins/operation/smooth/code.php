@@ -12,15 +12,17 @@ if (is_array($data)) {
   $newData = array();
   $i = 0;
   $total = 0;
+  $start = (float) $data[0][0];
   foreach ($data as $row) {
     $time = (float) $row[0];
     $val = (float) $row[1];
     $total += $val;
     $i += 1;
     if ($i >= $points) {
-      $newData[] = (array($time, $total));
+      $newData[] = (array($time + ($time - $start) / 2, $total));
       $i = 0;
       $total = 0;
+      $start = $time;
     }
   }
   $data = $newData;
