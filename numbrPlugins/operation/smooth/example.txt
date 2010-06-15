@@ -1,1 +1,0 @@
-webnumbrs.derivative.smooth(6)
