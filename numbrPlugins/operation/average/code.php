@@ -19,7 +19,7 @@ if (is_array($data)) {
     $total += $val;
     $i += 1;
     if ($i >= $points) {
-      $newData[] = (array($time + ($time - $start) / 2, $total));
+      $newData[] = (array($time + ($time - $start) / 2, $total / $points));
       $i = 0;
       $total = 0;
       $start = $time;
