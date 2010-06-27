@@ -1,1 +1,1 @@
-webnumbrs.derivative.normalize.min(0.8)
+webnumbrs.derivative.normalize.min(0.05)
