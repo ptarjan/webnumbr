@@ -2,9 +2,9 @@
 if (is_array($data)) {
   $num = NULL;
   if (isset($params['num']))
-    $num = (int) $params['num'];
+    $num = (float) $params['num'];
   else if (isset($params[0]))
-    $num = (int) $params[0];
+    $num = (float) $params[0];
 
   // only do this is the num is numeric
   if (is_numeric($num)) {
