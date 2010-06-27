@@ -1,0 +1,1 @@
+Only return values over (and including) this amount. (Use this instead of above() when you already did some processing on the data, like a derivative).
