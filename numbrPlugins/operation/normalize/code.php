@@ -18,7 +18,7 @@ if (is_array($data)) {
   foreach ($data as $row) {
     $time = (float) $row[0];
     $val = (float) $row[1];
-    $val /= $max;
+    $val /= $max * $range;
     $newData[] = (array($time, $val));
   }
 
