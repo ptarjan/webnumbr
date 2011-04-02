@@ -25,8 +25,14 @@ SELECT
 FROM numbrs 
 
 ORDER BY createdTime DESC
+LIMIT :limit
 ");
-$stmt->execute(array("query" => $_REQUEST['query'])) || die(json_encode($stmt->errorInfo()));
+if (isset($_REQUEST['limit'])) {
+  $stmt->bindValue('limit', (int) $_REQUEST['limit'], PDO::PARAM_INT);
+} else {
+  $stmt->bindValue('limit', 1000000, PDO::PARAM_INT);
+}
+$stmt->execute() || die(json_encode($stmt->errorInfo()));
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 foreach ($data as $row) {
     $sd = $PDO->prepare("
