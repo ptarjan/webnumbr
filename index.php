@@ -50,18 +50,18 @@ ob_start();
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/crude-oil-brent">Crude Brent Oil</a>
+                                    <a href="/wikileaks-cables-released">Wikileaks Cables Released</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <?php print getEmbed("crude-oil-brent") ?>
+                                    <?php print getEmbed("wikileaks-cables-released") ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/semantic-sm-video">Number of semantic video files</a>
+                                    <a href="/okcupid">OkCupid Online Users</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <?php print getEmbed("semantic-sm-video") ?>
+                                    <?php print getEmbed("okcupid") ?>
                                 </td>
                             </tr>
                             <tr>
