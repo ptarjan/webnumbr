@@ -101,6 +101,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
         <?php print isset($script) ? $script : "" ?>
         <?php include("ga.inc") ?>
         <?php include("uservoice.inc") ?>
+        <?php include("woopra.inc") ?>
 
     </body>
 </html>
