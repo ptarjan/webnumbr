@@ -29,7 +29,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
         <meta property="og:type" content="website" />
         <meta property="og:title" content="<?php print $subtitle ?>" />
         <meta property="og:site_name" content="Webnumbr" />
-        <meta property="og:image" content="http://webnumbr.com/images/webnumbr-favicon.png" />
+        <meta property="og:image" content="http://webnumbr.com/images/webnumbr-logo-512.png" />
         <meta property="fb:app_id" content="130410460310483" /> 
 
         <?php print $htmlHead ?>
