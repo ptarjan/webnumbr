@@ -12,7 +12,7 @@ foreach ($c['numbr'] as $key => $val)
 $embedCode = $c['code'];
 $graphCode = $c['code'];
 if (count($c['plugins']['selection']) == 1 && $c['plugins']['selection'][0][0] == 'default') {
-    $graphCode = str_replace($c['name'], "{$c['name']}.all", $graphCode);
+    $graphCode = str_replace($c['name'], "{$c['name']}.last(1000).sample", $graphCode);
     $embedCode = str_replace($c['name'], "{$c['name']}.latest", $embedCode);
 }
 

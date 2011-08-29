@@ -81,7 +81,7 @@ ob_start();
                                 </td>
                             </tr>
                         </table>
-                <iframe src="http://webnumbr.com/webnumbrs.all.graph" style="width: 100%; height: 200px;" allowtransparency="true" frameborder="0"></iframe>
+                <iframe src="http://webnumbr.com/webnumbrs.last(1000).sample.graph" style="width: 100%; height: 200px;" allowtransparency="true" frameborder="0"></iframe>
 
                 <br/>
 
