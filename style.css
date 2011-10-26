@@ -398,6 +398,10 @@ ul.searchresults {
     text-align: right;
 }
 
+.search_data a.is_not_fetching {
+    border-color: red;
+}
+
 .search_url {
     font-size : 60%;
 }

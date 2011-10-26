@@ -27,7 +27,7 @@ function cutzero($value) {
 require("db.inc");
 $stmt = $PDO->prepare("
 SELECT 
-    name, short(title, 100) as shorttitle, title, description, url, short(url, 100) as shorturl
+    name, short(title, 100) as shorttitle, title, description, url, short(url, 100) as shorturl, is_fetching
 
 FROM numbrs WHERE
 
@@ -64,7 +64,9 @@ LIMIT 1
 ?>
         <li>
             <div class="search_data">
-                <a href="/<?php print htmlspecialchars($row['name']) ?>"><?php print htmlspecialchars($data) ?></a>
+                <a href="/<?php print htmlspecialchars($row['name']) ?>" class="<?php print $row['is_fetching'] ? 'is_fetching' : 'is_not_fetching' ?>">
+                  <?php print htmlspecialchars($data) ?>
+                </a>
             </div>
             <div class="search_title">
                 <a href="/<?php print htmlspecialchars($row['name']) ?>" title="<?php print htmlspecialchars($row['title'])?>">
