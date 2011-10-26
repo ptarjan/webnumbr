@@ -50,15 +50,15 @@ ob_start();
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/wikileaks-cables-released">Wikileaks Cables Released</a>
+                                    <a href="/paul-tarjan-facebook-subscribers">Paul's Facebook subscribers</a>
                                 </td>
                                 <td class="leftpadding">
-                                    <?php print getEmbed("wikileaks-cables-released") ?>
+                                    <?php print getEmbed("paul-tarjan-facebook-subscribers") ?>
                                 </td>
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/okcupid">OkCupid Online Users</a>
+                                    <a href="/okcupid.last(100)">OkCupid Online Users</a>
                                 </td>
                                 <td class="leftpadding">
                                     <?php print getEmbed("okcupid") ?>
