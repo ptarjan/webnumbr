@@ -210,6 +210,7 @@ $_REQUEST['xpath'] = preg_replace(",/tbody,", "/", $_REQUEST['xpath']);
             <option value="6"<?php if ($_REQUEST['frequency'] == 6) print ' selected="selected"'; ?>>6 hours</option>
             <option value="12"<?php if ($_REQUEST['frequency'] == 12) print ' selected="selected"'; ?>>12 hours</option>
             <option value="24"<?php if ($_REQUEST['frequency'] == 24) print ' selected="selected"'; ?>>24 hours</option>
+            <option value="168"<?php if ($_REQUEST['frequency'] == 168) print ' selected="selected"'; ?>>1 week</option>
             </select></td></tr>
           </table>
         </form>
