@@ -74,7 +74,7 @@ ob_start();
                             </tr>
                             <tr>
                                 <td>
-                                    <a href="/xkcdusrs">xkcd forum users</a>
+                                    <a href="/xkcdusrs.last(1000)">xkcd forum users</a>
                                 </td>
                                 <td class="leftpadding">
                                     <?php print getEmbed("xkcdusrs") ?>
