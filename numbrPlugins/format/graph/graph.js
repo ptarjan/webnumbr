@@ -100,7 +100,7 @@ makeGraph = function (c, data, params) {
                     var x = new Date(item.datapoint[0]).toUTCString();
                     var y = item.datapoint[1];
                     
-                    showTooltip(item.pageX, item.pageY, x + " = " + y);
+                    showTooltip(item.pageX, item.pageY, y + " @ " + x);
                 }
             } else {
                 $("#tooltip").remove();
