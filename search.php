@@ -42,7 +42,7 @@ $stmt->execute(array("query" => $_REQUEST['query'])) || die(json_encode($stmt->e
 $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($data) == 0) {
-    print '0 results. Try <a class="external" href="http://google.com/search?q=' . urlencode("site:webnumbr.com " . htmlentities($_REQUEST['query'])) . '">google</a>?';
+    print '0 results. Try <a class="external" href="http://google.com/search?q=' . urlencode("site:webnumbr.com " . $_REQUEST['query']) . '">google</a>?';
 }
 foreach ($data as $row) {
     $sd = $PDO->prepare("
