@@ -56,6 +56,7 @@ makeGraph = function (c, data, params) {
                 show : 1,
                 backgroundOpacity : 0.5
             },
+            grid: { hoverable: true, },
             lines : { show : true }
         };
         if (typeof params.min != "undefined")
@@ -74,6 +75,37 @@ makeGraph = function (c, data, params) {
         });
         $("#plot").ready(function() {
             plotFunction();
+        });
+
+        function showTooltip(x, y, contents) {
+            $('<div id="tooltip">' + contents + '</div>').css( {
+                position: 'absolute',
+                display: 'none',
+                top: y + 5,
+                left: x + 5,
+                border: '1px solid #fdd',
+                padding: '2px',
+                'background-color': '#fee',
+                opacity: 0.80
+            }).appendTo("body").fadeIn(200);
+        }
+
+        var previousPoint = null;
+        $("#plot").bind("plothover", function (event, pos, item) {
+            if (item) {
+                if (previousPoint != item.dataIndex) {
+                    previousPoint = item.dataIndex;
+                    
+                    $("#tooltip").remove();
+                    var x = new Date(item.datapoint[0]).toUTCString();
+                    var y = item.datapoint[1];
+                    
+                    showTooltip(item.pageX, item.pageY, x + " = " + y);
+                }
+            } else {
+                $("#tooltip").remove();
+                previousPoint = null;            
+            }
         });
 
     });
