@@ -97,7 +97,7 @@ makeGraph = function (c, data, params) {
                     previousPoint = item.dataIndex;
                     
                     $("#tooltip").remove();
-                    var x = new Date(item.datapoint[0]).toUTCString();
+                    var x = new Date(item.datapoint[0]).toString();
                     var y = item.datapoint[1];
                     
                     showTooltip(item.pageX, item.pageY, y + " @ " + x);
