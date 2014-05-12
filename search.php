@@ -1,7 +1,12 @@
 <?php ob_start() ?>
 <?php
-if (!isset($_REQUEST['query']) || empty($_REQUEST['query'])) {
+if (!isset($_REQUEST['query']) || empty($_REQUEST['query']) || strlen($_REQUEST['query']) < 3) {
     $subtitle = "search";
+    if (strlen($_REQUEST['query']) < 3) {
+?>
+      Search must be greater than 3 chars in length
+<?php
+    }
 ?>
 <form id="search_form" action="/search"> 
     <div>
@@ -54,7 +59,6 @@ FROM numbr_data WHERE
 numbr = :name
 
 ORDER BY timestamp DESC
-LIMIT 1
 ");
     $sd->execute(array("name" => $row['name'])) || die(json_encode($stmt->errorInfo()));
     $data = $sd->fetchAll(PDO::FETCH_ASSOC);

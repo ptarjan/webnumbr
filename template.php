@@ -71,7 +71,7 @@ $status = urlencode("@webnumbr http://webnumbr.com is $thought");
                     <span class="logo">
                         <a href='/'><img id='logopic' src="/images/webnumbr-banner-63.png" alt="logo" /></a>
 
-<iframe src="http://www.facebook.com/plugins/like.php?href=http%253A%252F%252Fwebnumbr.com&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;font&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px; margin-bottom: 10px; margin-left: 10px" allowTransparency="true"></iframe>
+<iframe src="http://www.facebook.com/plugins/like.php?href=http://webnumbr.com&amp;layout=button_count&amp;show_faces=false&amp;width=100&amp;action=like&amp;font&amp;colorscheme=light&amp;height=21" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:100px; height:21px; margin-bottom: 10px; margin-left: 10px" allowTransparency="true"></iframe>
 
 <?php if (substr($_SERVER['SERVER_NAME'], 0, 4) === "dev.") { ?>
                         <br/> <span style="color: red">Development version - <a href="http://twitter.com/webnumbr">File Bugs</a></span>

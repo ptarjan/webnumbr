@@ -114,41 +114,67 @@ public function run() {
 
     $where = implode(" AND ", $this->c['sql']['where']);
     $orderby = $this->c['sql']['orderby'];
-    $s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE $where ORDER BY $orderby LIMIT :limit");
-    foreach ($this->c['sql']['params'] as $key => $value) {
-        if (is_string($value))
-            $s->bindValue($key, $value);
-        else if (is_int($value))
-            $s->bindValue($key, $value, PDO::PARAM_INT);
-        else if (is_array($value) && count($value) == 2) {
-            $s->bindValue($key, $value[0], $value[1]);
-        } else {
-            $s->bindValue($key, $value);
+    if ($orderby == 'timestamp DESC' && $this->c['singleValue']) {
+      $numbr = $this->c['sql']['params']['name'];
+      if (!$numbr) {
+        $numbr = $this->c['name'];
+      }
+      if ($numbr) {
+        $cached_file = "/var/tmp/webnumbr/latest_$numbr";
+        if (file_exists($cached_file) && filemtime($cached_file) > time() - 3600) {
+          $cached_data = json_decode(file_get_contents($cached_file));
         }
-    }
-    // Default value for name
-    if (in_array("numbr = :name" , $this->c['sql']['where']) && !isset($this->c['sql']['params']['name'])) {
-        $s->bindValue("name", $this->c['name']);
+      }
     }
 
-    $r = $s->execute();
-    if (!$r) 
-        $data = array("error" => array("PDO" => $s->errorInfo()));
-    else  {
-        $result = $s->fetchAll(PDO::FETCH_ASSOC);
+    if (!$cached_data) {
+      $s = $PDO->prepare("SELECT UNIX_TIMESTAMP(timestamp) as timestamp, data FROM numbr_data WHERE $where ORDER BY $orderby");
+      foreach ($this->c['sql']['params'] as $key => $value) {
+          if ($key == 'limit') {
+              continue;
+          } else if (is_string($value)) {
+              $s->bindValue($key, $value);
+          } else if (is_int($value)) {
+              $s->bindValue($key, $value, PDO::PARAM_INT);
+          } else if (is_array($value) && count($value) == 2) {
+              $s->bindValue($key, $value[0], $value[1]);
+          } else {
+              $s->bindValue($key, $value);
+          }
+      }
+      // Default value for name
+      if (in_array("numbr = :name" , $this->c['sql']['where']) && !isset($this->c['sql']['params']['name'])) {
+          $s->bindValue("name", $this->c['name']);
+      }
 
-        if (count($result) == 0) {
-            $data = NULL;
-        } else if ($this->c['singleValue']) {
-            $data = (float) $result[0]['data'];
-        } else {
-            // Its an array
-            $data = array();
-            foreach ($result as $ind => $row) {
-                $data[] = array((int) $row['timestamp'], (float) $row['data']);
-            }
-            sort($data);
-        }
+      $r = $s->execute();
+      if (!$r) 
+          $data = array("error" => array("PDO" => $s->errorInfo()));
+      else  {
+          $result = $s->fetchAll(PDO::FETCH_ASSOC);
+
+          if (count($result) == 0) {
+              $data = NULL;
+          } else if ($this->c['singleValue']) {
+              $data = (float) $result[0]['data'];
+          } else {
+              // Its an array
+              $data = array();
+              foreach ($result as $ind => $row) {
+                  $data[] = array((int) $row['timestamp'], (float) $row['data']);
+              }
+              if (isset($this->c['sql']['params']['limit'])) {
+                $data = array_slice($data, 0, $this->c['sql']['params']['limit']);
+              }
+              sort($data);
+          }
+      }
+
+      if ($cached_file) {
+        file_put_contents($cached_file, json_encode($data));
+      }
+    } else {
+      $data = $cached_data;
     }
 
     $s = $PDO->prepare("SELECT * FROM numbrs WHERE name = :name LIMIT 1");

@@ -44,7 +44,6 @@ FROM numbr_data WHERE
 numbr = :name
 
 ORDER BY timestamp DESC
-LIMIT 1
 ");
     $sd->execute(array("name" => $row['name'])) || die(json_encode($stmt->errorInfo()));
     $data = $sd->fetchAll(PDO::FETCH_ASSOC);

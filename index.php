@@ -1,14 +1,16 @@
 <?php
 function getEmbed($name) {
-    $cache = apc_fetch("embed_code_$name");
+    $cache = @file_get_contents("/var/tmp/webnumbr/embed_code_$name");
+    // $cache = apc_get("embed_code_$name");
     if ($cache) return $cache;
 
     $link = "/$name";
     $ch = curl_init("http://" . $_SERVER['HTTP_HOST'] . "$link.latest.embed");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, TRUE);
     $embed = (curl_exec($ch));
-    
-    apc_store("embed_code_$name", $embed, 60*60*24); // 1 day
+   
+    file_put_contents("/var/tmp/webnumbr/embed_code_$name", $embed);
+    // apc_store("embed_code_$name", $embed, 60*60*24); // 1 day
     return $embed;
 }
 
@@ -102,6 +104,7 @@ ob_start();
                 </div>
                             
 <?php
+/*
 require("db.inc");
 $stmt = $PDO->prepare("
 SELECT name, title FROM numbrs WHERE is_fetching = TRUE ORDER BY createdTime DESC LIMIT 1
@@ -158,7 +161,7 @@ if ($name) {
                     <a href="<?php print $link ?>" title="<?php print $data[0]['title']; ?>"><?php print $title ?></a>
                     <?php print $embed . "\n" ?>
                 </div>
-<?php } ?>
+<?php } */ ?>
 
                 <div class="clear">
                 </div>
